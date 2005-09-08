@@ -21,6 +21,8 @@ import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.AdminServiceDao;
 import vCampus.server.biz.AdminServiceDaoImpl;
+import vCampus.server.biz.LibraryServiceDao;
+import vCampus.server.biz.LibraryServiceDaoImpl;
 import vCampus.server.biz.StudentServiceDao;
 import vCampus.server.biz.StudentServiceDaoImpl;
 import vCampus.server.biz.TeacherServiceDao;
@@ -32,6 +34,8 @@ import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
 import vCampus.vo.Admin;
+import vCampus.vo.BookBorrow;
+import vCampus.vo.BookInformation;
 import vCampus.vo.CourseChoose;
 import vCampus.vo.CourseInformation;
 import vCampus.vo.Student;
@@ -537,6 +541,160 @@ public class ServerSocketThread extends Thread{
             	
             	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
             	response.writeObject(serverResponse);
+            }
+            
+            
+ if(object.getMessageType().equals(MessageTypeCodes.userQueryBookInformation)) {
+            	
+            	Message serverResponse =  new Message();
+            	
+            	LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+            	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            	BookInformation bookInformation = libraryServiceDao.queryBookInformation((String) paras.get(0));
+            	ArrayList<Object> data = new ArrayList<Object>();
+            	data.add(bookInformation);
+            	serverResponse.setData(data);
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryBookBorrow)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+            	   	LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+            	   	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            	   ArrayList<BookBorrow> borrowedBooksList= libraryServiceDao.queryBookBorrow((String) paras.get(0));
+            	   ArrayList<Object> data = new ArrayList<Object>();
+            	   data.add(borrowedBooksList);
+            	   serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+         
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryBookByBookname)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+					LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ArrayList<BookInformation> allBooksByName = libraryServiceDao.queryBook((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(allBooksByName);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFound");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userBorrowBook)) {
+            	Message severResponse = new Message();
+            	try {
+					LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isBorrowBook = libraryServiceDao.borrowBook((BookBorrow) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isBorrowBook);
+					severResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					severResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	catch (OutOfLimitException e) {
+					// TODO: handle exception
+            		severResponse.setExceptionCode("OutOfLimitException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(severResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userReturnBook)) {
+            	Message serverResponse = new Message();
+            	try {
+					LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isReturnBook = libraryServiceDao.returnBook((BookBorrow) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isReturnBook);
+					serverResponse.setData(data);
+					
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	catch (OutOfLimitException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("OutOfLimitException");
+            	}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminAddBook)) {
+            	
+            	Message serverResponse = new Message();
+            	try {
+					LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isAdminAddBook = libraryServiceDao.addBookByAdmin((BookInformation) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAdminAddBook);
+					serverResponse.setData(data);
+					
+				} catch (RecordAlreadyExistException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminUpdateBook)) {
+            	Message serverResponse = new Message();
+            	try {
+            		LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isAdminUpdateBook = libraryServiceDao.updateBookByAdmin((BookInformation) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAdminUpdateBook);
+					serverResponse.setData(data);
+					
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminDeleteBook)) {
+            	Message severResponse = new Message();
+            	try {
+					LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isAdminDeleteBook = libraryServiceDao.deleteBookByAdmin((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAdminDeleteBook);
+					severResponse.setData(data);
+					
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					severResponse.setExceptionCode("RecordNotFoundException");
+				}
+
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(severResponse);
             }
             
 		}

@@ -33,6 +33,15 @@ public interface MessageTypeCodes {
 	String adminAddCourse = "ADMIN_ADD_COURSE";
 	String adminDeleteCourse = "ADMIN_DELETE_COURSE";
 	String adminUpdateCourse = "ADMIN_UPDATE_COURSE";
+	String userQueryBookInformation = "USER_QUERY_BOOK_INFROMARION";
+	String userQueryBookByBookname = "USER_QUERY_BOOK_BY_BOOKNAME";
+	String userQueryBookBorrow = "USER_QUERY_BOOK_BORROW";
+	String userBorrowBook = "USER_BORROW_BOOK";
+	String userReturnBook = "USER_RETURN_BOOK";
+	String adminAddBook = "ADMIN_ADD_BOOK";
+	String adminUpdateBook = "ADMIN_UPDATE_BOOK";
+	String adminDeleteBook = "ADMIN_DELETE_BOOK";
+	
 	
 	
 }
