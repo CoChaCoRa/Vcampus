@@ -82,14 +82,13 @@ public class ServerSocketThread extends Thread{
             		data.add(newStudent);
             		serverResponse.setData(data);
             	}
-            	catch (SQLException e) {
-					// TODO: handle exception
-            		serverResponse.setExceptionCode("SQLException");
-				}
+            	
             	catch (RecordAlreadyExistException e) {
 					// TODO: handle exception
             		serverResponse.setExceptionCode("RecordAlreadyExistException");
 				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
             }
             
             if(object.getMessageType().equals(MessageTypeCodes.studentChangePassword)) {
@@ -101,33 +100,31 @@ public class ServerSocketThread extends Thread{
 					ArrayList<Object> data = new ArrayList<Object>();
 					data.add(updatedStudent);
 					serverResponse.setData(data);
-				} catch (SQLException e) {
-					// TODO: handle exception
-					serverResponse.setExceptionCode("SQLException");
-				}
+				} 
             	catch (RecordNotFoundException e) {
 					// TODO: handle exception
             		serverResponse.setExceptionCode("RecordNotFoundException");
 				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
             }
             
             if(object.getMessageType().equals(MessageTypeCodes.studentUpdateInfomation)) {
-            	Message serverReponse = new Message();
+            	Message serverResponse = new Message();
             	try {
             		StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
             		ArrayList<Object> paras = (ArrayList<Object>) object.getData();
             		Student updatedStudent = studentServiceDao.updateStudentInfo((Student) paras.get(0));
             		ArrayList<Object> data = new ArrayList<Object>();
             		data.add(updatedStudent);
-            		serverReponse.setData(data);
-				} catch (SQLException e) {
-					// TODO: handle exception
-					serverReponse.setExceptionCode("SQLException");
-				}
+            		serverResponse.setData(data);
+				} 
             	catch (RecordNotFoundException e) {
 					// TODO: handle exception
-            		serverReponse.setExceptionCode("RecordAlreadyExistException");
+            		serverResponse.setExceptionCode("RecordAlreadyExistException");
 				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
             }
             
           

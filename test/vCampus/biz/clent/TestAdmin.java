@@ -1,4 +1,4 @@
-package vCampus.biz;
+package vCampus.biz.clent;
 
 /**
  * @author SongZixing
