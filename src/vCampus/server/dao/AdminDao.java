@@ -15,11 +15,9 @@ public interface AdminDao {
 	 * @throws RecordNotFoundException
 	 * @throws WrongPasswordException
 	 */
-
-	public Admin selectAdmin(String adminID)throws SQLException;
-	public boolean insertAdmin(String ID,String password)throws SQLException;
-	public boolean updatePassword(String adminID,String password)throws SQLException;
-
+	public Admin selectAdmin(String adminID)throws RecordNotFoundException,SQLException;
+	public boolean insertAdmin(String ID,String password)throws RecordNotFoundException,SQLException;
+	public boolean updatePassword(String adminID,String password)throws RecordNotFoundException,SQLException;
 
 }
 

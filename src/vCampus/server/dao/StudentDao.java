@@ -15,8 +15,8 @@ public interface StudentDao {
 	 * @throws RecordNotFoundException
 	 * @throws WrongPasswordException
 	 */
-	Student findByName(String userName) throws RecordNotFoundException,SQLException;
-	boolean insertByUserNameAndPassword(String userName,String password)throws SQLException;
+	Student findByName(String userName) throws SQLException;
+	boolean insertByUserNameAndPassword(String userName,String password)throws RecordNotFoundException,SQLException;
 	boolean updatePassword(String userName,String password)throws RecordNotFoundException,SQLException;
 	boolean updateSelfInformation(Student std)throws RecordNotFoundException,SQLException;
 }

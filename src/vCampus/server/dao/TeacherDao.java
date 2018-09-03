@@ -15,7 +15,7 @@ public interface TeacherDao {
 	 * @throws RecordNotFoundException
 	 * @throws WrongPasswordException
 	 */
-	Teacher findByName(String userName) throws RecordNotFoundException,SQLException;
+	Teacher findByName(String userName) throws SQLException;
 	boolean insertByUserNameAndPassword(String userName,String password)throws SQLException;
 	boolean updatePassword(String userName,String password)throws RecordNotFoundException,SQLException;
 	boolean updateSelfInformation(Teacher std)throws RecordNotFoundException,SQLException;

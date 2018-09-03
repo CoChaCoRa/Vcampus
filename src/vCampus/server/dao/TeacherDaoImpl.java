@@ -3,7 +3,6 @@ package vCampus.server.dao;
 import java.sql.Connection;
 
 import java.sql.SQLException;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -13,7 +12,7 @@ import vCampus.server.exception.RecordNotFoundException;
 import vCampus.vo.Teacher;
 
 /**
- * @author YangHangyuan, SongZixing
+ * @author YangHangyuan
  *
  */
 public class TeacherDaoImpl implements TeacherDao{
@@ -47,9 +46,9 @@ public class TeacherDaoImpl implements TeacherDao{
 		}
 		return std;
 	}
-    
+	
 	@Override
-	public Teacher findByName(String userName) throws RecordNotFoundException,SQLException{
+	public Teacher findByName(String userName) throws SQLException{
 		// TODO Auto-generated method stub
 		try {
 			//create SQL string
@@ -63,11 +62,10 @@ public class TeacherDaoImpl implements TeacherDao{
 				return ResultSetToTeacher(rs);
 			}
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();
-			throw new RecordNotFoundException();
 		}
 		return null;
 	}
@@ -115,7 +113,7 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.setString(11, std.getUserName());
 			stmt.executeUpdate();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -136,7 +134,7 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.setString(2, userName);
 			stmt.executeUpdate();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();

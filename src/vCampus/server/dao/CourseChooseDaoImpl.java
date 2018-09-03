@@ -2,7 +2,6 @@ package vCampus.server.dao;
 
 import java.sql.PreparedStatement;
 
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.sql.SQLException;
 
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.vo.CourseChoose;
+import vCampus.vo.CourseInformation;
 
 public class CourseChooseDaoImpl implements CourseChooseDao{
 	
@@ -41,6 +41,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 		return list;
 	}
     
+    @Override
 	public ArrayList<CourseChoose> courseQueryByStudent(String studentName) throws RecordNotFoundException,SQLException {
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE studentName='"+studentName+"'";
@@ -48,15 +49,15 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				return ResultSetToArrayList(rs);
-			}
-		}catch(Exception e) {
+			}else throw new RecordNotFoundException();
+		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
-			throw new RecordNotFoundException();
 		}
 		return null;
 	}
 	
+	@Override
 	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName) throws RecordNotFoundException,SQLException {
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE teacherName='"+teacherName+"'";
@@ -64,13 +65,100 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				return ResultSetToArrayList(rs);
-			}
+			}else throw new RecordNotFoundException();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<CourseChoose> courseQueryByCourse(String courseID) throws RecordNotFoundException, SQLException {
+		try {
+			String sql="SELECT * FROM tbl_coursechoose WHERE courseID='"+courseID+"'";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				return ResultSetToArrayList(rs);
+			}else throw new RecordNotFoundException();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean addCourseByStudent(String studentName, String courseID) throws RecordNotFoundException,SQLException {
+		try {
+			String sql="SELECT * FROM tbl_courseinformation WHERE courseID='"+courseID+"'";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				int currentAmount=rs.getInt("currentAmount");
+				int personLimit=rs.getInt("personLimit");
+				if(currentAmount==personLimit)return false;
+				currentAmount++;
+				String sql1="UPDATE tbl_courseinformation SET currentAmount = "+currentAmount+" WHERE courseID='"+courseID+"'";
+				stmt=DBC.con.prepareStatement(sql);
+				rs = stmt.executeQuery();
+			}else throw new RecordNotFoundException();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteCourseByStudent(String studentName, String courseID)
+			throws RecordNotFoundException, SQLException {
+		try {
+			String sql="SELECT * FROM tbl_courseinformation WHERE courseID='"+courseID+"'";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				int currentAmount=rs.getInt("currentAmount");
+				int personLimit=rs.getInt("personLimit");
+				if(currentAmount==personLimit)return false;
+				currentAmount++;
+				String sql1="UPDATE tbl_courseinformation SET currentAmount = "+currentAmount+" WHERE courseID='"+courseID+"'";
+				stmt=DBC.con.prepareStatement(sql);
+				rs = stmt.executeQuery();
+			}else throw new RecordNotFoundException();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
 			throw new RecordNotFoundException();
 		}
-		return null;
+		return true;
+	}
+
+	@Override
+	public boolean updateScoreByTeacher(ArrayList<CourseChoose> scoreList)
+			throws RecordNotFoundException, SQLException {
+		
+		
+		
+		return false;
+	}
+
+	@Override
+	public boolean addCourseByAdmin(CourseInformation course) throws RecordNotFoundException, SQLException {
+		
+		
+		
+		return false;
+	}
+
+	@Override
+	public boolean updateCourseByAdmin(CourseInformation course) throws RecordNotFoundException, SQLException {
+		
+		
+		
+		return false;
 	}
 }
 

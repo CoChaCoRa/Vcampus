@@ -44,7 +44,6 @@ public class StudentDaoImpl implements StudentDao{
 			std.setDormNumber(rs1.getString("dormNumber"));
 		}
 		catch (Exception e) {
-			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
@@ -52,10 +51,8 @@ public class StudentDaoImpl implements StudentDao{
 	}
     
 	@Override
-	public Student findByName(String userName) throws RecordNotFoundException,SQLException{
-		// TODO Auto-generated method stub
+	public Student findByName(String userName) throws SQLException{
 		try {
-			//create SQL string
 			String sql= "select * from tbl_student where userName ="+ "'"+ userName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -66,28 +63,23 @@ public class StudentDaoImpl implements StudentDao{
 				return ResultSetToStudent(rs);
 			}
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
-			throw new RecordNotFoundException();
 		}
 		return null;
 	}
 	
 	@Override
 	public boolean insertByUserNameAndPassword(String userName,String password)throws SQLException{
-		
 		try {
 			Student std1=findByName(userName);
 			if(std1!=null)return false;
-			//create SQL string
 			String sql = "INSERT INTO tbl_student (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
 			int rs = stmt.executeUpdate();
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -100,7 +92,6 @@ public class StudentDaoImpl implements StudentDao{
 		try {
 			Student std1=findByName(std.getUserName());
 			if(std1==null)throw new RecordNotFoundException();
-			//create SQL string
 			String sql="UPDATE tbl_student SET sex=?, SET idCard=?, SET deptName=?, SET emailAddress=?, "
 					+ "SET phoneNumber=?, SET bankAccount=?, SET account=?, SET money=?, SET studentEcardNumber=?, "
 					+ "SET studentID=?, SET major=?, SET classNumber=?, SET dormNumber=? "
@@ -122,8 +113,7 @@ public class StudentDaoImpl implements StudentDao{
 			stmt.setString(14, std.getUserName());
 			stmt.executeUpdate();
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -136,22 +126,18 @@ public class StudentDaoImpl implements StudentDao{
 		try {
 			Student std1=findByName(userName);
 			if(std1==null)throw new RecordNotFoundException();
-			//create SQL string
 			String sql="UPDATE tbl_student SET password=? WHERE userName=?";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, password);
 			stmt.setString(2, userName);
 			stmt.executeUpdate();
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
-
-
 }
 
