@@ -101,4 +101,59 @@ public class StudentServiceImpl implements StudentService{
 		return false;
 	} 
 	
+	@Override
+	public boolean updatePassword(String originalPassword, String newPassword, String newConfirmedPassword) {
+		// TODO Auto-generated method stub
+		if(!newPassword.equals(newConfirmedPassword)) {
+			exceptionCode = "UnmachedPassword";
+			return false;
+		}
+		
+		Message message = new Message();
+		message.setUserType("STUDENT");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(originalPassword);
+		data.add(newPassword);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.studentChangePassword);
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		Student updatedStudent = (Student) paras.get(0);
+		
+		if(updatedStudent != null) {
+			cacheStudent = updatedStudent;
+			return true;
+		}
+		
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+	
+		return false;
+	}
+	
+	@Override
+	public boolean updateInfo(Student updatedStudent) {
+		// TODO Auto-generated method stub
+		
+		Message message = new Message();
+		message.setUserType("STUDENT");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(updatedStudent);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.studentUpdateInfomation);
+		Message serveReponse = client.sendRequestToServer(message);
+		ArrayList<Object> para = (ArrayList<Object>) serveReponse.getData();
+		Student updateStudent = (Student) para.get(0);
+		
+		if(updateStudent != null) {
+			cacheStudent = updatedStudent;
+			return true;
+		}
+		
+		if(!serveReponse.getExceptionCode().equals("")) {
+			exceptionCode = serveReponse.getExceptionCode();
+		}
+		return false;
+	}
 }
