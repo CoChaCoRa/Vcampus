@@ -1,12 +1,13 @@
 package vCampus.server.dao;
 import java.sql.ResultSet;
 
+
 import java.sql.SQLException;
 import vCampus.vo.Admin;
 import vCampus.vo.Student;
 
 import java.sql.PreparedStatement;
-import vCampus.server.exception.RecordNotFoundException;
+import vCampus.server.exception.*;
 
 public class AdminDaoImpl implements AdminDao{
 	
@@ -46,10 +47,10 @@ public class AdminDaoImpl implements AdminDao{
 	 * @return NONE
 	 */
 	@Override
-	public boolean insertAdmin(String adminID,String password)throws SQLException{		
+	public boolean insertAdmin(String adminID,String password)throws RecordAlreadyExistException,SQLException{		
 		try {
 			Admin admin=selectAdmin(adminID);
-			if(admin!=null)return false;
+			if(admin!=null)throw new RecordAlreadyExistException();
 			String sql="INSERT INTO tbl_admin (adminID,password) VALUES (?,?)";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1,adminID);

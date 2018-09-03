@@ -2,8 +2,7 @@ package vCampus.server.dao;
 
 import java.sql.SQLException;
 
-
-import vCampus.server.exception.RecordNotFoundException;
+import vCampus.server.exception.*;
 import vCampus.vo.Teacher;
 
 public interface TeacherDao {
@@ -13,10 +12,11 @@ public interface TeacherDao {
 	 * @param Teacher
 	 * @return
 	 * @throws RecordNotFoundException
+	 * @throws RecordAlreadyExistException
 	 * @throws WrongPasswordException
 	 */
-	Teacher findByName(String userName) throws SQLException;
-	boolean insertByUserNameAndPassword(String userName,String password)throws SQLException;
-	boolean updatePassword(String userName,String password)throws RecordNotFoundException,SQLException;
-	boolean updateSelfInformation(Teacher std)throws RecordNotFoundException,SQLException;
+	public Teacher findByName(String userName) throws SQLException;
+	public boolean insertByUserNameAndPassword(String userName,String password)throws RecordAlreadyExistException,SQLException;
+	public boolean updatePassword(String userName,String password)throws RecordNotFoundException,SQLException;
+	public boolean updateSelfInformation(Teacher std)throws RecordNotFoundException,SQLException;
 }

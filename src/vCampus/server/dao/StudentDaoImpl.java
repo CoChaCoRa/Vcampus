@@ -2,6 +2,7 @@ package vCampus.server.dao;
 
 import java.sql.Connection;
 
+
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-import vCampus.server.exception.RecordNotFoundException;
+import vCampus.server.exception.*;
 import vCampus.vo.Student;
 
 /**
@@ -21,8 +22,6 @@ public class StudentDaoImpl implements StudentDao{
 	private DBConnection DBC=new DBConnection();
 	private PreparedStatement stmt=null;
 	private ResultSet rs=null;
-    ResultSetMetaData resultSetMetaData;
-    int iNumCols;
 	
 	public Student ResultSetToStudent(ResultSet rs1){
 		Student std=new Student();
@@ -44,6 +43,7 @@ public class StudentDaoImpl implements StudentDao{
 			std.setDormNumber(rs1.getString("dormNumber"));
 		}
 		catch (Exception e) {
+			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
@@ -57,8 +57,6 @@ public class StudentDaoImpl implements StudentDao{
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 
-			resultSetMetaData = rs.getMetaData();
-			iNumCols= resultSetMetaData.getColumnCount();
 			if(rs.next()) {
 				return ResultSetToStudent(rs);
 			}
@@ -71,10 +69,10 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public boolean insertByUserNameAndPassword(String userName,String password)throws SQLException{
+	public boolean insertByUserNameAndPassword(String userName,String password)throws RecordAlreadyExistException,SQLException{
 		try {
 			Student std1=findByName(userName);
-			if(std1!=null)return false;
+			if(std1!=null)throw new RecordAlreadyExistException();
 			String sql = "INSERT INTO tbl_student (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
 			int rs = stmt.executeUpdate();

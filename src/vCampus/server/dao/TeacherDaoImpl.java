@@ -2,13 +2,14 @@ package vCampus.server.dao;
 
 import java.sql.Connection;
 
+
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-import vCampus.server.exception.RecordNotFoundException;
+import vCampus.server.exception.*;
 import vCampus.vo.Teacher;
 
 /**
@@ -20,8 +21,6 @@ public class TeacherDaoImpl implements TeacherDao{
 	private DBConnection DBC=new DBConnection();
 	private PreparedStatement stmt=null;
 	private ResultSet rs=null;
-    ResultSetMetaData resultSetMetaData;
-    int iNumCols;
 	
 	public Teacher ResultSetToTeacher(ResultSet rs1){
 		Teacher std=new Teacher();
@@ -56,8 +55,6 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 
-			resultSetMetaData = rs.getMetaData();
-			iNumCols= resultSetMetaData.getColumnCount();
 			if(rs.next()) {
 				return ResultSetToTeacher(rs);
 			}
@@ -71,17 +68,16 @@ public class TeacherDaoImpl implements TeacherDao{
 	}
 	
 	@Override
-	public boolean insertByUserNameAndPassword(String userName,String password)throws SQLException{
+	public boolean insertByUserNameAndPassword(String userName,String password)throws RecordAlreadyExistException,SQLException{
 		
 		try {
 			Teacher std1=findByName(userName);
-			if(std1!=null)return false;
-			//create SQL string
+			if(std1!=null)throw new RecordAlreadyExistException();
 			String sql = "INSERT INTO tbl_teacher (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
 			int rs = stmt.executeUpdate();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();

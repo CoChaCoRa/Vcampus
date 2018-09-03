@@ -68,23 +68,23 @@ public class CourseInformation implements Serializable {
 	public String getCourseName() {
 		return courseName;
 	}
-	public String getCourseHour() {
+	public int getCourseHour() {
 		return courseHour;
 	}
-	public String getCourseDate() {
-		return courseDate;
+	public Timestamp getCourseDate() {
+		return (Timestamp) courseDate;
 	}
 	public String getCoursePlace() {
 		return coursePlace;
 	}
-	public int getCredit() {
-		return credit;
+	public double getCredit() {
+		return (double) credit;
 	}
 	public int getPersonLimit() {
 		return personLimit;
 	}
-	public String getExamTime() {
-		return examTime;
+	public Timestamp getExamTime() {
+		return (Timestamp) examTime;
 	}
 	public String getExamPlace() {
 		return examPlace;
