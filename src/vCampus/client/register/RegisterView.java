@@ -76,7 +76,4 @@ public class RegisterView extends JFrame{
 		}
 	}
 	
-	public static void main(String[] args) {  
-        RegisterView RV=new RegisterView();  
-    }
 }
