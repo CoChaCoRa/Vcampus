@@ -26,6 +26,7 @@ public class Client {
 	 */
 	public Message sendRequestToServer (Message clientRequest ) {
 		try {
+			
 			//client request connection to local host at port 18888
 			Socket socket = new Socket("localhost", 18888);
 			//set the connection timeout
