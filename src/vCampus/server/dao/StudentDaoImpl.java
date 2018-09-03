@@ -10,7 +10,6 @@ import java.sql.Statement;
 
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
-import vCampus.util.Record2Student;
 import vCampus.vo.Student;
 
 /**

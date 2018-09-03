@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.security.Policy.Parameters;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
