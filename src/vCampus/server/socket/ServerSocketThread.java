@@ -17,6 +17,7 @@ import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.StudentServiceDao;
 import vCampus.server.biz.StudentServiceDaoImpl;
+import vCampus.server.exception.RecordAlreadyExistException;
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
@@ -85,9 +86,9 @@ public class ServerSocketThread extends Thread{
 					// TODO: handle exception
             		serverResponse.setExceptionCode("SQLException");
 				}
-            	catch (RecordNotFoundException e) {
+            	catch (RecordAlreadyExistException e) {
 					// TODO: handle exception
-            		serverResponse.setExceptionCode("RecordNotFoundException");
+            		serverResponse.setExceptionCode("RecordAlreadyExistException");
 				}
             }
             
@@ -109,6 +110,26 @@ public class ServerSocketThread extends Thread{
             		serverResponse.setExceptionCode("RecordNotFoundException");
 				}
             }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.studentUpdateInfomation)) {
+            	Message serverReponse = new Message();
+            	try {
+            		StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+            		ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            		Student updatedStudent = studentServiceDao.updateStudentInfo((Student) paras.get(0));
+            		ArrayList<Object> data = new ArrayList<Object>();
+            		data.add(updatedStudent);
+            		serverReponse.setData(data);
+				} catch (SQLException e) {
+					// TODO: handle exception
+					serverReponse.setExceptionCode("SQLException");
+				}
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverReponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            }
+            
           
 		}
 		catch (Exception e) {

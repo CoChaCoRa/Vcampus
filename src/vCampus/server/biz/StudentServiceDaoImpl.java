@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import vCampus.server.dao.StudentDao;
 import vCampus.server.dao.StudentDaoImpl;
+import vCampus.server.exception.RecordAlreadyExistException;
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
 import vCampus.vo.Student;
@@ -22,7 +23,7 @@ private StudentDao sd = new StudentDaoImpl();
 	 * @see vCampus.server.biz.StudentServiceDao#login(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Student login(String userName, String studentPassword) throws RecordNotFoundException, WrongPasswordException, SQLException {
+	public Student login(String userName, String studentPassword) throws RecordNotFoundException, WrongPasswordException {
 		// TODO Auto-generated method stub
 		try {
 			Student student1 = sd.findByName(userName);
@@ -34,7 +35,7 @@ private StudentDao sd = new StudentDaoImpl();
 			}
 		}
 		
-		catch (RecordNotFoundException e) {
+		catch (SQLException e) {
 			// TODO: handle exception
 			throw new RecordNotFoundException();
 		}
@@ -46,12 +47,19 @@ private StudentDao sd = new StudentDaoImpl();
 	 * @see vCampus.server.biz.StudentServiceDao#register(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Student register(String userName, String studentPassword) throws SQLException, RecordNotFoundException {
+	public Student register(String userName, String studentPassword) throws SQLException, RecordAlreadyExistException {
 		// TODO Auto-generated method stub
-		if(sd.insertByUserNameAndPassword(userName, studentPassword)) {
-			Student newStudent = sd.findByName(userName);
-			return newStudent;
+		try {
+			if(sd.insertByUserNameAndPassword(userName, studentPassword)) {
+				Student newStudent = sd.findByName(userName);
+				return newStudent;
+			}
+			
+		} catch (RecordAlreadyExistException e) {
+			// TODO: handle exception
+			throw new RecordAlreadyExistException();
 		}
+		
 		return null;
 	}
 	
@@ -62,20 +70,35 @@ private StudentDao sd = new StudentDaoImpl();
 	public Student updatePassword(String userName, String newStudentPassword)
 			throws SQLException, RecordNotFoundException {
 		// TODO Auto-generated method stub
-		if(sd.insertByUserNameAndPassword(userName, newStudentPassword)) {
-			Student updatedStudent = sd.findByName(userName);
-			return updatedStudent;
+		try {
+			if(sd.updatePassword(userName, newStudentPassword)) {
+				Student student = sd.findByName(userName);
+				return student;
+			}
+			
+		} catch (RecordNotFoundException e) {
+			// TODO: handle exception
+			throw new RecordNotFoundException();
 		}
+		
 		return null;
 	}
 	
 	@Override
 		public Student updateStudentInfo(Student updatedStudent) throws SQLException, RecordNotFoundException {
 			// TODO Auto-generated method stub
-		if(sd.updateSelfInformation(updatedStudent)) {
-			Student updatedStudent1 = sd.findByName(updatedStudent.getUserName());
-			return updatedStudent1;
+		
+		try {
+			if(sd.updateSelfInformation(updatedStudent)) {
+				Student updatedStudent1 = sd.findByName(updatedStudent.getUserName());
+				return updatedStudent1;
+			}
+			
+		} catch (RecordNotFoundException e) {
+			// TODO: handle exception
+			throw new RecordNotFoundException();
 		}
+		
 			return null;
 		}
 }
