@@ -70,7 +70,8 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public boolean insertByUserNameAndPassword(String userName,String password)throws RecordAlreadyExistException{
+	public boolean insertByUserNameAndPassword(String userName,String password)
+			throws RecordAlreadyExistException{
 		try {
 			Student std1=findByName(userName);
 			if(std1!=null)throw new RecordAlreadyExistException();
@@ -87,7 +88,8 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public boolean updateSelfInformation(String userName,Student std)throws RecordNotFoundException,RecordAlreadyExistException {
+	public boolean updateSelfInformation(String userName,Student std)
+			throws RecordNotFoundException,RecordAlreadyExistException {
 		try {
 			Student std1=findByName(userName);
 			if(std1==null)throw new RecordNotFoundException();
@@ -126,7 +128,8 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public boolean updatePassword(String userName,String password)throws RecordNotFoundException{
+	public boolean updatePassword(String userName,String password)
+			throws RecordNotFoundException{
 		try {
 			Student std1=findByName(userName);
 			if(std1==null)throw new RecordNotFoundException();
@@ -144,7 +147,8 @@ public class StudentDaoImpl implements StudentDao{
 		return true;
 	}
 	
-	public boolean deleteStudent(String userName)throws RecordNotFoundException{
+	public boolean deleteStudent(String userName)
+			throws RecordNotFoundException{
 		try {
 			Student std1=findByName(userName);
 			if(std1==null)throw new RecordNotFoundException();

@@ -1,6 +1,5 @@
 package vCampus.server.dao;
 
-import java.sql.SQLException;
 import vCampus.vo.Admin;
 import vCampus.server.exception.*;
 
@@ -14,7 +13,8 @@ public interface AdminDao {
 	 * @throws WrongPasswordException
 	 */
 	public Admin selectAdmin(String adminID);
-	public boolean insertAdmin(String ID,String password)throws RecordAlreadyExistException;
+	public boolean insertAdmin(String adminID,String password)throws RecordAlreadyExistException;
+	public boolean deleteAdmin(String adminID)throws RecordNotFoundException;
 	public boolean updatePassword(String adminID,String password)throws RecordNotFoundException;
 
 }

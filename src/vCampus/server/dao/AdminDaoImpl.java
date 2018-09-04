@@ -1,11 +1,8 @@
 package vCampus.server.dao;
 import java.sql.ResultSet;
 
-
 import java.sql.SQLException;
 import vCampus.vo.Admin;
-import vCampus.vo.Student;
-
 import java.sql.PreparedStatement;
 import vCampus.server.exception.*;
 
@@ -18,7 +15,7 @@ public class AdminDaoImpl implements AdminDao{
 	/**
 	 * @param adminID
 	 * 
-	 * @return admin
+	 * @return object
 	 */
 	@Override
 	public Admin selectAdmin(String adminID){
@@ -44,10 +41,11 @@ public class AdminDaoImpl implements AdminDao{
 	/**
 	 * @param adminID
 	 * @param password
-	 * @return NONE
+	 * @return boolean
 	 */
 	@Override
-	public boolean insertAdmin(String adminID,String password)throws RecordAlreadyExistException{		
+	public boolean insertAdmin(String adminID,String password)
+			throws RecordAlreadyExistException{		
 		try {
 			Admin admin=selectAdmin(adminID);
 			if(admin!=null)throw new RecordAlreadyExistException();
@@ -69,10 +67,11 @@ public class AdminDaoImpl implements AdminDao{
 	 * @param adminID
 	 * @param password
 	 * 
-	 * @return NONE
+	 * @return boolean
 	 */
 	@Override
-	public boolean updatePassword(String adminID,String password)throws RecordNotFoundException{
+	public boolean updatePassword(String adminID,String password)
+			throws RecordNotFoundException{
 		try{
 			Admin admin=selectAdmin(adminID);
 			if(admin==null)throw new RecordNotFoundException();
@@ -80,6 +79,25 @@ public class AdminDaoImpl implements AdminDao{
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, password);
 			stmt.setString(2, adminID);
+			stmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteAdmin(String adminID)
+			throws RecordNotFoundException {
+		try{
+			Admin admin=selectAdmin(adminID);
+			if(admin==null)throw new RecordNotFoundException();
+			String sql="DELETE FROM tbl_admin WHERE adminID=?";
+			stmt=DBC.con.prepareStatement(sql);
+			stmt.setString(1, adminID);
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {

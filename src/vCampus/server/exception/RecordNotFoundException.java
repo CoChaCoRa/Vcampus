@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vCampus.server.exception;
 
 
