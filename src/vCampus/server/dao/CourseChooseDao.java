@@ -2,7 +2,6 @@ package vCampus.server.dao;
 
 import java.sql.SQLException;
 
-
 import java.util.ArrayList;
 
 import vCampus.server.exception.*;
@@ -22,13 +21,13 @@ public interface CourseChooseDao {
 	 * @throws WrongPasswordException
 	 */
 
-    public CourseInformation findCourse(String courseID)throws SQLException;
-    public ArrayList<CourseChoose> courseQueryByStudent(String studentName)throws RecordNotFoundException,SQLException;
-    public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName)throws RecordNotFoundException,SQLException;
-    public ArrayList<CourseChoose> courseQueryByCourse(String courseID)throws RecordNotFoundException,SQLException;
-    public boolean addCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,SQLException;
-    public boolean deleteCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,SQLException;
-    public boolean updateScoreByTeacher(ArrayList<CourseChoose> scoreList)throws RecordNotFoundException,SQLException;
-    public boolean addCourseByAdmin(CourseInformation course)throws RecordAlreadyExistException,SQLException;
-    public boolean updateCourseByAdmin(CourseInformation course)throws RecordNotFoundException,SQLException;
+    public CourseInformation findCourse(String courseID);
+    public ArrayList<CourseChoose> courseQueryByStudent(String studentName)throws RecordNotFoundException;
+    public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName)throws RecordNotFoundException;
+    public ArrayList<CourseChoose> courseQueryByCourse(String courseID)throws RecordNotFoundException;
+    public boolean addCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,OutOfLimitException;
+    public boolean deleteCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,OutOfLimitException;
+    public boolean updateScoreByTeacher(ArrayList<CourseChoose> scoreList)throws RecordNotFoundException;
+    public boolean addCourseByAdmin(CourseInformation course)throws RecordAlreadyExistException;
+    public boolean updateCourseByAdmin(CourseInformation course)throws RecordNotFoundException;
 }

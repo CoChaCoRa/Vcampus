@@ -1,11 +1,13 @@
 package vCampus.server.exception;
 
-/**
- * @author SongZixing
- *
- * @version 0.0
- * 
- */
 public class RecordAlreadyExistException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
+	
+	public String getMessage() {
+		return new String("RecordAlreadyExist");
+	}
 }

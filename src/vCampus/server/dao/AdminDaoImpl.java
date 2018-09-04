@@ -21,7 +21,7 @@ public class AdminDaoImpl implements AdminDao{
 	 * @return admin
 	 */
 	@Override
-	public Admin selectAdmin(String adminID)throws SQLException{
+	public Admin selectAdmin(String adminID){
 		String sql="SELECT * FROM tbl_admin WHERE adminID=?";
 		try {
 			stmt=DBC.con.prepareStatement(sql);
@@ -47,7 +47,7 @@ public class AdminDaoImpl implements AdminDao{
 	 * @return NONE
 	 */
 	@Override
-	public boolean insertAdmin(String adminID,String password)throws RecordAlreadyExistException,SQLException{		
+	public boolean insertAdmin(String adminID,String password)throws RecordAlreadyExistException{		
 		try {
 			Admin admin=selectAdmin(adminID);
 			if(admin!=null)throw new RecordAlreadyExistException();
@@ -72,7 +72,7 @@ public class AdminDaoImpl implements AdminDao{
 	 * @return NONE
 	 */
 	@Override
-	public boolean updatePassword(String adminID,String password)throws RecordNotFoundException,SQLException{
+	public boolean updatePassword(String adminID,String password)throws RecordNotFoundException{
 		try{
 			Admin admin=selectAdmin(adminID);
 			if(admin==null)throw new RecordNotFoundException();

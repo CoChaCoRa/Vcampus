@@ -2,9 +2,7 @@ package vCampus.server.dao;
 
 import java.sql.PreparedStatement;
 
-
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -68,7 +66,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     }
     
     @Override
-    public CourseInformation findCourse(String courseID)throws SQLException{
+    public CourseInformation findCourse(String courseID){
     	try {
     		String sql= "select * from tbl_courseinformation where courseID ="+ "'"+ courseID+"'";
 			stmt=DBC.con.prepareStatement(sql);
@@ -85,7 +83,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     }
     
     @Override
-	public ArrayList<CourseChoose> courseQueryByStudent(String studentName) throws RecordNotFoundException,SQLException {
+	public ArrayList<CourseChoose> courseQueryByStudent(String studentName) throws RecordNotFoundException {
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE studentName='"+studentName+"'";
 			stmt=DBC.con.prepareStatement(sql);
@@ -101,7 +99,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 	
 	@Override
-	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName) throws RecordNotFoundException,SQLException {
+	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName) throws RecordNotFoundException {
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE teacherName='"+teacherName+"'";
 			stmt=DBC.con.prepareStatement(sql);
@@ -117,7 +115,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 
 	@Override
-	public ArrayList<CourseChoose> courseQueryByCourse(String courseID) throws RecordNotFoundException, SQLException {
+	public ArrayList<CourseChoose> courseQueryByCourse(String courseID) throws RecordNotFoundException {
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE courseID='"+courseID+"'";
 			stmt=DBC.con.prepareStatement(sql);
@@ -133,7 +131,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 
 	@Override
-    public boolean addCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,SQLException{
+    public boolean addCourseByStudent(String studentName,String courseID)throws RecordNotFoundException{
 		try {
 			String sql="SELECT * FROM tbl_courseinformation WHERE courseID='"+courseID+"'";
 			stmt=DBC.con.prepareStatement(sql);
@@ -157,7 +155,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 
 	@Override
 	public boolean deleteCourseByStudent(String studentName, String courseID)
-			throws RecordNotFoundException, SQLException {
+			throws RecordNotFoundException ,OutOfLimitException{
 		try {
 			String sql="SELECT * FROM tbl_courseinformation WHERE courseID='"+courseID+"'";
 			stmt=DBC.con.prepareStatement(sql);
@@ -165,9 +163,14 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			if(rs.next()) {
 				int currentAmount=rs.getInt("currentAmount");
 				int personLimit=rs.getInt("personLimit");
-				if(currentAmount==0)return false;
+				if(currentAmount==0)throw new OutOfLimitException();
 				currentAmount--;
+				//UPDATE tbl_courseinformation
 				String sql1="UPDATE tbl_courseinformation SET currentAmount = "+currentAmount+" WHERE courseID='"+courseID+"'";
+				stmt=DBC.con.prepareStatement(sql1);
+				rs = stmt.executeQuery();
+				//UPDATE tbl_coursechoose
+				String sql2="UPDATE tbl_courseinformation SET currentAmount = "+currentAmount+" WHERE courseID='"+courseID+"'";
 				stmt=DBC.con.prepareStatement(sql1);
 				rs = stmt.executeQuery();
 			}else throw new RecordNotFoundException();
@@ -181,7 +184,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 
 	@Override
 	public boolean updateScoreByTeacher(ArrayList<CourseChoose> scoreList)
-			throws RecordNotFoundException, SQLException {
+			throws RecordNotFoundException {
 		try {
 			int length=scoreList.size();
 			for(int i=1;i<=length;i++) {
@@ -204,7 +207,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 
 	@Override
-	public boolean addCourseByAdmin(CourseInformation course) throws RecordAlreadyExistException, SQLException {
+	public boolean addCourseByAdmin(CourseInformation course) throws RecordAlreadyExistException {
 		try{
 			CourseInformation course1=findCourse(course.getCourseID());
 			if(course1!=null)throw new RecordAlreadyExistException();
@@ -227,7 +230,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 
 	@Override
-	public boolean updateCourseByAdmin(CourseInformation course) throws RecordNotFoundException, SQLException {
+	public boolean updateCourseByAdmin(CourseInformation course) throws RecordNotFoundException {
 		try{
 			CourseInformation course1=findCourse(course.getCourseID());
 			if(course1==null)throw new RecordNotFoundException();

@@ -1,11 +1,13 @@
 package vCampus.server.exception;
 
-/**
- * @author SongZixing
- *
- * @version 0.0
- * 
- */
 public class WrongPasswordException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
+
+	public String getMessage() {
+		return new String("WrongPassword");
+	}
 }
