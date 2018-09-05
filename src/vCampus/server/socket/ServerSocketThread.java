@@ -17,12 +17,15 @@ import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.StudentServiceDao;
 import vCampus.server.biz.StudentServiceDaoImpl;
+import vCampus.server.biz.TeacherServiceDao;
+import vCampus.server.biz.TeacherServiceDaoImpl;
 import vCampus.server.exception.RecordAlreadyExistException;
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
 import vCampus.vo.Student;
+import vCampus.vo.Teacher;
 
 /**
  * @author SongZixing
@@ -127,6 +130,82 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(serverResponse);
             }
             
+            if(object.getMessageType().equals(MessageTypeCodes.teacherLogin)) {
+            	Message serverResponse = new Message();
+            	try {
+            		TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+            		ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            		Teacher foundTeacher = teacherServiceDao.login((String)paras.get(0), (String)paras.get(1));
+            		ArrayList<Object> data = new ArrayList<Object>();
+            		data.add(foundTeacher);
+            		serverResponse.setData(data);
+            	}
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	catch (WrongPasswordException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("WrongPasswordException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.teacherRegister)) {
+            	Message serverResponse = new Message();
+            	try {
+            		TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+            		ArrayList<Object> Parameters = (ArrayList<Object>) object.getData();
+            		Teacher newTeacher = teacherServiceDao.register((String)Parameters.get(0), (String)Parameters.get(1));
+            		ArrayList<Object> data = new ArrayList<Object>();
+            		data.add(newTeacher);
+            		serverResponse.setData(data);
+            	}
+            	
+            	catch (RecordAlreadyExistException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.teacherChangePassword)) {
+            	Message serverResponse = new Message();
+            	try {
+					TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					Teacher updatedTeacher = teacherServiceDao.updatePassword((String) paras.get(0), (String)paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(updatedTeacher);
+					serverResponse.setData(data);
+				} 
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.teacherUpdateInformation)) {
+            	Message serverResponse = new Message();
+            	try {
+            		TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+            		ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            		Teacher updatedTeacher = teacherServiceDao.updateTeacherInfo((Teacher) paras.get(0));
+            		ArrayList<Object> data = new ArrayList<Object>();
+            		data.add(updatedTeacher);
+            		serverResponse.setData(data);
+				} 
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
           
 		}
 		catch (Exception e) {

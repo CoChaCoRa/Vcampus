@@ -1,6 +1,5 @@
 package vCampus.util;
 
-import javax.print.DocFlavor.STRING;
 
 /**
  * @author SongZixing
