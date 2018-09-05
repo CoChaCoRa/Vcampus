@@ -1,13 +1,9 @@
 package vCampus.server.dao;
 
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import vCampus.server.exception.*;
 import vCampus.vo.CourseChoose;
@@ -31,8 +27,8 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 				c.setTeacherName(rs.getString("teacherName"));
 				c.setScore(rs.getDouble("score"));
 				list.add(c);
-				return list;
 			}while(rs.next());
+			return list;
 		}
 		catch (Exception e) {
 			// TODO: handle exception

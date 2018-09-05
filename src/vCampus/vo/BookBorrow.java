@@ -31,7 +31,7 @@ public class BookBorrow implements Serializable {
 	public String getUserName(){
 		return userName;
 	}
-	public String geBookID(){
+	public String getBookID(){
 		return bookID;
 	}
 	public Timestamp getBorrowTime(){

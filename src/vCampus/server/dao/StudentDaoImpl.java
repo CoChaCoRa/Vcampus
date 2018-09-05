@@ -1,8 +1,5 @@
 package vCampus.server.dao;
 
-import java.sql.Connection;
-
-
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

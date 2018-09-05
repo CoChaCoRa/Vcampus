@@ -1,6 +1,5 @@
 package vCampus.server.dao;
 
-import java.sql.SQLException;
 import vCampus.server.exception.*;
 import vCampus.vo.Student;
 
