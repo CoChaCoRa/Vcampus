@@ -1,13 +1,15 @@
 package vCampus.server.biz;
 
-import java.sql.SQLException;
 
-import vCampus.server.exception.RecordExistedException;
+import vCampus.server.exception.RecordAlreadyExistException;
+import vCampus.server.exception.RecordNotFoundException;
+import vCampus.server.exception.WrongPasswordException;
 import vCampus.vo.Admin;
 
 public interface AdminServiceDao {
-	Admin register(String ID,String password) throws RecordExistedException, SQLException;
-	Admin login(String ID,String password);
-	Admin update(Admin updatedAdmin);
-
+	Admin register(String ID,String password) throws RecordAlreadyExistException;
+	Admin login(String ID,String password) throws RecordNotFoundException,WrongPasswordException;
+	Admin updatePassword(String ID, String password) throws RecordNotFoundException;
+	boolean destroy(String ID) throws RecordNotFoundException;
+	
 }
