@@ -17,6 +17,6 @@ public interface StudentDao {
 	public Student findByName(String userName);
 	public boolean insertByUserNameAndPassword(String userName,String password)throws RecordAlreadyExistException;
 	public boolean updatePassword(String userName,String password)throws RecordNotFoundException;
-	public boolean updateSelfInformation(String userName,Student std)throws RecordNotFoundException,RecordAlreadyExistException;
+	public boolean updateSelfInformation(Student std)throws RecordNotFoundException;
 	public boolean deleteStudent(String userName)throws RecordNotFoundException;
 }
