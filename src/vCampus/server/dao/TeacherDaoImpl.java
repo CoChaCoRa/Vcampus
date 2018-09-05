@@ -111,17 +111,15 @@ public class TeacherDaoImpl implements TeacherDao{
 	}
 
 	@Override
-	public boolean updateSelfInformation(String userName, Teacher std)
-			throws RecordNotFoundException, RecordAlreadyExistException {
+	public boolean updateSelfInformation(Teacher std)
+			throws RecordNotFoundException {
 		try {
-			Teacher std1=findByName(userName);
+			Teacher std1=findByName(std.getUserName());
 			if(std1==null)throw new RecordNotFoundException();
-			Teacher std2=findByName(std.getUserName());
-			if(std2!=null)throw new RecordAlreadyExistException();
 			
 			String sql="UPDATE tbl_teacher SET sex=?,idCard=?,deptName=?,emailAddress=?,"
 					+ "phoneNumber=?,bankAccount=?,account=?,money=?,teacherEcardNumber=?,"
-					+"professionalTitle=?,userName=?"
+					+"professionalTitle=? "
 					+ "WHERE userName=?";
 			
 			stmt=DBC.con.prepareStatement(sql);
@@ -136,7 +134,6 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.setString(9, std.getTeacherEcardNumber());
 			stmt.setString(10, std.getProfessionalTitle());
 			stmt.setString(11, std.getUserName());
-			stmt.setString(12, userName);
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
