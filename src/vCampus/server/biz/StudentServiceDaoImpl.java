@@ -35,12 +35,16 @@ private StudentDao sd = new StudentDaoImpl();
 			}
 		}
 		
-		catch (Exception e) {
+		catch (RecordNotFoundException e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			throw new RecordNotFoundException();
 		}
 		
-		return null;
+		catch (WrongPasswordException e) {
+			throw new WrongPasswordException();
+		}
+		
+		
 
 	}
 	
