@@ -19,9 +19,6 @@ public class TestStudentService {
 		StudentService studentService = new StudentServiceImpl();
 		
 		
-		
-		
-		
 		//test login successfully
 		if(studentService.login("213160821", "szx123")) 
 		{
@@ -48,7 +45,7 @@ public class TestStudentService {
 		
 		
 		//test register when no account exists,(ATTENTION!!!! the userID has to be changed every time when running the test )
-		if(studentService.register("213160231", "12345", "12345") ) {
+		if(studentService.register("213160221", "12345", "12345") ) {
 		System.out.println(studentService.getCacheStudent().getUserName());
 		}
 		
@@ -95,6 +92,15 @@ public class TestStudentService {
 				studentService.login("213160821", "szx123");
 				System.out.println(studentService.getCacheStudent().getEmailAddress());
 				System.out.println("change successfully");
+			}
+		}
+		
+		
+		
+		//test delete account
+		if(studentService.login("213160221", "12345")) {
+			if(studentService.deleteStudentAccount("213160221")) {
+				System.out.println("Delete account!");
 			}
 		}
 	}

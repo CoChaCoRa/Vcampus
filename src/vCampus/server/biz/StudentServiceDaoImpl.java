@@ -105,4 +105,17 @@ private StudentDao sd = new StudentDaoImpl();
 		
 			return null;
 		}
+	
+	
+	@Override
+		public boolean destroyStudent(String userName) throws RecordNotFoundException {
+			// TODO Auto-generated method stub
+		try {
+			if(sd.deleteStudent(userName)) return true;
+		} catch (RecordNotFoundException e) {
+			// TODO: handle exception
+			throw new RecordNotFoundException();
+		}
+			return false;
+		}
 }

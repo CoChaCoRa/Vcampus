@@ -87,5 +87,14 @@ public class TestTeacherService {
 				System.out.println("change successfully");
 			}
 		}
+		
+		
+		
+		//test destroy account
+		if(teacherService.login("120160821", "teach1234")) {
+			if(teacherService.deleteTeacherAccount("120160821")) {
+				System.out.println("Delete the teacher account!");
+			}
+		}
 	}
 }

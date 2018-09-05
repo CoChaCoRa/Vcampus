@@ -17,4 +17,5 @@ public interface StudentService {
 	public boolean login(String studentID, String studentPassword);
 	public boolean updatePassword(String originalPassword, String newPassword, String newConfirmedPassword);
 	public boolean updateInfo(Student updatedStudent);
+	public boolean deleteStudentAccount(String userName);
 }

@@ -10,5 +10,5 @@ public interface TeacherService {
 	public boolean login(String teacherID, String teacherPassword);
 	public boolean updatePassword(String originalPassword, String newPassword, String newConfirmedPassword);
 	public boolean updateInfo(Teacher updatedTeacher);
-	
+	public boolean deleteTeacherAccount(String userName);
 }
