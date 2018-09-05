@@ -9,8 +9,11 @@ package vCampus.client.register;
 import javax.swing.*;
 
 import vCampus.client.InfoView.StuInfoView;
+import vCampus.client.InfoView.StuInfoView_main;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
+import vCampus.client.biz.TeacherService;
+import vCampus.client.biz.TeacherServiceImpl;
 import vCampus.client.biz.AdminService;
 import vCampus.client.biz.AdminServiceImpl;
 
@@ -99,18 +102,25 @@ public class LoginView extends JFrame{
 	        		StudentService SS = new StudentServiceImpl();
 	        		if(true/*SS.login(uID,uPassword)*/) {
 	        			frame.dispose();
-	        			StuInfoView SIV=new StuInfoView();
+	        			StuInfoView_main SIV=new StuInfoView_main();
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!SS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
 	        	case 1://½ÌÊ¦µÇÂ¼
+	        		TeacherService TS = new TeacherServiceImpl();
+	        		if(TS.login(uID,uPassword)) {
+	        			frame.dispose();
+	        			StuInfoView_main TIV=new StuInfoView_main();
+	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
+	        		}
+	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
 	        	case 2://¹ÜÀíÔ±µÇÂ½
 	        		AdminService AS = new AdminServiceImpl();
 	        		if(AS.login(uID,uPassword)) {
 	        			frame.dispose();
-	        			StuInfoView AIV=new StuInfoView();
+	        			StuInfoView_main AIV=new StuInfoView_main();
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);

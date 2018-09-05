@@ -68,7 +68,7 @@ public class StuMessageChange extends JPanel{
 			updatedStudent.setPhoneNumber(tf9.getText());
 			updatedStudent.setEmailAddress(tf10.getText());
 			StudentService SS = new StudentServiceImpl();
-			SS.updateInfo(updatedStudent);
+			//SS.updateInfo(updatedStudent);
 			JOptionPane.showMessageDialog(null,"ÐÞ¸Ä³É¹¦£¡");
 		}
     	

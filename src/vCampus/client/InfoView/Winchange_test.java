@@ -16,7 +16,7 @@ public class Winchange_test extends JPanel {
 	
 	Winchange_test(){
 		super();
-		int identify=2;
+		int identify=1;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		StuMessageCheck w1=new StuMessageCheck();
