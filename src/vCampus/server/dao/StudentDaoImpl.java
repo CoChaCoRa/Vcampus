@@ -1,15 +1,18 @@
 package vCampus.server.dao;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.DriverManager;
+
+
+import java.sql.SQLException;|
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
 
+<<<<<<< HEAD
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
+=======
+import vCampus.server.exception.*;
+>>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 import vCampus.vo.Student;
 
 /**
@@ -21,52 +24,26 @@ public class StudentDaoImpl implements StudentDao{
 	private DBConnection DBC=new DBConnection();
 	private PreparedStatement stmt=null;
 	private ResultSet rs=null;
-    ResultSetMetaData resultSetMetaData;
-    int iNumCols;
 	
-	public Student ResultSetToStudent(ResultSet rs1){
-		Student std=new Student();
+	public Student ResultSetToStudent(){
 		try {
-			std.setUserName(rs1.getString("userName"));
-			std.setPassword(rs1.getString("password"));
-			std.setSex(rs1.getString("sex"));
-			std.setIdCard(rs1.getString("idCard"));
-			std.setDeptName(rs1.getString("deptName"));
-			std.setEmailAddress(rs1.getString("emailAddress"));
-			std.setPhoneNumber(rs1.getString("phoneNumber"));
-			std.setBankAccount(rs1.getString("bankAccount"));
-			std.setAccount(rs1.getDouble("account"));
-			std.setStudentEcardNumber(rs1.getString("studentEcardNumber"));
-			std.setMoney(rs1.getDouble("money"));
-			std.setStudentID(rs1.getString("studentID"));
-			std.setMajor(rs1.getString("major"));
-			std.setClassNumber(rs1.getString("classNumber"));
-			std.setDormNumber(rs1.getString("dormNumber"));
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-            System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-		return std;
-	}
-    
-	@Override
-	public Student findByName(String userName) {
-		// TODO Auto-generated method stub
-		try {
-			//create SQL string
-			String sql= "select * from tbl_student where userName ="+ "'"+ userName+"'";
-			stmt=DBC.con.prepareStatement(sql);
-			rs = stmt.executeQuery();
-
-			resultSetMetaData = rs.getMetaData();
-			iNumCols= resultSetMetaData.getColumnCount();
-			if(rs.next()) {
-				Student std=ResultSetToStudent(rs);
-				System.out.println("Find!");
-				return std;
-			}
+			Student std=new Student();
+			std.setUserName(rs.getString("userName"));
+			std.setPassword(rs.getString("password"));
+			std.setSex(rs.getString("sex"));
+			std.setIdCard(rs.getString("idCard"));
+			std.setDeptName(rs.getString("deptName"));
+			std.setEmailAddress(rs.getString("emailAddress"));
+			std.setPhoneNumber(rs.getString("phoneNumber"));
+			std.setBankAccount(rs.getString("bankAccount"));
+			std.setAccount(rs.getDouble("account"));
+			std.setStudentEcardNumber(rs.getString("studentEcardNumber"));
+			std.setMoney(rs.getDouble("money"));
+			std.setStudentID(rs.getString("studentID"));
+			std.setMajor(rs.getString("major"));
+			std.setClassNumber(rs.getString("classNumber"));
+			std.setDormNumber(rs.getString("dormNumber"));
+			return std;
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -75,20 +52,36 @@ public class StudentDaoImpl implements StudentDao{
 		}
 		return null;
 	}
+    
+	@Override
+	public Student findByName(String userName) {
+		try {
+			String sql= "select * from tbl_student where userName ="+ "'"+ userName+"'";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			if(rs.next()) {
+				return ResultSetToStudent();
+			}
+		}
+		catch (SQLException e) {
+            System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	@Override
-	public boolean insertByUserNameAndPassword(String userName,String password)throws SQLException{
-		Student std1=findByName(userName);
-		if(std1!=null)return false;
-		
+	public boolean insertByUserNameAndPassword(String userName,String password)
+			throws RecordAlreadyExistException{
 		try {
-			//create SQL string
+			Student std1=findByName(userName);
+			if(std1!=null)throw new RecordAlreadyExistException();
 			String sql = "INSERT INTO tbl_student (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
 			int rs = stmt.executeUpdate();
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -97,13 +90,17 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public boolean updateSelfInformation(Student std)throws SQLException {
+	public boolean updateSelfInformation(Student std)
+			throws RecordNotFoundException {
 		try {
-			//create SQL string
-			String sql="UPDATE tbl_student SET sex=?, SET idCard=?, SET deptName=?, SET emailAddress=?, "
-					+ "SET phoneNumber=?, SET bankAccount=?, SET account=?, SET money=?, SET studentEcardNumber=?, "
-					+ "SET studentID=?, SET major=?, SET classNumber=?, SET dormNumber=? "
+			Student std1=findByName(std.getUserName());
+			if(std1==null)throw new RecordNotFoundException();
+			
+			String sql="UPDATE tbl_student SET sex=?,idCard=?,deptName=?,emailAddress=?,"
+					+ "phoneNumber=?,bankAccount=?,account=?,money=?,studentEcardNumber=?,"
+					+ "studentID=?,major=?,classNumber=?,dormNumber=? "
 					+ "WHERE userName=?";
+			
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, std.getSex());
 			stmt.setString(2, std.getIdCard());
@@ -111,8 +108,8 @@ public class StudentDaoImpl implements StudentDao{
 			stmt.setString(4, std.getEmailAddress());
 			stmt.setString(5, std.getPhoneNumber());
 			stmt.setString(6, std.getBankAccount());
-			stmt.setString(7, Double.toString(std.getAccount()));
-			stmt.setString(8, Double.toString(std.getMoney()));
+			stmt.setDouble(7, std.getAccount());
+			stmt.setDouble(8, std.getMoney());
 			stmt.setString(9, std.getStudentEcardNumber());
 			stmt.setString(10, std.getStudentID());
 			stmt.setString(11, std.getMajor());
@@ -121,8 +118,7 @@ public class StudentDaoImpl implements StudentDao{
 			stmt.setString(14, std.getUserName());
 			stmt.executeUpdate();
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -131,24 +127,44 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public boolean updatePassword(String userName,String password)throws SQLException{
+	public boolean updatePassword(String userName,String password)
+			throws RecordNotFoundException{
 		try {
-			//create SQL string
+			Student std1=findByName(userName);
+			if(std1==null)throw new RecordNotFoundException();
 			String sql="UPDATE tbl_student SET password=? WHERE userName=?";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, password);
 			stmt.setString(2, userName);
 			stmt.executeUpdate();
 		}
-		catch (Exception e) {
-			// TODO: handle exception
+		catch (SQLException e) {
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
-
-
+	
+	public boolean deleteStudent(String userName)
+			throws RecordNotFoundException{
+		try {
+			Student std1=findByName(userName);
+			if(std1==null)throw new RecordNotFoundException();
+			String sql = "DELETE FROM tbl_student WHERE userName=?";
+			stmt=DBC.con.prepareStatement(sql);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
+			
+			//TODO : erase any self-information in other tables
+			
+		}
+		catch (SQLException e) {
+            System.out.println(e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
 

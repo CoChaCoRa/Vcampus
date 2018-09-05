@@ -18,7 +18,7 @@ public class Teacher extends User implements Serializable {
     public String getTeacherEcardNumber(){
     	return teacherEcardNumber;
     }
-    public String getprofessionalTitle(){
+    public String getProfessionalTitle(){
     	return professionalTitle;
     }
     

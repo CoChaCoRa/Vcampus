@@ -1,11 +1,7 @@
 package vCampus.server.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import vCampus.vo.Admin;
-import java.sql.PreparedStatement;
-import vCampus.server.exception.RecordNotFoundException;
-import vCampus.server.exception.WrongPasswordException;
+import vCampus.server.exception.*;
 
 public interface AdminDao {	
 	/**
@@ -13,11 +9,13 @@ public interface AdminDao {
 	 * @param password
 	 * @return
 	 * @throws RecordNotFoundException
+	 * @throws RecordAlreadyExistException
 	 * @throws WrongPasswordException
 	 */
 	public Admin selectAdmin(String adminID);
-	public boolean insertAdmin(String ID,String password);
-	public boolean updatePassword(String adminID,String password);
+	public boolean insertAdmin(String adminID,String password)throws RecordAlreadyExistException;
+	public boolean deleteAdmin(String adminID)throws RecordNotFoundException;
+	public boolean updatePassword(String adminID,String password)throws RecordNotFoundException;
 
 }
 
