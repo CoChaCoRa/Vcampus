@@ -18,23 +18,23 @@ public class RegisterView extends JFrame{
 	 *v1.0 
 	 */
 	private static final long serialVersionUID = 1L;
-	JFrame frame = new JFrame("ç”¨æˆ·æ³¨å†Œ");
-	public JLabel nameLab = new JLabel("ç”¨æˆ·å");
-	public JLabel passLab1 = new JLabel("å¯†ç ");
-	public JLabel passLab2 = new JLabel("ç¡®è®¤å¯†ç ");
+	JFrame frame = new JFrame("ÓÃ»§×¢²á");
+	public JLabel nameLab = new JLabel("ÓÃ»§Ãû");
+	public JLabel passLab1 = new JLabel("ÃÜÂë");
+	public JLabel passLab2 = new JLabel("È·ÈÏÃÜÂë");
 	public JTextField nameText = new JTextField(15);;
 	public JPasswordField pwdText1 = new JPasswordField(15);
 	public JPasswordField pwdText2 = new JPasswordField(15);
-	public JButton registerButton = new JButton("ç¡®è®¤æ³¨å†Œ");
+	public JButton registerButton = new JButton("È·ÈÏ×¢²á");
 	public JPanel buttonPan = new JPanel();
 	String uID = null;
 	String uPassword = null;
 	
 	public RegisterView() {
 		
-		//è®¾ç½®ç›‘å¬
+		//ÉèÖÃ¼àÌı
 		registerButton.addActionListener(new registerActionPerformed());
-		//åŠ å…¥JFrameä¸­
+		//¼ÓÈëJFrameÖĞ
 		this.add(nameLab);
 		this.add(nameText);
 		this.add(passLab1);
@@ -43,7 +43,7 @@ public class RegisterView extends JFrame{
 		this.add(pwdText2);
 		buttonPan.add(registerButton);
 		this.add(buttonPan);
-		//å¸ƒå±€ç®¡ç†         
+		//²¼¾Ö¹ÜÀí         
         this.setSize(400,300);         
         this.setLocation(600, 300);
         nameLab.setBounds(40, 20, 60, 30);
@@ -54,7 +54,7 @@ public class RegisterView extends JFrame{
         pwdText2.setBounds(120, 140, 180, 30);
         buttonPan.setBounds(150, 200, 100, 50);
         this.setLayout(null);
-        this.setDefaultCloseOperation(2);//DISPOSE_ON_CLOSE,éšè—å¹¶é‡Šæ”¾çª—ä½“ï¼Œdispose()ï¼Œå½“æœ€åä¸€ä¸ªçª—å£è¢«é‡Šæ”¾åï¼Œåˆ™ç¨‹åºä¹Ÿéšä¹‹è¿è¡Œç»“æŸã€‚ 
+        this.setDefaultCloseOperation(2);//DISPOSE_ON_CLOSE,Òş²Ø²¢ÊÍ·Å´°Ìå£¬dispose()£¬µ±×îºóÒ»¸ö´°¿Ú±»ÊÍ·Åºó£¬Ôò³ÌĞòÒ²ËæÖ®ÔËĞĞ½áÊø¡£ 
         this.setVisible(true);  
         this.setResizable(true);
 	}
@@ -67,11 +67,11 @@ public class RegisterView extends JFrame{
 				StudentService SS = new StudentServiceImpl();
 				if(SS.register(uID, uPassword, pwdText2.getText()) == true) {
 					ImageIcon icon = new ImageIcon("img/frisk.jpg");
-					JOptionPane.showMessageDialog(null, "æ³¨å†ŒæˆåŠŸ","æ³¨å†ŒæˆåŠŸ",1,icon);
+					JOptionPane.showMessageDialog(null, "×¢²á³É¹¦","×¢²á³É¹¦",1,icon);
 				}
 			}else {
 				ImageIcon icon = new ImageIcon("img/frisk.jpg");
-				JOptionPane.showMessageDialog(null, "å¯†ç ä¸ä¸€è‡´","æ³¨å†Œå¤±è´¥",1,icon);
+				JOptionPane.showMessageDialog(null, "ÃÜÂë²»Ò»ÖÂ","×¢²áÊ§°Ü",1,icon);
 			}
 		}
 	}

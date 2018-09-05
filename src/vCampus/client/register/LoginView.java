@@ -21,16 +21,16 @@ import java.awt.event.ItemListener;
 
 
 public class LoginView extends JFrame{
-	JFrame frame = new JFrame("ç™»å½•ç•Œé¢");
+	JFrame frame = new JFrame("µÇÂ¼½çÃæ");
 	BackgroundPanel bgp;
 	public JTextField usernameText = new JTextField(15);
 	public JTextField pwdhintText = new JTextField(15);
 	public JPasswordField pwdText = new JPasswordField(15);
 	public JButton jb1 = new JButton();
 	public JButton jb2 = new JButton();
-	public JLabel stuLab = new JLabel("å­¦ç”Ÿ");
-	public JLabel teaLab = new JLabel("æ•™å¸ˆ");
-	public JLabel manLab = new JLabel("ç®¡ç†å‘˜");
+	public JLabel stuLab = new JLabel("Ñ§Éú");
+	public JLabel teaLab = new JLabel("½ÌÊ¦");
+	public JLabel manLab = new JLabel("¹ÜÀíÔ±");
 	public JRadioButton jrb1 = new JRadioButton();
 	public JRadioButton jrb2 = new JRadioButton();
 	public JRadioButton jrb3 = new JRadioButton();
@@ -43,7 +43,7 @@ public class LoginView extends JFrame{
 		this.setLayout(null);
 		this.setSize(1920,1080);         
 	    this.setLocation(0, 0);
-	    Font font=new Font("è‹¹æ–¹ å¸¸è§„",Font.CENTER_BASELINE,28);
+	    Font font=new Font("Æ»·½ ³£¹æ",Font.CENTER_BASELINE,28);
 	    this.add(usernameText);
 	    this.add(pwdText);
 	    this.setFocusable(true);
@@ -62,7 +62,7 @@ public class LoginView extends JFrame{
 	    usernameText.setBounds(750, 560, 425, 48);
 	    usernameText.setFont(font);
 	    usernameText.setBorder(null);
-	    usernameText.addFocusListener(new JTextFieldHintListener(usernameText, "ç”¨æˆ·ID"));
+	    usernameText.addFocusListener(new JTextFieldHintListener(usernameText, "ÓÃ»§ID"));
  
 	    pwdText.setBounds(750, 655, 425, 48);
 	    pwdText.setFont(font);
@@ -70,10 +70,10 @@ public class LoginView extends JFrame{
 	    pwdText.addFocusListener(new JTextFieldHintListener(pwdText, "******"));
 	    
 	    jb1.setBounds(747, 781, 150, 56);
-	    jb1.setIcon(new ImageIcon("img\\æ³¨å†Œ.png"));
+	    jb1.setIcon(new ImageIcon("img\\×¢²á.png"));
 	    jb1.setContentAreaFilled(false);
 	    jb1.setBorder(null);
-	    jb1.setPressedIcon(new ImageIcon("img\\\\æ³¨å†Œç‚¹å‡».png"));
+	    jb1.setPressedIcon(new ImageIcon("img\\\\×¢²áµã»÷.png"));
 	    jb1.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -82,10 +82,10 @@ public class LoginView extends JFrame{
 	    });
 	    
 	    jb2.setBounds(1029, 781, 150, 56);
-	    jb2.setIcon(new ImageIcon("img\\ç™»é™†1.png"));
+	    jb2.setIcon(new ImageIcon("img\\µÇÂ½1.png"));
 	    jb2.setContentAreaFilled(false);
 	    jb2.setBorder(null);
-	    jb2.setPressedIcon(new ImageIcon("img\\\\ç™»é™†1ç‚¹å‡».png"));
+	    jb2.setPressedIcon(new ImageIcon("img\\\\µÇÂ½1µã»÷.png"));
 	    jb2.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -95,8 +95,8 @@ public class LoginView extends JFrame{
 	        	case 0:
 	        		StudentService SS = new StudentServiceImpl();
 	        		if(SS.login(uID,uPassword))
-	        			JOptionPane.showMessageDialog(null,"ç™»å½•æˆåŠŸï¼");
-	        		else if(!SS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "è´¦å·æˆ–å¯†ç é”™è¯¯ ", "ç™»å½•å¤±è´¥ ", JOptionPane.ERROR_MESSAGE);
+	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
+	        		else if(!SS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
 	        	case 1:
 	        		break;
@@ -132,7 +132,7 @@ public class LoginView extends JFrame{
 	    	
 	    });
         
-	    bgp=new BackgroundPanel((new ImageIcon("img\\ç™»å½•èƒŒæ™¯.png")).getImage());
+	    bgp=new BackgroundPanel((new ImageIcon("img\\µÇÂ¼±³¾°.png")).getImage());
 		bgp.setBounds(0,0,1920,1080);
 		this.add(bgp);
 		
