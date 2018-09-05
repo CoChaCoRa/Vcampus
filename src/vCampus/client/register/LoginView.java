@@ -8,8 +8,11 @@ package vCampus.client.register;
 
 import javax.swing.*;
 
+import vCampus.client.InfoView.StuInfoView;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.AdminServiceImpl;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -92,15 +95,25 @@ public class LoginView extends JFrame{
 	        	uID = usernameText.getText();
 	        	uPassword = pwdhintText.getText();
 	        	switch(identity) {
-	        	case 0:
+	        	case 0://Ñ§ÉúµÇÂ¼
 	        		StudentService SS = new StudentServiceImpl();
-	        		if(SS.login(uID,uPassword))
+	        		if(true/*SS.login(uID,uPassword)*/) {
+	        			frame.dispose();
+	        			StuInfoView SIV=new StuInfoView();
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
+	        		}
 	        		else if(!SS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
-	        	case 1:
+	        	case 1://½ÌÊ¦µÇÂ¼
 	        		break;
-	        	case 2:
+	        	case 2://¹ÜÀíÔ±µÇÂ½
+	        		AdminService AS = new AdminServiceImpl();
+	        		if(AS.login(uID,uPassword)) {
+	        			frame.dispose();
+	        			StuInfoView AIV=new StuInfoView();
+	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
+	        		}
+	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
 	        	}
 	        }

@@ -3,16 +3,16 @@ package vCampus.server.dao;
 import java.sql.Connection;
 
 
-import java.sql.SQLException;|
+import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-<<<<<<< HEAD
+
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
-=======
+
 import vCampus.server.exception.*;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
+
 import vCampus.vo.Student;
 
 /**

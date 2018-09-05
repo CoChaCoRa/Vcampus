@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import vCampus.client.socket.Client;
+import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
 import vCampus.vo.Student;
@@ -59,17 +60,20 @@ public class StudentServiceImpl implements StudentService{
 		message.setData(data);
 		message.setMessageType(MessageTypeCodes.studentLogin);
 		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
 		
-		if(serverResponse.getStudentUser()!= null)
-		{
-			System.out.println(serverResponse.getStudentUser().getUserName());
-			return true;
+		if(paras != null) {
+			Student newStudent = (Student) paras.get(0);
+			
+			if(newStudent != null)
+			{
+				cacheStudent = newStudent;
+				return true;
+			}
 		}
+		
 		if(serverResponse.getExceptionCode()!=null) {
-			if(serverResponse.getExceptionCode()=="RecordNotFoundException")
-				System.out.println("No such Account!");
-			if(serverResponse.getExceptionCode()=="WrongPasswordException")
-				System.out.println("Wrong Password!");
+			exceptionCode = serverResponse.getExceptionCode();
 		}
 		return false;
 	}
@@ -88,23 +92,33 @@ public class StudentServiceImpl implements StudentService{
 		data.add(studentPassword);
 		message.setData(data);
 		message.setMessageType(MessageTypeCodes.studentRegister);
-		Message serverRespose = client.sendRequestToServer(message);
-		ArrayList<Object> paras = (ArrayList<Object>) serverRespose.getData();
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
 		Student newStudent = (Student) paras.get(0);
 		
 		if(newStudent != null) {
 			cacheStudent = newStudent;
 			return true;
 		}
-		else exceptionCode = serverRespose.getExceptionCode();
-		
-		
+		}
+	
+		if(serverResponse.getExceptionCode()!=null) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
 		return false;
 	} 
 	
 	@Override
 	public boolean updatePassword(String originalPassword, String newPassword, String newConfirmedPassword) {
 		// TODO Auto-generated method stub
+		if(!originalPassword.equals(cacheStudent.getPassword())) {
+			exceptionCode = "WrongPasswordException";
+			return false;
+		}
+		
+		
 		if(!newPassword.equals(newConfirmedPassword)) {
 			exceptionCode = "UnmachedPassword";
 			return false;
@@ -113,18 +127,22 @@ public class StudentServiceImpl implements StudentService{
 		Message message = new Message();
 		message.setUserType("STUDENT");
 		ArrayList<Object> data = new ArrayList<Object>();
-		data.add(originalPassword);
+		data.add(cacheStudent.getUserName());
 		data.add(newPassword);
 		message.setData(data);
 		message.setMessageType(MessageTypeCodes.studentChangePassword);
 		Message serverResponse = client.sendRequestToServer(message);
 		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
-		Student updatedStudent = (Student) paras.get(0);
 		
-		if(updatedStudent != null) {
-			cacheStudent = updatedStudent;
-			return true;
+		if(paras != null) {
+			Student updatedStudent = (Student) paras.get(0);
+			
+			if(updatedStudent != null) {
+				cacheStudent = updatedStudent;
+				return true;
+			}
 		}
+		
 		
 		if(!serverResponse.getExceptionCode().equals("")) {
 			exceptionCode = serverResponse.getExceptionCode();

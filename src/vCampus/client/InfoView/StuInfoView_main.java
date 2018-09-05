@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StuInfoView_main extends JPanel{
-	JFrame frame = new JFrame("教师信息");
+	JFrame frame = new JFrame("信息");
 	BackgroundPanel bgp;
 	
 	

@@ -1,6 +1,5 @@
 package vCampus.server.biz;
 
-import java.sql.SQLException;
 
 import vCampus.server.dao.StudentDao;
 import vCampus.server.dao.StudentDaoImpl;
@@ -27,6 +26,7 @@ private StudentDao sd = new StudentDaoImpl();
 		// TODO Auto-generated method stub
 		try {
 			Student student1 = sd.findByName(userName);
+			if(student1 == null) throw new RecordNotFoundException();
 			if(student1.getPassword().equals(studentPassword)) {
 				return student1;
 			}
@@ -35,10 +35,15 @@ private StudentDao sd = new StudentDaoImpl();
 			}
 		}
 		
-		catch (SQLException e) {
+		catch (RecordNotFoundException e) {
 			// TODO: handle exception
 			throw new RecordNotFoundException();
 		}
+		
+		catch (WrongPasswordException e) {
+			throw new WrongPasswordException();
+		}
+		
 		
 
 	}
@@ -47,7 +52,7 @@ private StudentDao sd = new StudentDaoImpl();
 	 * @see vCampus.server.biz.StudentServiceDao#register(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Student register(String userName, String studentPassword) throws SQLException, RecordAlreadyExistException {
+	public Student register(String userName, String studentPassword) throws  RecordAlreadyExistException {
 		// TODO Auto-generated method stub
 		try {
 			if(sd.insertByUserNameAndPassword(userName, studentPassword)) {
@@ -67,8 +72,7 @@ private StudentDao sd = new StudentDaoImpl();
 	 * @see vCampus.server.biz.StudentServiceDao#updatePassword(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Student updatePassword(String userName, String newStudentPassword)
-			throws SQLException, RecordNotFoundException {
+	public Student updatePassword(String userName, String newStudentPassword) throws  RecordNotFoundException {
 		// TODO Auto-generated method stub
 		try {
 			if(sd.updatePassword(userName, newStudentPassword)) {
@@ -85,7 +89,7 @@ private StudentDao sd = new StudentDaoImpl();
 	}
 	
 	@Override
-		public Student updateStudentInfo(Student updatedStudent) throws SQLException, RecordNotFoundException {
+		public Student updateStudentInfo(Student updatedStudent) throws RecordNotFoundException {
 			// TODO Auto-generated method stub
 		
 		try {
