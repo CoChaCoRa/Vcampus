@@ -30,8 +30,8 @@ public class TestStudentDao {
 		return stdImpl.updatePassword(userName, password);
 	}
 	
-	private static boolean updateSelfInformation(String userName,Student std)throws Exception {
-		return stdImpl.updateSelfInformation(userName,std);
+	private static boolean updateSelfInformation(Student std)throws Exception {
+		return stdImpl.updateSelfInformation(std);
 	}
 	
 	private static boolean deleteStudent(String userName)throws Exception {
@@ -62,11 +62,11 @@ public class TestStudentDao {
 			std.setSex("male");
 			std.setStudentEcardNumber("213147914");
 			std.setStudentID("09016429");
-			std.setUserName("cczuiqiang");
-			if(updateSelfInformation("213161268",std)) {
-				findByName("cczuiqiang");
+			std.setUserName("213161268");
+			if(updateSelfInformation(std)) {
+				findByName("213161268");
 			}else System.out.println("Error!");
-			if(deleteStudent("cczuiqiang")) {
+			if(deleteStudent("213161268")) {
 				findByName("cczuiqiang");
 			}else System.out.println("Error!");
 		}
