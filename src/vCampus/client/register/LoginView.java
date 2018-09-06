@@ -95,13 +95,16 @@ public class LoginView extends JFrame{
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	        	uID = usernameText.getText();
-	        	uPassword = pwdhintText.getText();
+	        	uPassword = pwdText.getText();
 	        	switch(identity) {
 	        	case 0://Ñ§ÉúµÇÂ¼
 	        		StudentService SS = new StudentServiceImpl();
+	        		System.out.print(uID);
+	        		System.out.println(uPassword);
 	        		if(SS.login(uID,uPassword)) {
+	        			
 	        			frame.dispose();
-	        			//StuInfoView_main SIV=new StuInfoView_main();
+	        			StuInfoView_main SIV=new StuInfoView_main();
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!SS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
@@ -110,7 +113,7 @@ public class LoginView extends JFrame{
 	        		TeacherService TS = new TeacherServiceImpl();
 	        		if(TS.login(uID,uPassword)) {
 	        			frame.dispose();
-	        			//StuInfoView_main TIV=new StuInfoView_main();
+	        			StuInfoView_main TIV=new StuInfoView_main();
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);

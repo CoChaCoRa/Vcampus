@@ -4,7 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vCampus.client.InfoView.StuMessageChange;
+//import vCampus.client.InfoView.StuMessageChange;
 
 import javax.swing.*;
 
@@ -21,7 +21,7 @@ public class Winchange_test extends JPanel {
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		StuMessageCheck w1=new StuMessageCheck();
-		StuMessageChange w2=new StuMessageChange();
+		//StuMessageChange w2=new StuMessageChange();
 		AdmAddCheck w4=new AdmAddCheck();
 		AdmMessageChange w3=new AdmMessageChange();
 		
@@ -94,7 +94,7 @@ public class Winchange_test extends JPanel {
 		if(identify==1)
 		{
 			cardpanel.add("w1",w1);
-			cardpanel.add("w2",w2);
+			//cardpanel.add("w2",w2);
 			this.add(jb1);
 			this.add(jb2);
 
