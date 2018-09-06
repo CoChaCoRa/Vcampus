@@ -58,4 +58,16 @@ public class BookInformation implements Serializable {
 	public int getBorrowedAmount(){
 		return borrowedAmount;
 	}
+	
+	@Override
+    public String toString() {
+        return "\nBookInformaiton\t"
+        		+"\nbookID\t" + bookID
+                +"\nbookName\t" + bookName 
+                +"\nbookWriter\t" + bookWriter
+                +"\nbookPress\t" + bookPress
+                +"\nbookAddress\t" + bookAddress
+                +"\ntotalAmount\t"+ Integer.toString(totalAmount)
+                +"\nborrowedAmount\t"+ Integer.toString(borrowedAmount);
+    }
 }

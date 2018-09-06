@@ -1,8 +1,9 @@
 package vCampus.vo;
 
 import java.io.Serializable;
-
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * @author YangHangyuan
@@ -40,4 +41,16 @@ public class BookBorrow implements Serializable {
 	public int getBorrowNumber(){
 		return borrowNumber;
 	}
+	
+	@Override
+	public String toString() {
+		 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 String str = df.format(borrowTime);
+		return "\nBookBorrow\t"
+			+"\nuserName\t"+userName
+			+"\nbookID\t"+bookID
+			+"\nborrowTime\t"+str
+			+"\nborrowNumber\t"+Integer.toString(borrowNumber);
+	}
+	
 }
