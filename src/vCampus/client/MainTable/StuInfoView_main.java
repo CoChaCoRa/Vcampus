@@ -1,4 +1,5 @@
-package vCampus.client.InfoView;
+package vCampus.client.MainTable;
+
 /**
  * @author SYH
  * 
@@ -9,6 +10,12 @@ package vCampus.client.InfoView;
 import javax.swing.*;
 
 import vCampus.client.register.RegisterView;
+import vCampus.client.InfoView.*;
+import vCampus.client.JWC.*;
+import vCampus.client.TSG.*;
+import vCampus.client.Shop.*;
+import vCampus.client.Dorm.*;
+import vCampus.client.Bank.*;
 
 import java.awt.CardLayout;
 import java.awt.Font;
@@ -33,6 +40,7 @@ public class StuInfoView_main extends JPanel{
 	this.setLayout(null);
 	this.setSize(1920,1080);         
     this.setLocation(0, 0);
+
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
 
  //*******************************
@@ -42,12 +50,44 @@ public class StuInfoView_main extends JPanel{
  	JPanel pn1=new JPanel();
  	
  	Winchange_test w1=new Winchange_test();
- 	//Winchange2 w2=new Winchange2();
+ 	Winchange_JWC w2=new Winchange_JWC();
+ 	Winchange_TSG w3=new Winchange_TSG();
+ 	Winchange_shop w4=new Winchange_shop();
+ 	Winchange_dorm w5=new Winchange_dorm();
+ 	Winchange_bank w6=new Winchange_bank();
+ 	
+ 	w1.setBackground(null);
+	w1.setOpaque(false);
+ 	
+ 	w2.setBackground(null);
+	w2.setOpaque(false);
+ 	
+ 	w3.setBackground(null);
+	w3.setOpaque(false);
+	
+	w4.setBackground(null);
+	w4.setOpaque(false);
+	
+	w5.setBackground(null);
+	w5.setOpaque(false);
+ 	
+	w6.setBackground(null);
+	w6.setOpaque(false);
+ 	
+	
  	pn1.setLayout(card);
  	pn1.setBounds(0, 80, 1920, 1000);
+    pn1.setBackground(null);
+    pn1.setOpaque(false);
+
  	pn1.add("w1",w1);
- //	pn1.add("w2",w2);
- 	frame.add(pn1);
+	pn1.add("w2",w2);
+	pn1.add("w3",w3);
+	pn1.add("w4",w4);
+	pn1.add("w5",w5);
+	pn1.add("w6",w6);
+	
+	frame.add(pn1);
     
     
     frame.add(jb3);
@@ -79,7 +119,7 @@ public class StuInfoView_main extends JPanel{
         public void actionPerformed(ActionEvent e) {
         	refresh();
         	jb4.setIcon(new ImageIcon("img\\银行点击.png"));
-        	card.show(pn1,"w2");
+        	card.show(pn1,"w6");
         }
     });
     
@@ -95,7 +135,7 @@ public class StuInfoView_main extends JPanel{
         public void actionPerformed(ActionEvent e) {
         	refresh();
         	jb5.setIcon(new ImageIcon("img\\图书点击.png"));
-        	card.show(pn1,"w2");
+        	card.show(pn1,"w3");
         }
     });
     
@@ -122,12 +162,15 @@ public class StuInfoView_main extends JPanel{
     // 设置按钮的默认图片
     jb7.setIcon(new ImageIcon("img\\教务常规.png"));
     jb7.setBorder(null);
+ 
     // 添加按钮点击事件监听器
     jb7.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
         	refresh();
         	jb7.setIcon(new ImageIcon("img\\教务点击.png"));
+        	card.show(pn1,"w2");
+        	
         }
     });
     
@@ -135,18 +178,19 @@ public class StuInfoView_main extends JPanel{
     jb8.setBounds(1520, 0, 250, 78);
     jb8.setFont(font);
     // 设置按钮的默认图片
-    jb8.setIcon(new ImageIcon("img\\医院常规.png"));
+    jb8.setIcon(new ImageIcon("img\\宿舍.png"));
     jb8.setBorder(null);
     // 添加按钮点击事件监听器
     jb8.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
         	refresh();
-        	jb8.setIcon(new ImageIcon("img\\医院点击.png"));
+        	jb8.setIcon(new ImageIcon("img\\宿舍点击.png"));
+        	card.show(pn1,"w5");
         }
     });
     
-	bgp=new BackgroundPanel((new ImageIcon("img\\bgp.png")).getImage());
+	bgp=new BackgroundPanel((new ImageIcon("img\\bg2.png")).getImage());
 	bgp.setBounds(0,0,1920,1080);
 	frame.add(bgp);
 	
@@ -162,7 +206,7 @@ public class StuInfoView_main extends JPanel{
 		jb5.setIcon(new ImageIcon("img\\图书常规.png"));
 		jb6.setIcon(new ImageIcon("img\\商店常规.png"));
 		jb7.setIcon(new ImageIcon("img\\教务常规.png"));
-		jb8.setIcon(new ImageIcon("img\\医院常规.png"));
+		jb8.setIcon(new ImageIcon("img\\宿舍.png"));
 	}
 	
 
