@@ -12,13 +12,16 @@ public class CourseInformation implements Serializable {
 	private int courseHour;
 	private double credit;
 	private Timestamp courseDate;
+	private int weekIndex;
 	private String coursePlace;
 	private Timestamp examTime;
 	private String examPlace;
 	private int personLimit;
 	private int currentAmount;
 	
-	
+	public void setWeekIndex(int weekIndex) {
+		this.weekIndex=weekIndex;
+	}
 	public void setDeptName(String deptName){
 		this.deptName=deptName;
 	}
@@ -59,6 +62,9 @@ public class CourseInformation implements Serializable {
 		this.teacherName=teacherName;
 	}
 	
+	public int getWeekIndex() {
+		return weekIndex;
+	}
 	public String getDeptName(){
 		return deptName;
 	}

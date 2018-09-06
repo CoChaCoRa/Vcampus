@@ -157,6 +157,7 @@ public class TestCourseChooseDao {
 	        course.setPersonLimit(1000);
 	        course.setTeacherEcardNumber("213161269");
 	        course.setTeacherName("yhy");
+	        course.setWeekIndex(3);
 	        
 		    if(addCourseByAdmin(course)){
 		    	queryResult1=findCourse("3");
