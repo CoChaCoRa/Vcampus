@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vCampus.client.InfoView.StuMessageChange;
 
 import javax.swing.*;
 
@@ -14,7 +15,7 @@ import javax.swing.*;
  */
 public class Winchange_test extends JPanel {
 	
-	Winchange_test(){
+	public Winchange_test(){
 		super();
 		int identify=1;
 	    CardLayout card=new CardLayout();
