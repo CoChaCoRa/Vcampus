@@ -77,7 +77,7 @@ public class TeacherDaoImpl implements TeacherDao{
 			if(std1!=null)throw new RecordAlreadyExistException();
 			String sql = "INSERT INTO tbl_teacher (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
-			int rs = stmt.executeUpdate();
+			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
 			// TODO: handle exception

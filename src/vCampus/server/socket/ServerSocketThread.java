@@ -15,6 +15,8 @@ import java.util.Collection;
 
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
+import vCampus.server.biz.AdminServiceDao;
+import vCampus.server.biz.AdminServiceDaoImpl;
 import vCampus.server.biz.StudentServiceDao;
 import vCampus.server.biz.StudentServiceDaoImpl;
 import vCampus.server.biz.TeacherServiceDao;
@@ -24,6 +26,7 @@ import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
+import vCampus.vo.Admin;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
 
@@ -130,6 +133,24 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(serverResponse);
             }
             
+            if(object.getMessageType().equals(MessageTypeCodes.studentDestroyAccount)) {
+            	Message serverResponse = new Message();
+            	try {
+					StudentServiceDao studentServiceDao =new StudentServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isDestroy = studentServiceDao.destroyStudent((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isDestroy);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            
             if(object.getMessageType().equals(MessageTypeCodes.teacherLogin)) {
             	Message serverResponse = new Message();
             	try {
@@ -201,12 +222,104 @@ public class ServerSocketThread extends Thread{
 				} 
             	catch (RecordNotFoundException e) {
 					// TODO: handle exception
-            		serverResponse.setExceptionCode("RecordAlreadyExistException");
+            		serverResponse.setExceptionCode("RecordNotFoundException");
 				}
             	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
             	response.writeObject(serverResponse);
             }
           
+            
+            if(object.getMessageType().equals(MessageTypeCodes.teacherDestroyAccount)) {
+            	Message serverResponse = new Message();
+            	try {
+					TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isDestroy = teacherServiceDao.destoryTeacher((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isDestroy);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminRegister)) {
+            	Message serverResponse = new Message();
+            	try {
+					AdminServiceDao adminServiceDao =new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					Admin admin = adminServiceDao.register((String)paras.get(0), (String) paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(admin);
+					serverResponse.setData(data);
+				} catch (RecordAlreadyExistException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminLogin)) {
+            	Message serverResponse = new Message();
+            	try {
+					AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					Admin admin = adminServiceDao.login((String) paras.get(0),(String) paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(admin);
+					serverResponse.setData(data);
+				} catch (WrongPasswordException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("WrongPasswordException");
+				}
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminUpdatePassword)) {
+            	Message serverResponse = new Message();
+            	try {
+					AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					Admin admin = adminServiceDao.updatePassword((String)paras.get(0),(String) paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(admin);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminDestroyAccount)) {
+            	Message serverResponse = new Message();
+            	try {
+					AdminServiceDao adminServiceDao =new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isDestroy = adminServiceDao.destroy((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isDestroy);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
 		}
 		catch (Exception e) {
 			// TODO: handle exception

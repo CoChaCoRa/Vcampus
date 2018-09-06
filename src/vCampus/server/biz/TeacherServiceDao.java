@@ -11,4 +11,5 @@ public interface TeacherServiceDao {
 	Teacher register(String userName, String password) throws RecordAlreadyExistException;
 	Teacher updatePassword(String userName, String newPassword) throws RecordNotFoundException;
 	Teacher updateTeacherInfo(Teacher updatedTeacher) throws RecordNotFoundException;
+	boolean destoryTeacher(String userName) throws RecordNotFoundException;
 }

@@ -27,8 +27,8 @@ public class TestTeacherDao {
 		return teacherImpl.updatePassword(userName, password);
 	}
 	
-	private static boolean updateSelfInformation(String userName,Teacher std)throws Exception {
-		return teacherImpl.updateSelfInformation(userName,std);
+	private static boolean updateSelfInformation(Teacher std)throws Exception {
+		return teacherImpl.updateSelfInformation(std);
 	}
 	
 	private static boolean deleteTeacher(String userName)throws Exception {
@@ -56,11 +56,11 @@ public class TestTeacherDao {
 			std.setSex("male");
 			std.setTeacherEcardNumber("213147914");
 			std.setProfessionalTitle("Ph.DD");
-			std.setUserName("cczuiqiang");
-			if(updateSelfInformation("213161268",std)) {
-				findByName("cczuiqiang");
+			std.setUserName("213161268");
+			if(updateSelfInformation(std)) {
+				findByName("213161268");
 			}else System.out.println("Error!");
-			if(deleteTeacher("cczuiqiang")) {
+			if(deleteTeacher("213161268")) {
 				findByName("cczuiqiang");
 			}else System.out.println("Error!");
 		}

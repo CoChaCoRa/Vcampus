@@ -22,9 +22,9 @@ public interface CourseChooseDao {
 	 */
 
     public CourseInformation findCourse(String courseID);
-    public ArrayList<CourseChoose> courseQueryByStudent(String studentName)throws RecordNotFoundException;
-    public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName)throws RecordNotFoundException;
-    public ArrayList<CourseChoose> courseQueryByCourse(String courseID)throws RecordNotFoundException;
+    public ArrayList<CourseChoose> courseQueryByStudent(String studentName);
+    public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName);
+    public ArrayList<CourseChoose> courseQueryByCourse(String courseID);
     public boolean addCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,RecordAlreadyExistException,OutOfLimitException;
     public boolean deleteCourseByStudent(String studentName,String courseID)throws RecordNotFoundException,OutOfLimitException;
     public boolean updateScoreByTeacher(ArrayList<CourseChoose> scoreList)throws RecordNotFoundException;

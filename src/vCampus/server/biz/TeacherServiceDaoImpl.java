@@ -95,6 +95,16 @@ public class TeacherServiceDaoImpl implements TeacherServiceDao {
 		return null;
 	}
 	
-	
+	@Override
+	public boolean destoryTeacher(String userName) throws RecordNotFoundException {
+		// TODO Auto-generated method stub
+		try {
+			if(td.deleteTeacher(userName)) return true;
+		} catch (RecordNotFoundException e) {
+			// TODO: handle exception
+			throw new RecordNotFoundException();
+		}
+		return false;
+	}
 	
 }

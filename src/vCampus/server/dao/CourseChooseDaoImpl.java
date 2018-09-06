@@ -1,13 +1,9 @@
 package vCampus.server.dao;
 
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import vCampus.server.exception.*;
 import vCampus.vo.CourseChoose;
@@ -23,7 +19,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 		try {
 	    	ArrayList<CourseChoose> list=new ArrayList<CourseChoose>();
 			CourseChoose c;
-			while(rs.next()) {
+			do {
 				c=new CourseChoose();
 				c.setCourseID(rs.getString("courseID"));
 				c.setCourseName(rs.getString("courseName"));
@@ -31,8 +27,8 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 				c.setTeacherName(rs.getString("teacherName"));
 				c.setScore(rs.getDouble("score"));
 				list.add(c);
-				return list;
-			}
+			}while(rs.next());
+			return list;
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -55,7 +51,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     		course.setDeptName(rs.getString("deptName"));
     		course.setExamPlace(rs.getString("examPlace"));
     		course.setExamTime(rs.getTimestamp("examTime"));
-    		course.setPersonLimit(rs.getInt("personLimist"));
+    		course.setPersonLimit(rs.getInt("personLimit"));
     		course.setTeacherEcardNumber(rs.getString("teacherEcardNumber"));
     		course.setTeacherName(rs.getString("teacherName"));
     		return course;
@@ -85,15 +81,14 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     }
     
     @Override
-	public ArrayList<CourseChoose> courseQueryByStudent(String studentName)
-			throws RecordNotFoundException {
+	public ArrayList<CourseChoose> courseQueryByStudent(String studentName){
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE studentName='"+studentName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				return ResultSetToCourseChooseArrayList();
-			}else throw new RecordNotFoundException();
+			}
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
@@ -102,15 +97,14 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 	
 	@Override
-	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName) 
-			throws RecordNotFoundException {
+	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName){
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE teacherName='"+teacherName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				return ResultSetToCourseChooseArrayList();
-			}else throw new RecordNotFoundException();
+			}
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
@@ -119,15 +113,14 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 
 	@Override
-	public ArrayList<CourseChoose> courseQueryByCourse(String courseID) 
-			throws RecordNotFoundException {
+	public ArrayList<CourseChoose> courseQueryByCourse(String courseID){
 		try {
 			String sql="SELECT * FROM tbl_coursechoose WHERE courseID='"+courseID+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				return ResultSetToCourseChooseArrayList();
-			}else throw new RecordNotFoundException();
+			}
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
@@ -150,7 +143,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 				
 				String sql2="SELECT * FROM tbl_coursechoose WHERE courseID='"+courseID+"' AND "
 						+"studentName='"+studentName+"'";
-				stmt=DBC.con.prepareStatement(sql1);
+				stmt=DBC.con.prepareStatement(sql2);
 				rs = stmt.executeQuery();
 				if(rs.next())throw new RecordAlreadyExistException();
 				
@@ -159,7 +152,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 				//UPDATE tbl_courseinformation
 				String sql="UPDATE tbl_courseinformation SET currentAmount = "+currentAmount+" WHERE courseID='"+courseID+"'";
 				stmt=DBC.con.prepareStatement(sql);
-				rs = stmt.executeQuery();
+				stmt.executeUpdate();
 
 				//UPDATE tbl_coursechoose
 				String sqll="INSERT INTO tbl_coursechoose (courseID,courseName,studentName,teacherName,score)"
@@ -170,7 +163,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 				stmt.setString(3,studentName);
 				stmt.setString(4, teacherName);
 				stmt.setDouble(5, 0.0);
-				rs = stmt.executeQuery();
+				stmt.executeUpdate();
 			}else throw new RecordNotFoundException();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
@@ -202,13 +195,13 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 				String sql="UPDATE tbl_courseinformation SET currentAmount = "+currentAmount
 						+" WHERE courseID='"+courseID+"'";
 				stmt=DBC.con.prepareStatement(sql);
-				rs = stmt.executeQuery();
+				stmt.executeUpdate();
 				
 				//UPDATE tbl_coursechoose
 				String sqll="DELETE FROM tbl_coursechoose WHERE courseID = '"+courseID
 						+"' AND studentName='"+studentName+"'";
 				stmt=DBC.con.prepareStatement(sqll);
-				rs = stmt.executeQuery();
+				stmt.executeUpdate();
 			}else throw new RecordNotFoundException();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
@@ -223,16 +216,18 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			throws RecordNotFoundException {
 		try {
 			int length=scoreList.size();
-			for(int i=1;i<=length;i++) {
+			for(int i=0;i<length;i++) {
 				String sql="SELECT * FROM tbl_coursechoose WHERE courseID='"+scoreList.get(i).getCourseID()
 						+"' AND studentName='"+scoreList.get(i).getStudentName()+"'";
 				stmt=DBC.con.prepareStatement(sql);
 				rs = stmt.executeQuery();
 				if(rs.next()) {
 					String sql1="UPDATE tbl_coursechoose SET score = "+scoreList.get(i).getScore()
-						+" WHERE courseID = '"+scoreList.get(i).getCourseID()+"'";
+						+" WHERE courseID = '"+scoreList.get(i).getCourseID()+"' AND studentName='"
+						+scoreList.get(i).getStudentName()+"'";
 					stmt=DBC.con.prepareStatement(sql1);
-					rs = stmt.executeQuery();
+					
+					stmt.executeUpdate();
 				}else throw new RecordNotFoundException();
 			}
 		}catch(SQLException e) {
@@ -266,7 +261,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setString(11, course.getExamPlace());
 			stmt.setInt(12, course.getPersonLimit());
 			stmt.setInt(13, course.getCurrentAmount());
-			int rs = stmt.executeUpdate();
+			stmt.executeUpdate();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
@@ -306,7 +301,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setInt(11, course.getPersonLimit());
 			stmt.setInt(12, course.getCurrentAmount());
 			stmt.setString(13, course.getCourseID());
-			int rs = stmt.executeUpdate();
+			stmt.executeUpdate();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();
@@ -323,11 +318,11 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			
 			String sql="DELETE FROM tbl_coursechoose WHERE courseID='"+courseID+"'";
 			stmt=DBC.con.prepareStatement(sql);
-			int rs1 = stmt.executeUpdate();
+			stmt.executeUpdate();
 
 			String sql1="DELETE FROM tbl_courseinformation WHERE courseID='"+courseID+"'";
 			stmt=DBC.con.prepareStatement(sql1);
-			int rs2 = stmt.executeUpdate();
+			stmt.executeUpdate();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.getStackTrace();

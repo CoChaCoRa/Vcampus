@@ -175,4 +175,27 @@ public class StudentServiceImpl implements StudentService{
 		}
 		return false;
 	}
+	
+	
+	@Override
+	public boolean deleteStudentAccount(String userName) {
+		// TODO Auto-generated method stub
+		Message message = new Message();
+		message.setUserType("STUDENT");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(userName);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.studentDestroyAccount);
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> para = (ArrayList<Object>) serverResponse.getData();
+		boolean isDestroy = (boolean) para.get(0);
+		
+		if(isDestroy) return true;
+		
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return false;
+	}
+	
 }

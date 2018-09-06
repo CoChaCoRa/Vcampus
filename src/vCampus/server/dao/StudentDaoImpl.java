@@ -1,8 +1,5 @@
 package vCampus.server.dao;
 
-import java.sql.Connection;
-
-
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,7 +76,7 @@ public class StudentDaoImpl implements StudentDao{
 			if(std1!=null)throw new RecordAlreadyExistException();
 			String sql = "INSERT INTO tbl_student (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
-			int rs = stmt.executeUpdate();
+			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -160,5 +160,24 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 	
 	
-	
+	@Override
+	public boolean deleteTeacherAccount(String userName) {
+		// TODO Auto-generated method stub
+		Message message = new Message();
+		message.setMessageType("TEACHER");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(userName);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.teacherDestroyAccount);
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		boolean isDestroy = (boolean) paras.get(0);
+		
+		if(isDestroy) return true;
+		
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return false;
+	}
 }

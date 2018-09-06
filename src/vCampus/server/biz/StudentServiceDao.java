@@ -18,4 +18,5 @@ public interface StudentServiceDao {
 	Student login(String userName, String studentPassword) throws RecordNotFoundException, WrongPasswordException;
 	Student updatePassword(String userName, String newStudentPassword) throws RecordNotFoundException;
 	Student updateStudentInfo(Student updatedStudent) throws  RecordNotFoundException;
+	boolean destroyStudent(String userName) throws RecordNotFoundException;
 }
