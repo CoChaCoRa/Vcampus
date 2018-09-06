@@ -7,7 +7,10 @@ package vCampus.client.InfoView;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -57,6 +60,19 @@ public class StuMessageChange extends JPanel{
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
+    bt1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Student updatedStudent = new Student();
+			updatedStudent.setPhoneNumber(tf9.getText());
+			updatedStudent.setEmailAddress(tf10.getText());
+			StudentService SS = new StudentServiceImpl();
+			//SS.updateInfo(updatedStudent);
+			JOptionPane.showMessageDialog(null,"修改成功！");
+		}
+    	
+    });
     
     
     this.add(lb1);
