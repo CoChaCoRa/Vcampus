@@ -91,7 +91,7 @@ public class Winchange_test extends JPanel {
 		cardpanel.setLayout(card);
 		cardpanel.setBounds(270, 0, 1920-270, 1000);
 
-		if(identify==1)
+		if(identify==1||identify==2)
 		{
 			cardpanel.add("w1",w1);
 			cardpanel.add("w2",w2);
@@ -100,7 +100,7 @@ public class Winchange_test extends JPanel {
 
 		}
 		
-		if(identify==2)
+		if(identify==3)
 		{
 			cardpanel.add("w3",w3);
 			cardpanel.add("w4",w4);

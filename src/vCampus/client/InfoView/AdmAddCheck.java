@@ -86,7 +86,7 @@ public class AdmAddCheck extends JPanel{
     tf0.setBackground(Color.WHITE);
     tf0.setBounds(660-270, 196-80, 352, 47);
     tf0.setFont(font);
-    tf0.setEditable(false);
+  //  tf0.setEditable(false);
     tf0.setBorder(null);
     
     this.add(lb1);

@@ -93,7 +93,7 @@ public class StuMessageChange extends JPanel{
   //  tf2.setText("11022");
     tf2.setBounds(1360-270, 196-80, 352, 47);
     tf2.setFont(font);
- //   tf2.setEditable(false);
+    tf2.setEditable(false);
     tf2.setBorder(null);
     
     this.add(lb3);

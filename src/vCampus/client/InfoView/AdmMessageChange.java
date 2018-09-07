@@ -73,7 +73,7 @@ public class AdmMessageChange extends JPanel{
     lb2.setBounds(1156-270, 196-80, 101, 47);
     lb2.setFont(font);
     this.add(tf2);
-    tf2.setText("11");
+  //  tf2.setText("11");
     tf2.setBackground(Color.WHITE);
     tf2.setBounds(1360-270, 196-80, 352, 47);
     tf2.setFont(font);
