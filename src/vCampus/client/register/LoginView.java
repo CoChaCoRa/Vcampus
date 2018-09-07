@@ -8,7 +8,7 @@ package vCampus.client.register;
 
 import javax.swing.*;
 
-import vCampus.client.InfoView.StuInfoView_main;
+import vCampus.client.MainTable.StuInfoView_main;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.biz.TeacherService;
@@ -42,7 +42,7 @@ public class LoginView extends JFrame{
 	public ButtonGroup bg=new ButtonGroup();
 	private String uID = null;
 	private String uPassword = null;
-	private int identity = 0;
+	private int identity = 1;
 	
 	public LoginView() {
 		this.setLayout(null);
@@ -97,32 +97,32 @@ public class LoginView extends JFrame{
 	        	uID = usernameText.getText();
 	        	uPassword = pwdText.getText();
 	        	switch(identity) {
-	        	case 0://Ñ§ÉúµÇÂ¼
+	        	case 1://Ñ§ÉúµÇÂ¼
 	        		StudentService SS = new StudentServiceImpl();
 	        		System.out.print(uID);
 	        		System.out.println(uPassword);
-	        		if(SS.login(uID,uPassword)) {
+	        		if(true/*SS.login(uID,uPassword)*/) {
 	        			
 	        			frame.dispose();
-	        			StuInfoView_main SIV=new StuInfoView_main();
+	        			StuInfoView_main SIV=new StuInfoView_main(identity);
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!SS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
-	        	case 1://½ÌÊ¦µÇÂ¼
+	        	case 2://½ÌÊ¦µÇÂ¼
 	        		TeacherService TS = new TeacherServiceImpl();
 	        		if(TS.login(uID,uPassword)) {
 	        			frame.dispose();
-	        			StuInfoView_main TIV=new StuInfoView_main();
+	        			StuInfoView_main TIV=new StuInfoView_main(identity);
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
 	        		break;
-	        	case 2://¹ÜÀíÔ±µÇÂ½
+	        	case 3://¹ÜÀíÔ±µÇÂ½
 	        		AdminService AS = new AdminServiceImpl();
-	        		if(AS.login(uID,uPassword)) {
+	        		if(true/*AS.login(uID,uPassword)*/) {
 	        			frame.dispose();
-	        			//StuInfoView_main AIV=new StuInfoView_main();
+	        			StuInfoView_main AIV=new StuInfoView_main(identity);
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
@@ -136,7 +136,7 @@ public class LoginView extends JFrame{
 	    jrb1.setSelected(true);
 	    jrb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				identity = 0;
+				identity = 1;
 			}
 	    	
 	    });
@@ -144,7 +144,7 @@ public class LoginView extends JFrame{
 	    jrb2.setBounds(900, 718, 30, 30);
 	    jrb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				identity = 1;
+				identity = 2;
 			}
 	    	
 	    });
@@ -152,7 +152,7 @@ public class LoginView extends JFrame{
 	    jrb3.setBounds(1000, 718, 30, 30);
 	    jrb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				identity = 2;
+				identity = 3;
 			}
 	    	
 	    });
