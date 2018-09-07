@@ -7,22 +7,27 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import vCampus.vo.Admin;
+import vCampus.vo.Student;
+import vCampus.vo.Teacher;
+
 
 /**
- * @author Yanhao Shen
+ * @author Yanhao Shen,CC
+ *
+ * @v1.1 edit by CC in 9/7
  *
  */
 public class Winchange_bank extends JPanel {
 	
-	public Winchange_bank(int identify){
+	public Winchange_bank(int identify,Student stu){
 		super();
 		//int identify=1;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		
-		StuCheck w1=new StuCheck();
-		StuAcountChange w2=new StuAcountChange();
-		AdmAcountCheck w3=new AdmAcountCheck();
+		StuCheck w1=new StuCheck(stu);
+		StuAcountChange w2=new StuAcountChange(stu);
 		
 		
 		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
@@ -30,7 +35,6 @@ public class Winchange_bank extends JPanel {
 		
 		JButton jb1=new JButton();
 		JButton jb2=new JButton();
-		JButton jb3=new JButton();
 		
 		
 		//identify:1 学生 查询
@@ -47,11 +51,6 @@ public class Winchange_bank extends JPanel {
 	    jb2.setBounds(0, 80, 270, 80);
 	    jb2.setFont(font);
 	    jb2.setIcon(new ImageIcon("img\\充值转账.png"));
-
-	    //this.add(jb3);
-	    jb3.setBounds(0, 00, 270, 80);
-	    jb3.setFont(font);
-	    jb3.setIcon(new ImageIcon("img\\查询余额.png"));
 
 	    	    
 	
@@ -72,13 +71,6 @@ public class Winchange_bank extends JPanel {
 	        }
 	    });
 	  
-	    jb3.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	      
-	        	card.show(cardpanel,"w3");
-	        }
-	    });
 	  
 		//Winchange2 w2=new Winchange2();
 		cardpanel.setLayout(card);
@@ -93,6 +85,125 @@ public class Winchange_bank extends JPanel {
 		
 			
 		}
+	
+		
+		this.add(cardpanel);
+		
+	}
+	
+	
+	public Winchange_bank(int identify,Teacher tea) {
+		super();
+		//int identify=1;
+	    CardLayout card=new CardLayout();
+		JPanel cardpanel=new JPanel();
+		
+		StuCheck w1=new StuCheck(tea);
+		StuAcountChange w2=new StuAcountChange(tea);
+		
+		
+		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
+		this.setLayout(null);
+		
+		JButton jb1=new JButton();
+		JButton jb2=new JButton();
+		
+		
+		//identify:1 学生 查询
+		//identify:2 教师 
+		//identify:3 管理员 费用扣除/登记分数
+		
+		
+		//this.add(jb1);
+	    jb1.setBounds(0, 0, 270, 80);
+	    jb1.setFont(font);
+	    jb1.setIcon(new ImageIcon("img\\查询账户.png"));
+	       	
+	    //this.add(jb2);
+	    jb2.setBounds(0, 80, 270, 80);
+	    jb2.setFont(font);
+	    jb2.setIcon(new ImageIcon("img\\充值转账.png"));
+
+	    	    
+	
+	    
+	    jb1.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w1");
+	        }
+	    });
+	    
+	    jb2.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w2");
+	        }
+	    });
+	  
+	  
+		//Winchange2 w2=new Winchange2();
+		cardpanel.setLayout(card);
+		cardpanel.setBounds(270, 0, 1920-270, 1000);
+
+		if(identify==1||identify==2)
+		{
+			cardpanel.add("w1",w1);
+			cardpanel.add("w2",w2);
+			this.add(jb1);
+			this.add(jb2);
+		
+			
+		}
+	
+		
+		this.add(cardpanel);
+		
+	}
+
+
+	public Winchange_bank(int identify,Admin adm) {
+		super();
+	    CardLayout card=new CardLayout();
+		JPanel cardpanel=new JPanel();
+		
+		
+		AdmAcountCheck w3=new AdmAcountCheck(adm);
+		
+		
+		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
+		this.setLayout(null);
+		
+		
+		JButton jb3=new JButton();
+		
+		
+		//identify:1 学生 查询
+		//identify:2 教师 
+		//identify:3 管理员 费用扣除/登记分数
+		
+
+	    //this.add(jb3);
+	    jb3.setBounds(0, 00, 270, 80);
+	    jb3.setFont(font);
+	    jb3.setIcon(new ImageIcon("img\\查询余额.png"));
+
+	    	  
+	  
+	    jb3.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w3");
+	        }
+	    });
+	  
+		//Winchange2 w2=new Winchange2();
+		cardpanel.setLayout(card);
+		cardpanel.setBounds(270, 0, 1920-270, 1000);
+
 		
 		if(identify==3)
 		{
@@ -105,6 +216,5 @@ public class Winchange_bank extends JPanel {
 		this.add(cardpanel);
 		
 	}
-	
-	
+
 }

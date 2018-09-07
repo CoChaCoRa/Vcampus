@@ -8,6 +8,7 @@ package vCampus.client.Bank;
 import javax.swing.*;
 
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Admin;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,7 +22,7 @@ public class AdmAcountCheck extends JPanel{
 
 
 	
-	public AdmAcountCheck() {
+	public AdmAcountCheck(Admin adm) {
 		
 	super();
 	JLabel lb1 = new JLabel("一卡通号");
@@ -38,13 +39,6 @@ public class AdmAcountCheck extends JPanel{
 	this.setSize(1650,1000);         
     
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
-   
-   // this.add(bt1);
-    bt1.setBounds(910-270, 910-80, 160, 80);
-    bt1.setFont(font);
-    // 设置按钮的默认图片
-    bt1.setIcon(new ImageIcon("img\\确认.png"));
-    bt1.setBorder(null);
     
     
     this.add(bt0);
@@ -53,6 +47,12 @@ public class AdmAcountCheck extends JPanel{
     // 设置按钮的默认图片
     bt0.setIcon(new ImageIcon("img\\查询UI.png"));
     bt0.setBorder(null);
+    bt0.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, "to check money of one stu");
+		}
+    	
+    });
     
     this.add(lb1); 
     lb1.setBounds(456-270, 196-80, 151, 47);
@@ -77,5 +77,6 @@ public class AdmAcountCheck extends JPanel{
     
   
     }
+
     
 }
