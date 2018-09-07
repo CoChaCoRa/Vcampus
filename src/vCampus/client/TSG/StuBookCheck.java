@@ -34,7 +34,7 @@ public class StuBookCheck extends JPanel{
 	
 	JLabel lb1 = new JLabel("查询");
 	JTextField tf1 = new JTextField(20);
-	
+	JLabel lb2 = new JLabel("heeee");
 	
 	JButton bt0=new JButton("");
 	JButton bt1=new JButton("");
@@ -74,28 +74,34 @@ public class StuBookCheck extends JPanel{
     this.add(lb2);
     lb2.setBounds(456-270, 307-80, 101, 47);
     lb2.setFont(font);
-    this.add(tf2);
-    tf2.setBackground(Color.WHITE);
 
   
     String str2[] = {"盖仑", "艾希", "提莫", "赵信", "李青", "安妮"};  
     jlist = new JList(str2);  
     jlist.setFont(font);
-    jlist.setBounds(800, 800, 100, 100);
+    jlist.setBounds(400, 400, 100, 100);
     
     jlist.setVisibleRowCount(5);//默认显示行数  
+    this.add(jlist);
     jsp = new JScrollPane(jlist);  
       
-   
-  //  this.add(jlb1);  
-  //  this.add(jcb);  
+    
       
-    this.add(jlb2);  
+      
     this.add(jsp);  
+    
+    JList list = new JList(str2);
+    list.setBounds(104, 365, 400, 400);
+    
+    list.setFont(font);
+    add(list);
+    
+    JScrollBar scrollBar = new JScrollBar();
+    scrollBar.setBounds(104, 365, 400, 48);
+    scrollBar.setBackground(getBackground());
+    add(scrollBar);
     
     
     
     }
-    	
-
 }
