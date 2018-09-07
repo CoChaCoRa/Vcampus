@@ -8,6 +8,7 @@ package vCampus.client.InfoView;
 import javax.swing.*;
 
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Admin;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,7 +22,7 @@ public class AdmMessageChange extends JPanel{
 
 
 	
-	public AdmMessageChange() {
+	public AdmMessageChange(Admin ad) {
 		
 	super();
 	JLabel lb1 = new JLabel("Ò»¿¨Í¨");
@@ -146,7 +147,7 @@ public class AdmMessageChange extends JPanel{
     tf9.setBackground(Color.WHITE);
     tf9.setBounds(660-270, 640-80, 352, 47);
     tf9.setFont(font);
-    tf9.setEditable(false);
+//    tf9.setEditable(false);
     tf9.setBorder(null);
     
     this.add(lb10);
@@ -156,6 +157,6 @@ public class AdmMessageChange extends JPanel{
     tf10.setBackground(Color.WHITE);
     tf10.setBounds(1360-270, 640-80, 352, 47);
     tf10.setFont(font);
-    tf10.setEditable(false);
+//    tf10.setEditable(false);
     tf10.setBorder(null);}
 }

@@ -90,7 +90,7 @@ public class LoginView extends JFrame{
 	    });
 	    teaLab.setBounds(850, 718, 80, 30);
 	    jrb2.setBounds(900, 718, 30, 30);
-	    jrb1.addActionListener(new ActionListener() {
+	    jrb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				identity = 1;
 			}
@@ -98,7 +98,7 @@ public class LoginView extends JFrame{
 	    });
 	    admLab.setBounds(950,718,80,30);
 	    jrb3.setBounds(1000, 718, 30, 30);
-	    jrb1.addActionListener(new ActionListener() {
+	    jrb3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				identity = 2;
 			}
@@ -130,7 +130,7 @@ public class LoginView extends JFrame{
 	        	switch(identity) {
 	        	case 0://Ñ§ÉúµÇÂ¼
 	        		StudentService SS = new StudentServiceImpl();
-	        		if(SS.login("213160821","szx123")/*SS.login(uID,uPassword)*/) {
+	        		if(SS.login(uID,uPassword)) {
 	        			LToff();
 	        			StuInfoView_main SIV=new StuInfoView_main(1,SS.getCacheStudent());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
@@ -150,9 +150,10 @@ public class LoginView extends JFrame{
 	        		break;
 	        	case 2://¹ÜÀíÔ±µÇÂ½
 	        		AdminService AS = new AdminServiceImpl();
-	        		if(true/*AS.login(uID,uPassword)*/) {
+	        		AS.register("1", "1234", "1234");
+	        		if(AS.login("1","1234")/*AS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			//StuInfoView_main AIV=new StuInfoView_main(3);
+	        			StuInfoView_main AIV=new StuInfoView_main(3,AS.getCacheAdmin());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);

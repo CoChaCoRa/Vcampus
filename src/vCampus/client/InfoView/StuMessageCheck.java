@@ -1,8 +1,10 @@
 package vCampus.client.InfoView;
 /**
  * @author Yanhao Shen
+ * @author2 CC
  * 
  * @date 9.3
+ * @v1.1 data 9/7
  *
  */
 import javax.swing.*;
