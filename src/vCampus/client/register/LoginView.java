@@ -132,7 +132,7 @@ public class LoginView extends JFrame{
 	        		StudentService SS = new StudentServiceImpl();
 	        		if(SS.login("213160821","szx123")/*SS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main SIV=new StuInfoView_main(1);
+	        			StuInfoView_main SIV=new StuInfoView_main(1,SS.getCacheStudent());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!SS.login(uID,uPassword)) {
@@ -143,7 +143,7 @@ public class LoginView extends JFrame{
 	        		TeacherService TS = new TeacherServiceImpl();
 	        		if(TS.login(uID,uPassword)) {
 	        			LToff();
-	        			StuInfoView_main TIV=new StuInfoView_main(2);
+	        			//StuInfoView_main TIV=new StuInfoView_main(2);
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
@@ -152,7 +152,7 @@ public class LoginView extends JFrame{
 	        		AdminService AS = new AdminServiceImpl();
 	        		if(true/*AS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main AIV=new StuInfoView_main(3);
+	        			//StuInfoView_main AIV=new StuInfoView_main(3);
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);

@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import vCampus.vo.Student;
+
 
 /**
  * @author Yanhao Shen
@@ -15,12 +17,12 @@ import javax.swing.*;
  */
 public class Winchange_test extends JPanel {
 	
-	public Winchange_test(int identify){
+	public Winchange_test(int identify,Student ss){
 		super();
 //		int identify=1;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-		StuMessageCheck w1=new StuMessageCheck();
+		StuMessageCheck w1=new StuMessageCheck(ss);
 		StuMessageChange w2=new StuMessageChange();
 		AdmAddCheck w4=new AdmAddCheck();
 		AdmMessageChange w3=new AdmMessageChange();
@@ -97,7 +99,7 @@ public class Winchange_test extends JPanel {
 			cardpanel.add("w2",w2);
 			this.add(jb1);
 			this.add(jb2);
-
+			
 		}
 		
 		if(identify==3)
