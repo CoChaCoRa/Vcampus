@@ -7,8 +7,11 @@ package vCampus.client.InfoView;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -58,7 +61,27 @@ public class AdmMessageChange extends JPanel{
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
-    
+    //add front-end monitor
+    bt1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Student newstu = new Student();
+			newstu.setStudentID(tf1.getText());
+			newstu.setUserName(tf2.getText());
+			newstu.setSex(tf3.getText());
+			newstu.setIdCard(tf4.getText());
+			newstu.setDeptName(tf5.getText());
+			newstu.setMajor(tf6.getText());
+			newstu.setClassNumber(tf7.getText());
+			newstu.setDormNumber(tf8.getText());
+			newstu.setPhoneNumber(tf9.getText());
+			newstu.setEmailAddress(tf10.getText());
+			StudentService SS = new StudentServiceImpl();
+			if(SS.updateInfo(newstu)) JOptionPane.showMessageDialog(null, "添加成功！");
+			else JOptionPane.showMessageDialog(null, "添加失败！");
+		}
+    	
+    });
     
     this.add(lb1);
     lb1.setBounds(456-270, 196-80, 101, 47);
