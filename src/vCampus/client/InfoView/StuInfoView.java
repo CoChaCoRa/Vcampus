@@ -2,7 +2,7 @@ package vCampus.client.InfoView;
 /**
  * @author CC
  * 
- * @date 8.27
+ * @date 8.31
  *
  */
 import javax.swing.*;
@@ -16,27 +16,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StuInfoView extends JFrame{
-	JFrame frame = new JFrame("½ÌÊ¦ĞÅÏ¢");
+	JFrame frame = new JFrame("æ•™å¸ˆä¿¡æ¯");
 	BackgroundPanel bgp;
-	JLabel lb1 = new JLabel("Ò»¿¨Í¨");
+	JLabel lb1 = new JLabel("ä¸€å¡é€š");
 	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("ĞÕÃû");
+	JLabel lb2 = new JLabel("å§“å");
 	JTextField tf2 = new JTextField(20);
-	JLabel lb3 = new JLabel("ĞÔ±ğ");
+	JLabel lb3 = new JLabel("æ€§åˆ«");
 	JTextField tf3 = new JTextField(20);
-	JLabel lb4 = new JLabel("Éí·İÖ¤ºÅ");
+	JLabel lb4 = new JLabel("èº«ä»½è¯å·");
 	JTextField tf4 = new JTextField(20);
-	JLabel lb5 = new JLabel("ÔºÏµ");
+	JLabel lb5 = new JLabel("é™¢ç³»");
 	JTextField tf5 = new JTextField(20);
-	JLabel lb6 = new JLabel("×¨Òµ");
+	JLabel lb6 = new JLabel("ä¸“ä¸š");
 	JTextField tf6 = new JTextField(20);
-	JLabel lb7 = new JLabel("°à¼¶");
+	JLabel lb7 = new JLabel("ç­çº§");
 	JTextField tf7 = new JTextField(20);
-	JLabel lb8 = new JLabel("ËŞÉáºÅ");
+	JLabel lb8 = new JLabel("å®¿èˆå·");
 	JTextField tf8 = new JTextField(20);
-	JLabel lb9 = new JLabel("ÊÖ»ú");
+	JLabel lb9 = new JLabel("æ‰‹æœº");
 	JTextField tf9 = new JTextField(20);
-	JLabel lb10 = new JLabel("ÓÊÏä");
+	JLabel lb10 = new JLabel("é‚®ç®±");
 	JTextField tf10 = new JTextField(20);
 	JButton jb1 = new JButton();
 	JButton jb2 = new JButton();
@@ -51,7 +51,7 @@ public class StuInfoView extends JFrame{
 	this.setLayout(null);
 	this.setSize(1920,1080);         
     this.setLocation(0, 0);
-    Font font=new Font("Æ»·½ ³£¹æ",Font.CENTER_BASELINE,28);//ÉèÖÃ×ÖÌå¸ñÊ½ºÍ´óĞ¡
+    Font font=new Font("è‹¹æ–¹ å¸¸è§„",Font.CENTER_BASELINE,28);//è®¾ç½®å­—ä½“æ ¼å¼å’Œå¤§å°
     this.add(lb1);
     lb1.setBounds(456, 196, 101, 47);
     lb1.setFont(font);
@@ -145,41 +145,99 @@ public class StuInfoView extends JFrame{
     this.add(jb1);
     jb1.setBounds(0, 80, 270, 80);
     jb1.setFont(font);
-    jb1.setIcon(new ImageIcon("img\\²éÑ¯ĞÅÏ¢.png"));
+    jb1.setIcon(new ImageIcon("img\\æŸ¥è¯¢ä¿¡æ¯.png"));
     this.add(jb2);
     jb2.setBounds(0, 160, 270, 80);
     jb2.setFont(font);
-    jb2.setIcon(new ImageIcon("img\\ĞŞ¸ÄĞÅÏ¢.png"));
+    jb2.setIcon(new ImageIcon("img\\ä¿®æ”¹ä¿¡æ¯.png"));
     
     this.add(jb3);
     jb3.setBounds(270, 0, 250, 78);
     jb3.setFont(font);
-    // ÉèÖÃ°´Å¥µÄÄ¬ÈÏÍ¼Æ¬
-    jb3.setIcon(new ImageIcon("img\\¸öÈË³£¹æ.png"));
-    // ÉèÖÃ°´Å¥±»µã»÷Ê±µÄÍ¼Æ¬
-    //jb3.setPressedIcon(new ImageIcon("img\\¸öÈËµã»÷.png"));
+    // è®¾ç½®æŒ‰é’®çš„é»˜è®¤å›¾ç‰‡
+    jb3.setIcon(new ImageIcon("img\\ä¸ªäººå¸¸è§„.png"));
     jb3.setBorder(null);
-    // Ìí¼Ó°´Å¥µã»÷ÊÂ¼ş¼àÌıÆ÷
+    // æ·»åŠ æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
     jb3.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
         	refresh();
-        	jb3.setIcon(new ImageIcon("img\\¸öÈËµã»÷.png"));
+        	jb3.setIcon(new ImageIcon("img\\ä¸ªäººç‚¹å‡».png"));
         }
     });
     
     this.add(jb4);
     jb4.setBounds(520, 0, 250, 78);
     jb4.setFont(font);
-    // ÉèÖÃ°´Å¥µÄÄ¬ÈÏÍ¼Æ¬
-    jb4.setIcon(new ImageIcon("img\\ÒøĞĞ³£¹æ.png"));
+    // è®¾ç½®æŒ‰é’®çš„é»˜è®¤å›¾ç‰‡
+    jb4.setIcon(new ImageIcon("img\\é“¶è¡Œå¸¸è§„.png"));
     jb4.setBorder(null);
-    // Ìí¼Ó°´Å¥µã»÷ÊÂ¼ş¼àÌıÆ÷
+    // æ·»åŠ æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
     jb4.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
         	refresh();
-        	jb4.setIcon(new ImageIcon("img\\ÒøĞĞµã»÷.png"));
+        	jb4.setIcon(new ImageIcon("img\\é“¶è¡Œç‚¹å‡».png"));
+        }
+    });
+    
+    this.add(jb5);
+    jb5.setBounds(770, 0, 250, 78);
+    jb5.setFont(font);
+    // è®¾ç½®æŒ‰é’®çš„é»˜è®¤å›¾ç‰‡
+    jb5.setIcon(new ImageIcon("img\\å›¾ä¹¦å¸¸è§„.png"));
+    jb5.setBorder(null);
+    // æ·»åŠ æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
+    jb5.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        	refresh();
+        	jb5.setIcon(new ImageIcon("img\\å›¾ä¹¦ç‚¹å‡».png"));
+        }
+    });
+    
+    this.add(jb6);
+    jb6.setBounds(1020, 0, 250, 78);
+    jb6.setFont(font);
+    // è®¾ç½®æŒ‰é’®çš„é»˜è®¤å›¾ç‰‡
+    jb6.setIcon(new ImageIcon("img\\å•†åº—å¸¸è§„.png"));
+    jb6.setBorder(null);
+    // æ·»åŠ æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
+    jb6.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        	refresh();
+        	jb6.setIcon(new ImageIcon("img\\å•†åº—ç‚¹å‡».png"));
+        }
+    });
+    
+    this.add(jb7);
+    jb7.setBounds(1270, 0, 250, 78);
+    jb7.setFont(font);
+    // è®¾ç½®æŒ‰é’®çš„é»˜è®¤å›¾ç‰‡
+    jb7.setIcon(new ImageIcon("img\\æ•™åŠ¡å¸¸è§„.png"));
+    jb7.setBorder(null);
+    // æ·»åŠ æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
+    jb7.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        	refresh();
+        	jb7.setIcon(new ImageIcon("img\\æ•™åŠ¡ç‚¹å‡».png"));
+        }
+    });
+    
+    this.add(jb8);
+    jb8.setBounds(1520, 0, 250, 78);
+    jb8.setFont(font);
+    // è®¾ç½®æŒ‰é’®çš„é»˜è®¤å›¾ç‰‡
+    jb8.setIcon(new ImageIcon("img\\åŒ»é™¢å¸¸è§„.png"));
+    jb8.setBorder(null);
+    // æ·»åŠ æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç›‘å¬å™¨
+    jb8.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        	refresh();
+        	jb8.setIcon(new ImageIcon("img\\åŒ»é™¢ç‚¹å‡».png"));
         }
     });
     
@@ -193,12 +251,12 @@ public class StuInfoView extends JFrame{
 	}
 	
 	public void refresh() {
-		jb3.setIcon(new ImageIcon("img\\¸öÈË³£¹æ.png"));
-		jb4.setIcon(new ImageIcon("img\\ÒøĞĞ³£¹æ.png"));
-		jb5.setIcon(new ImageIcon("img\\Í¼Êé³£¹æ.png"));
-		jb6.setIcon(new ImageIcon("img\\ÉÌµê³£¹æ.png"));
-		jb7.setIcon(new ImageIcon("img\\½ÌÎñ³£¹æ.png"));
-		jb8.setIcon(new ImageIcon("img\\Ò½Ôº³£¹æ.png"));
+		jb3.setIcon(new ImageIcon("img\\ä¸ªäººå¸¸è§„.png"));
+		jb4.setIcon(new ImageIcon("img\\é“¶è¡Œå¸¸è§„.png"));
+		jb5.setIcon(new ImageIcon("img\\å›¾ä¹¦å¸¸è§„.png"));
+		jb6.setIcon(new ImageIcon("img\\å•†åº—å¸¸è§„.png"));
+		jb7.setIcon(new ImageIcon("img\\æ•™åŠ¡å¸¸è§„.png"));
+		jb8.setIcon(new ImageIcon("img\\åŒ»é™¢å¸¸è§„.png"));
 	}
 	
 	public static void main(String[] args) {  

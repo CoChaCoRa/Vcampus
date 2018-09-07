@@ -1,13 +1,16 @@
 package vCampus.client.InfoView;
 /**
  * @author Yanhao Shen
+ * @author2 CC
  * 
  * @date 9.3
+ * @v1.1 data 9/7
  *
  */
 import javax.swing.*;
 
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,31 +24,31 @@ public class StuMessageCheck extends JPanel{
 
 
 	
-	public StuMessageCheck() {
+	public StuMessageCheck(Student stu) {
 	super();
 	
 //	this.setBackground(Color.BLUE);
 	
 	JLabel lb1 = new JLabel("一卡通");
-	JTextField tf1 = new JTextField(20);
+	JTextField tf1 = new JTextField(stu.getStudentID());
 	JLabel lb2 = new JLabel("姓名");
-	JTextField tf2 = new JTextField(20);
+	JTextField tf2 = new JTextField(stu.getUserName());
 	JLabel lb3 = new JLabel("性别");
-	JTextField tf3 = new JTextField(20);
+	JTextField tf3 = new JTextField(stu.getSex());
 	JLabel lb4 = new JLabel("身份证号");
-	JTextField tf4 = new JTextField(20);
+	JTextField tf4 = new JTextField(stu.getIdCard());
 	JLabel lb5 = new JLabel("院系");
-	JTextField tf5 = new JTextField(20);
+	JTextField tf5 = new JTextField(stu.getDeptName());
 	JLabel lb6 = new JLabel("专业");
-	JTextField tf6 = new JTextField(20);
+	JTextField tf6 = new JTextField(stu.getMajor());
 	JLabel lb7 = new JLabel("班级");
-	JTextField tf7 = new JTextField(20);
+	JTextField tf7 = new JTextField(stu.getClassNumber());
 	JLabel lb8 = new JLabel("宿舍号");
-	JTextField tf8 = new JTextField(20);
+	JTextField tf8 = new JTextField(stu.getDormNumber());
 	JLabel lb9 = new JLabel("手机");
-	JTextField tf9 = new JTextField(20);
+	JTextField tf9 = new JTextField(stu.getPhoneNumber());
 	JLabel lb10 = new JLabel("邮箱");
-	JTextField tf10 = new JTextField(20);
+	JTextField tf10 = new JTextField(stu.getEmailAddress());
 	
 	this.setLayout(null);
 	this.setSize(1650,1000);         
@@ -72,7 +75,7 @@ public class StuMessageCheck extends JPanel{
   //  tf2.setText("11022");
     tf2.setBounds(1360-270, 196-80, 352, 47);
     tf2.setFont(font);
- //   tf2.setEditable(false);
+    tf2.setEditable(false);
     tf2.setBorder(null);
     
     this.add(lb3);
@@ -150,7 +153,7 @@ public class StuMessageCheck extends JPanel{
     lb10.setFont(font);
     this.add(tf10);
     tf10.setBackground(Color.WHITE);
-    tf10.setBounds(1360-270, 640-80, 352, 47);
+    tf10.setBounds(1360-270, 640-80, 452, 47);
     tf10.setFont(font);
     tf10.setEditable(false);
     tf10.setBorder(null);

@@ -78,7 +78,7 @@ public class LibraryDaoImpl implements LibraryDao{
 	@Override
 	public ArrayList<BookBorrow> queryBookBorrow(String userName) {
 		try {
-			String sql="SELECT * FROM tbl_bookborrow WHERE bookID='"+userName+"'";
+			String sql="SELECT * FROM tbl_bookborrow WHERE userName='"+userName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			
@@ -115,22 +115,30 @@ public class LibraryDaoImpl implements LibraryDao{
 				if(rs.next()) {
 					borrowNumber+=rs.getInt("borrowNumber");
 				    
-				    //UPDATE tbl_bookborrow
-				    String sql="UPDATE tbl_bookborrow SET borrowTime=?,borrowNumber=? WHERE bookID='"
+				    //UPDATE tbl_bookborrow  //not to update the borrowTime
+				    String sql="UPDATE tbl_bookborrow SET borrowNumber=? WHERE bookID='"
 				    		+borrow.getBookID()+"' AND userName='"+borrow.getUserName()+"'";
 				    stmt=DBC.con.prepareStatement(sql);
+				    stmt.setInt(1,borrowNumber);
+				    
 					stmt.executeUpdate();
 				}else {
 					//INSERT NEW borrow record
 					String sql="INSERT INTO tbl_bookborrow (userName,bookID,borrowTime,borrowNumber)"
 							+" VALUES (?,?,?,?)";
 				    stmt=DBC.con.prepareStatement(sql);
+					stmt.setString(1,borrow.getUserName());
+					stmt.setString(2,borrow.getBookID());
+					stmt.setTimestamp(3,ts);//record the time of modification
+					stmt.setInt(4,borrow.getBorrowNumber());
 					stmt.executeUpdate();
 				}
 				//UPDATE tbl_bookinformation
 			    String sqll="UPDATE tbl_bookinformation SET borrowedAmount=? WHERE bookID='"
 			    		+borrow.getBookID()+"'";
 			    stmt=DBC.con.prepareStatement(sqll);
+			    stmt.setInt(1,currentNumber);
+			    
 				stmt.executeUpdate();
 					
 			}else throw new RecordNotFoundException();
@@ -144,16 +152,46 @@ public class LibraryDaoImpl implements LibraryDao{
 	
 	@Override
 	public boolean returnBook(BookBorrow borrow) throws RecordNotFoundException, OutOfLimitException {
-		// TODO Auto-generated method stub
 		try {
 			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+borrow.getBookID()+"'";
 			stmt=DBC.con.prepareStatement(sql1);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
+				int borrowedAmount=rs.getInt("borrowedAmount");
+				if(borrowedAmount<borrow.getBorrowNumber())throw new OutOfLimitException();
+				borrowedAmount-=borrow.getBorrowNumber();
+				
 				String sql2="SELECT * FROM tbl_bookborrow WHERE bookID='"+borrow.getBookID()
 						+"' AND userName='"+borrow.getUserName()+"'";
 				stmt=DBC.con.prepareStatement(sql2);
-				
+				rs = stmt.executeQuery();
+				if(rs.next()) {
+					int borrowNumber=rs.getInt("borrowNumber");
+					if(borrowNumber<borrow.getBorrowNumber())throw new OutOfLimitException();
+					borrowNumber-=borrow.getBorrowNumber();
+					
+					if(borrowNumber==0) {
+						String sql="DELETE FROM tbl_bookborrow WHERE bookID='"
+							+borrow.getBookID()+"' AND userName='"+borrow.getUserName()+"'";
+						stmt=DBC.con.prepareStatement(sql);
+					
+						stmt.executeUpdate();
+					}else {
+						String sql="UPDATE tbl_bookborrow SET borrowNumber=? WHERE bookID='"
+							+borrow.getBookID()+"' AND userName='"+borrow.getUserName()+"'";
+						stmt=DBC.con.prepareStatement(sql);
+						stmt.setInt(1, borrowNumber);
+						
+						stmt.executeUpdate();
+					}
+					
+					String sqll="UPDATE tbl_bookinformation SET borrowedAmount=? "
+							+"WHERE bookID='"+borrow.getBookID()+"'";
+					stmt=DBC.con.prepareStatement(sqll);
+					stmt.setInt(1,borrowedAmount);
+					
+					stmt.executeUpdate();
+				}else throw new RecordNotFoundException();
 			}else throw new RecordNotFoundException();
 		}catch(SQLException e) {
     		System.out.println(e.getMessage());
@@ -166,17 +204,25 @@ public class LibraryDaoImpl implements LibraryDao{
 	@Override
 	public boolean addBookByAdmin(BookInformation book) 
 			throws RecordAlreadyExistException {
-		// TODO Auto-generated method stu
 		try {
-			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+borrow.getBookID()+"'";
+			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+book.getBookID()+"'";
 			stmt=DBC.con.prepareStatement(sql1);
 			rs = stmt.executeQuery();
-			if(rs.next()) {
-				String sql2="SELECT * FROM tbl_bookborrow WHERE bookID='"+borrow.getBookID()
-						+"' AND userName='"+borrow.getUserName()+"'";
-				stmt=DBC.con.prepareStatement(sql2);
+			if(rs.next()) throw new RecordAlreadyExistException();
 				
-			}else throw new RecordNotFoundException();
+			String sql2="INSERT INTO tbl_bookinformation (bookID,bookName,bookPress,"
+					+"bookAddress,bookWriter,totalAmount,borrowedAmount) "
+					+"VALUES (?,?,?,?,?,?,?)";
+			stmt=DBC.con.prepareStatement(sql2);
+			stmt.setString(1,book.getBookID());
+			stmt.setString(2,book.getBookName());
+			stmt.setString(3,book.getBookPress());
+			stmt.setString(4,book.getBookAddress());
+			stmt.setString(5,book.getBookWriter());
+			stmt.setInt(6,book.getTotalAmount());
+			stmt.setInt(7, book.getBorrowedAmount());
+			
+			stmt.executeUpdate();
 		}catch(SQLException e) {
     		System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -188,16 +234,22 @@ public class LibraryDaoImpl implements LibraryDao{
 	@Override
 	public boolean updateBookByAdmin(BookInformation book) 
 			throws RecordNotFoundException {
-		// TODO Auto-generated method stub
 		try {
-			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+borrow.getBookID()+"'";
+			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+book.getBookID()+"'";
 			stmt=DBC.con.prepareStatement(sql1);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				String sql2="SELECT * FROM tbl_bookborrow WHERE bookID='"+borrow.getBookID()
-						+"' AND userName='"+borrow.getUserName()+"'";
-				stmt=DBC.con.prepareStatement(sql2);
+				String sql="UPDATE tbl_bookinformation SET bookName=?,bookPress=?,bookAddress=?,bookWriter=?,"
+						+"totalAmount=?,borrowedAmount=? WHERE bookID='"+book.getBookID()+"'";
+				stmt=DBC.con.prepareStatement(sql);
+				stmt.setString(1,book.getBookName());
+				stmt.setString(2,book.getBookPress());
+				stmt.setString(3,book.getBookAddress());
+				stmt.setString(4,book.getBookWriter());
+				stmt.setInt(5,book.getTotalAmount());
+				stmt.setInt(6, book.getBorrowedAmount());
 				
+				stmt.executeUpdate();
 			}else throw new RecordNotFoundException();
 		}catch(SQLException e) {
     		System.out.println(e.getMessage());
@@ -210,16 +262,14 @@ public class LibraryDaoImpl implements LibraryDao{
 	@Override
 	public boolean deleteBookByAdmin(String bookID) 
 			throws RecordNotFoundException {
-		// TODO Auto-generated method stub
 		try {
-			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+borrow.getBookID()+"'";
+			String sql1="SELECT * FROM tbl_bookinformation WHERE bookID='"+bookID+"'";
 			stmt=DBC.con.prepareStatement(sql1);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				String sql2="SELECT * FROM tbl_bookborrow WHERE bookID='"+borrow.getBookID()
-						+"' AND userName='"+borrow.getUserName()+"'";
-				stmt=DBC.con.prepareStatement(sql2);
-				
+				String sql="DELETE FROM tbl_bookinformation WHERE bookID='"+bookID+"'";
+				stmt=DBC.con.prepareStatement(sql);
+				stmt.executeUpdate();
 			}else throw new RecordNotFoundException();
 		}catch(SQLException e) {
     		System.out.println(e.getMessage());

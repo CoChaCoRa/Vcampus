@@ -12,13 +12,16 @@ public class CourseInformation implements Serializable {
 	private int courseHour;
 	private double credit;
 	private Timestamp courseDate;
+	private int weekIndex;
 	private String coursePlace;
 	private Timestamp examTime;
 	private String examPlace;
 	private int personLimit;
 	private int currentAmount;
 	
-	
+	public void setWeekIndex(int weekIndex) {
+		this.weekIndex=weekIndex;
+	}
 	public void setDeptName(String deptName){
 		this.deptName=deptName;
 	}
@@ -59,6 +62,9 @@ public class CourseInformation implements Serializable {
 		this.teacherName=teacherName;
 	}
 	
+	public int getWeekIndex() {
+		return weekIndex;
+	}
 	public String getDeptName(){
 		return deptName;
 	}
@@ -72,19 +78,32 @@ public class CourseInformation implements Serializable {
 		return courseHour;
 	}
 	public Timestamp getCourseDate() {
+<<<<<<< HEAD
+		return courseDate;
+=======
 		return (Timestamp) courseDate;
+>>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public String getCoursePlace() {
 		return coursePlace;
 	}
+<<<<<<< HEAD
+	public int getCredit() {
+		return (int) credit;
+=======
 	public double getCredit() {
 		return (double) credit;
+>>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public int getPersonLimit() {
 		return personLimit;
 	}
 	public Timestamp getExamTime() {
+<<<<<<< HEAD
+		return examTime;
+=======
 		return (Timestamp) examTime;
+>>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public String getExamPlace() {
 		return examPlace;

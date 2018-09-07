@@ -35,7 +35,7 @@ public class TestClient {
 		StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
 		try {
 			Student foundStudent = studentServiceDao.login("213160821", "szx123");
-			System.out.println(foundStudent.getStudentName());
+			//System.out.println(foundStudent.getStudentName());
 		}
 		catch (Exception e) {
 			// TODO: handle exception

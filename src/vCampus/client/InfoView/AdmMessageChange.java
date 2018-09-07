@@ -7,7 +7,11 @@ package vCampus.client.InfoView;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Admin;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,7 +25,7 @@ public class AdmMessageChange extends JPanel{
 
 
 	
-	public AdmMessageChange() {
+	public AdmMessageChange(Admin ad) {
 		
 	super();
 	JLabel lb1 = new JLabel("一卡通");
@@ -57,7 +61,27 @@ public class AdmMessageChange extends JPanel{
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
-    
+    //add front-end monitor
+    bt1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Student newstu = new Student();
+			newstu.setStudentID(tf1.getText());
+			newstu.setUserName(tf2.getText());
+			newstu.setSex(tf3.getText());
+			newstu.setIdCard(tf4.getText());
+			newstu.setDeptName(tf5.getText());
+			newstu.setMajor(tf6.getText());
+			newstu.setClassNumber(tf7.getText());
+			newstu.setDormNumber(tf8.getText());
+			newstu.setPhoneNumber(tf9.getText());
+			newstu.setEmailAddress(tf10.getText());
+			StudentService SS = new StudentServiceImpl();
+			if(SS.updateInfo(newstu)) JOptionPane.showMessageDialog(null, "添加成功！");
+			else JOptionPane.showMessageDialog(null, "添加失败！");
+		}
+    	
+    });
     
     this.add(lb1);
     lb1.setBounds(456-270, 196-80, 101, 47);
@@ -73,7 +97,7 @@ public class AdmMessageChange extends JPanel{
     lb2.setBounds(1156-270, 196-80, 101, 47);
     lb2.setFont(font);
     this.add(tf2);
-    tf2.setText("11");
+  //  tf2.setText("11");
     tf2.setBackground(Color.WHITE);
     tf2.setBounds(1360-270, 196-80, 352, 47);
     tf2.setFont(font);
@@ -146,7 +170,7 @@ public class AdmMessageChange extends JPanel{
     tf9.setBackground(Color.WHITE);
     tf9.setBounds(660-270, 640-80, 352, 47);
     tf9.setFont(font);
-    tf9.setEditable(false);
+//    tf9.setEditable(false);
     tf9.setBorder(null);
     
     this.add(lb10);
@@ -156,6 +180,6 @@ public class AdmMessageChange extends JPanel{
     tf10.setBackground(Color.WHITE);
     tf10.setBounds(1360-270, 640-80, 352, 47);
     tf10.setFont(font);
-    tf10.setEditable(false);
+//    tf10.setEditable(false);
     tf10.setBorder(null);}
 }

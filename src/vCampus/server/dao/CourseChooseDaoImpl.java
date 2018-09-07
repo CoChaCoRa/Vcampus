@@ -54,6 +54,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     		course.setPersonLimit(rs.getInt("personLimit"));
     		course.setTeacherEcardNumber(rs.getString("teacherEcardNumber"));
     		course.setTeacherName(rs.getString("teacherName"));
+    		course.setWeekIndex(rs.getInt("weekIndex"));
     		return course;
     	}catch(Exception e) {
 			// TODO: handle exception
@@ -245,7 +246,8 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			if(course1!=null)throw new RecordAlreadyExistException();
 			String sql = "INSERT INTO tbl_courseinformation (courseID, courseName, deptName, "
 				+"teacherEcardNumber, teacherName, courseHour, credit, courseDate, coursePlace, "
-				+"examTime, examPlace, personLimit, currentAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+				+"examTime, examPlace, personLimit, currentAmount,weekIndex) "
+				+"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 			
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, course.getCourseID());
@@ -261,6 +263,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setString(11, course.getExamPlace());
 			stmt.setInt(12, course.getPersonLimit());
 			stmt.setInt(13, course.getCurrentAmount());
+			stmt.setInt(14, course.getWeekIndex());
 			stmt.executeUpdate();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
@@ -275,9 +278,9 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 		try{
 			CourseInformation course1=findCourse(course.getCourseID());
 			if(course1==null)throw new RecordNotFoundException();
-			String sql = "UPDATE tbl_courseinformation SET courseName = ?,  deptName = ?, "
-				+"teacherEcardNumber = ?, teacherName = ?, courseHour = ?, credit = ?, courseDate = ?, "
-				+"coursePlace = ?, examTime = ?, examPlace = ?, personLimit = ?, currentAmount = ? "
+			String sql = "UPDATE tbl_courseinformation SET courseName =?,deptName =?,"
+				+"teacherEcardNumber=?,teacherName=?,courseHour=?, credit=?,courseDate=?,"
+				+"coursePlace=?,examTime=?,examPlace=?,personLimit=?,currentAmount=?,weekIndex=? "
 				+"WHERE courseID = ?";
 			/*
 			// the format of time
@@ -300,7 +303,8 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setString(10, course.getExamPlace());
 			stmt.setInt(11, course.getPersonLimit());
 			stmt.setInt(12, course.getCurrentAmount());
-			stmt.setString(13, course.getCourseID());
+			stmt.setInt(13, course.getWeekIndex());
+			stmt.setString(14, course.getCourseID());
 			stmt.executeUpdate();
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());

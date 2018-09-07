@@ -4,7 +4,12 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
+import vCampus.server.exception.RecordNotFoundException;
+import vCampus.server.exception.WrongPasswordException;
+
 import vCampus.server.exception.*;
+
 import vCampus.vo.Student;
 
 /**
