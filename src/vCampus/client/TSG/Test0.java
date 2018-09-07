@@ -13,8 +13,8 @@ public class Test0 extends JFrame{
     
   //构造函数  
   public Test0(){  
-      jp1 = new JPanel();  
-      jp2 = new JPanel();  
+        
+        
         
       jlb1 = new JLabel("你的水平：");  
       String str1[] = {"巨坑", "菜鸟", "一般", "大神"};  
@@ -23,22 +23,23 @@ public class Test0 extends JFrame{
       jlb2 = new JLabel("选择英雄：");  
       String str2[] = {"盖仑", "艾希", "提莫", "赵信", "李青", "安妮"};  
       jlist = new JList(str2);  
+      jlist.setBounds(200, 200, 100, 100);
       jlist.setVisibleRowCount(2);//默认显示行数  
       jsp = new JScrollPane(jlist);  
         
-      jp1.add(jlb1);  
-      jp1.add(jcb);  
+      //this.add(jlb1);  
+      //this.add(jcb);  
         
-      jp2.add(jlb2);  
-      jp2.add(jsp);  
+      this.add(jlb2);  
+      this.add(jsp);  
         
           //网格布局2行一列  
       this.setLayout(new GridLayout(2, 1));  
         
       this.add(jp1);  
-      this.add(jp2);  
         
-      this.setSize(200,200);  
+        
+      this.setSize(1000,1000);  
       this.setTitle("组件演示");  
       this.setVisible(true);  
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  

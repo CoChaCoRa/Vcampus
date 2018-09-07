@@ -222,7 +222,7 @@ public class StuInfoView_main extends JPanel{
 	
 
 	public static void main(String[] args) {  
-		int identify=3;
+		int identify=1;
 		StuInfoView_main SIV=new StuInfoView_main(identify);  
     }
 }
