@@ -65,20 +65,8 @@ public class AdmMessageChange extends JPanel{
     bt1.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Student newstu = new Student();
-			newstu.setStudentID(tf1.getText());
-			newstu.setUserName(tf2.getText());
-			newstu.setSex(tf3.getText());
-			newstu.setIdCard(tf4.getText());
-			newstu.setDeptName(tf5.getText());
-			newstu.setMajor(tf6.getText());
-			newstu.setClassNumber(tf7.getText());
-			newstu.setDormNumber(tf8.getText());
-			newstu.setPhoneNumber(tf9.getText());
-			newstu.setEmailAddress(tf10.getText());
-			StudentService SS = new StudentServiceImpl();
-			if(SS.updateInfo(newstu)) JOptionPane.showMessageDialog(null, "添加成功！");
-			else JOptionPane.showMessageDialog(null, "添加失败！");
+			//here to add a function for addition of student's info
+			JOptionPane.showMessageDialog(null, "to add one stu's info");
 		}
     	
     });
