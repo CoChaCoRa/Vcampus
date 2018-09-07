@@ -16,6 +16,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.*;
+import javax.swing.*; 
 
 public class StuBookCheck extends JPanel{
 
@@ -24,8 +26,14 @@ public class StuBookCheck extends JPanel{
 	public StuBookCheck() {
 		
 	super();
-	JLabel lb0 = new JLabel("查询");
-	JTextField tf0 = new JTextField(20);
+	JList jlist;    //列表框  
+	JComboBox jcb;  //下拉框  
+	  
+	JLabel jlb2;  
+	JScrollPane jsp;    //滚动控件 
+	
+	JLabel lb1 = new JLabel("查询");
+	JTextField tf1 = new JTextField(20);
 	
 	
 	JButton bt0=new JButton("");
@@ -51,22 +59,43 @@ public class StuBookCheck extends JPanel{
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
 
-    
-    
-    this.add(lb0);
-    lb0.setBounds(456-270, 196-80, 101, 47);
-    lb0.setFont(font);
-    this.add(tf0);
-    tf0.setBackground(Color.WHITE);
-    tf0.setBounds(660-270, 196-80, 352, 47);
-    tf0.setFont(font);
-    tf0.setEditable(false);
-    tf0.setBorder(null);
+    this.add(lb1); 
+    lb1.setBounds(456-270, 196-80, 151, 47);
+    lb1.setFont(font);
+    this.add(tf1);
+    tf1.setBackground(Color.WHITE);
+    tf1.setBounds(710-270, 196-80, 352, 47);
+    tf1.setFont(font);
+   // tf1.setEditable(false);
+    tf1.setBorder(null);
+
+    lb2 = new JLabel("选择英雄：");  
+
+    this.add(lb2);
+    lb2.setBounds(456-270, 307-80, 101, 47);
+    lb2.setFont(font);
+    this.add(tf2);
+    tf2.setBackground(Color.WHITE);
+
   
+    String str2[] = {"盖仑", "艾希", "提莫", "赵信", "李青", "安妮"};  
+    jlist = new JList(str2);  
+    jlist.setFont(font);
+    jlist.setBounds(800, 800, 100, 100);
+    
+    jlist.setVisibleRowCount(5);//默认显示行数  
+    jsp = new JScrollPane(jlist);  
+      
+   
+  //  this.add(jlb1);  
+  //  this.add(jcb);  
+      
+    this.add(jlb2);  
+    this.add(jsp);  
+    
+    
+    
     }
     	
-
-
-    
 
 }

@@ -17,6 +17,10 @@ import vCampus.client.Shop.*;
 import vCampus.client.Bank.*;
 import vCampus.client.Dorm.*;
 
+
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -194,6 +198,13 @@ public class StuInfoView_main extends JPanel{
 	bgp.setBounds(0,0,1920,1080);
 	frame.add(bgp);
 	
+	Toolkit kit = Toolkit.getDefaultToolkit();
+  //Dimension dimension = kit.getScreenSize();
+  //  frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+  //  frame.setBounds(0, 0, dimension.width, dimension.height);
+   
+    frame.setUndecorated(true);
+ 
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 	frame.setSize(1920,1080);
 	frame.setVisible(true);  
