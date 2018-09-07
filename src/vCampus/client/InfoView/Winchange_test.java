@@ -15,9 +15,9 @@ import javax.swing.*;
  */
 public class Winchange_test extends JPanel {
 	
-	public Winchange_test(){
+	public Winchange_test(int identify){
 		super();
-		int identify=1;
+//		int identify=1;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		StuMessageCheck w1=new StuMessageCheck();

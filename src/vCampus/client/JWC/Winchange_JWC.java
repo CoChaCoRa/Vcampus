@@ -19,9 +19,9 @@ import javax.swing.ImageIcon;
  */
 public class Winchange_JWC extends JPanel {
 	
-	public Winchange_JWC(){
+	public Winchange_JWC(int identify){
 		super();
-		int identify=3;
+//		int identify=3;
 	
 
 	    CardLayout card=new CardLayout();

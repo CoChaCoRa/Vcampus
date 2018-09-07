@@ -14,9 +14,9 @@ import javax.swing.*;
  */
 public class Winchange_shop extends JPanel {
 	
-	public Winchange_shop(){
+	public Winchange_shop(int identify){
 		super();
-		int identify=2;
+//		int identify=2;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		StuAccountCheck w1=new StuAccountCheck();

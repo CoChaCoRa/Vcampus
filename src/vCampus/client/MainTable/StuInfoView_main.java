@@ -36,7 +36,7 @@ public class StuInfoView_main extends JPanel{
 	JButton jb7 = new JButton();
 	JButton jb8 = new JButton();
 	
-	public StuInfoView_main() {
+	public StuInfoView_main(int id) {
 	this.setLayout(null);
 	this.setSize(1920,1080);         
     this.setLocation(0, 0);
@@ -49,12 +49,12 @@ public class StuInfoView_main extends JPanel{
     CardLayout card=new CardLayout();
  	JPanel pn1=new JPanel();
  	
- 	Winchange_test w1=new Winchange_test();
- 	Winchange_JWC w2=new Winchange_JWC();
- 	Winchange_TSG w3=new Winchange_TSG();
- 	Winchange_shop w4=new Winchange_shop();
- 	Winchange_dorm w5=new Winchange_dorm();
- 	Winchange_bank w6=new Winchange_bank();
+ 	Winchange_test w1=new Winchange_test(id);
+ 	Winchange_JWC w2=new Winchange_JWC(id);
+ 	Winchange_TSG w3=new Winchange_TSG(id);
+ 	Winchange_shop w4=new Winchange_shop(id);
+ 	Winchange_dorm w5=new Winchange_dorm(id);
+ 	Winchange_bank w6=new Winchange_bank(id);
  	
  	w1.setBackground(null);
 	w1.setOpaque(false);
@@ -211,7 +211,8 @@ public class StuInfoView_main extends JPanel{
 	
 
 	public static void main(String[] args) {  
-		StuInfoView_main SIV=new StuInfoView_main();  
+		int identify=1;
+		StuInfoView_main SIV=new StuInfoView_main(identify);  
     }
 }
 class BackgroundPanel extends JPanel{

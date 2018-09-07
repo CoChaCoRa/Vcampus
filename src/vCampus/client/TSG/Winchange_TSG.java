@@ -14,9 +14,9 @@ import javax.swing.*;
  */
 public class Winchange_TSG extends JPanel {
 	
-	public Winchange_TSG(){
+	public Winchange_TSG(int identify){
 		super();
-		int identify=3;
+//		int identify=3;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		StuBookCheck w1=new StuBookCheck();

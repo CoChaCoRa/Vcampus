@@ -14,9 +14,9 @@ import javax.swing.*;
  */
 public class Winchange_dorm extends JPanel {
 	
-	public Winchange_dorm(){
+	public Winchange_dorm(int identify){
 		super();
-		int identify=3;
+//		int identify=3;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		
