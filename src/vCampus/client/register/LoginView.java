@@ -8,7 +8,7 @@ package vCampus.client.register;
 
 import javax.swing.*;
 
-import vCampus.client.MainTable.StuInfoView_main;
+import vCampus.client.MainTable.InfoView_main;
 import vCampus.client.InfoView.*;
 import vCampus.client.JWC.*;
 import vCampus.client.TSG.*;
@@ -170,7 +170,7 @@ public class LoginView extends JFrame{
 	        		StudentService SS = new StudentServiceImpl();
 	        		if(SS.login("213160821","szx123")/*SS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main SIV=new StuInfoView_main(1,SS.getCacheStudent());
+	        			InfoView_main SIV=new InfoView_main(1,SS.getCacheStudent());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!SS.login(uID,uPassword)) {
@@ -182,7 +182,7 @@ public class LoginView extends JFrame{
 	        		TS.register("0", "12345", "12345");
 	        		if(TS.login("0","12345")/*TS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main TIV=new StuInfoView_main(2,TS.getCacheTeacher());
+	        			InfoView_main TIV=new InfoView_main(2,TS.getCacheTeacher());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "µÇÂ¼Ê§°Ü ", "ERROR ", JOptionPane.ERROR_MESSAGE);
@@ -192,7 +192,7 @@ public class LoginView extends JFrame{
 	        		AS.register("1", "1234", "1234");
 	        		if(AS.login("1","1234")/*AS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main AIV=new StuInfoView_main(3,AS.getCacheAdmin());
+	        			InfoView_main AIV=new InfoView_main(3,AS.getCacheAdmin());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "µÇÂ¼Ê§°Ü ", "ERROR ", JOptionPane.ERROR_MESSAGE);

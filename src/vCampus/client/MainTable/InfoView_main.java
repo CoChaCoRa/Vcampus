@@ -35,7 +35,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class StuInfoView_main extends JPanel{
+public class InfoView_main extends JPanel{
 	JFrame frame = new JFrame("信息");
 	BackgroundPanel bgp;
 	
@@ -47,7 +47,7 @@ public class StuInfoView_main extends JPanel{
 	JButton jb7 = new JButton();
 	JButton jb8 = new JButton();
 	
-	public StuInfoView_main(int id,Student ss) {
+	public InfoView_main(int id,Student ss) {
 	this.setLayout(null);
 	this.setSize(1920,1080);         
     this.setLocation(0, 0);
@@ -68,7 +68,7 @@ public class StuInfoView_main extends JPanel{
  	Winchange_TSG w3=new Winchange_TSG(id);
  	Winchange_shop w4=new Winchange_shop(id);
  	Winchange_dorm w5=new Winchange_dorm(id);
- 	Winchange_bank w6=new Winchange_bank(id);
+ 	Winchange_bank w6=new Winchange_bank(id,ss);
  	
  	w1.setBackground(null);
 	w1.setOpaque(false);
@@ -140,8 +140,7 @@ public class StuInfoView_main extends JPanel{
     jb3.setBounds(270, 0, 250, 78);
     jb3.setFont(font);
     // 设置按钮的默认图片
-    //jb3.setIcon(new ImageIcon("img\\个人常规.png"));
-    jb3.setIcon(new ImageIcon("img\\个人常规.png"));
+    jb3.setIcon(new ImageIcon("img\\个人点击.png"));
     jb3.setBorder(null);
     // 添加按钮点击事件监听器
     jb3.addActionListener(new ActionListener() {
@@ -254,7 +253,7 @@ public class StuInfoView_main extends JPanel{
 	}
 	
 	
-	public StuInfoView_main(int id, Admin admin) {
+	public InfoView_main(int id, Admin admin) {
 		this.setLayout(null);
 		this.setSize(1920,1080);         
 	    this.setLocation(0, 0);
@@ -274,7 +273,7 @@ public class StuInfoView_main extends JPanel{
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	Winchange_dorm w5=new Winchange_dorm(id);
-	 	Winchange_bank w6=new Winchange_bank(id);
+	 	Winchange_bank w6=new Winchange_bank(id,ad);
 	 	
 	 	w1.setBackground(null);
 		w1.setOpaque(false);
@@ -309,13 +308,44 @@ public class StuInfoView_main extends JPanel{
 		
 		frame.add(pn1);
 	    
+		frame.add(jb_close);
+		jb_close.setBounds(1920-50, 20, 50, 50);
+		jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
+	    jb_close.setBorder(null);
+	    jb_close.setContentAreaFilled(false);
+	    jb_close.setPressedIcon(new ImageIcon("img\\exit_ready.png"));
+	    jb_close.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				jb_close.setIcon(new ImageIcon("img\\exit_ready.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+	    });
 	    
 	    frame.add(jb3);
 	    jb3.setBounds(270, 0, 250, 78);
 	    jb3.setFont(font);
 	    // 设置按钮的默认图片
-	    //jb3.setIcon(new ImageIcon("img\\个人常规.png"));
-	    jb3.setIcon(new ImageIcon("img\\个人常规.png"));
+	    jb3.setIcon(new ImageIcon("img\\个人点击.png"));
 	    jb3.setBorder(null);
 	    // 添加按钮点击事件监听器
 	    jb3.addActionListener(new ActionListener() {
@@ -428,7 +458,7 @@ public class StuInfoView_main extends JPanel{
 	}
 
 	
-	public StuInfoView_main(int id, Teacher cacheTeacher) {
+	public InfoView_main(int id, Teacher cacheTeacher) {
 		this.setLayout(null);
 		this.setSize(1920,1080);         
 	    this.setLocation(0, 0);
@@ -448,7 +478,7 @@ public class StuInfoView_main extends JPanel{
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	Winchange_dorm w5=new Winchange_dorm(id);
-	 	Winchange_bank w6=new Winchange_bank(id);
+	 	Winchange_bank w6=new Winchange_bank(id,tc);
 	 	
 	 	w1.setBackground(null);
 		w1.setOpaque(false);
@@ -486,21 +516,41 @@ public class StuInfoView_main extends JPanel{
 		frame.add(jb_close);
 		jb_close.setBounds(1920-50, 20, 50, 50);
 		jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
-		jb_close.setBorder(null);
-		jb_close.setPressedIcon(new ImageIcon("img\\exit_ready.png"));
-		jb_close.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	System.exit(0);
-	        }
+	    jb_close.setBorder(null);
+	    jb_close.setContentAreaFilled(false);
+	    jb_close.setPressedIcon(new ImageIcon("img\\exit_ready.png"));
+	    jb_close.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				jb_close.setIcon(new ImageIcon("img\\exit_ready.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
 	    });
-	    /*
+	    
 	    frame.add(jb3);
 	    jb3.setBounds(270, 0, 250, 78);
 	    jb3.setFont(font);
 	    // 设置按钮的默认图片
-	    //jb3.setIcon(new ImageIcon("img\\个人常规.png"));
-	    jb3.setIcon(new ImageIcon("img\\个人常规.png"));
+	    jb3.setIcon(new ImageIcon("img\\个人点击.png"));
 	    jb3.setBorder(null);
 	    // 添加按钮点击事件监听器
 	    jb3.addActionListener(new ActionListener() {
@@ -511,7 +561,7 @@ public class StuInfoView_main extends JPanel{
 	        	card.show(pn1,"w1");
 	        }
 	    });
-	    */
+	    
 	    frame.add(jb4);
 	    jb4.setBounds(520, 0, 250, 78);
 	    jb4.setFont(font);
