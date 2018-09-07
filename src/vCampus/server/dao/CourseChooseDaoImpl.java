@@ -9,6 +9,10 @@ import vCampus.server.exception.*;
 import vCampus.vo.CourseChoose;
 import vCampus.vo.CourseInformation;
 
+/**
+ * @author YangHangyuan
+ *
+ */
 public class CourseChooseDaoImpl implements CourseChooseDao{
 	
 	private DBConnection DBC=new DBConnection();
@@ -41,7 +45,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     private CourseInformation ResultSetToCourseInformation() {
     	try {
         	CourseInformation course=new CourseInformation();
-    		course.setCourseDate(rs.getTimestamp("courseDate"));
+    		course.setCourseDate(rs.getDate("courseDate"));
     		course.setCourseHour(rs.getInt("courseHour"));
     		course.setCourseID(rs.getString("courseID"));
     		course.setCourseName(rs.getString("courseName"));
@@ -50,7 +54,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     		course.setCurrentAmount(rs.getInt("currentAmount"));
     		course.setDeptName(rs.getString("deptName"));
     		course.setExamPlace(rs.getString("examPlace"));
-    		course.setExamTime(rs.getTimestamp("examTime"));
+    		course.setExamTime(rs.getDate("examTime"));
     		course.setPersonLimit(rs.getInt("personLimit"));
     		course.setTeacherEcardNumber(rs.getString("teacherEcardNumber"));
     		course.setTeacherName(rs.getString("teacherName"));
@@ -257,9 +261,9 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setString(5, course.getTeacherName());
 			stmt.setInt(6, course.getCourseHour());
 			stmt.setDouble(7, course.getCredit());
-			stmt.setTimestamp(8, course.getCourseDate());
+			stmt.setDate(8, course.getCourseDate());
 			stmt.setString(9, course.getCoursePlace());
-			stmt.setTimestamp(10, course.getExamTime());
+			stmt.setDate(10, course.getExamTime());
 			stmt.setString(11, course.getExamPlace());
 			stmt.setInt(12, course.getPersonLimit());
 			stmt.setInt(13, course.getCurrentAmount());
@@ -297,9 +301,9 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setString(4, course.getTeacherName());
 			stmt.setInt(5, course.getCourseHour());
 			stmt.setDouble(6, course.getCredit());
-			stmt.setTimestamp(7, course.getCourseDate());
+			stmt.setDate(7, course.getCourseDate());
 			stmt.setString(8, course.getCoursePlace());
-			stmt.setTimestamp(9, course.getExamTime());
+			stmt.setDate(9, course.getExamTime());
 			stmt.setString(10, course.getExamPlace());
 			stmt.setInt(11, course.getPersonLimit());
 			stmt.setInt(12, course.getCurrentAmount());

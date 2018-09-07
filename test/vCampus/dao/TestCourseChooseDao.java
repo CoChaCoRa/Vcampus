@@ -1,6 +1,6 @@
 package vCampus.dao;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.ArrayList;
 
 
@@ -137,15 +137,9 @@ public class TestCourseChooseDao {
 		    }else System.out.println("Error!");
 
 		    CourseInformation course=new CourseInformation();
-		    Timestamp ts = new Timestamp(System.currentTimeMillis());   
+		    Date ts = new Date(System.currentTimeMillis());   
 		    course.setCourseDate(ts);
-		    String tsStr = "2019-01-09 09:00:00";   
-	        try {   
-	            ts = Timestamp.valueOf(tsStr);   
-	            course.setExamTime(ts);
-	        } catch (Exception e) {   
-	            e.printStackTrace();   
-	        }  
+		    course.setExamTime(ts);
 	        course.setCourseHour(100);
 	        course.setCourseID("3");
 	        course.setCourseName("Boxing");

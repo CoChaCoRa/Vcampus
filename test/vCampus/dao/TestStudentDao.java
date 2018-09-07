@@ -52,7 +52,7 @@ public class TestStudentDao {
 			std.setBankAccount("cc");
 			std.setClassNumber("asd");
 			std.setDeptName("CSDN");
-			std.setDormNumber("3B613");
+			std.setDormNumber("613");
 			std.setEmailAddress("cc@seu.edu.cn");
 			std.setIdCard("89461236472189374");
 			std.setMajor("CS");

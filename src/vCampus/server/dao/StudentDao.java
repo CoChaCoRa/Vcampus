@@ -5,8 +5,7 @@ import vCampus.vo.Student;
 
 public interface StudentDao {
 	/**
-	 * @param userName
-	 * @param password
+	 * @param String
 	 * @param Student
 	 * @return
 	 * @throws RecordNotFoundException

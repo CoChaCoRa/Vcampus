@@ -34,4 +34,13 @@ public class ProductInformation implements Serializable{
 	public int getAmount() {
 		return amount;
 	}
+	
+	@Override
+	public String toString() {
+		return "\nProductInformation"
+				+"\nProductID\t"+productID
+				+"\nProductName\t"+productName
+				+"\nProductPrice\t"+productPrice
+				+"\nAmount\t"+amount;
+	}
 }

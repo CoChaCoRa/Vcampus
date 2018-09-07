@@ -8,8 +8,7 @@ import vCampus.vo.Teacher;
 
 public interface TeacherDao {
 	/**
-	 * @param userName
-	 * @param password
+	 * @param String
 	 * @param Teacher
 	 * @return
 	 * @throws RecordNotFoundException

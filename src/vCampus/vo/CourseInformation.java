@@ -1,7 +1,7 @@
 package vCampus.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class CourseInformation implements Serializable {
 	private String courseID;
@@ -11,10 +11,10 @@ public class CourseInformation implements Serializable {
 	private String teacherName;
 	private int courseHour;
 	private double credit;
-	private Timestamp courseDate;
+	private Date courseDate;
 	private int weekIndex;
 	private String coursePlace;
-	private Timestamp examTime;
+	private Date examTime;
 	private String examPlace;
 	private int personLimit;
 	private int currentAmount;
@@ -34,7 +34,7 @@ public class CourseInformation implements Serializable {
 	public void setCourseHour(int courseHour) {
 		this.courseHour = courseHour;
 	}	
-	public void setCourseDate(Timestamp courseDate) {
+	public void setCourseDate(Date courseDate) {
 		this.courseDate = courseDate;
 	}	
 	public void setCoursePlace(String coursePlace) {
@@ -46,7 +46,7 @@ public class CourseInformation implements Serializable {
 	public void setPersonLimit(int personLimit) {
 		this.personLimit = personLimit;
 	}	
-	public void setExamTime(Timestamp examTime) {
+	public void setExamTime(Date examTime) {
 		this.examTime = examTime;
 	}
 	public void setExamPlace(String examPlace) {
@@ -77,33 +77,21 @@ public class CourseInformation implements Serializable {
 	public int getCourseHour() {
 		return courseHour;
 	}
-	public Timestamp getCourseDate() {
-<<<<<<< HEAD
+	public Date getCourseDate() {
 		return courseDate;
-=======
-		return (Timestamp) courseDate;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public String getCoursePlace() {
 		return coursePlace;
 	}
-<<<<<<< HEAD
-	public int getCredit() {
-		return (int) credit;
-=======
+	
 	public double getCredit() {
-		return (double) credit;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
+		return credit;
 	}
 	public int getPersonLimit() {
 		return personLimit;
 	}
-	public Timestamp getExamTime() {
-<<<<<<< HEAD
+	public Date getExamTime() {
 		return examTime;
-=======
-		return (Timestamp) examTime;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public String getExamPlace() {
 		return examPlace;

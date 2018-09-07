@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vCampus.server.dao.LibraryDao;
 import vCampus.server.dao.LibraryDaoImpl;
-import java.sql.Timestamp;
+import java.sql.Date;
 import vCampus.server.exception.*;
 import vCampus.vo.*;
 
@@ -13,6 +13,7 @@ public class TestLibraryDao {
 	
 	/*
 	public BookInformation queryBookInformation(String bookID);
+	public ArrayList<BookInformation> queryBook(String bookName);
 	public ArrayList<BookBorrow> queryBookBorrow(String userName);
 	public boolean borrowBook(BookBorrow borrow)throws RecordNotFoundException,OutOfLimitException;
 	public boolean returnBook(BookBorrow borrow)throws RecordNotFoundException,OutOfLimitException;
@@ -28,6 +29,16 @@ public class TestLibraryDao {
 			return;
 		}
 		System.out.println(book);
+	}
+	private static void queryBook(String bookName) {
+		ArrayList<BookInformation> list=new ArrayList<BookInformation>();
+		list=libImpl.queryBook(bookName);
+		if(list==null) {
+			System.out.println("NULL!\n");
+			return;
+		}
+		for(int i=0;i<list.size();i++)
+			System.out.println(Integer.toString(i)+":  "+list.get(i));
 	}
 	private static void queryBookBorrow(String userName){
 		ArrayList<BookBorrow> list=new ArrayList<BookBorrow>();
@@ -57,21 +68,21 @@ public class TestLibraryDao {
 	
 	public static void main(String[] args) {
 		try {
+			queryBook("QAQ");
 			queryBookInformation("1");
-			queryBookBorrow("YHY");
-			queryBookBorrow("SYH");
+			queryBookBorrow("213161269");
 			
 			BookBorrow bookborrow=new BookBorrow();
 			bookborrow.setBookID("1");
 			bookborrow.setBorrowNumber(1);
-			Timestamp ts = new Timestamp(System.currentTimeMillis()); 
+			Date ts = new Date(System.currentTimeMillis()); 
 			bookborrow.setBorrowTime(ts);
-			bookborrow.setUserName("YHY");
+			bookborrow.setUserName("213161269");
 			if(returnBook(bookborrow)) {
-				queryBookBorrow("YHY");
+				queryBookBorrow("213161269");
 			}else System.out.println("Error!");
 			if(borrowBook(bookborrow)) {
-				queryBookBorrow("YHY");
+				queryBookBorrow("213161269");
 			}else System.out.println("Error!");
 			
 			BookInformation book=new BookInformation();
@@ -94,7 +105,6 @@ public class TestLibraryDao {
 			if(deleteBookByAdmin("4")) {
 				queryBookInformation("4");
 			}else System.out.println("Error!");
-			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

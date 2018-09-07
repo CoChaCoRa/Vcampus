@@ -6,6 +6,10 @@ import vCampus.vo.Admin;
 import java.sql.PreparedStatement;
 import vCampus.server.exception.*;
 
+/**
+ * @author YangHangyuan
+ *
+ */
 public class AdminDaoImpl implements AdminDao{
 	
 	private DBConnection DBC=new DBConnection();

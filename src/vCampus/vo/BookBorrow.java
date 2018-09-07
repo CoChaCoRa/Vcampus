@@ -1,7 +1,7 @@
 package vCampus.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -13,7 +13,7 @@ public class BookBorrow implements Serializable {
 	
 	private String userName;
 	private String bookID;
-	private Timestamp borrowTime;
+	private Date borrowTime;
 	private int borrowNumber;
 	
 	public void setUserName(String userName){
@@ -22,7 +22,7 @@ public class BookBorrow implements Serializable {
 	public void setBookID(String bookID){
 		this.bookID=bookID;
 	}
-	public void setBorrowTime(Timestamp borrowTime){
+	public void setBorrowTime(Date borrowTime){
 		this.borrowTime=borrowTime;
 	}
 	public void setBorrowNumber(int borrowNumber){
@@ -35,7 +35,7 @@ public class BookBorrow implements Serializable {
 	public String getBookID(){
 		return bookID;
 	}
-	public Timestamp getBorrowTime(){
+	public Date getBorrowTime(){
 		return borrowTime;
 	}
 	public int getBorrowNumber(){

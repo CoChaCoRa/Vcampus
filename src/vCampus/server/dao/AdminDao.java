@@ -5,8 +5,7 @@ import vCampus.server.exception.*;
 
 public interface AdminDao {	
 	/**
-	 * @param adminID
-	 * @param password
+	 * @param String
 	 * @return
 	 * @throws RecordNotFoundException
 	 * @throws RecordAlreadyExistException

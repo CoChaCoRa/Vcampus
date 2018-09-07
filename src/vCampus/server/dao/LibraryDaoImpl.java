@@ -1,7 +1,7 @@
 package vCampus.server.dao;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import vCampus.vo.BookBorrow;
 import vCampus.vo.BookInformation;
@@ -11,7 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
+/**
+ * @author YangHangyuan
+ *
+ */
 public class LibraryDaoImpl implements LibraryDao{
 
 	private DBConnection DBC=new DBConnection();
@@ -45,7 +48,7 @@ public class LibraryDaoImpl implements LibraryDao{
 				bookborrow=new BookBorrow();
 				bookborrow.setBookID(rs.getString("bookID"));
 				bookborrow.setBorrowNumber(rs.getInt("borrowNumber"));
-				bookborrow.setBorrowTime(rs.getTimestamp("borrowTime"));
+				bookborrow.setBorrowTime(rs.getDate("borrowTime"));
 				bookborrow.setUserName(rs.getString("userName"));
 				list.add(bookborrow);
 			}while(rs.next());
@@ -57,6 +60,33 @@ public class LibraryDaoImpl implements LibraryDao{
     	}
 		return null;
 	}
+	
+	private ArrayList<BookInformation> ResultSetToBookInformationArrayList(){
+		try {
+			ArrayList<BookInformation> list=new ArrayList<BookInformation>();
+			do {
+				BookInformation book;
+				book=new BookInformation();
+				book.setBookID(rs.getString("bookID"));
+				book.setBookAddress(rs.getString("bookAddress"));
+				book.setBookName(rs.getString("bookName"));
+				book.setBookPress(rs.getString("bookPress"));
+				book.setBookWriter(rs.getString("bookWriter"));
+				book.setBorrowedAmount(rs.getInt("borrowedAmount"));
+				book.setTotalAmount(rs.getInt("totalAmount"));
+				
+				list.add(book);
+			}while(rs.next());
+			return list;
+		}catch(Exception e) {
+			// TODO: handle exception
+            System.out.println(e.getMessage());
+			e.printStackTrace();
+    	}
+		return null;
+	}
+	
+	
 	
 	@Override
 	public BookInformation queryBookInformation(String bookID) {
@@ -92,6 +122,24 @@ public class LibraryDaoImpl implements LibraryDao{
 		return null;
 	}
 
+
+	@Override
+	public ArrayList<BookInformation> queryBook(String bookName) {
+		try {
+			String sql="SELECT * FROM tbl_bookinformation WHERE bookName='"+bookName+"'";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			if(rs.next()) {
+				return ResultSetToBookInformationArrayList();
+			}
+		}catch(SQLException e) {
+    		System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@Override
 	public boolean borrowBook(BookBorrow borrow) 
 			throws RecordNotFoundException,OutOfLimitException {
@@ -111,7 +159,7 @@ public class LibraryDaoImpl implements LibraryDao{
 				rs = stmt.executeQuery();
 				int borrowNumber=borrow.getBorrowNumber();
 				//UPDATE borrow time
-			    Timestamp ts = new Timestamp(System.currentTimeMillis());
+			    Date ts = new Date(System.currentTimeMillis());
 				if(rs.next()) {
 					borrowNumber+=rs.getInt("borrowNumber");
 				    
@@ -129,7 +177,7 @@ public class LibraryDaoImpl implements LibraryDao{
 				    stmt=DBC.con.prepareStatement(sql);
 					stmt.setString(1,borrow.getUserName());
 					stmt.setString(2,borrow.getBookID());
-					stmt.setTimestamp(3,ts);//record the time of modification
+					stmt.setDate(3,ts);//record the time of modification
 					stmt.setInt(4,borrow.getBorrowNumber());
 					stmt.executeUpdate();
 				}
@@ -278,5 +326,4 @@ public class LibraryDaoImpl implements LibraryDao{
 		}
 		return true;
 	}
-
 }

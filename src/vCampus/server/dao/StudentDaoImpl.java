@@ -3,11 +3,6 @@ package vCampus.server.dao;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-
-import vCampus.server.exception.RecordNotFoundException;
-import vCampus.server.exception.WrongPasswordException;
-
 import vCampus.server.exception.*;
 
 import vCampus.vo.Student;
@@ -22,7 +17,7 @@ public class StudentDaoImpl implements StudentDao{
 	private PreparedStatement stmt=null;
 	private ResultSet rs=null;
 	
-	public Student ResultSetToStudent(){
+	private Student ResultSetToStudent(){
 		try {
 			Student std=new Student();
 			std.setUserName(rs.getString("userName"));

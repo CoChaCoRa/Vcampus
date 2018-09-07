@@ -1,27 +1,30 @@
 package vCampus.vo;
 
 import java.io.Serializable;
-
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class ProductPurchase implements Serializable{
+	private String productID;
 	private String productName;
 	private int purchaseAmount;
-	private String ecardNumber;
-	private Timestamp purchaseTime;
+	private String userName;
+	private Date purchaseTime;
 	private double oneConsumption;
 	private double currentAccount;
 	
-	public void setProductID(String productName){
+	public void setProductID(String productID){
+		this.productID = productID;
+	}
+	public void setProductName(String productName){
 		this.productName = productName;
 	}
 	public void setPurchaseAmount(int purchaseAmount) {
 		this.purchaseAmount = purchaseAmount;
 	}
-	public void setEcardNumber(String ecardNumber) {
-		this.ecardNumber = ecardNumber;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public void setPurchaseTime(Timestamp purchaseTime) {
+	public void setPurchaseTime(Date purchaseTime) {
 		this.purchaseTime = purchaseTime;
 	}
 	public void setOneConsumption(double consumption){
@@ -30,17 +33,20 @@ public class ProductPurchase implements Serializable{
 	public void setCurrentAccount(double currentAccount){
 		this.currentAccount=currentAccount;
 	}
-	
+
+	public String getProductID(){
+		return productID;
+	}
 	public String getProductName() {
 		return productName;
 	}
 	public int getPurchaseAmount() {
 		return purchaseAmount;
 	}
-	public String getEcardNumber() {
-		return ecardNumber;
+	public String getUserName() {
+		return userName;
 	}
-	public Timestamp getPurchaseTime() {
+	public Date getPurchaseTime() {
 		return purchaseTime;
 	}
 	public double getOneConsumption(){
@@ -48,5 +54,17 @@ public class ProductPurchase implements Serializable{
 	}
 	public double getCurrentAccount(){
 		return currentAccount;
+	}
+	
+	@Override
+	public String toString() {
+		return "\nProductPurchase\t"
+			+"\nProductID\t"+productID
+			+"\nProductName\t"+productName
+			+"\nPurchaseAmount\t"+purchaseAmount
+			+"\nUserName\t"+userName
+			+"\nPurchaseTime\t"+purchaseTime
+			+"\nOneConsumption\t"+oneConsumption
+			+"\nCurrentAccount\t"+currentAccount;
 	}
 }
