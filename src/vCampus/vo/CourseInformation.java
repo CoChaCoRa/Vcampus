@@ -78,32 +78,20 @@ public class CourseInformation implements Serializable {
 		return courseHour;
 	}
 	public Timestamp getCourseDate() {
-<<<<<<< HEAD
 		return courseDate;
-=======
-		return (Timestamp) courseDate;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public String getCoursePlace() {
 		return coursePlace;
 	}
-<<<<<<< HEAD
-	public int getCredit() {
-		return (int) credit;
-=======
+	
 	public double getCredit() {
-		return (double) credit;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
+		return credit;
 	}
 	public int getPersonLimit() {
 		return personLimit;
 	}
 	public Timestamp getExamTime() {
-<<<<<<< HEAD
 		return examTime;
-=======
-		return (Timestamp) examTime;
->>>>>>> branch 'master' of https://github.com/AnthonySong98/Vcampus.git
 	}
 	public String getExamPlace() {
 		return examPlace;

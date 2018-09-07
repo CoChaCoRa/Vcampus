@@ -3,7 +3,7 @@ package vCampus.client.biz;
 import vCampus.vo.Admin;
 
 /**
- * @author Administrator
+ * @author SongZixing
  *
  */
 public interface AdminService {

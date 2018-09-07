@@ -1,5 +1,9 @@
 package vCampus.client.biz;
 
+import java.util.ArrayList;
+
+import vCampus.vo.CourseChoose;
+import vCampus.vo.CourseInformation;
 import vCampus.vo.Student;
 
 /**
@@ -18,4 +22,6 @@ public interface StudentService {
 	public boolean updatePassword(String originalPassword, String newPassword, String newConfirmedPassword);
 	public boolean updateInfo(Student updatedStudent);
 	public boolean deleteStudentAccount(String userName);
+	
+
 }

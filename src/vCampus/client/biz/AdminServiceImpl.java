@@ -10,7 +10,7 @@ import vCampus.vo.Admin;
 import vCampus.vo.Student;
 
 /**
- * @author Administrator
+ * @author SongZixing
  *
  */
 public class AdminServiceImpl implements AdminService{
