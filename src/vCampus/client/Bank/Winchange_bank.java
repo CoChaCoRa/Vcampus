@@ -16,7 +16,7 @@ public class Winchange_bank extends JPanel {
 	
 	public Winchange_bank(int identify){
 		super();
-		
+		//int identify=1;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		

@@ -14,8 +14,8 @@ import vCampus.client.InfoView.*;
 import vCampus.client.JWC.*;
 import vCampus.client.TSG.*;
 import vCampus.client.Shop.*;
-import vCampus.client.Dorm.*;
 import vCampus.client.Bank.*;
+import vCampus.client.Dorm.*;
 
 import java.awt.CardLayout;
 import java.awt.Font;
