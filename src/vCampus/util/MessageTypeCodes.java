@@ -23,6 +23,10 @@ public interface MessageTypeCodes {
 	String teacherChangePassword = "TEACHER_CHANGE_PASSWORD";
 	String teacherUpdateInformation = "TEACHER_UPDATE_INFORMATION";
 	String teacherDestroyAccount = "TEACHER_DESTROY_ACCOUNT";
+	String UserQueryCourseInformation = "USER_QUERY_COURSE_INFORMATION";
+	String studentQueryCourses = "STUDENT_QUERY_COURSES";
+	String studentAddCourse = "STUDENT_ADD_COURSE";
+	String studentDeleteCourse = "STUDENT_DELETE_COURSE";
 	
 	
 }

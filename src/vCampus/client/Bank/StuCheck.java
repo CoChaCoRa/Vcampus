@@ -30,7 +30,7 @@ public class StuCheck extends JPanel{
 	JTextField tf1 = new JTextField(20);
 	
 	
-	JLabel lb3 = new JLabel("·ÖÊý");
+	JLabel lb3 = new JLabel("Óà¶î");
 	JTextField tf3 = new JTextField(20);
 
 

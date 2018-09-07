@@ -14,9 +14,9 @@ import javax.swing.*;
  */
 public class Winchange_TSG extends JPanel {
 	
-	public Winchange_TSG(){
+	public Winchange_TSG(int identify){
 		super();
-		int identify=3;
+//		int identify=3;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		StuBookCheck w1=new StuBookCheck();
@@ -31,13 +31,8 @@ public class Winchange_TSG extends JPanel {
 		JButton jb1=new JButton();
 		JButton jb2=new JButton();
 		JButton jb3=new JButton();
-		JButton jb4=new JButton();
-		JButton jb5=new JButton();
-		JButton jb6=new JButton();
-		JButton jb7=new JButton();
-		JButton jb8=new JButton();
-		
-		//identify:1 学生 查询图书/借还
+
+		//identify:1 学生 查询图书(借)/还
 		//identify:2 教师 
 		//identify:3 管理员 查询图书/添加
 		
@@ -50,10 +45,10 @@ public class Winchange_TSG extends JPanel {
 	    //this.add(jb2);
 	    jb2.setBounds(0, 80, 270, 80);
 	    jb2.setFont(font);
-	    jb2.setIcon(new ImageIcon("img\\借还图书.png"));
+	    jb2.setIcon(new ImageIcon("img\\归还图书.png"));
 
 	    //this.add(jb3);
-	    jb3.setBounds(0, 80, 270, 80);
+	    jb3.setBounds(0, 0, 270, 80);
 	    jb3.setFont(font);
 	    jb3.setIcon(new ImageIcon("img\\添加图书.png"));
 
@@ -99,9 +94,9 @@ public class Winchange_TSG extends JPanel {
 		
 		if(identify==3)
 		{
-			cardpanel.add("w1",w1);
+		
 			cardpanel.add("w3",w3);
-			this.add(jb1);
+		
 			this.add(jb3);
 		}
 	

@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.xml.crypto.Data;
+
+import com.hxtt.c.o;
+
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.AdminServiceDao;
@@ -21,12 +25,15 @@ import vCampus.server.biz.StudentServiceDao;
 import vCampus.server.biz.StudentServiceDaoImpl;
 import vCampus.server.biz.TeacherServiceDao;
 import vCampus.server.biz.TeacherServiceDaoImpl;
+import vCampus.server.exception.OutOfLimitException;
 import vCampus.server.exception.RecordAlreadyExistException;
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
 import vCampus.vo.Admin;
+import vCampus.vo.CourseChoose;
+import vCampus.vo.CourseInformation;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
 
@@ -318,6 +325,105 @@ public class ServerSocketThread extends Thread{
 				}
             	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
             	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.studentQueryCourses)) {
+            	Message serverResponse = new Message();
+            	
+					StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ArrayList<CourseChoose> allCourses = studentServiceDao.findAllChosenCourses((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(allCourses);
+					serverResponse.setData(data);
+					ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+	            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.studentAddCourse)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+					StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isAddCourse = studentServiceDao.addCourse((String) paras.get(0), (String) paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAddCourse);
+					serverResponse.setData(data);
+				} catch (RecordAlreadyExistException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	
+            	catch (OutOfLimitException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("OutOfLimitException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.studentDeleteCourse)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+					StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isDeleteCourse = studentServiceDao.deleteCourse((String) paras.get(0),(String) paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isDeleteCourse);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	
+            	catch (OutOfLimitException e) {
+					// TODO: handle exception
+            		serverResponse.equals("OutOfLimitException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            	
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.UserQueryCourseInformation)) {
+            	Message serverResponse = new Message();
+            	
+            	StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+            	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            	CourseInformation courseInformation = studentServiceDao.findCourseInformation((String) paras.get(0));
+            	ArrayList<Object> data = new ArrayList<Object>();
+            	data.add(courseInformation);
+            	serverResponse.setData(data);
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            	
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.studentQueryCourses)) {
+            	Message serverResponse = new Message();
+            	
+            	
+					StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ArrayList<CourseChoose> allChosenCourses = studentServiceDao.findAllChosenCourses((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					//System.out.println(allChosenCourses.get(0).getCourseName());
+					//for(int i = 0; i < allChosenCourses.size(); i++) {
+					//	data.add(allChosenCourses.get(i));
+					//}
+					data.add(allChosenCourses);
+					serverResponse.setData(data);
+					ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+	            	response.writeObject(serverResponse);
             }
             
 		}

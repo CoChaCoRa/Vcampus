@@ -8,6 +8,7 @@ package vCampus.client.InfoView;
 import javax.swing.*;
 
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Admin;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,7 +22,7 @@ public class AdmAddCheck extends JPanel{
 
 
 	
-	public AdmAddCheck() {
+	public AdmAddCheck(Admin ad) {
 		
 	super();
 	JLabel lb0 = new JLabel("≤È—Ø");
@@ -86,7 +87,7 @@ public class AdmAddCheck extends JPanel{
     tf0.setBackground(Color.WHITE);
     tf0.setBounds(660-270, 196-80, 352, 47);
     tf0.setFont(font);
-    tf0.setEditable(false);
+  //  tf0.setEditable(false);
     tf0.setBorder(null);
     
     this.add(lb1);
