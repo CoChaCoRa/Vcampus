@@ -60,7 +60,6 @@ public interface CourseChooseDao {
 	 * @param String
 	 * @return boolean
 	 * @throws RecordNotFoundException
-	 * @throws OutOfLimitException
 	 */
     public boolean updateScoreByTeacher(ArrayList<CourseChoose> scoreList)throws RecordNotFoundException;
     
@@ -78,7 +77,6 @@ public interface CourseChooseDao {
 	 * @param String
 	 * @return boolean
 	 * @throws RecordNotFoundException
-	 * @throws RecordAlreadyExistException
 	 */
     public boolean updateCourseByAdmin(CourseInformation course)throws RecordNotFoundException;
     
@@ -87,7 +85,6 @@ public interface CourseChooseDao {
 	 * @param String
 	 * @return boolean
 	 * @throws RecordNotFoundException
-	 * @throws RecordAlreadyExistException
 	 */
     public boolean deleteCourseByAdmin(String courseID)throws RecordNotFoundException;
 }

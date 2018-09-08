@@ -33,11 +33,11 @@ public class TestCourseChooseDao {
 	private static CourseInformation findCourse(String courseID)throws Exception {
 		return ccImpl.findCourse(courseID);
 	}
-	private static ArrayList<CourseChoose> courseQueryByStudent(String studentName)throws Exception {
-		return ccImpl.courseQueryByStudent(studentName);
+	private static ArrayList<CourseChoose> courseQueryByStudent(String studentUserName)throws Exception {
+		return ccImpl.courseQueryByStudent(studentUserName);
 	}
-	private static ArrayList<CourseChoose> courseQueryByTeacher(String teacherName)throws Exception {
-		return ccImpl.courseQueryByTeacher(teacherName);
+	private static ArrayList<CourseChoose> courseQueryByTeacher(String teacherUserName)throws Exception {
+		return ccImpl.courseQueryByTeacher(teacherUserName);
 	}
 	private static ArrayList<CourseChoose> courseQueryByCourse(String courseID)throws Exception {
 		return ccImpl.courseQueryByCourse(courseID);

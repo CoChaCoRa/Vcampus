@@ -87,9 +87,9 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     }
     
     @Override
-	public ArrayList<CourseChoose> courseQueryByStudent(String studentName){
+	public ArrayList<CourseChoose> courseQueryByStudent(String studentUserName){
 		try {
-			String sql="SELECT * FROM tbl_coursechoose WHERE studentName='"+studentName+"'";
+			String sql="SELECT * FROM tbl_coursechoose WHERE studentUserName='"+studentUserName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
@@ -103,9 +103,9 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 	
 	@Override
-	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName){
+	public ArrayList<CourseChoose> courseQueryByTeacher(String teacherUserName){
 		try {
-			String sql="SELECT * FROM tbl_coursechoose WHERE teacherName='"+teacherName+"'";
+			String sql="SELECT * FROM tbl_coursechoose WHERE teacherUserName='"+teacherUserName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
@@ -135,7 +135,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 	}
 
 	@Override
-    public boolean addCourseByStudent(String studentName,String courseID)
+    public boolean addCourseByStudent(String studentUserName,String courseID)
     		throws RecordNotFoundException,RecordAlreadyExistException,OutOfLimitException{
 		try {
 			String sql1="SELECT * FROM tbl_courseinformation WHERE courseID='"+courseID+"'";
@@ -148,7 +148,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			String teacherName=rs.getString("teacherName");
 			
 			String sql2="SELECT * FROM tbl_coursechoose WHERE courseID='"+courseID+"' AND "
-					+"studentName='"+studentName+"'";
+					+"studentUserName='"+studentUserName+"'";
 			stmt=DBC.con.prepareStatement(sql2);
 			rs = stmt.executeQuery();
 			if(rs.next())throw new RecordAlreadyExistException();
@@ -254,7 +254,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			if(!rs.next())throw new RecordNotFoundException();
 			
 			String sql = "INSERT INTO tbl_courseinformation (courseID, courseName, deptName, "
-				+"teacherEcardNumber, teacherName, courseHour, credit, courseDate, coursePlace, "
+				+"teacherUserName, teacherName, courseHour, credit, courseDate, coursePlace, "
 				+"examTime, examPlace, personLimit, currentAmount,weekIndex) "
 				+"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 			
