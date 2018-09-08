@@ -1,3 +1,4 @@
+package vCampus.server.dao;
 
 import vCampus.vo.ProductInformation;
 import vCampus.vo.ProductPurchase;

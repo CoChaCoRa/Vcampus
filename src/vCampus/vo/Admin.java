@@ -1,7 +1,6 @@
 package vCampus.vo;
 
 import java.io.Serializable;
-//import vCampus.model.User;
 
 /**
  * @author YangHangyuan

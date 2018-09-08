@@ -2,7 +2,7 @@ package vCampus.server.exception;
 
 public class OutOfLimitException extends Exception{
 
-	String uMsg=null;
+	private String uMsg=new String("");
 	/**
 	 * 
 	 */

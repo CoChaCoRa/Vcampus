@@ -37,7 +37,7 @@ public class ProductInformation implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "\nProductInformation"
+		return "\nProductInformation\t"
 				+"\nProductID\t"+productID
 				+"\nProductName\t"+productName
 				+"\nProductPrice\t"+productPrice

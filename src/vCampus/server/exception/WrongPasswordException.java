@@ -2,6 +2,8 @@ package vCampus.server.exception;
 
 public class WrongPasswordException extends Exception {
 
+	private String uMsg=new String("");
+	
 	/**
 	 * 
 	 */
@@ -9,5 +11,13 @@ public class WrongPasswordException extends Exception {
 
 	public String getMessage() {
 		return new String("WrongPassword");
+	}
+
+	public void setMsg(String msg) {
+		uMsg=msg;
+	}
+	
+	public String getType() {
+		return uMsg;
 	}
 }

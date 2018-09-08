@@ -38,6 +38,7 @@ public class TeacherDaoImpl implements TeacherDao{
 			std.setProfessionalTitle(rs.getString("professionalTitle"));
 			std.setMoney(rs.getDouble("money"));
 			std.setTeacherEcardNumber(rs.getString("teacherEcardNumber"));
+			std.setRealName(rs.getString("realName"));
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -49,9 +50,7 @@ public class TeacherDaoImpl implements TeacherDao{
 	
 	@Override
 	public Teacher findByName(String userName){
-		// TODO Auto-generated method stub
 		try {
-			//create SQL string
 			String sql= "SELECT * FROM tbl_teacher WHERE userName ="+ "'"+ userName+"'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -80,7 +79,6 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
-			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -102,7 +100,6 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
-			// TODO: handle exception
             System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -117,9 +114,10 @@ public class TeacherDaoImpl implements TeacherDao{
 			Teacher std1=findByName(std.getUserName());
 			if(std1==null)throw new RecordNotFoundException();
 			
+			//UPDATE tbl_teacher
 			String sql="UPDATE tbl_teacher SET sex=?,idCard=?,deptName=?,emailAddress=?,"
 					+ "phoneNumber=?,bankAccount=?,account=?,money=?,teacherEcardNumber=?,"
-					+"professionalTitle=? "
+					+"professionalTitle=?,realName=? "
 					+ "WHERE userName=?";
 			
 			stmt=DBC.con.prepareStatement(sql);
@@ -133,7 +131,16 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.setDouble(8, std.getMoney());
 			stmt.setString(9, std.getTeacherEcardNumber());
 			stmt.setString(10, std.getProfessionalTitle());
-			stmt.setString(11, std.getUserName());
+			stmt.setString(11, std.getRealName());
+			stmt.setString(12, std.getUserName());
+			stmt.executeUpdate();
+
+			//TODO : UPDATE other tables ABOUT this teacher
+			String sqll="UPDATE tbl_courseinformation SET teacherName=? "
+					+ "WHERE teacherUserName=?";
+			stmt=DBC.con.prepareStatement(sqll);
+			stmt.setString(1, std.getRealName());
+			stmt.setString(2, std.getUserName());
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
@@ -157,6 +164,14 @@ public class TeacherDaoImpl implements TeacherDao{
 			stmt.executeUpdate();
 			
 			//TODO : erase any self-information in other tables
+			String sqll = "DELETE FROM tbl_coursechoose WHERE teacherUserName=?";
+			stmt=DBC.con.prepareStatement(sqll);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
+			String sqll2 = "DELETE FROM tbl_courseinformation WHERE teacherUserName=?";
+			stmt=DBC.con.prepareStatement(sqll2);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
 			
 		}
 		catch (SQLException e) {

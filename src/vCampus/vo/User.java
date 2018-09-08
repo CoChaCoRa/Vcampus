@@ -3,9 +3,10 @@ package vCampus.vo;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String password;
     private String userName;
+    private String password;
     private String sex;
+    private String realName;
     private String idCard;//ID card
     private String deptName;//department name
     private String emailAddress;//email
@@ -19,6 +20,9 @@ public class User implements Serializable {
     }
     public void setSex(String sex){
     	this.sex=sex;
+    }
+    public void setRealName(String realName) {
+    	this.realName=realName;
     }
     public void setUserName(String userName){
     	this.userName=userName;
@@ -50,6 +54,9 @@ public class User implements Serializable {
     }
     public String getSex(){
     	return sex;
+    }
+    public String getRealName() {
+    	return realName;
     }
     public String getUserName(){
     	return userName;

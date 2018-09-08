@@ -35,6 +35,7 @@ public class StudentDaoImpl implements StudentDao{
 			std.setMajor(rs.getString("major"));
 			std.setClassNumber(rs.getString("classNumber"));
 			std.setDormNumber(rs.getString("dormNumber"));
+			std.setRealName(rs.getString("realName"));
 			return std;
 		}
 		catch (Exception e) {
@@ -69,6 +70,7 @@ public class StudentDaoImpl implements StudentDao{
 		try {
 			Student std1=findByName(userName);
 			if(std1!=null)throw new RecordAlreadyExistException();
+			//UPDATE tbl_student
 			String sql = "INSERT INTO tbl_student (userName, password) VALUES ( '"+userName+"' , '"+password+"' )";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.executeUpdate();
@@ -87,10 +89,10 @@ public class StudentDaoImpl implements StudentDao{
 		try {
 			Student std1=findByName(std.getUserName());
 			if(std1==null)throw new RecordNotFoundException();
-			
+			//UPDATE tbl_student
 			String sql="UPDATE tbl_student SET sex=?,idCard=?,deptName=?,emailAddress=?,"
 					+ "phoneNumber=?,bankAccount=?,account=?,money=?,studentEcardNumber=?,"
-					+ "studentID=?,major=?,classNumber=?,dormNumber=? "
+					+ "studentID=?,major=?,classNumber=?,dormNumber=?,realName=?"
 					+ "WHERE userName=?";
 			
 			stmt=DBC.con.prepareStatement(sql);
@@ -107,8 +109,10 @@ public class StudentDaoImpl implements StudentDao{
 			stmt.setString(11, std.getMajor());
 			stmt.setString(12, std.getClassNumber());
 			stmt.setString(13, std.getDormNumber());
-			stmt.setString(14, std.getUserName());
+			stmt.setString(14, std.getRealName());
+			stmt.setString(15, std.getUserName());
 			stmt.executeUpdate();
+			
 		}
 		catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -148,8 +152,27 @@ public class StudentDaoImpl implements StudentDao{
 			stmt.setString(1,userName);
 			stmt.executeUpdate();
 			
-			//TODO : erase any self-information in other tables
-			
+			//erase any self-information ABOUT this student in other tables
+			String sqll = "DELETE FROM tbl_bookborrow WHERE userName=?";
+			stmt=DBC.con.prepareStatement(sqll);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
+			String sqll2 = "DELETE FROM tbl_coursechoose WHERE studentUserName=?";
+			stmt=DBC.con.prepareStatement(sqll2);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
+			String sqll3 = "DELETE FROM tbl_dormitory WHERE userName=?";
+			stmt=DBC.con.prepareStatement(sqll3);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
+			String sqll4 = "DELETE FROM tbl_productpurchase WHERE userName=?";
+			stmt=DBC.con.prepareStatement(sqll4);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
+			String sqll5 = "DELETE FROM tbl_recharge WHERE userName=?";
+			stmt=DBC.con.prepareStatement(sqll5);
+			stmt.setString(1,userName);
+			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
             System.out.println(e.getMessage());

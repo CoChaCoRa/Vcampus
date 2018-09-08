@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Dormitory implements Serializable {
-    private String studentEcardNumber;
-	private Date monthtime;
+    private String userName;
+	private Date chargeTime;
     private String dormNumber;
 	private double dormBill;
 	private double score;
 	
-	public void setStudentEcardNumber(String studentEcardNumber) {
-		this.studentEcardNumber=studentEcardNumber;
+	public void setUserName(String userName) {
+		this.userName=userName;
 	}
 	public void setScore(double score) {
 		this.score=score;
@@ -22,15 +22,15 @@ public class Dormitory implements Serializable {
 	public void setDormBill(double dormBill){
 		this.dormBill=dormBill;
 	}
-	public void setMonthtime(Date monthtime){
-		this.monthtime=monthtime;
+	public void setChargeTime(Date chargeTime){
+		this.chargeTime=chargeTime;
 	}
 
-	public String getStudentEcardNumber() {
-		return studentEcardNumber;
+	public String getUserName() {
+		return userName;
 	}
-	public Date getMonthtime(){
-		return monthtime;
+	public Date getChargeTime(){
+		return chargeTime;
 	}
 	public String getDormNumber() {
 		return dormNumber;
@@ -40,5 +40,15 @@ public class Dormitory implements Serializable {
 	}
 	public double getScore(){
 		return score;
+	}
+	
+	@Override
+	public String toString() {
+		return "\nDormitory\t"
+			+"\nstudentName\t"+userName
+			+"\nchargeTime\t"+chargeTime
+			+"\ndormNumber\t"+dormNumber
+			+"\ndormBill\t"+dormBill
+			+"\nscore\t"+score;
 	}
 }

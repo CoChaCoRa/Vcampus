@@ -70,13 +70,13 @@ public class TestCourseChooseDao {
 			if(queryResult1==null)throw new RecordNotFoundException();
 			System.out.println(queryResult1.getCourseID()+" "+queryResult1.getCourseName());
 
-			queryResult2=courseQueryByStudent("yhy");
+			queryResult2=courseQueryByStudent("213161269");
 			if(queryResult2==null)throw new RecordNotFoundException();
 			for(int i=0;i<queryResult2.size();i++) {
 				System.out.println(queryResult2.get(i).getCourseID()+" "
 						+queryResult2.get(i).getCourseName());
 			}
-			queryResult2=courseQueryByTeacher("yhy");
+			queryResult2=courseQueryByTeacher("213161269");
 			if(queryResult2==null)throw new RecordNotFoundException();
 			for(int i=0;i<queryResult2.size();i++) {
 				System.out.println(queryResult2.get(i).getCourseID()+" "
@@ -90,8 +90,8 @@ public class TestCourseChooseDao {
 						+queryResult2.get(i).getCourseName());
 			}
 
-			if(addCourseByStudent("szx","2")) {
-				queryResult2=courseQueryByStudent("szx");
+			if(addCourseByStudent("213161269","2")) {
+				queryResult2=courseQueryByStudent("213161269");
 				if(queryResult2==null)throw new RecordNotFoundException();
 				for(int i=0;i<queryResult2.size();i++) {
 					System.out.println(queryResult2.get(i).getCourseID()+" "
@@ -99,9 +99,9 @@ public class TestCourseChooseDao {
 				}
 			}else System.out.println("Error!");
 
-			if(deleteCourseByStudent("szx","2")) {
-				queryResult2=courseQueryByStudent("szx");
-				if(queryResult2==null)System.out.println("szx doesn't wrestle!");
+			if(deleteCourseByStudent("213161269","2")) {
+				queryResult2=courseQueryByStudent("213161269");
+				if(queryResult2==null)System.out.println("213161269 doesn't wrestle!");
 				else for(int i=0;i<queryResult2.size();i++) {
 					System.out.println(queryResult2.get(i).getCourseID()+" "
 							+queryResult2.get(i).getCourseName());
@@ -111,27 +111,27 @@ public class TestCourseChooseDao {
 			ArrayList<CourseChoose> scoreList=new ArrayList<CourseChoose>();
 			CourseChoose cc1=new CourseChoose(),cc2=new CourseChoose();
 			cc1.setCourseID("1");
-			cc1.setScore(99);
-			cc1.setStudentName("yhy");
+			cc1.setScore(90);
+			cc1.setStudentUserName("213161269");
 			scoreList.add(cc1);
 			cc2.setCourseID("2");
-			cc2.setScore(98);
-			cc2.setStudentName("syh");
+			cc2.setScore(91);
+			cc2.setStudentUserName("213160821");
 			scoreList.add(cc2);
 		    if(updateScoreByTeacher(scoreList)){
-		    	queryResult2=courseQueryByStudent("yhy");
-				if(queryResult2==null)System.out.println("yhy doesn't study!");
+		    	queryResult2=courseQueryByStudent("213161269");
+				if(queryResult2==null)System.out.println("213161269 doesn't study!");
 		    	for(int i=0;i<queryResult2.size();i++) {
 					System.out.println(queryResult2.get(i).getCourseID()+" "
-							+queryResult2.get(i).getStudentName()+" "
+							+queryResult2.get(i).getStudentUserName()+" "
 							+queryResult2.get(i).getScore());
 				}
 		    	
-		    	queryResult2=courseQueryByStudent("syh");
-				if(queryResult2==null)System.out.println("syh doesn't study!");
+		    	queryResult2=courseQueryByStudent("213160821");
+				if(queryResult2==null)System.out.println("213160821 doesn't study!");
 		    	for(int i=0;i<queryResult2.size();i++) {
 					System.out.println(queryResult2.get(i).getCourseID()+" "
-							+queryResult2.get(i).getStudentName()+" "
+							+queryResult2.get(i).getStudentUserName()+" "
 							+queryResult2.get(i).getScore());
 				}
 		    }else System.out.println("Error!");
@@ -149,7 +149,7 @@ public class TestCourseChooseDao {
 	        course.setDeptName("CS");
 	        course.setExamPlace("3B613");
 	        course.setPersonLimit(1000);
-	        course.setTeacherEcardNumber("213161269");
+	        course.setTeacherUserName("szxdl");
 	        course.setTeacherName("yhy");
 	        course.setWeekIndex(3);
 	        
@@ -160,7 +160,7 @@ public class TestCourseChooseDao {
 		    }else System.out.println("Error!");
 
 		    course.setTeacherName("syh");
-		    course.setTeacherEcardNumber("1234554321");
+		    course.setTeacherUserName("szxdl");
 	        course.setExamPlace("3B614");
 	        if(updateCourseByAdmin(course)){
 		    	queryResult1=findCourse("3");

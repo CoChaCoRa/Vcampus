@@ -16,11 +16,6 @@ public class AdminDaoImpl implements AdminDao{
 	private PreparedStatement stmt=null;
 	private ResultSet rs=null;
 	
-	/**
-	 * @param adminID
-	 * 
-	 * @return object
-	 */
 	@Override
 	public Admin selectAdmin(String adminID){
 		String sql="SELECT * FROM tbl_admin WHERE adminID=?";
@@ -42,17 +37,13 @@ public class AdminDaoImpl implements AdminDao{
 		return null;
 	} 	
 	
-	/**
-	 * @param adminID
-	 * @param password
-	 * @return boolean
-	 */
 	@Override
 	public boolean insertAdmin(String adminID,String password)
 			throws RecordAlreadyExistException{		
 		try {
 			Admin admin=selectAdmin(adminID);
 			if(admin!=null)throw new RecordAlreadyExistException();
+			//UPDATE tbl_admin
 			String sql="INSERT INTO tbl_admin (adminID,password) VALUES (?,?)";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1,adminID);
@@ -67,18 +58,13 @@ public class AdminDaoImpl implements AdminDao{
 		return true;
 	}	 	
 	
-	/**
-	 * @param adminID
-	 * @param password
-	 * 
-	 * @return boolean
-	 */
 	@Override
 	public boolean updatePassword(String adminID,String password)
 			throws RecordNotFoundException{
 		try{
 			Admin admin=selectAdmin(adminID);
 			if(admin==null)throw new RecordNotFoundException();
+			//UPDATE tbl_admin
 			String sql="UPDATE tbl_admin SET password=? WHERE adminID=?";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, password);
@@ -99,6 +85,7 @@ public class AdminDaoImpl implements AdminDao{
 		try{
 			Admin admin=selectAdmin(adminID);
 			if(admin==null)throw new RecordNotFoundException();
+			//UPDATE tbl_admin
 			String sql="DELETE FROM tbl_admin WHERE adminID=?";
 			stmt=DBC.con.prepareStatement(sql);
 			stmt.setString(1, adminID);

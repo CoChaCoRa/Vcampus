@@ -6,8 +6,8 @@ public class CourseChoose implements Serializable {
 	
 	private String courseID;
 	private String courseName;
-	private String studentName;
-	private String teacherName;
+	private String studentUserName;
+	private String teacherUserName;
 	private double score;
 	
 	public void setCourseID(String courseID) {
@@ -16,11 +16,11 @@ public class CourseChoose implements Serializable {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+	public void setStudentUserName(String studentUserName) {
+		this.studentUserName = studentUserName;
 	}
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
+	public void setTeacherUserName(String teacherUserName) {
+		this.teacherUserName = teacherUserName;
 	}
 	public void setScore(double score) {
 		this.score= score;
@@ -32,11 +32,11 @@ public class CourseChoose implements Serializable {
 	public String getCourseName() {
 		return courseName;
 	}
-	public String getStudentName() {
-		return studentName;
+	public String getStudentUserName() {
+		return studentUserName;
 	}
-	public String gettTeacherName() {
-		return teacherName;
+	public String getTeacherUserName() {
+		return teacherUserName;
 	}
 	public double getScore() {
 		return score;

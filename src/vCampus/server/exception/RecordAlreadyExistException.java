@@ -1,7 +1,9 @@
 package vCampus.server.exception;
 
 public class RecordAlreadyExistException extends Exception {
-
+	
+	private String uMsg=new String("");
+	
 	/**
 	 * 
 	 */
@@ -9,5 +11,13 @@ public class RecordAlreadyExistException extends Exception {
 	
 	public String getMessage() {
 		return new String("RecordAlreadyExist");
+	}
+	
+	public void setMsg(String msg) {
+		uMsg=msg;
+	}
+	
+	public String getType() {
+		return uMsg;
 	}
 }

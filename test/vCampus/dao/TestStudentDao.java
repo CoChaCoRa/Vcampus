@@ -63,9 +63,11 @@ public class TestStudentDao {
 			std.setStudentEcardNumber("213147914");
 			std.setStudentID("09016429");
 			std.setUserName("213161268");
+			std.setRealName("cc");
 			if(updateSelfInformation(std)) {
 				findByName("213161268");
 			}else System.out.println("Error!");
+			
 			if(deleteStudent("213161268")) {
 				findByName("cczuiqiang");
 			}else System.out.println("Error!");
