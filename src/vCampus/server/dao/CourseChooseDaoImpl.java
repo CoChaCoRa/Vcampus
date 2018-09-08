@@ -166,7 +166,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt=DBC.con.prepareStatement(sqll);
 			stmt.setString(1,courseID);
 			stmt.setString(2,courseName);
-			stmt.setString(3,studentName);
+			stmt.setString(3,studentUserName);
 			stmt.setString(4, teacherName);
 			stmt.setDouble(5, 0.0);
 			stmt.executeUpdate();

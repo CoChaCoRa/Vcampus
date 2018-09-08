@@ -64,10 +64,10 @@ public class InfoView_main extends JPanel{
  	stu=ss;
  	
  	Winchange_test w1=new Winchange_test(id,ss);
- 	Winchange_JWC w2=new Winchange_JWC(id);
+ 	Winchange_JWC w2=new Winchange_JWC(id,4);
  	Winchange_TSG w3=new Winchange_TSG(id);
  	Winchange_shop w4=new Winchange_shop(id);
- 	Winchange_dorm w5=new Winchange_dorm(id);
+ 	Winchange_dorm w5=new Winchange_dorm(id,ss);
  	Winchange_bank w6=new Winchange_bank(id,ss);
  	
  	w1.setBackground(null);
@@ -104,7 +104,7 @@ public class InfoView_main extends JPanel{
 	frame.add(pn1);
     
 	frame.add(jb_close);
-	jb_close.setBounds(1920-50, 20, 50, 50);
+	jb_close.setBounds(1920-80, 20, 50, 50);
 	jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
     jb_close.setBorder(null);
     jb_close.setContentAreaFilled(false);
@@ -269,10 +269,10 @@ public class InfoView_main extends JPanel{
 	 	Admin ad=new Admin();
 	 	ad=admin;
 	 	Winchange_test w1=new Winchange_test(id,ad);
-	 	Winchange_JWC w2=new Winchange_JWC(id);
+	 	Winchange_JWC w2=new Winchange_JWC(id,4);
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
-	 	Winchange_dorm w5=new Winchange_dorm(id);
+	 	Winchange_dorm w5=new Winchange_dorm(id,admin);
 	 	Winchange_bank w6=new Winchange_bank(id,ad);
 	 	
 	 	w1.setBackground(null);
@@ -474,10 +474,10 @@ public class InfoView_main extends JPanel{
 	 	Teacher tc = cacheTeacher;
 	 	
 	 	Winchange_test w1=new Winchange_test(id,tc);
-	 	Winchange_JWC w2=new Winchange_JWC(id);
+	 	Winchange_JWC w2=new Winchange_JWC(id,4);
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
-	 	Winchange_dorm w5=new Winchange_dorm(id);
+	 	//Winchange_dorm w5=new Winchange_dorm(id,tc);
 	 	Winchange_bank w6=new Winchange_bank(id,tc);
 	 	
 	 	w1.setBackground(null);
@@ -492,8 +492,8 @@ public class InfoView_main extends JPanel{
 		w4.setBackground(null);
 		w4.setOpaque(false);
 		
-		w5.setBackground(null);
-		w5.setOpaque(false);
+		//w5.setBackground(null);
+		//w5.setOpaque(false);
 	 	
 		w6.setBackground(null);
 		w6.setOpaque(false);
@@ -508,7 +508,7 @@ public class InfoView_main extends JPanel{
 		pn1.add("w2",w2);
 		pn1.add("w3",w3);
 		pn1.add("w4",w4);
-		pn1.add("w5",w5);
+		//pn1.add("w5",w5);
 		pn1.add("w6",w6);
 		
 		frame.add(pn1);
@@ -639,9 +639,10 @@ public class InfoView_main extends JPanel{
 	    jb8.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	        	refresh();
+	        	JOptionPane.showMessageDialog(null, "您没有入住校园宿舍");
+	        	/*refresh();
 	        	jb8.setIcon(new ImageIcon("img\\宿舍点击.png"));
-	        	card.show(pn1,"w5");
+	        	card.show(pn1,"w5");*/
 	        }
 	    });
 	    
@@ -673,6 +674,8 @@ public class InfoView_main extends JPanel{
 	
 
 }
+
+
 class BackgroundPanel extends JPanel{
 	Image im;
 	public BackgroundPanel(Image im)

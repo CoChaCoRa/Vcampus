@@ -426,6 +426,119 @@ public class ServerSocketThread extends Thread{
 	            	response.writeObject(serverResponse);
             }
             
+
+            
+            if(object.getMessageType().equals(MessageTypeCodes.teacherQueryCourses)) {
+            	Message serverResponse = new Message();
+            	
+            	TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+            	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            	ArrayList<CourseChoose> allTaughtCourses = teacherServiceDao.findAllTeachCourses((String) paras.get(0));
+            	ArrayList<Object> data = new ArrayList<Object>();
+            	data.add(allTaughtCourses);
+            	serverResponse.setData(data);
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            
+            if(object.getMessageType().equals(MessageTypeCodes.teacherUpdateCourseGrades)) {
+            	
+            	Message serverResponse = new Message();
+            	
+            	try {
+            		TeacherServiceDao teacherServiceDao = new TeacherServiceDaoImpl();
+                	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+                	boolean isTeacherUpdateCoursesGrades = teacherServiceDao.updateStudentGrades((ArrayList<CourseChoose>)paras.get(0));
+                	ArrayList<Object> data = new ArrayList<Object>();
+                	data.add(isTeacherUpdateCoursesGrades);
+                	serverResponse.setData(data);
+                	
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminQueryCourses)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+					AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ArrayList<CourseChoose> res = adminServiceDao.courseQueryAdmin((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(res);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminAddCourse)) {
+            	Message serverResponse = new Message();
+            	try {
+					AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isAdminAddCourse = adminServiceDao.addCoursebyAdmin((CourseInformation) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAdminAddCourse);
+					serverResponse.setData(data);
+				} catch (RecordAlreadyExistException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminDeleteCourse)) {
+            	Message serverResponse = new Message();
+            	try {
+					AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isAdminDeleteCourse = adminServiceDao.deleteCoursebyAdmin((String)paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAdminDeleteCourse);
+					serverResponse.setData(data);
+            	} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminUpdateCourse)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+					AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					boolean isUpdateCourseByAdmin = adminServiceDao.updateCoursebyAdmin((CourseInformation) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isUpdateCourseByAdmin);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
 		}
 		catch (Exception e) {
 			// TODO: handle exception

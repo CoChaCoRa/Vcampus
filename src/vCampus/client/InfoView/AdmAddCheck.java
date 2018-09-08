@@ -103,7 +103,7 @@ public class AdmAddCheck extends JPanel{
     lb0.setFont(font);
     this.add(tf0);
     tf0.setBackground(Color.WHITE);
-    tf0.setBounds(660-270, 196-80, 352, 47);
+    tf0.setBounds(660-270, 196-80, 402, 47);
     tf0.setFont(font);
   //  tf0.setEditable(false);
     tf0.setBorder(null);
@@ -113,7 +113,7 @@ public class AdmAddCheck extends JPanel{
     lb1.setFont(font);
     this.add(tf1);
     tf1.setBackground(Color.WHITE);
-    tf1.setBounds(660-270, 196-80+111, 352, 47);
+    tf1.setBounds(660-270, 196-80+111, 402, 47);
     tf1.setFont(font);
     tf1.setEditable(false);
     tf1.setBorder(null);
@@ -123,7 +123,7 @@ public class AdmAddCheck extends JPanel{
     lb2.setFont(font);
     this.add(tf2);
     tf2.setBackground(Color.WHITE);
-    tf2.setBounds(1360-270, 196-80+111, 352, 47);
+    tf2.setBounds(1360-270, 196-80+111, 402, 47);
     tf2.setFont(font);
  //   tf2.setEditable(false);
     tf2.setBorder(null);
@@ -133,7 +133,7 @@ public class AdmAddCheck extends JPanel{
     lb3.setFont(font);
     this.add(tf3);
     tf3.setBackground(Color.WHITE);
-    tf3.setBounds(660-270, 307-80+111, 352, 47);
+    tf3.setBounds(660-270, 307-80+111, 402, 47);
     tf3.setFont(font);
     tf3.setEditable(false);
     tf3.setBorder(null);
@@ -143,7 +143,7 @@ public class AdmAddCheck extends JPanel{
     lb4.setFont(font);
     this.add(tf4);
     tf4.setBackground(Color.WHITE);
-    tf4.setBounds(1360-270, 307-80+111, 352, 47);
+    tf4.setBounds(1360-270, 307-80+111, 402, 47);
     tf4.setFont(font);
     tf4.setEditable(false);
     tf4.setBorder(null);
@@ -153,7 +153,7 @@ public class AdmAddCheck extends JPanel{
     lb5.setFont(font);
     this.add(tf5);
     tf5.setBackground(Color.WHITE);
-    tf5.setBounds(660-270, 418-80+111, 352, 47);
+    tf5.setBounds(660-270, 418-80+111, 402, 47);
     tf5.setFont(font);
     tf5.setEditable(false);
     tf5.setBorder(null);
@@ -163,7 +163,7 @@ public class AdmAddCheck extends JPanel{
     lb6.setBounds(1156-270, 418-80+111, 101, 47);
     lb6.setFont(font);
     this.add(tf6);
-    tf6.setBounds(1360-270, 418-80+111, 352, 47);
+    tf6.setBounds(1360-270, 418-80+111, 402, 47);
     tf6.setFont(font);
     tf6.setEditable(false);
     tf6.setBorder(null);
@@ -173,7 +173,7 @@ public class AdmAddCheck extends JPanel{
     lb7.setBounds(456-270, 529-80+111, 101, 47);
     lb7.setFont(font);
     this.add(tf7);
-    tf7.setBounds(660-270, 529-80+111, 352, 47);
+    tf7.setBounds(660-270, 529-80+111, 402, 47);
     tf7.setFont(font);
     tf7.setEditable(false);
     tf7.setBorder(null);
@@ -183,7 +183,7 @@ public class AdmAddCheck extends JPanel{
     lb8.setFont(font);
     this.add(tf8);
     tf8.setBackground(Color.WHITE);
-    tf8.setBounds(1360-270, 529-80+111, 352, 47);
+    tf8.setBounds(1360-270, 529-80+111, 402, 47);
     tf8.setFont(font);
     tf8.setEditable(false);
     tf8.setBorder(null);
@@ -193,7 +193,7 @@ public class AdmAddCheck extends JPanel{
     lb9.setFont(font);
     this.add(tf9);
     tf9.setBackground(Color.WHITE);
-    tf9.setBounds(660-270, 640-80+111, 352, 47);
+    tf9.setBounds(660-270, 640-80+111, 402, 47);
     tf9.setFont(font);
     tf9.setEditable(false);
     tf9.setBorder(null);
@@ -203,7 +203,7 @@ public class AdmAddCheck extends JPanel{
     lb10.setFont(font);
     this.add(tf10);
     tf10.setBackground(Color.WHITE);
-    tf10.setBounds(1360-270, 640-80+111, 352, 47);
+    tf10.setBounds(1360-270, 640-80+111, 402, 47);
     tf10.setFont(font);
     tf10.setEditable(false);
     tf10.setBorder(null);
