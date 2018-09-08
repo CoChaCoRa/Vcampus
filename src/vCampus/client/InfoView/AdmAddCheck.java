@@ -63,6 +63,13 @@ public class AdmAddCheck extends JPanel{
     // 设置按钮的默认图片
     bt0.setIcon(new ImageIcon("img\\查询UI.png"));
     bt0.setBorder(null);
+    bt0.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			// to search for stu's info
+			JOptionPane.showMessageDialog(null, "to search for info of one stu");
+		}
+    	
+    });
     
     this.add(bt1);
     bt1.setBounds(910-270, 910-80, 160, 80);
@@ -70,6 +77,12 @@ public class AdmAddCheck extends JPanel{
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
+    bt1.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		// to confirm changes to stu's info
+    		JOptionPane.showMessageDialog(null, "to confirm changes to stu's info");
+    	}
+    });
 
     this.add(bt2);
     bt2.setBounds(1001, 910-80, 160, 80);
@@ -77,7 +90,12 @@ public class AdmAddCheck extends JPanel{
     // 设置按钮的默认图片
     bt2.setIcon(new ImageIcon("img\\删除.png"));
     bt2.setBorder(null);
-    
+    bt2.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		// to delete one stu's info
+    		JOptionPane.showMessageDialog(null, "to delete one stu's info");
+    	}
+    });
     
     
     this.add(lb0);

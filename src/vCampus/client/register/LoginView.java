@@ -8,7 +8,7 @@ package vCampus.client.register;
 
 import javax.swing.*;
 
-import vCampus.client.MainTable.StuInfoView_main;
+import vCampus.client.MainTable.InfoView_main;
 import vCampus.client.InfoView.*;
 import vCampus.client.JWC.*;
 import vCampus.client.TSG.*;
@@ -26,8 +26,11 @@ import vCampus.client.biz.AdminServiceImpl;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 
 public class LoginView extends JFrame{
@@ -38,6 +41,7 @@ public class LoginView extends JFrame{
 	public JPasswordField pwdText = new JPasswordField(15);
 	public JButton jb1 = new JButton();
 	public JButton jb2 = new JButton();
+	public JButton jb_close = new JButton();
 	public JLabel stuLab = new JLabel("Ñ§Éú");
 	public JLabel teaLab = new JLabel("½ÌÊ¦");
 	public JLabel admLab = new JLabel("¹ÜÀíÔ±");
@@ -59,6 +63,7 @@ public class LoginView extends JFrame{
 	    this.setFocusable(true);
 	    this.add(jb1);
 	    this.add(jb2);
+	    this.add(jb_close);
 	    this.add(stuLab);
 	    this.add(teaLab);
 	    this.add(admLab);
@@ -105,6 +110,39 @@ public class LoginView extends JFrame{
 	    	
 	    });
 	    
+	    
+	    jb_close.setBounds(1920-50, 20, 50, 50);
+	    jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
+	    jb_close.setBorder(null);
+	    jb_close.setContentAreaFilled(false);
+	    jb_close.setPressedIcon(new ImageIcon("img\\exit_ready.png"));
+	    jb_close.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				jb_close.setIcon(new ImageIcon("img\\exit_ready.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+	    });
+	    
 	    jb1.setBounds(747, 781, 150, 56);
 	    jb1.setIcon(new ImageIcon("img\\×¢²á.png"));
 	    jb1.setContentAreaFilled(false);
@@ -130,33 +168,34 @@ public class LoginView extends JFrame{
 	        	switch(identity) {
 	        	case 0://Ñ§ÉúµÇÂ¼
 	        		StudentService SS = new StudentServiceImpl();
-	        		if(SS.login(uID,uPassword)) {
+	        		if(SS.login("213160821","szx123")/*SS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main SIV=new StuInfoView_main(1,SS.getCacheStudent());
+	        			InfoView_main SIV=new InfoView_main(1,SS.getCacheStudent());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
 	        		else if(!SS.login(uID,uPassword)) {
-	        			JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
+	        			JOptionPane.showMessageDialog(null, "µÇÂ¼Ê§°Ü ", "ERROR ", JOptionPane.ERROR_MESSAGE);
 	        		}
 	        		break;
 	        	case 1://½ÌÊ¦µÇÂ¼
 	        		TeacherService TS = new TeacherServiceImpl();
-	        		if(TS.login(uID,uPassword)) {
+	        		TS.register("0", "12345", "12345");
+	        		if(TS.login("0","12345")/*TS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			//StuInfoView_main TIV=new StuInfoView_main(2);
+	        			InfoView_main TIV=new InfoView_main(2,TS.getCacheTeacher());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
-	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
+	        		else if(!TS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "µÇÂ¼Ê§°Ü ", "ERROR ", JOptionPane.ERROR_MESSAGE);
 	        		break;
 	        	case 2://¹ÜÀíÔ±µÇÂ½
 	        		AdminService AS = new AdminServiceImpl();
 	        		AS.register("1", "1234", "1234");
 	        		if(AS.login("1","1234")/*AS.login(uID,uPassword)*/) {
 	        			LToff();
-	        			StuInfoView_main AIV=new StuInfoView_main(3,AS.getCacheAdmin());
+	        			InfoView_main AIV=new InfoView_main(3,AS.getCacheAdmin());
 	        			JOptionPane.showMessageDialog(null,"µÇÂ¼³É¹¦£¡");
 	        		}
-	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "ÕËºÅ»òÃÜÂë´íÎó ", "µÇÂ¼Ê§°Ü ", JOptionPane.ERROR_MESSAGE);
+	        		else if(!AS.login(uID,uPassword)) JOptionPane.showMessageDialog(null, "µÇÂ¼Ê§°Ü ", "ERROR ", JOptionPane.ERROR_MESSAGE);
 	        		break;
 	        	}
 	        }
@@ -166,6 +205,12 @@ public class LoginView extends JFrame{
 		bgp.setBounds(0,0,1920,1080);
 		this.add(bgp);
 		
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		  //Dimension dimension = kit.getScreenSize();
+		  //  frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		  //  frame.setBounds(0, 0, dimension.width, dimension.height);
+		   
+		this.setUndecorated(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 	    this.setVisible(true);  
 	    this.setResizable(true);
