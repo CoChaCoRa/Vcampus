@@ -31,7 +31,7 @@ public class StuCheck extends JPanel{
 //	this.setBackground(Color.BLUE);
 	
 	JLabel lb1 = new JLabel("“ªø®Õ®∫≈");
-	JTextField tf1 = new JTextField(stu.getStudentID());
+	JTextField tf1 = new JTextField(stu.getUserName());
 	
 	
 	JLabel lb3 = new JLabel("”‡∂Ó");

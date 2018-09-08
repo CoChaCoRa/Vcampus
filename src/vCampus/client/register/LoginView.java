@@ -2,7 +2,9 @@ package vCampus.client.register;
 /**
  * @author CC
  * 
- * @date 9/7
+ * @date 8/27
+ *
+ * @v1.2 data 9/8
  *
  */
 
@@ -228,10 +230,10 @@ public class LoginView extends JFrame{
 	    });
 	    
 	    jb2.setBounds(1029, 781, 150, 56);
-	    jb2.setIcon(new ImageIcon("img\\µÇÂ½1.png"));
+	    jb2.setIcon(new ImageIcon("img\\µÇÂ¼.png"));
 	    jb2.setContentAreaFilled(false);
 	    jb2.setBorder(null);
-	    jb2.setPressedIcon(new ImageIcon("img\\µÇÂ½1µã»÷.png"));
+	    jb2.setPressedIcon(new ImageIcon("img\\µÇÂ¼µã»÷.png"));
 	    jb2.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
