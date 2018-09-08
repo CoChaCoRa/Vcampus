@@ -2,6 +2,11 @@ package vCampus.client.biz;
 
 import java.util.ArrayList;
 
+import javax.jws.Oneway;
+
+import com.hxtt.c.i;
+import com.hxtt.c.l;
+
 import vCampus.client.socket.Client;
 import vCampus.server.dao.CourseChooseDao;
 import vCampus.util.Message;
@@ -16,6 +21,7 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 	private String studentUserName;
 	private ArrayList<CourseChoose> cacheStudentCourse;
 	private String teacherUserName;
+	private ArrayList<CourseChoose> cacheTeacherCourse;
 	private String adminUserName;
 	
 	public AcademicAffairsServiceImpl(int UserType, String userName) {
@@ -29,6 +35,7 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 		}
 		if(UserType == 2) {
 			teacherUserName = userName;
+			cacheTeacherCourse = teacherGetAllCourses();
 		}
 		if(UserType == 3) {
 			adminUserName = userName;
@@ -63,7 +70,7 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 		exceptionCode = "";
 		
 		Message message = new Message();
-		message.setMessageType("User");
+		message.setUserType("User");
 		ArrayList<Object> data = new ArrayList<Object>();
 		data.add(courseID);
 		message.setData(data);
@@ -205,7 +212,7 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 		exceptionCode = "";
 		
 		Message message = new Message();
-		message.setMessageType("STUDENT");
+		message.setUserType("STUDENT");
 		ArrayList<Object> data = new ArrayList<Object>();
 		data.add(studentUserName);
 		data.add(CourseID);
@@ -236,7 +243,7 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 		exceptionCode = "";
 		
 		Message message = new Message();
-		message.setMessageType("STUDENT");
+		message.setUserType("STUDENT");
 		ArrayList<Object> data = new ArrayList<Object>();
 		data.add(studentUserName);
 		data.add(CourseID);
@@ -286,6 +293,268 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 		return GPA;
 	}
 	
+	
+	@Override
+	public ArrayList<CourseChoose> teacherGetAllCourses() {
+		// TODO Auto-generated method stub
+		
+		exceptionCode = "";
+		Message message = new Message();
+		
+		message.setUserType("TEACHER");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(teacherUserName);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.teacherQueryCourses);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
+			ArrayList<CourseChoose> teacherTeachCourses = (ArrayList<CourseChoose>) paras.get(0);
+			return teacherTeachCourses;
+		}
+		
+		if(!message.getExceptionCode().equals("")) {
+			exceptionCode = message.getExceptionCode();
+		}
+		return null;
+	}
+	
+	
+	@Override
+	public boolean updateStudentGrades(ArrayList<CourseChoose> gradesSheet) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		Message message = new Message();
+		
+		message.setUserType("TEACHER");
+		ArrayList<Object> data = new ArrayList<Object>();
+		
+		data.add(gradesSheet);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.teacherUpdateCourseGrades);
+		
+		
+		Message severResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) severResponse.getData();
+		
+		if(paras != null) {
+			boolean isUpdateStudentGrades = (boolean) paras.get(0);
+			if(isUpdateStudentGrades) return true;
+		}
+		
+		if(!message.getExceptionCode().equals("")) {
+			exceptionCode = message.getExceptionCode();
+		}
+		return false;
+	}
+	
+	
+	@Override
+	public ArrayList<String> getTeacherCourse() {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		
+		if(cacheTeacherCourse == null) {
+			ArrayList<CourseChoose> allTeachCourses = teacherGetAllCourses();
+			if(allTeachCourses != null) {
+				cacheTeacherCourse = allTeachCourses;
+			}
+			
+		}
+		
+		ArrayList<String> allCourses = new ArrayList<String>();
+		
+		if(cacheTeacherCourse.size() > 0) {
+			allCourses.add(cacheTeacherCourse.get(0).getCourseName());
+		}
+		for(int i = 0;i < cacheTeacherCourse.size()-1; i++) {
+			if(!cacheTeacherCourse.get(i).getCourseName().equals(cacheTeacherCourse.get(i+1).getCourseName())) {
+				allCourses.add(cacheTeacherCourse.get(i+1).getCourseName());
+			}
+		}
+		return allCourses;
+	}
+	
+	
+	@Override
+	public ArrayList<CourseChoose> getStudentSheetForCourse(String courseID) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		
+		ArrayList<String> allCourses = getTeacherCourse();
+		int i;
+		
+		for(i =0; i < allCourses.size(); i++) {
+			if(courseID.equals(allCourses.get(i))) break;
+		}
+		
+		if(i == allCourses.size()) {
+			exceptionCode = "Teacher does not teach this course!";
+			
+		}
+		
+		ArrayList<CourseChoose> returnList = new ArrayList<CourseChoose>();
+		
+		for(int j = 0; j < cacheTeacherCourse.size(); j++) {
+			if(cacheTeacherCourse.get(j).getCourseID().equals(courseID)) {
+				returnList.add(cacheTeacherCourse.get(j));
+			}
+		}
+		return returnList;
+		
+	}
+	
+	
+	@Override
+	public boolean updateStudentGradesForCourse(String courseID, ArrayList<CourseChoose> gradesSheet) {
+		// TODO Auto-generated method stub
+		
+		exceptionCode = "";
+		
+		ArrayList<String> allCourses = getTeacherCourse();
+		int i;
+		
+		for(i =0; i < allCourses.size(); i++) {
+			if(courseID.equals(allCourses.get(i))) break;
+		}
+		
+		if(i == allCourses.size()) {
+			exceptionCode = "Teacher does not teach this course!";
+			
+		}
+		
+		for(i = 0; i < gradesSheet.size(); i++) {
+			gradesSheet.get(i).setCourseID(courseID);
+		}
+		
+		if(updateStudentGrades(gradesSheet)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see vCampus.client.biz.AcademicAffairsService#adminGetAllCourses(java.lang.String)
+	 */
+	@Override
+	public ArrayList<CourseChoose> adminGetAllCourses(String courseID) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		
+		Message message = new Message();
+		
+		message.setUserType("ADMIN");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(courseID);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.adminQueryCourses);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
+			return (ArrayList<CourseChoose>) paras.get(0);
+		}
+		
+		if(!message.getExceptionCode().equals("")) {
+			exceptionCode = message.getExceptionCode();
+		}
+		return null;
+	}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see vCampus.client.biz.AcademicAffairsService#addCourseByAdmin(vCampus.vo.CourseInformation)
+	 */
+	@Override
+	public boolean addCourseByAdmin(CourseInformation newCourse) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		
+		Message message = new Message();
+		message.setUserType("ADMIN");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(newCourse);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.adminAddCourse);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
+		 	 boolean isAddCourseByAdmin = (boolean) paras.get(0);
+		 	 if(isAddCourseByAdmin) return true;
+		}
+		
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return false;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see vCampus.client.biz.AcademicAffairsService#deleteCourseByAdmin(java.lang.String)
+	 */
+	@Override
+	public boolean deleteCourseByAdmin(String courseID) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		
+		Message message = new Message();
+		message.setUserType("ADMIN");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(courseID);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.adminDeleteCourse);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		if(paras != null) {
+			boolean isDeleteCourseByAdmin = (boolean) paras.get(0);
+			if(isDeleteCourseByAdmin) {
+				return true;
+			}
+		}
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return false;
+	}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see vCampus.client.biz.AcademicAffairsService#updateCourseByAdmin(vCampus.vo.CourseInformation)
+	 */
+	@Override
+	public boolean updateCourseByAdmin(CourseInformation updatedCourse) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		Message message =new Message();
+		message.setUserType("ADMIN");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(updatedCourse);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.adminUpdateCourse);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		if(paras != null) {
+			boolean isUpdateCourseAdmin = (boolean) paras.get(0);
+			if(isUpdateCourseAdmin) return true;
+		}
+		
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return false;
+	}
 	
 	
 }

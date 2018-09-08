@@ -1,15 +1,21 @@
 package vCampus.server.biz;
 
+import java.util.ArrayList;
+
+import vCampus.server.dao.CourseChooseDao;
+import vCampus.server.dao.CourseChooseDaoImpl;
 import vCampus.server.dao.TeacherDao;
 import vCampus.server.dao.TeacherDaoImpl;
 import vCampus.server.exception.RecordAlreadyExistException;
 import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
+import vCampus.vo.CourseChoose;
 import vCampus.vo.Teacher;
 
 public class TeacherServiceDaoImpl implements TeacherServiceDao {
 
 	private TeacherDao td = new TeacherDaoImpl();
+	private CourseChooseDao ccd = new CourseChooseDaoImpl();
 	
 	@Override
 	public Teacher login(String userName, String password) throws RecordNotFoundException, WrongPasswordException {
@@ -105,6 +111,32 @@ public class TeacherServiceDaoImpl implements TeacherServiceDao {
 			throw new RecordNotFoundException();
 		}
 		return false;
+	}
+	
+	
+	@Override
+	public boolean updateStudentGrades(ArrayList<CourseChoose> gradesSheet) throws RecordNotFoundException {
+		// TODO Auto-generated method stub
+		try {
+			if(ccd.updateScoreByTeacher(gradesSheet)) {
+				return true;
+			}
+		} catch (RecordNotFoundException e) {
+			// TODO: handle exception
+			throw new RecordNotFoundException();
+		}
+		
+		return false;
+	}
+	
+	
+	@Override
+	public ArrayList<CourseChoose> findAllTeachCourses(String teacherName) {
+		// TODO Auto-generated method stub
+		if(ccd.courseQueryByTeacher(teacherName) != null){
+			return ccd.courseQueryByTeacher(teacherName);
+		}
+		return null;
 	}
 	
 }
