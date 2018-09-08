@@ -11,6 +11,7 @@ import vCampus.client.register.RegisterView;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,11 +20,59 @@ import java.awt.event.ActionListener;
 
 public class AdmScoreCheck extends JPanel{
 
+	JScrollPane jsp=null;
+	JTextArea   jta=null;
+	JTextField  jtf=null;
 
+
+
+	JButton jb=null;
+	JPanel   jp=null;
+	JViewport vp=null;
+
+	JButton jb2=new JButton("按钮");	
+	
 	
 	public AdmScoreCheck() {
 		
 	super();
+	
+
+	jp=new JPanel();
+	 
+	 // 定义三个组件
+	jta=new JTextArea();
+	
+	jtf=new JTextField(20);
+	
+	
+	
+	jta.add(jb2);
+	jb2.setBounds(20, 20, 40, 40);
+	
+	jta.setPreferredSize(new Dimension(400,400)); // 使用了这一句后，就可以显示滚动条了。
+	/*
+	* 之所以不显示，滚动条的原因：
+	* 主要是这句代码，设置panel的首选大小，同时保证宽高大于JScrollPane的宽高，这样下面的JScrollPane才会出现滚动条
+	*即：只有当处于：JScrollPane 之中的组件，其显示的宽和高大于JScrollPane 的宽和高时，才会显示滚动条。 
+	* 
+	* 
+	* */
+	
+	jsp=new JScrollPane(jta);
+	
+	jsp.validate();
+	 
+	jp.add(jtf);
+	 
+	
+	
+	this.add(jsp,"Center");
+	this.add(jp,"South");
+
+
+	
+	
 	JLabel lb1 = new JLabel("一卡通");
 	JTextField tf1 = new JTextField(20);
 	JLabel lb2 = new JLabel("姓名");

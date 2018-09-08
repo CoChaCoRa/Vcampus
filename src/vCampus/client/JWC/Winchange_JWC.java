@@ -1,34 +1,38 @@
 package vCampus.client.JWC;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
- 
-import javax.swing.ImageIcon;
 
+import vCampus.client.JWC.*;
 /**
  * @author Yanhao Shen
  *
  */
 public class Winchange_JWC extends JPanel {
 	
-	public Winchange_JWC(int identify){
+	private int index;
+	
+	public Winchange_JWC(int identify,int num){
 		super();
 //		int identify=3;
 	
-
+		index=num;
+		
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		
 		StuClassCheck w1=new StuClassCheck();
-		StuScoreCheck w2=new StuScoreCheck();
+		StuScoreCheck w2=new StuScoreCheck(num);
 		StuCLassChange w3=new StuCLassChange();
 	
 		TeaClassCheck w4=new TeaClassCheck();
@@ -115,6 +119,90 @@ public class Winchange_JWC extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w2");
+	        	ArrayList<Thread> tv = new ArrayList<Thread>(num); 	
+	        	int goal[]= {100,40,50,78,20,66};
+	        	//学生成绩 需要外部调用
+	        	   
+	        //	int index;
+	        	for(int j=0;j<index;j++) {
+	        	
+	        	int score=goal[j];
+	        	JProgressBar progress=w2.BarVector.get(j);
+	        	
+	        	
+	        	Thread t2 = new Thread(){
+
+	        		int r = 255;
+	        		int g = 0;
+	        		int b = 0;	
+	        		
+	        	 	public void run() {
+	        	    
+	        	    	//System.out.println(j);
+	        			for (int i = 0; i <=score; i++) {
+	        				try {
+	        					Thread.sleep(1200/score);
+	        				} catch (InterruptedException e) {
+	        					e.printStackTrace();
+	        				}
+	        				if (g != 255) {
+	        					g += 5;
+	        				} else {
+	        					r -= 5;
+	        				}
+	        				
+	        				Color color = new Color(r, g, b);
+	        			
+	        				progress.setForeground(color);
+	        			//	jtar.progressbar.setDigitalColor(color);
+	        				
+	        				
+	        				progress.setValue(i);
+	        				
+	        			}
+	        	    }
+	        	};
+	        	tv.add(t2);
+	        	}
+
+	        	Thread t2 =new Thread() {
+
+					int index2 = 0;
+					int r = 255;
+	        		int g = 0;
+	        		int b = 0;	
+	        		
+	        		
+	        		//index2 为绩点平均分
+	        		
+	        		
+					@Override
+					public void run() {
+						while (index2 <= 100) {
+							try {
+								Thread.sleep(25);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							if (g != 255) {
+								g += 5;
+							} else {
+								r -= 5;
+							}
+							Color color = new Color(r, g, b);
+							w2.circleProgressBar2.setForegroundColor(color);
+							w2.circleProgressBar2.setDigitalColor(color);
+							w2.circleProgressBar2.setProgress(index2++);
+						}
+						
+					};
+
+				};
+	        	
+	        	t2.start();
+		        for(int i=0;i<num;i++) {
+		        	tv.get(i).start();
+		        }	
 	        }
 	    });
 	  
@@ -169,7 +257,6 @@ public class Winchange_JWC extends JPanel {
 		}
 		
 		this.add(cardpanel);
-		
 		
 		this.setBackground(null);
 		this.setOpaque(false);

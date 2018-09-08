@@ -64,7 +64,7 @@ public class InfoView_main extends JPanel{
  	stu=ss;
  	
  	Winchange_test w1=new Winchange_test(id,ss);
- 	Winchange_JWC w2=new Winchange_JWC(id);
+ 	Winchange_JWC w2=new Winchange_JWC(id,4);
  	Winchange_TSG w3=new Winchange_TSG(id);
  	Winchange_shop w4=new Winchange_shop(id);
  	Winchange_dorm w5=new Winchange_dorm(id,ss);
@@ -269,7 +269,7 @@ public class InfoView_main extends JPanel{
 	 	Admin ad=new Admin();
 	 	ad=admin;
 	 	Winchange_test w1=new Winchange_test(id,ad);
-	 	Winchange_JWC w2=new Winchange_JWC(id);
+	 	Winchange_JWC w2=new Winchange_JWC(id,4);
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	Winchange_dorm w5=new Winchange_dorm(id,admin);
@@ -474,7 +474,7 @@ public class InfoView_main extends JPanel{
 	 	Teacher tc = cacheTeacher;
 	 	
 	 	Winchange_test w1=new Winchange_test(id,tc);
-	 	Winchange_JWC w2=new Winchange_JWC(id);
+	 	Winchange_JWC w2=new Winchange_JWC(id,4);
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	//Winchange_dorm w5=new Winchange_dorm(id,tc);
