@@ -39,6 +39,7 @@ public class Winchange_test extends JPanel {
 	    jb1.setBounds(0, 0, 270, 80);
 	    jb1.setFont(font);
 	    jb1.setIcon(new ImageIcon("img\\≤È—Ø–≈œ¢.png"));
+	    
 	       	
 	    //this.add(jb2);
 	    jb2.setBounds(0, 80, 270, 80);

@@ -104,7 +104,7 @@ public class InfoView_main extends JPanel{
 	frame.add(pn1);
     
 	frame.add(jb_close);
-	jb_close.setBounds(1920-50, 20, 50, 50);
+	jb_close.setBounds(1920-80, 20, 50, 50);
 	jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
     jb_close.setBorder(null);
     jb_close.setContentAreaFilled(false);

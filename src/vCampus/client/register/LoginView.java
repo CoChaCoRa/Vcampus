@@ -90,10 +90,10 @@ public class LoginView extends JFrame{
 	    pwdhintText.setBorder(null);
 	    pwdhintText.setForeground(Color.GRAY);
 	    pwdhintText.setText("密码");
-	    pwdhintText.addMouseListener(new MouseListener() {
+	    pwdhintText.addFocusListener(new FocusListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void focusGained(FocusEvent e) {
 				// TODO Auto-generated method stub
 				//鼠标点击时，隐藏文本框,显示密码框，密码框获取焦点		
 				String temp = pwdhintText.getText();
@@ -104,27 +104,9 @@ public class LoginView extends JFrame{
 					pwdText.requestFocus();
 				}
 			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
+			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
 				
 			}
@@ -201,7 +183,7 @@ public class LoginView extends JFrame{
 	    admLab.setBounds(1110,718,80,30);
 	    admLab.setFont(font1);
 	    
-	    jb_close.setBounds(1920-50, 20, 50, 50);
+	    jb_close.setBounds(1920-80, 20, 50, 50);
 	    jb_close.setIcon(new ImageIcon("img\\exit_idle.png"));
 	    jb_close.setBorder(null);
 	    jb_close.setContentAreaFilled(false);
