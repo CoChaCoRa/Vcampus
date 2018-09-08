@@ -29,6 +29,7 @@ public class AdmFee extends JPanel{
 	JTextField tf1 = new JTextField(20);
 	JLabel lb2 = new JLabel("水电费");
 	JTextField tf2 = new JTextField(20);
+	JTextField tf3 = new JTextField(20);
 
 	JButton bt1=new JButton("");
 	
@@ -37,6 +38,11 @@ public class AdmFee extends JPanel{
     
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
    
+    this.add(tf3);
+    tf3.setBounds(810-170, 600-80, 352, 47);
+    tf3.setFont(font);
+    tf3.setEditable(false);
+    tf3.setBorder(null);
     
     
     this.add(bt1);
@@ -45,6 +51,28 @@ public class AdmFee extends JPanel{
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
+    bt1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+    			double moneychange = Double.parseDouble(tf2.getText());
+    			if(moneychange<=0) throw new ArithmeticException();
+    			tf3.setText("收费成功！");
+    			tf1.setText("");
+    			tf2.setText("");
+    		}catch(NumberFormatException e1) {
+    			tf3.setText("输入不能含有字符");
+    			tf1.setText("");
+    			tf2.setText("");
+    		}
+    		catch(ArithmeticException e2) {
+    			tf3.setText("请输入0-100的整数");
+    			tf1.setText("");
+    			tf2.setText("");
+    		}
+		}
+    	
+    });
     
     
     this.add(lb1);

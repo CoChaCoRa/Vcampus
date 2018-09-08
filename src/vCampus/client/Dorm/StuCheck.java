@@ -8,6 +8,7 @@ package vCampus.client.Dorm;
 import javax.swing.*;
 
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,15 +22,15 @@ public class StuCheck extends JPanel{
 
 
 	
-	public StuCheck() {
+	public StuCheck(Student stu) {
 	super();
 	
 //	this.setBackground(Color.BLUE);
 	
 	JLabel lb1 = new JLabel("宿舍号");
-	JTextField tf1 = new JTextField(20);
+	JTextField tf1 = new JTextField(stu.getDormNumber());
 	JLabel lb2 = new JLabel("姓名");
-	JTextField tf2 = new JTextField(20);
+	JTextField tf2 = new JTextField(stu.getUserName());
 	JLabel lb3 = new JLabel("分数");
 	JTextField tf3 = new JTextField(20);
 	JLabel lb4 = new JLabel("水电消费");

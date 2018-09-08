@@ -101,13 +101,32 @@ public class StuAcountChange extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
            	if(choice==0)        	
-        		tf2.setText("请选择充值操作！");
+        		tf2.setText("请选择充值或支取操作！");
         	if(choice==1) {
-        		tf2.setText("充值成功！");
+        		try {
+        			double moneychange = Double.parseDouble(tf1.getText());
+        			if(moneychange<=0) throw new ArithmeticException();
+        			tf2.setText("充值成功！");
+        		}catch(NumberFormatException e1) {
+        			tf2.setText("输入不能含有字符");
+        		}
+        		catch(ArithmeticException e2) {
+        			tf2.setText("不能输入非正数");
+        		}
         	}
          	if(choice==2) {       	
          		//stu.setMoney(stu.getMoney()-Double.parseDouble(tf1.getText()));
-         		tf2.setText("支取成功！");
+         		
+         		try {
+        			double moneychange = Double.parseDouble(tf1.getText());
+        			if(moneychange<=0) throw new ArithmeticException();
+        			tf2.setText("支取成功！");
+        		}catch(NumberFormatException e1) {
+        			tf2.setText("输入不能含有字符");
+        		}
+        		catch(ArithmeticException e2) {
+        			tf2.setText("不能输入非正数");
+        		}
          	}
         }
     });
