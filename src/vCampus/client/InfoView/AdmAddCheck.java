@@ -12,6 +12,7 @@ import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -25,12 +26,12 @@ public class AdmAddCheck extends JPanel{
 
 
 	
-	public AdmAddCheck(AdminService ad) {
+	public AdmAddCheck(AdminService adm) {
 		
 	super();
 	JLabel lb0 = new JLabel("≤È—Ø");
 	JTextField tf0 = new JTextField(20);
-	JLabel lb1 = new JLabel("“ªø®Õ®");
+	JLabel lb1 = new JLabel("—ß∫≈");
 	JTextField tf1 = new JTextField(20);
 	JLabel lb2 = new JLabel("–’√˚");
 	JTextField tf2 = new JTextField(20);
@@ -69,7 +70,21 @@ public class AdmAddCheck extends JPanel{
     bt0.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			// to search for stu's info
-			JOptionPane.showMessageDialog(null, "to search for info of one stu");
+			//JOptionPane.showMessageDialog(null, "to search for info of one stu");
+			Student queriedStudent=adm.queryStudentInformation(tf0.getText());
+			if(queriedStudent != null) {
+				tf1.setText(queriedStudent.getStudentID());
+	    		tf2.setText(queriedStudent.getRealName());
+	    		tf3.setText(queriedStudent.getSex());
+	    		tf4.setText(queriedStudent.getIdCard());
+	    		tf5.setText(queriedStudent.getDeptName());
+	    		tf6.setText(queriedStudent.getMajor());
+	    		tf7.setText(queriedStudent.getClassNumber());
+	    		tf8.setText(queriedStudent.getDormNumber());
+	    		tf9.setText(queriedStudent.getPhoneNumber());
+	    		tf10.setText(queriedStudent.getEmailAddress());
+			}
+			else tf0.setText("≤È’“ ß∞‹");
 		}
     	
     });
@@ -83,7 +98,23 @@ public class AdmAddCheck extends JPanel{
     bt1.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
     		// to confirm changes to stu's info
-    		JOptionPane.showMessageDialog(null, "to confirm changes to stu's info");
+    		//JOptionPane.showMessageDialog(null, "to confirm changes to stu's info");
+    		Student stu = new Student();
+    		stu.setUserName(tf0.getText());
+    		stu.setStudentID(tf1.getText());
+    		stu.setRealName(tf2.getText());
+    		stu.setSex(tf3.getText());
+    		stu.setIdCard(tf4.getText());
+    		stu.setDeptName(tf5.getText());
+    		stu.setMajor(tf6.getText());
+    		stu.setClassNumber(tf7.getText());
+    		stu.setDormNumber(tf8.getText());
+    		stu.setPhoneNumber(tf9.getText());
+    		stu.setEmailAddress(tf10.getText());
+    		if(adm.updateStudentInformation(stu)==true) {
+    			JOptionPane.showMessageDialog(null, "update succeed");
+    		}
+    		else JOptionPane.showMessageDialog(null, "update failed");
     	}
     });
 
@@ -96,7 +127,11 @@ public class AdmAddCheck extends JPanel{
     bt2.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
     		// to delete one stu's info
-    		JOptionPane.showMessageDialog(null, "to delete one stu's info");
+    		//JOptionPane.showMessageDialog(null, "to delete one stu's info");
+    		if(adm.destoryAccount("Student", tf0.getText())==true) {
+    			JOptionPane.showMessageDialog(null, "…æ≥˝≥…π¶");
+    		}
+    		else JOptionPane.showMessageDialog(null, "…æ≥˝ ß∞‹");
     	}
     });
     
@@ -118,7 +153,6 @@ public class AdmAddCheck extends JPanel{
     tf1.setBackground(Color.WHITE);
     tf1.setBounds(660-270, 196-80+111, 402, 47);
     tf1.setFont(font);
-    tf1.setEditable(false);
     tf1.setBorder(null);
 
     this.add(lb2);
@@ -128,7 +162,6 @@ public class AdmAddCheck extends JPanel{
     tf2.setBackground(Color.WHITE);
     tf2.setBounds(1360-270, 196-80+111, 402, 47);
     tf2.setFont(font);
- //   tf2.setEditable(false);
     tf2.setBorder(null);
     
     this.add(lb3);
@@ -138,7 +171,6 @@ public class AdmAddCheck extends JPanel{
     tf3.setBackground(Color.WHITE);
     tf3.setBounds(660-270, 307-80+111, 402, 47);
     tf3.setFont(font);
-    tf3.setEditable(false);
     tf3.setBorder(null);
     
     this.add(lb4);
@@ -148,7 +180,6 @@ public class AdmAddCheck extends JPanel{
     tf4.setBackground(Color.WHITE);
     tf4.setBounds(1360-270, 307-80+111, 402, 47);
     tf4.setFont(font);
-    tf4.setEditable(false);
     tf4.setBorder(null);
     
     this.add(lb5);
@@ -158,7 +189,6 @@ public class AdmAddCheck extends JPanel{
     tf5.setBackground(Color.WHITE);
     tf5.setBounds(660-270, 418-80+111, 402, 47);
     tf5.setFont(font);
-    tf5.setEditable(false);
     tf5.setBorder(null);
     
     this.add(lb6);
@@ -168,7 +198,6 @@ public class AdmAddCheck extends JPanel{
     this.add(tf6);
     tf6.setBounds(1360-270, 418-80+111, 402, 47);
     tf6.setFont(font);
-    tf6.setEditable(false);
     tf6.setBorder(null);
     
     this.add(lb7);
@@ -178,7 +207,6 @@ public class AdmAddCheck extends JPanel{
     this.add(tf7);
     tf7.setBounds(660-270, 529-80+111, 402, 47);
     tf7.setFont(font);
-    tf7.setEditable(false);
     tf7.setBorder(null);
     
     this.add(lb8);
@@ -188,7 +216,6 @@ public class AdmAddCheck extends JPanel{
     tf8.setBackground(Color.WHITE);
     tf8.setBounds(1360-270, 529-80+111, 402, 47);
     tf8.setFont(font);
-    tf8.setEditable(false);
     tf8.setBorder(null);
     
     this.add(lb9);
@@ -198,7 +225,6 @@ public class AdmAddCheck extends JPanel{
     tf9.setBackground(Color.WHITE);
     tf9.setBounds(660-270, 640-80+111, 402, 47);
     tf9.setFont(font);
-    tf9.setEditable(false);
     tf9.setBorder(null);
     
     this.add(lb10);
@@ -208,7 +234,6 @@ public class AdmAddCheck extends JPanel{
     tf10.setBackground(Color.WHITE);
     tf10.setBounds(1360-270, 640-80+111, 402, 47);
     tf10.setFont(font);
-    tf10.setEditable(false);
     tf10.setBorder(null);
 	}
 }

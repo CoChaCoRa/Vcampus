@@ -24,7 +24,8 @@ import java.awt.event.ActionListener;
 
 public class StuMessageCheck extends JPanel{
 
-
+	static JTextField tf9 = new JTextField();
+	static JTextField tf10 = new JTextField();
 	
 	public StuMessageCheck(Student stu) {
 	super();
@@ -48,9 +49,9 @@ public class StuMessageCheck extends JPanel{
 	JLabel lb8 = new JLabel("宿舍号");
 	JTextField tf8 = new JTextField(stu.getDormNumber());
 	JLabel lb9 = new JLabel("手机");
-	JTextField tf9 = new JTextField(stu.getPhoneNumber());
+	tf9.setText(stu.getPhoneNumber());
 	JLabel lb10 = new JLabel("邮箱");
-	JTextField tf10 = new JTextField(stu.getEmailAddress());
+	tf10.setText(stu.getEmailAddress());
 	
 	this.setLayout(null);
 	this.setSize(1650,1000);         
@@ -183,9 +184,9 @@ public class StuMessageCheck extends JPanel{
 		JLabel lb8 = new JLabel("宿舍号");
 		JTextField tf8 = new JTextField("您没有入住校园宿舍");
 		JLabel lb9 = new JLabel("手机");
-		JTextField tf9 = new JTextField(tc.getCacheTeacher().getPhoneNumber());
+		tf9.setText(tc.getCacheTeacher().getPhoneNumber());
 		JLabel lb10 = new JLabel("邮箱");
-		JTextField tf10 = new JTextField(tc.getCacheTeacher().getEmailAddress());
+		tf10.setText(tc.getCacheTeacher().getEmailAddress());
 		
 		this.setLayout(null);
 		this.setSize(1650,1000);         

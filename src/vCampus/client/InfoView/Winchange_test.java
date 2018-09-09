@@ -59,6 +59,8 @@ public class Winchange_test extends JPanel {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	        	card.show(cardpanel,"w1");
+	        	w1.tf9.setText(ss.getCacheStudent().getPhoneNumber());
+	        	w1.tf10.setText(ss.getCacheStudent().getEmailAddress());
 	        }
 	    });
 	    
@@ -180,6 +182,8 @@ public class Winchange_test extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w1");
+	        	w1.tf9.setText(tc.getCacheTeacher().getPhoneNumber());
+	        	w1.tf10.setText(tc.getCacheTeacher().getEmailAddress());
 	        }
 	    });
 	    

@@ -67,7 +67,22 @@ public class AdmMessageChange extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//here to add a function for addition of student's info
-			JOptionPane.showMessageDialog(null, "to add one stu's info");
+			//JOptionPane.showMessageDialog(null, "to add one stu's info");
+			Student stu = new Student();
+    		stu.setUserName(tf1.getText());
+    		stu.setRealName(tf2.getText());
+    		stu.setSex(tf3.getText());
+    		stu.setIdCard(tf4.getText());
+    		stu.setDeptName(tf5.getText());
+    		stu.setMajor(tf6.getText());
+    		stu.setClassNumber(tf7.getText());
+    		stu.setDormNumber(tf8.getText());
+    		stu.setPhoneNumber(tf9.getText());
+    		stu.setEmailAddress(tf10.getText());
+    		if(ad.addStudentAccount(stu)==true) {
+    			JOptionPane.showMessageDialog(null, "Ìí¼Ó³É¹¦");
+    		}
+    		else JOptionPane.showMessageDialog(null, ad.getExceptionCode());
 		}
     	
     });
