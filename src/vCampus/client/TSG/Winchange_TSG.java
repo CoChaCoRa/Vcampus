@@ -19,8 +19,8 @@ public class Winchange_TSG extends JPanel {
 //		int identify=3;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-		StuBookCheck w1=new StuBookCheck();
-		StuBookChange w2=new StuBookChange();
+		StuBookChange w1=new StuBookChange();
+		StuBookCheck w2=new StuBookCheck();
 		AdmBookAdd w3=new AdmBookAdd();
 		
 		
