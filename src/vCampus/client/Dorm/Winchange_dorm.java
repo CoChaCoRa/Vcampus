@@ -27,58 +27,6 @@ public class Winchange_dorm extends JPanel {
 	JButton jb2=new JButton("扣除费用");
 	JButton jb3=new JButton("登记分数");
 	
-	public Winchange_dorm(int identify,Student stu){
-		super();
-//		int identify=3;
-	    CardLayout card=new CardLayout();
-		JPanel cardpanel=new JPanel();
-		
-		StuCheck w1=new StuCheck(stu);
-		
-		
-		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
-		this.setLayout(null);
-		
-		
-		//identify:1 学生 查询
-		//identify:2 教师 
-		//identify:3 管理员 费用扣除/登记分数
-		
-		
-		//this.add(jb1);
-	    jb1.setBounds(0, 0, 270, 80);
-	    jb1.setFont(font);
-	    jb1.setIcon(new ImageIcon("img\\查询信息点击.png"));	   	    	    
-	    jb1.addMouseListener(new WinchangeButtonPerformed());
-	    
-	    jb1.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	      
-	        	card.show(cardpanel,"w1");
-	        }
-	    });
-	    
-	  
-		//Winchange2 w2=new Winchange2();
-		cardpanel.setLayout(card);
-		cardpanel.setBounds(270, 0, 1920-270, 1000);
-
-		if(identify==1||identify==2)
-		{
-			cardpanel.add("w1",w1);
-		
-			this.add(jb1);
-		
-			
-		}
-		
-	
-		
-		
-		this.add(cardpanel);
-		
-	}
 	
 
 	public Winchange_dorm(int identify,Admin adm) {
@@ -149,6 +97,62 @@ public class Winchange_dorm extends JPanel {
 		this.add(cardpanel);
 	
 	}
+
+
+
+	public Winchange_dorm(int id, Student stu) {
+		// TODO Auto-generated constructor stub
+		super();
+	    CardLayout card=new CardLayout();
+		JPanel cardpanel=new JPanel();
+		
+		StuCheck w1=new StuCheck(stu);
+		
+		
+		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
+		this.setLayout(null);
+		
+		
+		//identify:1 学生 查询
+		//identify:2 教师 
+		//identify:3 管理员 费用扣除/登记分数
+		
+		
+		//this.add(jb1);
+	    jb1.setBounds(0, 0, 270, 80);
+	    jb1.setFont(font);
+	    jb1.setIcon(new ImageIcon("img\\查询信息点击.png"));	   	    	    
+	    jb1.addMouseListener(new WinchangeButtonPerformed());
+	    
+	    jb1.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w1");
+	        }
+	    });
+	    
+	  
+		//Winchange2 w2=new Winchange2();
+		cardpanel.setLayout(card);
+		cardpanel.setBounds(270, 0, 1920-270, 1000);
+
+		if(id==1||id==2)
+		{
+			cardpanel.add("w1",w1);
+		
+			this.add(jb1);
+		
+			
+		}
+		
+	
+		
+		
+		this.add(cardpanel);
+		
+	}
+
 
 	public void refresh() {
 		jb1.setIcon(new ImageIcon("img\\查询信息.png"));

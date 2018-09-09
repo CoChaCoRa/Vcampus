@@ -63,12 +63,12 @@ public class InfoView_main extends JPanel{
  	Student stu = new Student();
  	stu=ss;
  	
- 	Winchange_test w1=new Winchange_test(id,ss);
+ 	Winchange_test w1=new Winchange_test(id,stu);
  	Winchange_JWC w2=new Winchange_JWC(id,4);
  	Winchange_TSG w3=new Winchange_TSG(id);
  	Winchange_shop w4=new Winchange_shop(id);
- 	Winchange_dorm w5=new Winchange_dorm(id,ss);
- 	Winchange_bank w6=new Winchange_bank(id,ss);
+ 	Winchange_dorm w5=new Winchange_dorm(id,stu);
+ 	Winchange_bank w6=new Winchange_bank(id,stu);
  	
  	w1.setBackground(null);
 	w1.setOpaque(false);

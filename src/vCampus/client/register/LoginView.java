@@ -253,8 +253,8 @@ public class LoginView extends JFrame{
 	        		break;
 	        	case 1://教师登录
 	        		TeacherService TS = new TeacherServiceImpl();
-	        		TS.register("0", "12345", "12345");
-	        		if(TS.login("0","12345")/*TS.login(uID,uPassword)*/) {
+	        		//TS.register("0", "12345", "12345");
+	        		if(TS.login("szxdl","123")/*TS.login(uID,uPassword)*/) {
 	        			LToff();
 	        			InfoView_main TIV=new InfoView_main(2,TS.getCacheTeacher());
 	        			JOptionPane.showMessageDialog(null,"登录成功！");
@@ -263,7 +263,7 @@ public class LoginView extends JFrame{
 	        		break;
 	        	case 2://管理员登陆
 	        		AdminService AS = new AdminServiceImpl();
-	        		AS.register("1", "1234", "1234");
+	        		//AS.register("1", "1234", "1234");
 	        		if(AS.login("1","1234")/*AS.login(uID,uPassword)*/) {
 	        			LToff();
 	        			InfoView_main AIV=new InfoView_main(3,AS.getCacheAdmin());
