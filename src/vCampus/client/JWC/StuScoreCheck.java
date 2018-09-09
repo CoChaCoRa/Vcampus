@@ -7,7 +7,9 @@ package vCampus.client.JWC;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AcademicAffairsService;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.CourseChoose;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -34,7 +36,7 @@ public class StuScoreCheck extends JPanel{
 	public ArrayList<Integer> ScoreVector = new ArrayList<Integer>(10);
 	
 	
-	public StuScoreCheck(int num) {
+	public StuScoreCheck(AcademicAffairsService AAS) {
 		
 	super();
 	
@@ -260,9 +262,10 @@ public class StuScoreCheck extends JPanel{
 	};
 	
 	//此处修改课程名
-	String class_name[]= {"语文","高等数学","计算机组成原理","英语"};
+	ArrayList<CourseChoose> class_name=AAS.studentGetAllCourses();
+	//String class_name[]= {"语文","高等数学","计算机组成原理","英语"};
 	//此处修改成绩
-	int goal[]= {100,40,50,78,20,66};
+	ArrayList<CourseChoose> goal= AAS.studentGetAllCourseGrades();
 	
 	this.setLayout(null);
 	this.setSize(1650,1000);         
@@ -277,7 +280,7 @@ public class StuScoreCheck extends JPanel{
 	circleProgressBar2.setBounds(1100, 100, 400, 400);
     
     
-	for(int i=0;i<num;i++)
+	for(int i=0;i<AAS.studentGetAllCourses().size();i++)
     {
 		JProgressBar progressbar; 
 		progressbar = new JProgressBar();
@@ -290,13 +293,13 @@ public class StuScoreCheck extends JPanel{
 		BarVector.add(progressbar);
 		this.add(progressbar);
 		
-		JLabel lb1=new JLabel(class_name[i]);
+		JLabel lb1=new JLabel(class_name.get(i).getCourseName());
 		lb1.setFont(font);
 		lb1.setBounds(600, 120*i+100, 300, 47);
 		this.add(lb1);
 		
 		JTextField jt=new JTextField();
-		String s = String.valueOf(goal[i]);
+		String s = String.valueOf(goal.get(i).getScore());
 		jt.setText(s);
 		jt.setFont(font);
 		jt.setBounds(850, 120*i+100, 100, 47);

@@ -7,6 +7,7 @@ package vCampus.client.JWC;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AcademicAffairsService;
 import vCampus.client.register.RegisterView;
 
 import java.awt.CardLayout;
@@ -155,6 +156,7 @@ public class StuClassCheck extends JPanel{
     tf10.setEditable(false);
     tf10.setBorder(null);
     }
+
     	
 
 }
