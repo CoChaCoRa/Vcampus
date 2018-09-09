@@ -11,6 +11,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import vCampus.client.biz.StudentService;
 import vCampus.client.register.RegisterView;
 
 import java.awt.CardLayout;
@@ -35,7 +36,7 @@ public class StuBookCheck extends JPanel{
 	/**
 	 * 
 	 */
-	public StuBookCheck() {
+	public StuBookCheck(StudentService ss) {
 		
 	super();
 	 

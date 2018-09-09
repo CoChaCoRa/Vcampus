@@ -18,6 +18,9 @@ import java.awt.event.ActionEvent;
 import vCampus.client.JWC.*;
 import vCampus.client.biz.AcademicAffairsService;
 import vCampus.client.biz.AcademicAffairsServiceImpl;
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.TeacherService;
 import vCampus.vo.Admin;
 import vCampus.vo.CourseChoose;
 import vCampus.vo.Student;
@@ -40,10 +43,10 @@ public class Winchange_JWC extends JPanel {
 	JButton jb7=new JButton("管理员查询成绩");
 	JButton jb8=new JButton("修改课程");
 	
-	public Winchange_JWC(int identify,Student stu){
+	public Winchange_JWC(int identify,StudentService stu){
 		super();
 		
-		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(1, stu.getUserName());
+		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(1, stu.getCacheStudent().getUserName());
 		index=AAS.studentGetAllCourses().size();
 		
 	    CardLayout card=new CardLayout();
@@ -219,11 +222,11 @@ public class Winchange_JWC extends JPanel {
 	}
 	
 	
-	public Winchange_JWC(int identify,Teacher tc) {
+	public Winchange_JWC(int identify,TeacherService tc) {
 		super();
 //		int identify=3;
 		
-		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(2, tc.getUserName());
+		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(2, tc.getCacheTeacher().getUserName());
 		//index=AAS.studentGetAllCourses().size();
 		
 	    CardLayout card=new CardLayout();
@@ -294,7 +297,7 @@ public class Winchange_JWC extends JPanel {
 	}
 	
 	
-	public Winchange_JWC(int identify,Admin adm) {
+	public Winchange_JWC(int identify,AdminService adm) {
 		super();
 //		int identify=3;
 		

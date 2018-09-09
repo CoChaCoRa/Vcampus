@@ -67,8 +67,8 @@ public class InfoView_main extends JPanel{
  	stu=ss.getCacheStudent();
  	
  	Winchange_test w1=new Winchange_test(id,ss);
- 	Winchange_JWC w2=new Winchange_JWC(id,stu);
- 	Winchange_TSG w3=new Winchange_TSG(id);
+ 	Winchange_JWC w2=new Winchange_JWC(id,ss);
+ 	Winchange_TSG w3=new Winchange_TSG(id,ss);
  	Winchange_shop w4=new Winchange_shop(id);
  	Winchange_dorm w5=new Winchange_dorm(id,ss);
  	Winchange_bank w6=new Winchange_bank(id,ss);
@@ -271,8 +271,8 @@ public class InfoView_main extends JPanel{
 	 	
 
 	 	Winchange_test w1=new Winchange_test(id,admin);
-	 	Winchange_JWC w2=new Winchange_JWC(id,admin.getCacheAdmin());
-	 	Winchange_TSG w3=new Winchange_TSG(id);
+	 	Winchange_JWC w2=new Winchange_JWC(id,admin);
+	 	Winchange_TSG w3=new Winchange_TSG(id,admin);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	Winchange_dorm w5=new Winchange_dorm(id,admin);
 	 	Winchange_bank w6=new Winchange_bank(id,admin);
@@ -476,8 +476,8 @@ public class InfoView_main extends JPanel{
 	 	TeacherService tc = cacheTeacher;
 	 	
 	 	Winchange_test w1=new Winchange_test(id,tc);
-	 	Winchange_JWC w2=new Winchange_JWC(id,tc.getCacheTeacher());
-	 	Winchange_TSG w3=new Winchange_TSG(id);
+	 	Winchange_JWC w2=new Winchange_JWC(id,tc);
+	 	Winchange_TSG w3=new Winchange_TSG(id,tc);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	//Winchange_dorm w5=new Winchange_dorm(id,tc);
 	 	Winchange_bank w6=new Winchange_bank(id,tc);
