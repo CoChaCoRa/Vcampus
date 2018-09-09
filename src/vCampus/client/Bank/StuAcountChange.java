@@ -7,6 +7,8 @@ package vCampus.client.Bank;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.TeacherService;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
@@ -27,7 +29,7 @@ public class StuAcountChange extends JPanel{
 	
 	int choice=0;
 	
-	public StuAcountChange(Student stu) {
+	public StuAcountChange(StudentService stu) {
 	super();
 	
 //	this.setBackground(Color.BLUE);
@@ -106,7 +108,9 @@ public class StuAcountChange extends JPanel{
         		try {
         			double moneychange = Double.parseDouble(tf1.getText());
         			if(moneychange<=0) throw new ArithmeticException();
-        			tf2.setText("充值成功！");
+        			stu.getCacheStudent().setMoney(stu.getCacheStudent().getMoney()+moneychange);
+        			if(stu.updateInfo(stu.getCacheStudent())) tf2.setText("充值成功！");
+        			else tf2.setText("充值失败！");
         		}catch(NumberFormatException e1) {
         			tf2.setText("输入不能含有字符");
         		}
@@ -120,13 +124,21 @@ public class StuAcountChange extends JPanel{
          		try {
         			double moneychange = Double.parseDouble(tf1.getText());
         			if(moneychange<=0) throw new ArithmeticException();
-        			tf2.setText("支取成功！");
+        			if(stu.getCacheStudent().getMoney()-moneychange<0) throw new Exception();
+        			stu.getCacheStudent().setMoney(stu.getCacheStudent().getMoney()-moneychange);
+        			if(stu.updateInfo(stu.getCacheStudent())) {
+        				tf2.setText("提现成功！");
+        			}
+        			else tf2.setText("提现失败！");
         		}catch(NumberFormatException e1) {
         			tf2.setText("输入不能含有字符");
         		}
         		catch(ArithmeticException e2) {
         			tf2.setText("不能输入非正数");
-        		}
+        		} catch (Exception e1) {
+        			tf2.setText("余额不足！");
+    				tf1.setText("");
+				}
          	}
         }
     });
@@ -137,7 +149,7 @@ public class StuAcountChange extends JPanel{
     }
 
 	
-	public StuAcountChange(Teacher tc) {
+	public StuAcountChange(TeacherService tc) {
 		super();
 		
 //		this.setBackground(Color.BLUE);
@@ -213,10 +225,38 @@ public class StuAcountChange extends JPanel{
 	           	if(choice==0)        	
 	        		tf2.setText("请选择充值操作！");
 	        	if(choice==1) {       	
-	        		tf2.setText("充值成功！");
+	        		try {
+	        			double moneychange = Double.parseDouble(tf1.getText());
+	        			if(moneychange<=0) throw new ArithmeticException();
+	        			tc.getCacheTeacher().setMoney(tc.getCacheTeacher().getMoney()+moneychange);
+	        			if(tc.updateInfo(tc.getCacheTeacher())) tf2.setText("充值成功！");
+	        			else tf2.setText("充值失败！");
+	        		}catch(NumberFormatException e1) {
+	        			tf2.setText("输入不能含有字符");
+	        		}
+	        		catch(ArithmeticException e2) {
+	        			tf2.setText("不能输入非正数");
+	        		}
 	        	}
 	         	if(choice==2) {       	
-	            	tf2.setText("支取成功！");
+	         		try {
+	        			double moneychange = Double.parseDouble(tf1.getText());
+	        			if(moneychange<=0) throw new ArithmeticException();
+	        			if(tc.getCacheTeacher().getMoney()-moneychange<0) throw new Exception();
+	        			tc.getCacheTeacher().setMoney(tc.getCacheTeacher().getMoney()-moneychange);
+	        			if(tc.updateInfo(tc.getCacheTeacher())) {
+	        				tf2.setText("提现成功！");
+	        			}
+	        			else tf2.setText("提现失败！");
+	        		}catch(NumberFormatException e1) {
+	        			tf2.setText("输入不能含有字符");
+	        		}
+	        		catch(ArithmeticException e2) {
+	        			tf2.setText("不能输入非正数");
+	        		} catch (Exception e1) {
+	        			tf2.setText("余额不足！");
+	    				tf1.setText("");
+					}
 	         	}
 	        }
 	    });

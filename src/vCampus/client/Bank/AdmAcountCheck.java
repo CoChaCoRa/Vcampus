@@ -7,6 +7,7 @@ package vCampus.client.Bank;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
 
@@ -22,7 +23,7 @@ public class AdmAcountCheck extends JPanel{
 
 
 	
-	public AdmAcountCheck(Admin adm) {
+	public AdmAcountCheck(AdminService adm) {
 		
 	super();
 	JLabel lb1 = new JLabel("Ò»¿¨Í¨ºÅ");

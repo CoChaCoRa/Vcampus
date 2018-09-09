@@ -10,6 +10,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.TeacherService;
 import vCampus.vo.Admin;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
@@ -28,12 +31,12 @@ public class Winchange_test extends JPanel {
 	JButton jb3=new JButton("添加信息");
 	JButton jb4=new JButton("查询修改");
 	
-	public Winchange_test(int identify,Student ss){
+	public Winchange_test(int identify,StudentService ss){
 		super();
 //		int identify=1;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-		StuMessageCheck w1=new StuMessageCheck(ss);
+		StuMessageCheck w1=new StuMessageCheck(ss.getCacheStudent());
 		StuMessageChange w2=new StuMessageChange(ss);
 		
 		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
@@ -87,7 +90,7 @@ public class Winchange_test extends JPanel {
 	}
 
 
-	public Winchange_test(int identify, Admin ad) {
+	public Winchange_test(int identify, AdminService ad) {
 		// TODO Auto-generated constructor stub
 		super();
 	    CardLayout card=new CardLayout();
@@ -148,7 +151,7 @@ public class Winchange_test extends JPanel {
 	}
 
 	
-	public Winchange_test(int identify, Teacher tc) {
+	public Winchange_test(int identify, TeacherService tc) {
 		super();
 //		int identify=1;
 	    CardLayout card=new CardLayout();

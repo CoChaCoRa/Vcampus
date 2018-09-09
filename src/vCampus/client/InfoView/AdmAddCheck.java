@@ -7,6 +7,9 @@ package vCampus.client.InfoView;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
 
@@ -22,7 +25,7 @@ public class AdmAddCheck extends JPanel{
 
 
 	
-	public AdmAddCheck(Admin ad) {
+	public AdmAddCheck(AdminService ad) {
 		
 	super();
 	JLabel lb0 = new JLabel("≤È—Ø");

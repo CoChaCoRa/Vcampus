@@ -9,6 +9,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
 import vCampus.vo.Admin;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
@@ -29,7 +31,7 @@ public class Winchange_dorm extends JPanel {
 	
 	
 
-	public Winchange_dorm(int identify,Admin adm) {
+	public Winchange_dorm(int identify,AdminService adm) {
 		super();
 //		int identify=3;
 	    CardLayout card=new CardLayout();
@@ -100,7 +102,7 @@ public class Winchange_dorm extends JPanel {
 
 
 
-	public Winchange_dorm(int id, Student stu) {
+	public Winchange_dorm(int id, StudentService stu) {
 		// TODO Auto-generated constructor stub
 		super();
 	    CardLayout card=new CardLayout();

@@ -9,6 +9,8 @@ package vCampus.client.Bank;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.TeacherService;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
@@ -23,19 +25,19 @@ import java.awt.event.ActionListener;
 
 public class StuCheck extends JPanel{
 
-
+	static JTextField tf3 = new JTextField();
 	
-	public StuCheck(Student stu) {
+	public StuCheck(StudentService stu) {
 	super();
 	
 //	this.setBackground(Color.BLUE);
 	
 	JLabel lb1 = new JLabel("“ªø®Õ®∫≈");
-	JTextField tf1 = new JTextField(stu.getUserName());
+	JTextField tf1 = new JTextField(stu.getCacheStudent().getUserName());
 	
 	
 	JLabel lb3 = new JLabel("”‡∂Ó");
-	JTextField tf3 = new JTextField(String.valueOf(stu.getMoney()));
+	tf3.setText(String.valueOf(stu.getCacheStudent().getMoney()));
 
 
 	this.setLayout(null);
@@ -70,17 +72,17 @@ public class StuCheck extends JPanel{
     }
     	
 
-	public StuCheck(Teacher tc) {
+	public StuCheck(TeacherService tc) {
 		super();
 		
 //		this.setBackground(Color.BLUE);
 		
 		JLabel lb1 = new JLabel("“ªø®Õ®∫≈");
-		JTextField tf1 = new JTextField(tc.getTeacherEcardNumber());
+		JTextField tf1 = new JTextField(tc.getCacheTeacher().getTeacherEcardNumber());
 		
 		
 		JLabel lb3 = new JLabel("”‡∂Ó");
-		JTextField tf3 = new JTextField(String.valueOf(tc.getMoney()));
+		tf3.setText(String.valueOf(tc.getCacheTeacher().getMoney()));
 
 
 		this.setLayout(null);

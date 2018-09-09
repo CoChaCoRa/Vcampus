@@ -30,29 +30,29 @@ public class StuMessageChange extends JPanel{
 
 
 	
-	public StuMessageChange(Student stu) {
+	public StuMessageChange(StudentService stu) {
 		
 	super();
 	JLabel lb1 = new JLabel("学号");
-	JTextField tf1 = new JTextField(stu.getStudentID());
+	JTextField tf1 = new JTextField(stu.getCacheStudent().getStudentID());
 	JLabel lb2 = new JLabel("姓名");
-	JTextField tf2 = new JTextField(stu.getRealName());
+	JTextField tf2 = new JTextField(stu.getCacheStudent().getRealName());
 	JLabel lb3 = new JLabel("性别");
-	JTextField tf3 = new JTextField(stu.getSex());
+	JTextField tf3 = new JTextField(stu.getCacheStudent().getSex());
 	JLabel lb4 = new JLabel("身份证号");
-	JTextField tf4 = new JTextField(stu.getIdCard());
+	JTextField tf4 = new JTextField(stu.getCacheStudent().getIdCard());
 	JLabel lb5 = new JLabel("院系");
-	JTextField tf5 = new JTextField(stu.getDeptName());
+	JTextField tf5 = new JTextField(stu.getCacheStudent().getDeptName());
 	JLabel lb6 = new JLabel("专业");
-	JTextField tf6 = new JTextField(stu.getMajor());
+	JTextField tf6 = new JTextField(stu.getCacheStudent().getMajor());
 	JLabel lb7 = new JLabel("班级");
-	JTextField tf7 = new JTextField(stu.getClassNumber());
+	JTextField tf7 = new JTextField(stu.getCacheStudent().getClassNumber());
 	JLabel lb8 = new JLabel("宿舍号");
-	JTextField tf8 = new JTextField(stu.getDormNumber());
+	JTextField tf8 = new JTextField(stu.getCacheStudent().getDormNumber());
 	JLabel lb9 = new JLabel("手机");
-	JTextField tf9 = new JTextField(stu.getPhoneNumber());
+	JTextField tf9 = new JTextField(stu.getCacheStudent().getPhoneNumber());
 	JLabel lb10 = new JLabel("邮箱");
-	JTextField tf10 = new JTextField(stu.getEmailAddress());
+	JTextField tf10 = new JTextField(stu.getCacheStudent().getEmailAddress());
 	JButton bt1=new JButton("");
 	
 	this.setLayout(null);
@@ -69,11 +69,9 @@ public class StuMessageChange extends JPanel{
     bt1.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Student updatedStudent = new Student();
-			updatedStudent.setPhoneNumber(tf9.getText());
-			updatedStudent.setEmailAddress(tf10.getText());
-			StudentService SS = new StudentServiceImpl();
-			if(SS.updateInfo(updatedStudent))
+			stu.getCacheStudent().setPhoneNumber(tf9.getText());
+			stu.getCacheStudent().setEmailAddress(tf10.getText());
+			if(stu.updateInfo(stu.getCacheStudent()))
 				JOptionPane.showMessageDialog(null,"修改成功！");
 			else JOptionPane.showMessageDialog(null,"修改失败！");
 		}
@@ -187,28 +185,28 @@ public class StuMessageChange extends JPanel{
 	
 	
 	
-	public StuMessageChange(Teacher tc) {
+	public StuMessageChange(TeacherService tc) {
 		super();
 		JLabel lb1 = new JLabel("一卡通");
-		JTextField tf1 = new JTextField(tc.getTeacherEcardNumber());
+		JTextField tf1 = new JTextField(tc.getCacheTeacher().getTeacherEcardNumber());
 		JLabel lb2 = new JLabel("姓名");
-		JTextField tf2 = new JTextField(tc.getRealName());
+		JTextField tf2 = new JTextField(tc.getCacheTeacher().getRealName());
 		JLabel lb3 = new JLabel("性别");
-		JTextField tf3 = new JTextField(tc.getSex());
+		JTextField tf3 = new JTextField(tc.getCacheTeacher().getSex());
 		JLabel lb4 = new JLabel("身份证号");
-		JTextField tf4 = new JTextField(tc.getIdCard());
+		JTextField tf4 = new JTextField(tc.getCacheTeacher().getIdCard());
 		JLabel lb5 = new JLabel("院系");
-		JTextField tf5 = new JTextField(tc.getDeptName());
+		JTextField tf5 = new JTextField(tc.getCacheTeacher().getDeptName());
 		JLabel lb6 = new JLabel("职称");
-		JTextField tf6 = new JTextField(tc.getProfessionalTitle());
+		JTextField tf6 = new JTextField(tc.getCacheTeacher().getProfessionalTitle());
 		JLabel lb7 = new JLabel("班级");
 		JTextField tf7 = new JTextField(20);
 		JLabel lb8 = new JLabel("宿舍号");
-		JTextField tf8 = new JTextField(20);
+		JTextField tf8 = new JTextField("您没有入住校园宿舍");
 		JLabel lb9 = new JLabel("手机");
-		JTextField tf9 = new JTextField(tc.getPhoneNumber());
+		JTextField tf9 = new JTextField(tc.getCacheTeacher().getPhoneNumber());
 		JLabel lb10 = new JLabel("邮箱");
-		JTextField tf10 = new JTextField(tc.getEmailAddress());
+		JTextField tf10 = new JTextField(tc.getCacheTeacher().getEmailAddress());
 		JButton bt1=new JButton("");
 		
 		this.setLayout(null);
@@ -225,11 +223,9 @@ public class StuMessageChange extends JPanel{
 	    bt1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Teacher updateTeacher = new Teacher();
-				updateTeacher.setPhoneNumber(tf9.getText());
-				updateTeacher.setEmailAddress(tf10.getText());
-				TeacherService TS = new TeacherServiceImpl();
-				if(TS.updateInfo(updateTeacher))
+				tc.getCacheTeacher().setPhoneNumber(tf9.getText());
+				tc.getCacheTeacher().setEmailAddress(tf10.getText());
+				if(tc.updateInfo(tc.getCacheTeacher()))
 					JOptionPane.showMessageDialog(null,"修改成功！");
 				else JOptionPane.showMessageDialog(null,"修改失败！");
 			}

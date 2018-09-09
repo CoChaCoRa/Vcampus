@@ -18,6 +18,9 @@ import vCampus.vo.Teacher;
 import vCampus.client.InfoView.*;
 import vCampus.client.JWC.*;
 import vCampus.client.TSG.*;
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.TeacherService;
 import vCampus.client.Shop.*;
 import vCampus.client.Bank.*;
 import vCampus.client.Dorm.*;
@@ -47,7 +50,7 @@ public class InfoView_main extends JPanel{
 	JButton jb7 = new JButton();
 	JButton jb8 = new JButton();
 	
-	public InfoView_main(int id,Student ss) {
+	public InfoView_main(int id,StudentService ss) {
 	this.setLayout(null);
 	this.setSize(1920,1080);         
     this.setLocation(0, 0);
@@ -61,14 +64,14 @@ public class InfoView_main extends JPanel{
  	JPanel pn1=new JPanel();
  	
  	Student stu = new Student();
- 	stu=ss;
+ 	stu=ss.getCacheStudent();
  	
- 	Winchange_test w1=new Winchange_test(id,stu);
+ 	Winchange_test w1=new Winchange_test(id,ss);
  	Winchange_JWC w2=new Winchange_JWC(id,stu);
  	Winchange_TSG w3=new Winchange_TSG(id);
  	Winchange_shop w4=new Winchange_shop(id);
- 	Winchange_dorm w5=new Winchange_dorm(id,stu);
- 	Winchange_bank w6=new Winchange_bank(id,stu);
+ 	Winchange_dorm w5=new Winchange_dorm(id,ss);
+ 	Winchange_bank w6=new Winchange_bank(id,ss);
  	
  	w1.setBackground(null);
 	w1.setOpaque(false);
@@ -253,7 +256,7 @@ public class InfoView_main extends JPanel{
 	}
 	
 	
-	public InfoView_main(int id, Admin admin) {
+	public InfoView_main(int id, AdminService admin) {
 		this.setLayout(null);
 		this.setSize(1920,1080);         
 	    this.setLocation(0, 0);
@@ -266,14 +269,13 @@ public class InfoView_main extends JPanel{
 	    CardLayout card=new CardLayout();
 	 	JPanel pn1=new JPanel();
 	 	
-	 	Admin ad=new Admin();
-	 	ad=admin;
-	 	Winchange_test w1=new Winchange_test(id,ad);
-	 	Winchange_JWC w2=new Winchange_JWC(id,admin);
+
+	 	Winchange_test w1=new Winchange_test(id,admin);
+	 	Winchange_JWC w2=new Winchange_JWC(id,admin.getCacheAdmin());
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	Winchange_dorm w5=new Winchange_dorm(id,admin);
-	 	Winchange_bank w6=new Winchange_bank(id,ad);
+	 	Winchange_bank w6=new Winchange_bank(id,admin);
 	 	
 	 	w1.setBackground(null);
 		w1.setOpaque(false);
@@ -458,7 +460,7 @@ public class InfoView_main extends JPanel{
 	}
 
 	
-	public InfoView_main(int id, Teacher cacheTeacher) {
+	public InfoView_main(int id, TeacherService cacheTeacher) {
 		this.setLayout(null);
 		this.setSize(1920,1080);         
 	    this.setLocation(0, 0);
@@ -471,10 +473,10 @@ public class InfoView_main extends JPanel{
 	    CardLayout card=new CardLayout();
 	 	JPanel pn1=new JPanel();
 	 	
-	 	Teacher tc = cacheTeacher;
+	 	TeacherService tc = cacheTeacher;
 	 	
 	 	Winchange_test w1=new Winchange_test(id,tc);
-	 	Winchange_JWC w2=new Winchange_JWC(id,tc);
+	 	Winchange_JWC w2=new Winchange_JWC(id,tc.getCacheTeacher());
 	 	Winchange_TSG w3=new Winchange_TSG(id);
 	 	Winchange_shop w4=new Winchange_shop(id);
 	 	//Winchange_dorm w5=new Winchange_dorm(id,tc);

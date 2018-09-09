@@ -7,6 +7,7 @@ package vCampus.client.InfoView;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
@@ -25,7 +26,7 @@ public class AdmMessageChange extends JPanel{
 
 
 	
-	public AdmMessageChange(Admin ad) {
+	public AdmMessageChange(AdminService ad) {
 		
 	super();
 	JLabel lb1 = new JLabel("Ò»¿¨Í¨");

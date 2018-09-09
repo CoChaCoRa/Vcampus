@@ -9,6 +9,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.TeacherService;
 import vCampus.vo.Admin;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
@@ -28,7 +31,7 @@ public class Winchange_bank extends JPanel {
 	JButton jb2=new JButton("≥‰÷µ◊™’À");
 	JButton jb3=new JButton("≤È—Ø”‡∂Ó");
 	
-	public Winchange_bank(int identify,Student stu){
+	public Winchange_bank(int identify,StudentService stu){
 		super();
 		//int identify=1;
 	    CardLayout card=new CardLayout();
@@ -66,6 +69,7 @@ public class Winchange_bank extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w1");
+	        	w1.tf3.setText(String.valueOf(stu.getCacheStudent().getMoney()));
 	        }
 	    });
 	    
@@ -98,7 +102,7 @@ public class Winchange_bank extends JPanel {
 	}
 	
 	
-	public Winchange_bank(int identify,Teacher tea) {
+	public Winchange_bank(int identify,TeacherService tea) {
 		super();
 		//int identify=1;
 	    CardLayout card=new CardLayout();
@@ -135,6 +139,7 @@ public class Winchange_bank extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w1");
+	        	w1.tf3.setText(String.valueOf(tea.getCacheTeacher().getMoney()));
 	        }
 	    });
 	    
@@ -167,7 +172,7 @@ public class Winchange_bank extends JPanel {
 	}
 
 
-	public Winchange_bank(int identify,Admin adm) {
+	public Winchange_bank(int identify,AdminService adm) {
 		super();
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
