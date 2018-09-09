@@ -71,4 +71,5 @@ public interface LibraryServiceDao {
 	 * @throws RecordAlreadyExistException
 	 */
 	public boolean deleteBookByAdmin(String bookID)throws RecordNotFoundException;
+	
 }

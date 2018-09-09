@@ -697,6 +697,7 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(severResponse);
             }
             
+            
 		}
 		catch (Exception e) {
 			// TODO: handle exception
