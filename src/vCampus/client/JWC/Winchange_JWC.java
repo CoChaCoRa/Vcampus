@@ -173,12 +173,12 @@ public class Winchange_JWC extends JPanel {
 	        		int b = 0;	
 	        		
 	        		
-	        		//index2 为绩点平均分
-	        		
+	        		//GPA 为平均分
+	        		int GPA=87;
 	        		
 					@Override
 					public void run() {
-						while (index2 <= 100) {
+						while (index2 <= GPA) {
 							try {
 								Thread.sleep(25);
 							} catch (InterruptedException e) {

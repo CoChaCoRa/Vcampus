@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 /**
  * 圆形进度条。
  * 
- * @author 钱佳明。
+ * @author Yanhao Shen。
  * @version 1.0。
  *
  */
@@ -58,6 +58,7 @@ public class CircleProgressBar extends JPanel {
 		setMinimumProgress(0);
 		setMaximumProgress(100);
 		setProgress(0);
+		
 		setBackgroundColor(new Color(209, 206, 200));
 		setForegroundColor(new Color(172, 168, 163));
 		setDigitalColor(Color.BLACK);
@@ -98,12 +99,13 @@ public class CircleProgressBar extends JPanel {
 		graphics2d.drawArc(x, y, width, height, 0, 360);
 		graphics2d.setColor(foregroundColor);
 		graphics2d.drawArc(x, y, width, height, 90, -(int) (360 * ((progress * 1.0) / (getMaximumProgress() - getMinimumProgress()))));
-		graphics2d.setFont(new Font("黑体", Font.BOLD, fontSize));
+		graphics2d.setFont(new Font("苹方 常规",Font.BOLD, fontSize));
 		FontMetrics fontMetrics = graphics2d.getFontMetrics();
 		int digitalWidth = fontMetrics.stringWidth(progress + "%");
 		int digitalAscent = fontMetrics.getAscent();
 		graphics2d.setColor(digitalColor);
-		graphics2d.drawString(progress + "%", getWidth() / 2 - digitalWidth / 2, getHeight() / 2 + digitalAscent / 2);
+		graphics2d.drawString("GPA:"+getGPA(), getWidth() / 2 - digitalWidth, getHeight() / 2 + digitalAscent / 5);
+		
 	}
 
 	/**
@@ -156,7 +158,11 @@ public class CircleProgressBar extends JPanel {
 	public int getProgress() {
 		return progress;
 	}
-
+	
+	public double getGPA() {
+		
+		return ((double)progress/25.0);
+	}
 	/**
 	 * 设置当前进度值。
 	 * 
