@@ -24,6 +24,7 @@ public interface MessageTypeCodes {
 	String teacherUpdateInformation = "TEACHER_UPDATE_INFORMATION";
 	String teacherDestroyAccount = "TEACHER_DESTROY_ACCOUNT";
 	String UserQueryCourseInformation = "USER_QUERY_COURSE_INFORMATION";
+	String adminFindStudent = "ADMIN_FIND_STUDENT";
 	String studentQueryCourses = "STUDENT_QUERY_COURSES";
 	String studentAddCourse = "STUDENT_ADD_COURSE";
 	String studentDeleteCourse = "STUDENT_DELETE_COURSE";

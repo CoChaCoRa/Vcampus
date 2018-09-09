@@ -18,6 +18,7 @@ import vCampus.vo.Student;
  * 
  */
 public interface StudentServiceDao {
+	Student findByName(String userName) throws RecordNotFoundException;
 	Student register(String userName, String studentPassword) throws  RecordAlreadyExistException; 
 	Student login(String userName, String studentPassword) throws RecordNotFoundException, WrongPasswordException;
 	Student updatePassword(String userName, String newStudentPassword) throws RecordNotFoundException;
@@ -29,4 +30,5 @@ public interface StudentServiceDao {
 	boolean addCourse(String userName,String courseID) throws RecordNotFoundException, RecordAlreadyExistException, OutOfLimitException;
 	boolean deleteCourse(String userName,String courseID) throws OutOfLimitException, RecordNotFoundException;
 
+	
 }

@@ -1,8 +1,13 @@
 package vCampus.biz.clent;
 
+import com.hxtt.global.s;
+
 import vCampus.client.biz.AdminService;
 import vCampus.client.biz.AdminServiceImpl;
 import vCampus.server.biz.AdminServiceDaoImpl;
+import vCampus.server.biz.StudentServiceDao;
+import vCampus.server.biz.StudentServiceDaoImpl;
+import vCampus.vo.Student;
 
 /**
  * @author SongZixing
@@ -61,5 +66,24 @@ public class TestAdminService {
 						System.out.println("delete the account!");
 					}
 				}
+				
+			//test add student
+				Student addStudent = new Student();
+				addStudent.setUserName("213170821");
+				adminService.addStudentAccount(addStudent);
+				
+			//test query student
+				if(adminService.queryStudentInformation("213160821") != null) {
+					System.out.println("ok!");
+				}
+				
+			//test change student info
+				Student screwedStudent = new Student();
+				screwedStudent.setUserName("213160821");
+				screwedStudent.setEmailAddress("2746661349@qq.com");
+				if(adminService.updateStudentInformation(screwedStudent)) {
+					System.out.println("change success!");
+				}
+				
 	}
 }

@@ -198,4 +198,14 @@ private CourseChooseDao ccd = new CourseChooseDaoImpl();
 			
 		}
 	
+	@Override
+		public Student findByName(String userName) throws RecordNotFoundException {
+			// TODO Auto-generated method stub
+		if(sd.findByName(userName) != null) {
+			return sd.findByName(userName);
+		}
+			return null;
+		}
+	
+	
 }

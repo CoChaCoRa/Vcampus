@@ -697,6 +697,24 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(severResponse);
             }
             
+            if(object.getMessageType().equals(MessageTypeCodes.adminFindStudent)) {
+            	Message serverResponse = new Message();
+            	
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+					Student returnStudent = studentServiceDao.findByName((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(returnStudent);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
             
 		}
 		catch (Exception e) {

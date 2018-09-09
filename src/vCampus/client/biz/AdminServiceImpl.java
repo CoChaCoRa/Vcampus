@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import vCampus.client.socket.Client;
 import vCampus.server.biz.AdminServiceDao;
+import vCampus.server.biz.StudentServiceDao;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
 import vCampus.vo.Admin;
@@ -174,5 +175,81 @@ public class AdminServiceImpl implements AdminService{
 		}
 		return false;
 	}
+	
+	
+	@Override
+	public boolean addStudentAccount(Student newStudent) {
+		// TODO Auto-generated method stub
+		StudentService studentService = new StudentServiceImpl();
+		if(studentService.register(newStudent.getUserName(), "password", "password")) {
+			
+			if(studentService.updateInfo(newStudent)) {
+				return true;
+			}
+			else {
+				exceptionCode = studentService.getExceptionCode();
+				return false;
+			}
+		}
+		exceptionCode = studentService.getExceptionCode();
+		return false;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public Student queryStudentInformation(String studentUserName) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		Message message = new Message();
+		message.setUserType("ADMIN");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(studentUserName);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.adminFindStudent);
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
+		Student foundStudent = (Student) paras.get(0);
+		
+		if(foundStudent != null) {
+			
+			return foundStudent;
+		}
+		}
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return null;
+	}
+	
+	
+	
+	@Override
+	public boolean updateStudentInformation(Student updatedStudent) {
+		// TODO Auto-generated method stub
+		if(queryStudentInformation(updatedStudent.getUserName()) != null) {
+			Student foundStudent = queryStudentInformation(updatedStudent.getUserName());
+			StudentService studentService = new StudentServiceImpl();
+			if(studentService.login(foundStudent.getUserName(), foundStudent.getPassword())) {
+				if(studentService.updateInfo(updatedStudent)) {
+					return true;
+				}
+			}
+			exceptionCode = studentService.getExceptionCode();
+			return false;
+		}
+		else {
+			return false;
+		}
+
+	}
+	
+	
+	
+
 	
 }
