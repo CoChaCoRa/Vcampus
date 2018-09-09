@@ -6,6 +6,8 @@ package vCampus.client.TSG;
  *
  */
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 import vCampus.client.register.RegisterView;
 
@@ -16,27 +18,24 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.*;
 import javax.swing.*; 
 
 public class StuBookCheck extends JPanel{
 
-
+	JTextArea jtf=new JTextArea(20,1);
 	
+	/**
+	 * 
+	 */
 	public StuBookCheck() {
 		
 	super();
-	JList jlist;    //列表框  
-	JComboBox jcb;  //下拉框  
-	  
-	JLabel jlb2;  
-	JScrollPane jsp;    //滚动控件 
+	 
+	JLabel lb1=new JLabel("已借阅：");
 	
-	JLabel lb1 = new JLabel("查询");
-	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("heeee");
-	
-	JButton bt0=new JButton("");
 	JButton bt1=new JButton("");
 	
 	this.setLayout(null);
@@ -44,64 +43,131 @@ public class StuBookCheck extends JPanel{
     
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
    
-    
-    this.add(bt0);
-    bt0.setBounds(880,196-90,60,60);
-    bt0.setFont(font);
-    // 设置按钮的默认图片
-    bt0.setIcon(new ImageIcon("img\\查询UI.png"));
-    bt0.setBorder(null);
-    
     this.add(bt1);
-    bt1.setBounds(910-270, 910-80, 160, 80);
+    bt1.setBounds(910-270, 910-80, 120, 60);
     bt1.setFont(font);
     // 设置按钮的默认图片
-    bt1.setIcon(new ImageIcon("img\\确认.png"));
+   
+    bt1.setContentAreaFilled(false);
+    bt1.setIcon(new ImageIcon("img\\归还.png"));
     bt1.setBorder(null);
+    
+    
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\归还点击.png"));
+		}
 
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\归还.png"));
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			//System.exit(0);
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
+	
+    
     this.add(lb1); 
     lb1.setBounds(456-270, 196-80, 151, 47);
     lb1.setFont(font);
-    this.add(tf1);
-    tf1.setBackground(Color.WHITE);
-    tf1.setBounds(710-270, 196-80, 352, 47);
-    tf1.setFont(font);
-   // tf1.setEditable(false);
-    tf1.setBorder(null);
 
-    lb2 = new JLabel("选择英雄：");  
+	/*
+	 * 设置JTable的列名
+	 */
+	String[] columnNames =
+	{ "书号","书名", "作者", "出版社" };
 
-    this.add(lb2);
-    lb2.setBounds(456-270, 307-80, 101, 47);
-    lb2.setFont(font);
+	/*
+	 * 初始化JTable里面各项的值，设置两个一模一样的实体"赵匡义"学生。
+	 */
+	
+	Object[][] obj = new Object[2][4];
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			switch (j)
+			{
+			case 0:
+				obj[i][j] = "高等数学";
+				break;
+			case 1:
+				obj[i][j] = "吴云建";
+				break;
+			case 2:
+				obj[i][j] = "SEU";
+				break;
+		
+			}
+		}
+	
+		
+	}
+	
+	
+	/*
+	 * JTable的其中一种构造方法
+	 */
+	JTable table = new JTable(obj, columnNames) {
+		public boolean isCellEditable(int row, int column)
+    {
+               return false;}//表格不允许被编辑
+    }
+	;
+	/*
+	 * 设置JTable的列默认的宽度和高度
+	 */
+    table.setRowHeight(30);// 设置表格行宽
+    
+    JTableHeader head = table.getTableHeader(); // 创建表格标题对象
+    head.setPreferredSize(new Dimension(head.getWidth(), 35));// 设置表头大小
+    head.setFont(font);// 设置表格字体
+   
+	TableColumn column = null;
+	int colunms = table.getColumnCount();
+	for(int i = 0; i < colunms; i++)
+	{
+		column = table.getColumnModel().getColumn(i);
+		/*将每一列的默认宽度设置为100*/
+		column.setPreferredWidth(300);
+		if (i % 2 == 0)
+			table.setBackground(Color.pink); 
+		else if (i % 2 == 1)
+			table.setBackground(Color.white);
 
-  
-    String str2[] = {"盖仑", "艾希", "提莫", "赵信", "李青", "安妮"};  
-    jlist = new JList(str2);  
-    jlist.setFont(font);
-    jlist.setBounds(400, 400, 100, 100);
-    
-    jlist.setVisibleRowCount(5);//默认显示行数  
-    this.add(jlist);
-    jsp = new JScrollPane(jlist);  
-      
-    
-      
-      
-    this.add(jsp);  
-    
-    JList list = new JList(str2);
-    list.setBounds(104, 365, 400, 400);
-    
-    list.setFont(font);
-    add(list);
-    
-    JScrollBar scrollBar = new JScrollBar();
-    scrollBar.setBounds(104, 365, 400, 48);
-    scrollBar.setBackground(getBackground());
-    add(scrollBar);
-    
-    
+	}
+	
+	
+	/*
+	 * 设置JTable自动调整列表的状态，此处设置为关闭
+	 */
+//	table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	table.setBounds(400, 365, 600, 800);
+	table.setFont(font);
+	
+	/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
+	JScrollPane scroll = new JScrollPane(table);
+	scroll.setLocation(186, 223);
+	scroll.setSize(908, 528);
+	table.setSize(600, 800);
+	
+	add(scroll);
+	
+   
     
     }
 }
