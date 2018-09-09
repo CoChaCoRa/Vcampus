@@ -22,7 +22,7 @@ public class Winchange_TSG extends JPanel {
 		StuBookChange w1=new StuBookChange();
 		StuBookCheck w2=new StuBookCheck();
 		AdmBookAdd w3=new AdmBookAdd();
-		
+		AdmBookChange w4=new AdmBookChange();
 		
 		
 		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
@@ -31,10 +31,11 @@ public class Winchange_TSG extends JPanel {
 		JButton jb1=new JButton();
 		JButton jb2=new JButton();
 		JButton jb3=new JButton();
-
+		JButton jb4=new JButton();
+		
 		//identify:1 学生 查询图书(借)/还
 		//identify:2 教师 
-		//identify:3 管理员 查询图书/添加
+		//identify:3 管理员 添加/删除修改
 		
 		
 		//this.add(jb1);
@@ -52,7 +53,10 @@ public class Winchange_TSG extends JPanel {
 	    jb3.setFont(font);
 	    jb3.setIcon(new ImageIcon("img\\添加图书.png"));
 
-	    	    
+	    jb4.setBounds(0, 80, 270, 80);
+	    jb4.setFont(font);
+	    jb4.setIcon(new ImageIcon("img\\查询修改.png"));
+	    
 	
 	    
 	    jb1.addActionListener(new ActionListener() {
@@ -79,6 +83,16 @@ public class Winchange_TSG extends JPanel {
 	        }
 	    });
 	  
+	    
+	    jb4.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w4");
+	        }
+	    });
+	  
+	    
 		//Winchange2 w2=new Winchange2();
 		cardpanel.setLayout(card);
 		cardpanel.setBounds(270, 0, 1920-270, 1000);
@@ -96,8 +110,9 @@ public class Winchange_TSG extends JPanel {
 		{
 		
 			cardpanel.add("w3",w3);
-		
+			cardpanel.add("w4",w4);
 			this.add(jb3);
+			this.add(jb4);
 		}
 	
 		

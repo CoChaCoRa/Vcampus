@@ -24,16 +24,19 @@ public class AdmBookAdd extends JPanel{
 	public AdmBookAdd() {
 		
 	super();
-	JLabel lb1 = new JLabel("书名");
+	
+	JLabel lb1 = new JLabel("书号");
 	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("作者");
+	JLabel lb2 = new JLabel("书名");
 	JTextField tf2 = new JTextField(20);
 	JLabel lb3 = new JLabel("出版社");
 	JTextField tf3 = new JTextField(20);
 	JLabel lb4 = new JLabel("书架位置");
 	JTextField tf4 = new JTextField(20);
-	JLabel lb5 = new JLabel("总量");
+	JLabel lb5 = new JLabel("作者");
 	JTextField tf5 = new JTextField(20);
+	JLabel lb6 = new JLabel("库存量");
+	JTextField tf6 = new JTextField(20);
 	
 	JButton bt1=new JButton("");
 	
@@ -101,7 +104,15 @@ public class AdmBookAdd extends JPanel{
   //  tf5.setEditable(false);
     tf5.setBorder(null);
     
- 
+    this.add(lb6);
+    tf6.setBackground(Color.WHITE);
+    lb6.setBounds(1156-270, 418-80, 101, 47);
+    lb6.setFont(font);
+    this.add(tf6);
+    tf6.setBounds(1360-270, 418-80, 352, 47);
+    tf6.setFont(font);
+  //  tf6.setEditable(false);
+    tf6.setBorder(null);
   
 	this.setLayout(null);
 	this.setSize(1650,1000);         

@@ -6,8 +6,10 @@ package vCampus.client.TSG;
  *
  */
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import vCampus.client.register.RegisterView;
 
@@ -25,6 +27,9 @@ import javax.swing.*;
 
 public class StuBookCheck extends JPanel{
 
+	
+	
+	DefaultTableModel dtm = null;
 	JTextArea jtf=new JTextArea(20,1);
 	
 	/**
@@ -53,33 +58,7 @@ public class StuBookCheck extends JPanel{
     bt1.setBorder(null);
     
     
-    bt1.addMouseListener(new MouseListener() {
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			bt1.setIcon(new ImageIcon("img\\归还点击.png"));
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			bt1.setIcon(new ImageIcon("img\\归还.png"));
-		}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			//System.exit(0);
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub				
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub				
-		}
-    });
-	
+  
     
     this.add(lb1); 
     lb1.setBounds(456-270, 196-80, 151, 47);
@@ -95,8 +74,9 @@ public class StuBookCheck extends JPanel{
 	 * 初始化JTable里面各项的值，设置两个一模一样的实体"赵匡义"学生。
 	 */
 	
-	Object[][] obj = new Object[2][4];
-	for (int i = 0; i < 2; i++)
+	int num_borrow=2;
+	Object[][] obj = new Object[num_borrow][4];
+	for (int i = 0; i < num_borrow; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
@@ -118,15 +98,18 @@ public class StuBookCheck extends JPanel{
 		
 	}
 	
-	
 	/*
 	 * JTable的其中一种构造方法
 	 */
-	JTable table = new JTable(obj, columnNames) {
+    dtm=new DefaultTableModel(obj,columnNames){
 		public boolean isCellEditable(int row, int column)
-    {
-               return false;}//表格不允许被编辑
-    }
+	    {
+	               return false;}//表格不允许被编辑
+	    };
+   //用模型建立表;
+	    
+
+	JTable table = new JTable(dtm); 
 	;
 	/*
 	 * 设置JTable的列默认的宽度和高度
@@ -144,11 +127,6 @@ public class StuBookCheck extends JPanel{
 		column = table.getColumnModel().getColumn(i);
 		/*将每一列的默认宽度设置为100*/
 		column.setPreferredWidth(300);
-		if (i % 2 == 0)
-			table.setBackground(Color.pink); 
-		else if (i % 2 == 1)
-			table.setBackground(Color.white);
-
 	}
 	
 	
@@ -167,7 +145,49 @@ public class StuBookCheck extends JPanel{
 	
 	add(scroll);
 	
-   
+	  bt1.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				bt1.setIcon(new ImageIcon("img\\归还点击.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				bt1.setIcon(new ImageIcon("img\\归还.png"));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 int index = table.getSelectedRow();
+				 Object return_book=table.getValueAt(index,0);
+				
+				 
+				 //点击确认
+				 //cc:返回的是新书的id号
+				 
+				  System.out.println(return_book);
+				  if(index!=-1) //存在选中行
+				  {
+					  dtm.removeRow(index);
+				  }
+				  else {
+					
+				}
+				 
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+	    });
+		
     
     }
+	
 }

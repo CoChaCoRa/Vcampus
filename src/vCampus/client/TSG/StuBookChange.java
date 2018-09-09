@@ -1,4 +1,5 @@
 package vCampus.client.TSG;
+import javax.crypto.interfaces.PBEKey;
 /**
  * @author Yanhao Shen
  * 
@@ -8,6 +9,9 @@ package vCampus.client.TSG;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.swing.text.TableView.TableRow;
+
+import org.omg.CORBA.OBJECT_NOT_EXIST;
 
 import vCampus.client.register.RegisterView;
 
@@ -21,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.print.Book;
+import java.io.ObjectStreamConstants;
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*; 
@@ -121,18 +126,15 @@ public class StuBookChange extends JPanel{
 				obj[i][j] = "吴建";
 				break;
 			case 5:
-				obj[i][j] = "3";
+				obj[i][j] = new String("3");
 				break;
 			case 6:
-				obj[i][j] = "2";
+				obj[i][j] =new String("2"); ;
 				break;	
 			}
 		}
 		
-		if (i % 2 == 0)
-               setForeground(Color.pink);
-        else if (i % 2 == 1)
-        	  setForeground(Color.WHITE);;
+	
 		
 	}
 	
@@ -143,8 +145,11 @@ public class StuBookChange extends JPanel{
 	JTable table = new JTable(obj, columnNames) {
 	public boolean isCellEditable(int row, int column)
     {
-               return false;}//表格不允许被编辑
-    };
+      
+				return false;//表格不允许被编辑
+    }
+	
+	};
     table.setRowHeight(30);// 设置表格行宽
     
     JTableHeader head = table.getTableHeader(); // 创建表格标题对象
@@ -158,6 +163,7 @@ public class StuBookChange extends JPanel{
 		column = table.getColumnModel().getColumn(i);
 		/*将每一列的默认宽度设置为100*/
 		column.setPreferredWidth(300);
+		
 	}
 	/*
 	 * 设置JTable自动调整列表的状态，此处设置为关闭
@@ -190,8 +196,34 @@ public class StuBookChange extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			 int index = table.getSelectedRow();
+			 Object New_book=table.getValueAt(index,0);
+			 //System.out.println(n5); 
+				//cc:可借此书
+				//点击确认返回的是新书的id号
+				
+				 String s=new String();
+				 
+					
+				 String s6=table.getValueAt(index,6).toString();
+				 int n6 = Integer.valueOf(s6).intValue();
+				 
+				 String s5=table.getValueAt(index,5).toString();
+				 int n5 = Integer.valueOf(s5).intValue();
+				  
+				 System.out.println(n6);
+				 System.out.println(n5);
+				 if (n6<n5) {
+					 s=table.getValueAt(index,6).toString();
+					 int n = Integer.valueOf(s).intValue()+1;
+					 s=String.valueOf(n);
+					 table.setValueAt(s, index, 6);		 
+				}
+
+				 
+				 System.out.println(New_book);
+				
 			
-			System.out.println(table.getValueAt(index,1));
+			 
 		}
 
 		@Override
