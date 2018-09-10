@@ -7,7 +7,12 @@ package vCampus.client.TSG;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.LibraryService;
+import vCampus.client.biz.LibraryServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.server.exception.RecordAlreadyExistException;
+import vCampus.vo.BookInformation;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -19,12 +24,6 @@ import java.awt.event.ActionListener;
 
 public class AdmBookAdd extends JPanel{
 
-
-	
-	public AdmBookAdd() {
-		
-	super();
-	
 	JLabel lb1 = new JLabel("书号");
 	JTextField tf1 = new JTextField(20);
 	JLabel lb2 = new JLabel("书名");
@@ -38,6 +37,12 @@ public class AdmBookAdd extends JPanel{
 	JLabel lb6 = new JLabel("库存量");
 	JTextField tf6 = new JTextField(20);
 	
+	
+	public AdmBookAdd(AdminService admin) {
+		
+	super();
+	
+	
 	JButton bt1=new JButton("");
 	
 	this.setLayout(null);
@@ -50,8 +55,32 @@ public class AdmBookAdd extends JPanel{
     bt1.setFont(font);
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
+    bt1.setPressedIcon(new ImageIcon("img\\确认点击.png"));
     bt1.setBorder(null);
-    
+    bt1.addActionListener(new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			LibraryService LS = new LibraryServiceImpl(3,admin.getCacheAdmin().getAdminID());
+			BookInformation BooktoAdd = new BookInformation();
+			BooktoAdd.setBookID(tf1.getText());
+			BooktoAdd.setBookName(tf2.getText());
+			BooktoAdd.setBookPress(tf3.getText());
+			BooktoAdd.setBookAddress(tf4.getText());
+			BooktoAdd.setBookWriter(tf5.getText());
+			BooktoAdd.setTotalAmount(Integer.parseInt(tf6.getText()));
+			if(LS.addBookByAdmin(BooktoAdd)==true) {
+					JOptionPane.showMessageDialog(null, "添加成功");
+			}
+			else {
+				if(!LS.getExceptionCode().equals("")) {
+					JOptionPane.showMessageDialog(null, LS.getExceptionCode());
+				}
+			}
+
+		}
+    	
+    });
     
     this.add(lb1);
     lb1.setBounds(456-270, 196-80, 101, 47);
@@ -119,4 +148,6 @@ public class AdmBookAdd extends JPanel{
     
   
 	}
+	
+
 }

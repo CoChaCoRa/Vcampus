@@ -20,10 +20,10 @@ import vCampus.client.biz.TeacherService;
  */
 public class Winchange_TSG extends JPanel {
 	
-	JButton jb1=new JButton("查询图书");
-	JButton jb2=new JButton("归还图书");
-	JButton jb3=new JButton("添加图书");
-	JButton jb4=new JButton("查询修改");
+	JButton jb1=new JButton();
+	JButton jb2=new JButton();
+	JButton jb3=new JButton();
+	JButton jb4=new JButton();
 	
 	public Winchange_TSG(int identify,StudentService ss){
 		super();
@@ -101,8 +101,8 @@ public class Winchange_TSG extends JPanel {
 //		int identify=3;
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-		AdmBookAdd w3=new AdmBookAdd();
-		AdmBookChange w4=new AdmBookChange();
+		AdmBookAdd w3=new AdmBookAdd(admin);
+		AdmBookChange w4=new AdmBookChange(admin);
 		
 		
 		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);

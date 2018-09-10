@@ -7,8 +7,12 @@ package vCampus.client.TSG;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.LibraryService;
+import vCampus.client.biz.LibraryServiceImpl;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
+import vCampus.vo.BookInformation;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,11 +24,6 @@ import java.awt.event.ActionListener;
 
 public class AdmBookChange extends JPanel{
 
-
-	
-	public AdmBookChange() {
-		
-	super();
 	JLabel lb0 = new JLabel("书号");
 	JTextField tf0 = new JTextField(20);
 	JLabel lb1 = new JLabel("书名");
@@ -37,6 +36,10 @@ public class AdmBookChange extends JPanel{
 	JTextField tf4 = new JTextField(20);
 	JLabel lb5 = new JLabel("库存总量");
 	JTextField tf5 = new JTextField(20);
+	
+	public AdmBookChange(AdminService admin) {
+		
+	super();
 
 	JButton bt0=new JButton("");
 	JButton bt1=new JButton("");
@@ -47,6 +50,7 @@ public class AdmBookChange extends JPanel{
     
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
    
+    LibraryService LS = new LibraryServiceImpl(3,admin.getCacheAdmin().getAdminID());
     
     this.add(bt0);
     bt0.setBounds(880,196-90,60,60);
@@ -56,8 +60,15 @@ public class AdmBookChange extends JPanel{
     bt0.setBorder(null);
     bt0.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			// to search for stu's info
-			JOptionPane.showMessageDialog(null, "to search for info of one stu");
+			// to search for info of one book
+			BookInformation book = LS.queryBookInformation(tf0.getText());
+			if(book != null) {
+				tf1.setText(book.getBookName());
+				tf2.setText(book.getBookPress());
+				tf3.setText(book.getBookAddress());
+				tf4.setText(book.getBookWriter());
+				tf5.setText(String.valueOf(book.getTotalAmount()));
+			}
 		}
     	
     });
@@ -70,8 +81,22 @@ public class AdmBookChange extends JPanel{
     bt1.setBorder(null);
     bt1.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
-    		// to confirm changes to stu's info
-    		JOptionPane.showMessageDialog(null, "to confirm changes to stu's info");
+    		// to confirm changes to info of one book
+    		BookInformation BooktoUpdate = new BookInformation();
+			BooktoUpdate.setBookID(tf0.getText());
+			BooktoUpdate.setBookName(tf1.getText());
+			BooktoUpdate.setBookPress(tf2.getText());
+			BooktoUpdate.setBookAddress(tf3.getText());
+			BooktoUpdate.setBookWriter(tf4.getText());
+			BooktoUpdate.setTotalAmount(Integer.parseInt(tf5.getText()));
+			if(LS.updateBookByAdmin(BooktoUpdate)==true) {
+				JOptionPane.showMessageDialog(null, "修改成功");
+			}
+			else {
+				if(!LS.getExceptionCode().equals("")) {
+					JOptionPane.showMessageDialog(null, LS.getExceptionCode());
+				}
+			} 
     	}
     });
 
@@ -83,8 +108,15 @@ public class AdmBookChange extends JPanel{
     bt2.setBorder(null);
     bt2.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
-    		// to delete one stu's info
-    		JOptionPane.showMessageDialog(null, "to delete one stu's info");
+    		// to delete info of one book
+			if(LS.deleteBookByAdmin(tf0.getText())==true) {
+				JOptionPane.showMessageDialog(null, "删除成功");
+			}
+			else {
+				if(!LS.getExceptionCode().equals("")) {
+					JOptionPane.showMessageDialog(null, LS.getExceptionCode());
+				}
+			}
     	}
     });
     
