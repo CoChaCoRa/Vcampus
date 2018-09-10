@@ -50,7 +50,9 @@ public interface MessageTypeCodes {
 	String adminAddProduct = "ADMIN_ADD_PRODUCT";
 	String adminUpdateProduct = "ADMIN_UPDATE_PRODUCT";
 	String adminDeleteProduct = "ADMIN_DELETE_PRODUCT";
-	
+	String userQueryDormitoryByUserName = "USER_QUERY_DORMITORY_BY_USER_NAME";
+	String userQueryDormitoryByDormNumber = "USER_QUERY_DORMITORRY_BY_DORM_NUMBER";
+	String userAddDormitoryInfo = "USER_ADD_DORMITORY_INFO";
 	
 	
 }

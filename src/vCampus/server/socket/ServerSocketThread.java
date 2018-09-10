@@ -23,6 +23,8 @@ import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.AdminServiceDao;
 import vCampus.server.biz.AdminServiceDaoImpl;
+import vCampus.server.biz.DormitoryServiceDao;
+import vCampus.server.biz.DormitoryServiceDaoImpl;
 import vCampus.server.biz.LibraryServiceDao;
 import vCampus.server.biz.LibraryServiceDaoImpl;
 import vCampus.server.biz.ShopServiceDao;
@@ -42,6 +44,7 @@ import vCampus.vo.BookBorrow;
 import vCampus.vo.BookInformation;
 import vCampus.vo.CourseChoose;
 import vCampus.vo.CourseInformation;
+import vCampus.vo.Dormitory;
 import vCampus.vo.ProductInformation;
 import vCampus.vo.ProductPurchase;
 import vCampus.vo.Student;
@@ -864,6 +867,60 @@ public class ServerSocketThread extends Thread{
             	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
             	response.writeObject(serverResponse);
             }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryDormitoryByUserName)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					DormitoryServiceDao dormitoryServiceDao = new DormitoryServiceDaoImpl();
+					ArrayList<Dormitory> dormitories = dormitoryServiceDao.queryDormitoryByUserName((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(dormitories);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryDormitoryByDormNumber)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					DormitoryServiceDao dormitoryServiceDao = new DormitoryServiceDaoImpl();
+					ArrayList<Dormitory> dormitories = dormitoryServiceDao.queryDormitoryByDormNumber((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(dormitories);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if (object.getMessageType().equals(MessageTypeCodes.userAddDormitoryInfo)) {
+				Message serverRresponse = new Message();
+				try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					DormitoryServiceDao dormitoryServiceDao = new DormitoryServiceDaoImpl();
+					boolean isAddDormitory = dormitoryServiceDao.addDormitoryInfo((Dormitory) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAddDormitory);
+					serverRresponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverRresponse.setExceptionCode("RecordNotFoundException");
+				}
+				catch (OutOfLimitException e) {
+					// TODO: handle exception
+					serverRresponse.setExceptionCode("OutOfLimitException");
+				}
+				ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverRresponse);
+			}
+            
 		}
 		catch (Exception e) {
 			// TODO: handle exception
