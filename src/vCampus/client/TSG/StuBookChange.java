@@ -151,6 +151,9 @@ public class StuBookChange extends JPanel{
 			// TODO Auto-generated method stub
 			if(tf1.getText()!="") {
 				ArrayList<BookInformation> Books = LS.queryBook(tf1.getText());
+				if(Books==null) {
+					JOptionPane.showMessageDialog(null, "查无此书");
+				}
 				Object[][] obj = new Object[Books.size()][7];
 				for (int i = 0; i < Books.size(); i++){
 					for (int j = 0; j < 7; j++){
