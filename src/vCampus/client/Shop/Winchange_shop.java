@@ -46,7 +46,7 @@ public class Winchange_shop extends JPanel {
 		//this.add(jb1);
 	    jb1.setBounds(0, 0, 270, 80);
 	    jb1.setFont(font);
-	    jb1.setIcon(new ImageIcon("img\\账户余额.png"));
+	    jb1.setIcon(new ImageIcon("img\\账户余额点击.png"));
 	       	
 	    //this.add(jb2);
 	    jb2.setBounds(0, 80, 270, 80);
@@ -56,7 +56,7 @@ public class Winchange_shop extends JPanel {
 	    //this.add(jb3);
 	    jb3.setBounds(0, 00, 270, 80);
 	    jb3.setFont(font);
-	    jb3.setIcon(new ImageIcon("img\\销售查询.png"));
+	    jb3.setIcon(new ImageIcon("img\\销售查询点击.png"));
 
 
 	    jb4.setBounds(0, 80, 270, 80);
@@ -74,6 +74,10 @@ public class Winchange_shop extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w1");
+	        	 jb1.setIcon(new ImageIcon("img\\账户余额点击.png"));
+	        	 jb2.setIcon(new ImageIcon("img\\购买商品.png"));
+	      	   
+	        	
 	        }
 	    });
 	    
@@ -82,6 +86,10 @@ public class Winchange_shop extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w2");
+
+	        	 jb1.setIcon(new ImageIcon("img\\账户余额.png"));
+	        	 jb2.setIcon(new ImageIcon("img\\购买商品点击.png"));
+	        	
 	        }
 	    });
 	  
@@ -90,6 +98,10 @@ public class Winchange_shop extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w3");
+	        	jb3.setIcon(new ImageIcon("img\\销售查询点击.png"));
+	        	jb4.setIcon(new ImageIcon("img\\添加商品.png"));
+	        	jb5.setIcon(new ImageIcon("img\\查询修改.png"));
+	        	
 	        }
 	    });
 	    
@@ -98,6 +110,9 @@ public class Winchange_shop extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w4");
+	          	jb3.setIcon(new ImageIcon("img\\销售查询.png"));
+	        	jb4.setIcon(new ImageIcon("img\\添加商品点击.png"));
+	        	jb5.setIcon(new ImageIcon("img\\查询修改.png"));
 	        }
 	    });
 	    
@@ -107,6 +122,9 @@ public class Winchange_shop extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w5");
+	          	jb3.setIcon(new ImageIcon("img\\销售查询.png"));
+	        	jb4.setIcon(new ImageIcon("img\\添加商品.png"));
+	        	jb5.setIcon(new ImageIcon("img\\查询修改点击.png"));
 	        }
 	    });
 	  

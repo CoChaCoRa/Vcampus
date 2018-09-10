@@ -6,11 +6,15 @@ package vCampus.client.Shop;
  *
  */
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 import vCampus.client.register.RegisterView;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,173 +24,118 @@ import java.awt.event.ActionListener;
 public class AdmCheck extends JPanel{
 
 
+	JLabel lb1 = new JLabel("余额");
+	JTextField tf1 = new JTextField("");
+	
+	
+	DefaultTableModel dtm = null;
+
 	
 	public AdmCheck() {
 		
 	super();
-	JLabel lb0 = new JLabel("查询");
-	JTextField tf0 = new JTextField(20);
-	JLabel lb1 = new JLabel("一卡通");
-	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("姓名");
-	JTextField tf2 = new JTextField(20);
-	JLabel lb3 = new JLabel("性别");
-	JTextField tf3 = new JTextField(20);
-	JLabel lb4 = new JLabel("身份证号");
-	JTextField tf4 = new JTextField(20);
-	JLabel lb5 = new JLabel("院系");
-	JTextField tf5 = new JTextField(20);
-	JLabel lb6 = new JLabel("专业");
-	JTextField tf6 = new JTextField(20);
-	JLabel lb7 = new JLabel("班级");
-	JTextField tf7 = new JTextField(20);
-	JLabel lb8 = new JLabel("宿舍号");
-	JTextField tf8 = new JTextField(20);
-	JLabel lb9 = new JLabel("手机");
-	JTextField tf9 = new JTextField(20);
-	JLabel lb10 = new JLabel("邮箱");
-	JTextField tf10 = new JTextField(20);
-	JButton bt0=new JButton("");
-	JButton bt1=new JButton("");
-	JButton bt2=new JButton("");
+
+
 	
 	this.setLayout(null);
 	this.setSize(1650,1000);         
     
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
-   
-    
-    this.add(bt0);
-    bt0.setBounds(880,196-90,60,60);
-    bt0.setFont(font);
-    // 设置按钮的默认图片
-    bt0.setIcon(new ImageIcon("img\\查询UI.png"));
-    bt0.setBorder(null);
-    
-    this.add(bt1);
-    bt1.setBounds(910-270, 910-80, 160, 80);
-    bt1.setFont(font);
-    // 设置按钮的默认图片
-    bt1.setIcon(new ImageIcon("img\\确认.png"));
-    bt1.setBorder(null);
 
-    this.add(bt2);
-    bt2.setBounds(1001, 910-80, 160, 80);
-    bt2.setFont(font);
-    // 设置按钮的默认图片
-    bt2.setIcon(new ImageIcon("img\\删除.png"));
-    bt2.setBorder(null);
     
-    
-    
-    this.add(lb0);
-    lb0.setBounds(456-270, 196-80, 101, 47);
-    lb0.setFont(font);
-    this.add(tf0);
-    tf0.setBackground(Color.WHITE);
-    tf0.setBounds(660-270, 196-80, 352, 47);
-    tf0.setFont(font);
-    tf0.setEditable(false);
-    tf0.setBorder(null);
+
     
     this.add(lb1);
-    lb1.setBounds(456-270, 196-80+111, 101, 47);
+    lb1.setBounds(456-270, 196-80, 151, 47);
     lb1.setFont(font);
     this.add(tf1);
     tf1.setBackground(Color.WHITE);
-    tf1.setBounds(660-270, 196-80+111, 352, 47);
+    tf1.setBounds(660-270, 196-80, 352, 47);
     tf1.setFont(font);
     tf1.setEditable(false);
-    tf1.setBorder(null);
+    tf1.setBorder(null);    
 
-    this.add(lb2);
-    lb2.setBounds(1156-270, 196-80+111, 101, 47);
-    lb2.setFont(font);
-    this.add(tf2);
-    tf2.setBackground(Color.WHITE);
-    tf2.setBounds(1360-270, 196-80+111, 352, 47);
-    tf2.setFont(font);
- //   tf2.setEditable(false);
-    tf2.setBorder(null);
+	/*
+	 * 设置JTable的列名
+	 */
+	String[] columnNames =
+	{ "产品号","产品名", "购买数量","购买者","购买时间","消费金额","账户余额"};
+
+	int num_borrow=2;
+	Object[][] obj = new Object[num_borrow][7];
+	for (int i = 0; i < num_borrow; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			switch (j)
+			{
+			case 0:
+				obj[i][j] = "1";
+				break;
+			case 1:
+				obj[i][j] = "吴云建";
+				break;
+			case 2:
+				obj[i][j] = "3";
+				break;
+			case 3:
+				obj[i][j] = "1993";
+				break;
+			case 4:
+				obj[i][j] = "2";
+				break;
+			case 5:
+				obj[i][j] = "3";
+				break;
+			case 6:
+				obj[i][j] = "3";
+				break;
+				
+			}
+		}
+	
+		
+	}
+	
+	/*
+	 * JTable的其中一种构造方法
+	 */
+    dtm=new DefaultTableModel(obj,columnNames){
+		public boolean isCellEditable(int row, int column)
+	    {
+	               return false;}//表格不允许被编辑
+	    };
+ 
+
+	JTable table = new JTable(dtm); 
+	;
+    table.setRowHeight(30);// 设置表格行宽
     
-    this.add(lb3);
-    lb3.setBounds(456-270, 307-80+111, 101, 47);
-    lb3.setFont(font);
-    this.add(tf3);
-    tf3.setBackground(Color.WHITE);
-    tf3.setBounds(660-270, 307-80+111, 352, 47);
-    tf3.setFont(font);
-    tf3.setEditable(false);
-    tf3.setBorder(null);
+    JTableHeader head = table.getTableHeader(); // 创建表格标题对象
+    head.setPreferredSize(new Dimension(head.getWidth(), 35));// 设置表头大小
+    head.setFont(font);// 设置表格字体
+   
+	TableColumn column = null;
+	int colunms = table.getColumnCount();
+	for(int i = 0; i < colunms; i++)
+	{
+		column = table.getColumnModel().getColumn(i);
+		column.setPreferredWidth(300);
+	}
+	
+
+	table.setBounds(400, 365, 600, 800);
+	table.setFont(font);
+	
+	/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
+	JScrollPane scroll = new JScrollPane(table);
+	scroll.setLocation(186, 223);
+	scroll.setSize(1022, 528);
+	table.setSize(600, 800);
+	
+	add(scroll);
+
     
-    this.add(lb4);
-    lb4.setBounds(1156-270, 307-80+111, 150, 47);
-    lb4.setFont(font);
-    this.add(tf4);
-    tf4.setBackground(Color.WHITE);
-    tf4.setBounds(1360-270, 307-80+111, 352, 47);
-    tf4.setFont(font);
-    tf4.setEditable(false);
-    tf4.setBorder(null);
     
-    this.add(lb5);
-    lb5.setBounds(456-270, 418-80+111, 101, 47);
-    lb5.setFont(font);
-    this.add(tf5);
-    tf5.setBackground(Color.WHITE);
-    tf5.setBounds(660-270, 418-80+111, 352, 47);
-    tf5.setFont(font);
-    tf5.setEditable(false);
-    tf5.setBorder(null);
-    
-    this.add(lb6);
-    tf6.setBackground(Color.WHITE);
-    lb6.setBounds(1156-270, 418-80+111, 101, 47);
-    lb6.setFont(font);
-    this.add(tf6);
-    tf6.setBounds(1360-270, 418-80+111, 352, 47);
-    tf6.setFont(font);
-    tf6.setEditable(false);
-    tf6.setBorder(null);
-    
-    this.add(lb7);
-    tf7.setBackground(Color.WHITE);
-    lb7.setBounds(456-270, 529-80+111, 101, 47);
-    lb7.setFont(font);
-    this.add(tf7);
-    tf7.setBounds(660-270, 529-80+111, 352, 47);
-    tf7.setFont(font);
-    tf7.setEditable(false);
-    tf7.setBorder(null);
-    
-    this.add(lb8);
-    lb8.setBounds(1156-270, 529-80+111, 101, 47);
-    lb8.setFont(font);
-    this.add(tf8);
-    tf8.setBackground(Color.WHITE);
-    tf8.setBounds(1360-270, 529-80+111, 352, 47);
-    tf8.setFont(font);
-    tf8.setEditable(false);
-    tf8.setBorder(null);
-    
-    this.add(lb9);
-    lb9.setBounds(456-270, 640-80+111, 101, 47);
-    lb9.setFont(font);
-    this.add(tf9);
-    tf9.setBackground(Color.WHITE);
-    tf9.setBounds(660-270, 640-80+111, 352, 47);
-    tf9.setFont(font);
-    tf9.setEditable(false);
-    tf9.setBorder(null);
-    
-    this.add(lb10);
-    lb10.setBounds(1156-270, 640-80+111, 101, 47);
-    lb10.setFont(font);
-    this.add(tf10);
-    tf10.setBackground(Color.WHITE);
-    tf10.setBounds(1360-270, 640-80+111, 352, 47);
-    tf10.setFont(font);
-    tf10.setEditable(false);
-    tf10.setBorder(null);
 	}
 }
