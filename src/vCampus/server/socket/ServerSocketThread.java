@@ -17,12 +17,16 @@ import javax.xml.crypto.Data;
 
 import com.hxtt.c.o;
 
+import vCampus.client.biz.ShopService;
+import vCampus.client.biz.ShopServiceImpl;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.AdminServiceDao;
 import vCampus.server.biz.AdminServiceDaoImpl;
 import vCampus.server.biz.LibraryServiceDao;
 import vCampus.server.biz.LibraryServiceDaoImpl;
+import vCampus.server.biz.ShopServiceDao;
+import vCampus.server.biz.ShopServiceDaoImpl;
 import vCampus.server.biz.StudentServiceDao;
 import vCampus.server.biz.StudentServiceDaoImpl;
 import vCampus.server.biz.TeacherServiceDao;
@@ -38,6 +42,8 @@ import vCampus.vo.BookBorrow;
 import vCampus.vo.BookInformation;
 import vCampus.vo.CourseChoose;
 import vCampus.vo.CourseInformation;
+import vCampus.vo.ProductInformation;
+import vCampus.vo.ProductPurchase;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
 
@@ -716,6 +722,148 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(serverResponse);
             }
             
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryAccountCurrentByProductID)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					ArrayList<ProductPurchase> purchases = shopServiceDao.queryAccountCurrentByProductID((String) paras.get(0)); 
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(purchases);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryAccountCurrentByUserName)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object>  paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					ArrayList<ProductPurchase> purchases = shopServiceDao.queryAccountCurrentByUserName((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(purchases);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            	
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryAllProduct)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					ArrayList<ProductInformation> allProducts = shopServiceDao.queryAllProduct();
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(allProducts);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            	
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userQueryProductInformation)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					ProductInformation productInformation = shopServiceDao.queryProductInformation((String) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(productInformation);
+					serverResponse.setData(data);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            	
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userBuyProduct)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					boolean isBuyProduct = shopServiceDao.buyProduct((ProductPurchase) paras.get(0),(int)paras.get(1));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isBuyProduct);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	catch (OutOfLimitException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("OutOfLimitException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminAddProduct)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					boolean isAddProduct = shopServiceDao.addProductByAdmin((ProductInformation) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isAddProduct);
+					serverResponse.setData(data);
+				} catch (RecordAlreadyExistException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordAlreadyExistException");
+				}
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminUpdateProduct)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					boolean isUpdateProduct = shopServiceDao.updateProductByAdmin((ProductInformation) paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isUpdateProduct);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminDeleteProduct)) {
+            	Message serverResponse = new Message();
+            	try {
+					ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+					ShopServiceDao shopServiceDao = new ShopServiceDaoImpl();
+					boolean isDeleteProduct = shopServiceDao.deleteProductByAdmin((String)paras.get(0));
+					ArrayList<Object> data = new ArrayList<Object>();
+					data.add(isDeleteProduct);
+					serverResponse.setData(data);
+				} catch (RecordNotFoundException e) {
+					// TODO: handle exception
+					serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
 		}
 		catch (Exception e) {
 			// TODO: handle exception

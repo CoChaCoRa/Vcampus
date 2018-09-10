@@ -42,7 +42,14 @@ public interface MessageTypeCodes {
 	String adminAddBook = "ADMIN_ADD_BOOK";
 	String adminUpdateBook = "ADMIN_UPDATE_BOOK";
 	String adminDeleteBook = "ADMIN_DELETE_BOOK";
-	
+	String userQueryAccountCurrentByProductID = "USER_QUERY_ACCOUNT_CURRENT_BY_PRODUCT_ID";
+	String userQueryAccountCurrentByUserName = "USER_QUERY_ACCOUNT_CURRENT_BY_USER_NAME";
+	String userQueryAllProduct = "USER_QUERY_ALL_PRODUCT";
+	String userQueryProductInformation = "USER_QUERY_PRODUCT_INFORMATION";
+	String userBuyProduct = "USER_BUY_PRODUCT";
+	String adminAddProduct = "ADMIN_ADD_PRODUCT";
+	String adminUpdateProduct = "ADMIN_UPDATE_PRODUCT";
+	String adminDeleteProduct = "ADMIN_DELETE_PRODUCT";
 	
 	
 	
