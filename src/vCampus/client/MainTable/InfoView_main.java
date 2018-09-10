@@ -199,7 +199,7 @@ public class InfoView_main extends JPanel{
         public void actionPerformed(ActionEvent e) {
         	refresh();
         	jb6.setIcon(new ImageIcon("img\\商店点击.png"));
-        	card.show(pn1,"w1");
+        	card.show(pn1,"w4");
         }
         
     });
@@ -403,7 +403,7 @@ public class InfoView_main extends JPanel{
 	        public void actionPerformed(ActionEvent e) {
 	        	refresh();
 	        	jb6.setIcon(new ImageIcon("img\\商店点击.png"));
-	        	card.show(pn1,"w1");
+	        	card.show(pn1,"w4");
 	        }
 	        
 	    });
@@ -608,7 +608,7 @@ public class InfoView_main extends JPanel{
 	        public void actionPerformed(ActionEvent e) {
 	        	refresh();
 	        	jb6.setIcon(new ImageIcon("img\\商店点击.png"));
-	        	card.show(pn1,"w1");
+	        	card.show(pn1,"w4");
 	        }
 	        
 	    });

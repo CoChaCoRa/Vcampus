@@ -21,6 +21,8 @@ public class Winchange_shop extends JPanel {
 		JPanel cardpanel=new JPanel();
 		StuAccountCheck w1=new StuAccountCheck();
 		Stubuy w2=new Stubuy();
+		
+		
 		AdmCheck w3=new AdmCheck();
 		AdmAdd w4=new AdmAdd();
 		AdmDelete w5=new AdmDelete();
@@ -52,19 +54,19 @@ public class Winchange_shop extends JPanel {
 	    jb2.setIcon(new ImageIcon("img\\购买商品.png"));
 
 	    //this.add(jb3);
-	    jb3.setBounds(0, 80, 270, 80);
+	    jb3.setBounds(0, 00, 270, 80);
 	    jb3.setFont(font);
 	    jb3.setIcon(new ImageIcon("img\\销售查询.png"));
 
 
-	    jb4.setBounds(0, 160, 270, 80);
+	    jb4.setBounds(0, 80, 270, 80);
 	    jb4.setFont(font);
-	    jb4.setIcon(new ImageIcon("img\\添加.png"));
+	    jb4.setIcon(new ImageIcon("img\\添加商品.png"));
 	    
 	   
-	    jb5.setBounds(0, 240, 270, 80);
+	    jb5.setBounds(0, 160, 270, 80);
 	    jb5.setFont(font);
-	    jb5.setIcon(new ImageIcon("img\\删除修改.png"));
+	    jb5.setIcon(new ImageIcon("img\\查询修改.png"));
 	
 	    
 	    jb1.addActionListener(new ActionListener() {
@@ -90,6 +92,23 @@ public class Winchange_shop extends JPanel {
 	        	card.show(cardpanel,"w3");
 	        }
 	    });
+	    
+	    jb4.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w4");
+	        }
+	    });
+	    
+	    
+	    jb5.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w5");
+	        }
+	    });
 	  
 		//Winchange2 w2=new Winchange2();
 		cardpanel.setLayout(card);
@@ -109,9 +128,9 @@ public class Winchange_shop extends JPanel {
 			cardpanel.add("w3",w3);
 			cardpanel.add("w4",w4);
 			cardpanel.add("w5",w5);
-			this.add(jb1);
 			this.add(jb3);
-			this.add(jb3);
+			this.add(jb4);
+			this.add(jb5);
 		}
 	
 		

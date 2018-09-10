@@ -16,6 +16,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class AdmDelete extends JPanel{
 
@@ -26,26 +28,16 @@ public class AdmDelete extends JPanel{
 	super();
 	JLabel lb0 = new JLabel("查询");
 	JTextField tf0 = new JTextField(20);
-	JLabel lb1 = new JLabel("一卡通");
+
+	JLabel lb1 = new JLabel("商品号");
 	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("姓名");
+	JLabel lb2 = new JLabel("商品名");
 	JTextField tf2 = new JTextField(20);
-	JLabel lb3 = new JLabel("性别");
+	JLabel lb3 = new JLabel("销售单价");
 	JTextField tf3 = new JTextField(20);
-	JLabel lb4 = new JLabel("身份证号");
+	JLabel lb4 = new JLabel("库存数量");
 	JTextField tf4 = new JTextField(20);
-	JLabel lb5 = new JLabel("院系");
-	JTextField tf5 = new JTextField(20);
-	JLabel lb6 = new JLabel("专业");
-	JTextField tf6 = new JTextField(20);
-	JLabel lb7 = new JLabel("班级");
-	JTextField tf7 = new JTextField(20);
-	JLabel lb8 = new JLabel("宿舍号");
-	JTextField tf8 = new JTextField(20);
-	JLabel lb9 = new JLabel("手机");
-	JTextField tf9 = new JTextField(20);
-	JLabel lb10 = new JLabel("邮箱");
-	JTextField tf10 = new JTextField(20);
+
 	JButton bt0=new JButton("");
 	JButton bt1=new JButton("");
 	JButton bt2=new JButton("");
@@ -66,9 +58,11 @@ public class AdmDelete extends JPanel{
     this.add(bt1);
     bt1.setBounds(910-270, 910-80, 160, 80);
     bt1.setFont(font);
+    bt1.setContentAreaFilled(false);
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
+    
 
     this.add(bt2);
     bt2.setBounds(1001, 910-80, 160, 80);
@@ -76,7 +70,7 @@ public class AdmDelete extends JPanel{
     // 设置按钮的默认图片
     bt2.setIcon(new ImageIcon("img\\删除.png"));
     bt2.setBorder(null);
-    
+    bt2.setContentAreaFilled(false);
     
     
     this.add(lb0);
@@ -110,7 +104,7 @@ public class AdmDelete extends JPanel{
     tf2.setBorder(null);
     
     this.add(lb3);
-    lb3.setBounds(456-270, 307-80+111, 101, 47);
+    lb3.setBounds(456-270, 307-80+111, 151, 47);
     lb3.setFont(font);
     this.add(tf3);
     tf3.setBackground(Color.WHITE);
@@ -128,65 +122,64 @@ public class AdmDelete extends JPanel{
     tf4.setFont(font);
     tf4.setEditable(false);
     tf4.setBorder(null);
+   
     
-    this.add(lb5);
-    lb5.setBounds(456-270, 418-80+111, 101, 47);
-    lb5.setFont(font);
-    this.add(tf5);
-    tf5.setBackground(Color.WHITE);
-    tf5.setBounds(660-270, 418-80+111, 352, 47);
-    tf5.setFont(font);
-    tf5.setEditable(false);
-    tf5.setBorder(null);
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认.png"));
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			 
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
+	
+   
     
-    this.add(lb6);
-    tf6.setBackground(Color.WHITE);
-    lb6.setBounds(1156-270, 418-80+111, 101, 47);
-    lb6.setFont(font);
-    this.add(tf6);
-    tf6.setBounds(1360-270, 418-80+111, 352, 47);
-    tf6.setFont(font);
-    tf6.setEditable(false);
-    tf6.setBorder(null);
+    bt2.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt2.setIcon(new ImageIcon("img\\删除点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt2.setIcon(new ImageIcon("img\\删除.png"));
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			 
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
+	
     
-    this.add(lb7);
-    tf7.setBackground(Color.WHITE);
-    lb7.setBounds(456-270, 529-80+111, 101, 47);
-    lb7.setFont(font);
-    this.add(tf7);
-    tf7.setBounds(660-270, 529-80+111, 352, 47);
-    tf7.setFont(font);
-    tf7.setEditable(false);
-    tf7.setBorder(null);
-    
-    this.add(lb8);
-    lb8.setBounds(1156-270, 529-80+111, 101, 47);
-    lb8.setFont(font);
-    this.add(tf8);
-    tf8.setBackground(Color.WHITE);
-    tf8.setBounds(1360-270, 529-80+111, 352, 47);
-    tf8.setFont(font);
-    tf8.setEditable(false);
-    tf8.setBorder(null);
-    
-    this.add(lb9);
-    lb9.setBounds(456-270, 640-80+111, 101, 47);
-    lb9.setFont(font);
-    this.add(tf9);
-    tf9.setBackground(Color.WHITE);
-    tf9.setBounds(660-270, 640-80+111, 352, 47);
-    tf9.setFont(font);
-    tf9.setEditable(false);
-    tf9.setBorder(null);
-    
-    this.add(lb10);
-    lb10.setBounds(1156-270, 640-80+111, 101, 47);
-    lb10.setFont(font);
-    this.add(tf10);
-    tf10.setBackground(Color.WHITE);
-    tf10.setBounds(1360-270, 640-80+111, 352, 47);
-    tf10.setFont(font);
-    tf10.setEditable(false);
-    tf10.setBorder(null);
 	}
 }
