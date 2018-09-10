@@ -1,4 +1,4 @@
-package vCampus.client.Shop;
+package vCampus.server.Shop;
 
 import java.awt.CardLayout;
 import java.awt.Font;

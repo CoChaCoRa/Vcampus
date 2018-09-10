@@ -1,4 +1,4 @@
-package vCampus.client.Shop;
+package vCampus.server.Shop;
 /**
  * @author SYH
  * 
@@ -38,7 +38,6 @@ public class AdmAdd extends JPanel{
 	JTextField tf4 = new JTextField(20);
 
 	
-	
 	JButton bt1=new JButton("");
 	
 	this.setLayout(null);
@@ -54,7 +53,10 @@ public class AdmAdd extends JPanel{
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
     bt1.setContentAreaFilled(false);
-   
+
+	//cc:如果商品种类==8种不能添加！
+    //cc:如果商品种类==0种不能减少！
+    
     
     this.add(lb1);
     lb1.setBounds(456-270, 196-80+111, 101, 47);

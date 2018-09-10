@@ -178,6 +178,7 @@ public class AdmScoreCheck extends JPanel{
     tf7.setFont(font);
  //   tf7.setEditable(false);
     tf7.setBorder(null);
+     
     
     this.add(lb8);
     lb8.setBounds(1156-270, 529-80, 101, 47);

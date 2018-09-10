@@ -1,4 +1,4 @@
-package vCampus.client.Shop;
+package vCampus.server.Shop;
 /**
  * @author SYH
  * 
@@ -63,7 +63,10 @@ public class AdmDelete extends JPanel{
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
     
-
+    
+    //cc:如果商品种类==8种不能添加！
+    //cc:如果商品种类==0种不能减少！
+    
     this.add(bt2);
     bt2.setBounds(1001, 910-80, 160, 80);
     bt2.setFont(font);

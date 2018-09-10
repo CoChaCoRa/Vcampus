@@ -1,4 +1,4 @@
-package vCampus.client.Shop;
+package vCampus.server.Shop;
 /**
  * @author Yanhao Shen
  * 
