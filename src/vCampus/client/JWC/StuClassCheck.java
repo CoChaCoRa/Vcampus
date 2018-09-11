@@ -165,7 +165,7 @@ public class StuClassCheck extends JPanel{
 		//scrollTable.add(tableDemo);
 		JScrollPane scrollTable=new JScrollPane();
 		scrollTable.setViewportView(tableDemo);
-		
+		//System.err.println();
 		this.add(scrollTable,BorderLayout.CENTER);
 		
 		
