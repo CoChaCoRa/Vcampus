@@ -92,13 +92,13 @@ public class Winchange_test extends JPanel {
 	}
 
 
-	public Winchange_test(int identify, AdminService ad) {
+	public Winchange_test(int identify, AdminService adm) {
 		// TODO Auto-generated constructor stub
 		super();
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-		AdmAddCheck w4=new AdmAddCheck(ad);
-		AdmMessageChange w3=new AdmMessageChange(ad);
+		AdmAddCheck w4=new AdmAddCheck(adm);
+		AdmMessageChange w3=new AdmMessageChange(adm);
 		
 		Font font=new Font("Æ»·½ ³£¹æ",Font.CENTER_BASELINE,28);
 		this.setLayout(null);

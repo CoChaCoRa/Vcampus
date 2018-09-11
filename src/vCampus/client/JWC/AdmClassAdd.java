@@ -7,7 +7,10 @@ package vCampus.client.JWC;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AcademicAffairsService;
+import vCampus.client.biz.AcademicAffairsServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.CourseInformation;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -18,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 
 public class AdmClassAdd extends JPanel{
 	
@@ -52,12 +56,14 @@ public class AdmClassAdd extends JPanel{
 	
 	
 	JButton bt1=new JButton("");
-
 	
-	public AdmClassAdd() {
+	String UserName;
+	
+	public AdmClassAdd(String username) {
 		
 	super();
-
+	
+	UserName = username;
 	this.setLayout(null);
 	this.setSize(1650,1000);         
     
@@ -239,6 +245,33 @@ public class AdmClassAdd extends JPanel{
 	this.setSize(1650,1000);         
 	
 
+	}
+	
+	public class addconfirm implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			AcademicAffairsService AAS = new AcademicAffairsServiceImpl(3,UserName);
+			CourseInformation newCourse = new CourseInformation();
+			newCourse.setCourseID(tf1.getText());
+			newCourse.setCourseName(tf2.getText());
+			newCourse.setDeptName(tf3.getText());
+			newCourse.setTeacherUserName(tf4.getText());
+			newCourse.setTeacherName(tf5.getText());
+			newCourse.setCourseHour(Integer.parseInt(tf6.getText()));
+			newCourse.setCredit(Double.parseDouble(tf7.getText()));
+			newCourse.setExamPlace(tf9.getText());
+			newCourse.setExamPlace(tf11.getText());
+			newCourse.setPersonLimit(Integer.parseInt(tf12.getText()));
+			if(AAS.addCourseByAdmin(newCourse)) {
+				JOptionPane.showMessageDialog(null, "Ìí¼Ó³É¹¦");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, AAS.getExceptionCode());
+			}
+		}
+		
 	}
 	
 }

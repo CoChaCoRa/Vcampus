@@ -52,9 +52,9 @@ public class Winchange_JWC extends JPanel {
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		
-		StuClassCheck w1=new StuClassCheck();
+		StuClassCheck w1=new StuClassCheck(stu.getCacheStudent().getUserName());
 		StuScoreCheck w2=new StuScoreCheck(AAS);
-		StuCLassChange w3=new StuCLassChange();		
+		StuCLassChange w3=new StuCLassChange(stu.getCacheStudent().getUserName());		
 		
 		
 		
@@ -102,7 +102,10 @@ public class Winchange_JWC extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w2");
-	        	int num = AAS.studentGetAllCourses().size();
+	        	int num = 0;
+	        	if(AAS.studentGetAllCourses()==null) {
+	        		num = AAS.studentGetAllCourses().size();
+	        	}
 	        	ArrayList<Thread> tv = new ArrayList<Thread>(num); 	
 	        	ArrayList<CourseChoose> goal= AAS.studentGetAllCourseGrades();
 	        	//学生成绩 需要外部调用
@@ -110,9 +113,10 @@ public class Winchange_JWC extends JPanel {
 	        //	int index;
 	        	for(int j=0;j<index;j++) {
 	        	
-	        	int score=(int) goal.get(j).getScore();
+	        	int score=(int) goal.get(j).getScore();	
 	        	JProgressBar progress=w2.BarVector.get(j);
 	        	
+	        	//int score=100;
 	        	
 	        	Thread t2 = new Thread(){
 
@@ -121,7 +125,7 @@ public class Winchange_JWC extends JPanel {
 	        		int b = 0;	
 	        		
 	        	 	public void run() {
-	        	    
+	        	 		
 	        	    	//System.out.println(j);
 	        			for (int i = 0; i <=score; i++) {
 	        				try {
@@ -158,7 +162,8 @@ public class Winchange_JWC extends JPanel {
 	        		
 	        		
 	        		//GPA 为平均分
-	        		double GPA= AAS.studentGetGPA();
+	        		double GPA= AAS.studentGetGPA();	
+	        		//double GPA=100;
 	        		
 					@Override
 					public void run() {
@@ -183,9 +188,9 @@ public class Winchange_JWC extends JPanel {
 
 				};
 	        	
-	        	t2.start();
+	        	t2.run();
 		        for(int i=0;i<num;i++) {
-		        	tv.get(i).start();
+		        	tv.get(i).run();
 		        }	
 	        }
 	    });
@@ -307,10 +312,10 @@ public class Winchange_JWC extends JPanel {
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 		
-		
-		AdmClassAdd w6=new AdmClassAdd();
-		AdmScoreCheck w7=new AdmScoreCheck();
-		AdmClassAdd w8=new AdmClassAdd();
+		String username = adm.getCacheAdmin().getAdminID();
+		AdmClassAdd w6=new AdmClassAdd(username);
+		AdmScoreCheck w7=new AdmScoreCheck(username);
+		AdmClassAdd w8=new AdmClassAdd(username);
 		
 		
 		

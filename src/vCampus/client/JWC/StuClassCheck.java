@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +23,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import vCampus.client.biz.AcademicAffairsService;
+import vCampus.client.biz.AcademicAffairsServiceImpl;
+import vCampus.vo.CourseInformation;
 
 
 public class StuClassCheck extends JPanel{
@@ -40,23 +45,34 @@ public class StuClassCheck extends JPanel{
 	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,20);//设置字体格式和大小
 	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,18);//设置字体格式和大小
 	
-	private void setData() {
+	private void setData(String username) {
+		
+		AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,username);
+		ArrayList<CourseInformation>courseTable = AAS.studentGetTimeTable();
 		Object[][] a= {{"第一节","","","","","","",""},
 				{"第二节","","","","","","",""},
 				{"中午","","","","","","",""},
-				{"第三节","","","","<html><body>adf<br>klj<body><html>","","",""},
+				{"第三节","","","","","","",""},
 				{"第四节","","","","","","",""},
-				{"下午","","","","","","",""},
+				{"傍晚","","","","","","",""},
 				{"第五节","","","","","","",""}
 				};
 		data=a;
+		
+		for(int i=0;i<courseTable.size();i++) {
+			int row= courseTable.get(i).getWeekIndex()/5;
+			int col= courseTable.get(i).getWeekIndex()%5+1;
+			String courseName = courseTable.get(i).getCourseName();
+			String coursePlace = courseTable.get(i).getCoursePlace();
+			a[row][col]="<html><body>"+courseName+"<br>"+coursePlace+"<body><html>";
+		}
 	}
 	
-	StuClassCheck(){
+	StuClassCheck(String username){
 		super();
 		//this.setBounds(0, 0, 200, 150);
 		this.setLayout(new BorderLayout());
-		setData();
+		setData(username);
 		//this.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
 		//this.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
@@ -256,11 +272,11 @@ public class StuClassCheck extends JPanel{
 	
 		
 	}
-	
+/*	
 	public static void main(String args[]) {
 		StuClassCheck table=new StuClassCheck();
 		//table.setOpaque(true);
 		
 	}
-
+*/
 }

@@ -11,11 +11,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.EventObject;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,6 +29,10 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import vCampus.client.biz.AcademicAffairsService;
+import vCampus.client.biz.AcademicAffairsServiceImpl;
+import vCampus.vo.CourseInformation;
 
 
 public class StuCLassChange extends JPanel{
@@ -44,9 +50,19 @@ public class StuCLassChange extends JPanel{
 	Font font1=new Font("苹方 常规",Font.CENTER_BASELINE,25);//设置字体格式和大小
 	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,15);//设置字体格式和大小
 	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,10);//设置字体格式和大小
+	
+	String userName;
+	Object[][] Courses = {{"","","","","",""},
+			{"","","","","",""},
+			{"","","","","",""},
+			{"","","","","",""},
+			{"","","","","",""},
+			{"","","","","",""},
+			{"","","","","",""}
+			};
 	//************************************************
 	//加入要显示数据
-	private void setData() {
+	private void setData(String username) {
 		Object[][] a= {{"","","","","",""},
 				{"","","","","",""},
 				{"","","","","",""},
@@ -56,13 +72,34 @@ public class StuCLassChange extends JPanel{
 				{"","","","","",""}
 				};
 		data=a;
-	}
+		AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,username);
+		ArrayList<CourseInformation> allcourses = new ArrayList<CourseInformation>();
+		allcourses.add(AAS.findCourseInformation("1"));
+		allcourses.add(AAS.findCourseInformation("2"));
+		allcourses.add(AAS.findCourseInformation("3"));
+		allcourses.add(AAS.findCourseInformation("4"));
+		for(int row=0;row<allcourses.size();row++) {
+			a[row][0]=allcourses.get(row).getCourseName();
+			a[row][1]=allcourses.get(row).getTeacherName();
+			a[row][2]=allcourses.get(row).getCourseID();
+			a[row][3]=allcourses.get(row).getCoursePlace();
+			a[row][4]=allcourses.get(row).getCredit();
+			}
+		Courses = a;
+		}
 	
-	StuCLassChange(){
+	
+	private void swtich(int col) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	StuCLassChange(String username){
 		super();
+		userName = username;
 		//this.setBounds(0, 0, 200, 150);
 		this.setLayout(new BorderLayout());
-		setData();
+		setData(username);
 
 	//	this.setLayout(null);
 		this.setSize(1650,1000);         
@@ -191,7 +228,7 @@ public class StuCLassChange extends JPanel{
 	class MyTableModel extends AbstractTableModel{
 		//表格要显示的数据
 		//表头
-		private String[] columnHead= {"课程名称","教师","时间","院系","学分",""};
+		private String[] columnHead= {"课程名称","教师","课程号","地点","学分",""};
 		
 		//数据
 		private Object[][] data=null;
@@ -299,6 +336,10 @@ public class StuCLassChange extends JPanel{
 		JPanel pane;
 		boolean chosen=false;
 
+		public CourseChooseEditor() {
+			// TODO Auto-generated constructor stub
+		}
+
 		@Override
 		public void addCellEditorListener(CellEditorListener arg0) {
 			// TODO Auto-generated method stub
@@ -370,7 +411,13 @@ public class StuCLassChange extends JPanel{
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					//************************在此处添加与数据可连接代码
-					
+					AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,userName);
+					String courseID = (String)Courses[row][2];
+					if(AAS.studentDeleteCourse(courseID)) {
+						JOptionPane.showMessageDialog(null, "退课成功");
+					}
+					else JOptionPane.showMessageDialog(null, AAS.getExceptionCode());
+			
 					//***********************************************
 					choose.setVisible(true);
 					exit.setVisible(false);
@@ -388,11 +435,18 @@ public class StuCLassChange extends JPanel{
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					//************************在此处添加与数据可连接代码
-					
+					AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,userName);
+					JOptionPane.showMessageDialog(null, userName);
+					String courseID = (String)Courses[row][2];
+					JOptionPane.showMessageDialog(null, (String)Courses[row][2]);
+					if(AAS.studentAddCourse(courseID)) {
+						JOptionPane.showMessageDialog(null, "选课成功");
+					}
+					else JOptionPane.showMessageDialog(null, AAS.getExceptionCode());
 					//***********************************************
 					choose.setVisible(false);
 					exit.setVisible(true);
-					fireTableCellUpdated(col,row);
+					fireTableCellUpdated(row,col);
 					fireEditingStopped();
 					
 				}
@@ -423,9 +477,5 @@ public class StuCLassChange extends JPanel{
 		
 	}
 	
-	public static void main(String args[]) {
-		StuCLassChange table=new StuCLassChange();
-	
-	}
 
 }
