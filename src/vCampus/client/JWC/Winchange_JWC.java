@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import org.omg.CORBA.TCKind;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -237,7 +239,7 @@ public class Winchange_JWC extends JPanel {
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 	
-		TeaClassCheck w4=new TeaClassCheck();
+	//	TeaClassCheck w4=new TeaClassCheck(tc.getCacheTeacher().getUserName());	//cc 需要修改接口
 		TeaScoreAdd w5=new TeaScoreAdd();
 		
 		
@@ -278,6 +280,14 @@ public class Winchange_JWC extends JPanel {
 	        }
 	    });
 
+	    jb5.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	      
+	        	card.show(cardpanel,"w5");
+	        }
+	    });
+
 	    
 		//Winchange2 w2=new Winchange2();
 		cardpanel.setLayout(card);
@@ -287,7 +297,7 @@ public class Winchange_JWC extends JPanel {
 		
 		if(identify==2)
 		{
-			cardpanel.add("w4",w4);
+			//cardpanel.add("w4",w4);
 			cardpanel.add("w5",w5);
 			this.add(jb4);
 			this.add(jb5);

@@ -21,6 +21,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class AdmAddCheck extends JPanel{
 
@@ -118,6 +120,36 @@ public class AdmAddCheck extends JPanel{
     	}
     });
 
+    bt1.setContentAreaFilled(false);
+
+    bt1.setAutoscrolls(false);
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认.png"));
+		}
+
+		public void mouseClicked(MouseEvent e) {
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
+    
+    
     this.add(bt2);
     bt2.setBounds(1001, 910-80, 160, 80);
     bt2.setFont(font);
@@ -135,6 +167,35 @@ public class AdmAddCheck extends JPanel{
     	}
     });
     
+    
+
+    bt2.setAutoscrolls(false);
+    bt2.setContentAreaFilled(false);
+    bt2.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt2.setIcon(new ImageIcon("img\\删除点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt2.setIcon(new ImageIcon("img\\删除.png"));
+		}
+
+		public void mouseClicked(MouseEvent e) {
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
     
     this.add(lb0);
     lb0.setBounds(456-270, 196-80, 101, 47);

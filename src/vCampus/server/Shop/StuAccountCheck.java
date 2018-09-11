@@ -37,6 +37,9 @@ public class StuAccountCheck extends JPanel{
 	DefaultTableModel dtm = null;
 
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public StuAccountCheck(StudentService ss) {
 	super();
 	
@@ -178,7 +181,7 @@ public class StuAccountCheck extends JPanel{
 	/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
 	JScrollPane scroll = new JScrollPane(table);
 	scroll.setLocation(186, 223);
-	scroll.setSize(908, 528);
+	scroll.setSize(1087, 528);
 	table.setSize(600, 800);
 	
 	add(scroll);

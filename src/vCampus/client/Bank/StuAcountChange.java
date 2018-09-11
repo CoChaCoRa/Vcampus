@@ -20,6 +20,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 public class StuAcountChange extends JPanel{
@@ -54,7 +56,7 @@ public class StuAcountChange extends JPanel{
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
     bt1.setBorder(null);
-    
+    bt1.setContentAreaFilled(false);
     
     this.add(lb1);
     lb1.setBounds(456-270, 196-80, 151, 47);
@@ -144,7 +146,33 @@ public class StuAcountChange extends JPanel{
     });
     
 
-    
+
+    bt1.setAutoscrolls(false);
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认.png"));
+		}
+
+		public void mouseClicked(MouseEvent e) {
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
     
     }
 
@@ -188,7 +216,7 @@ public class StuAcountChange extends JPanel{
 	    
 	    this.add(tf2);
 	 
-	    tf2.setBounds(660-270, 600-80, 352, 47);
+	    tf2.setBounds(660-270, 600-80, 602, 47);
 	    tf2.setFont(font1);
 	    tf2.setEditable(false);
 	    tf2.setBorder(null);
@@ -260,7 +288,35 @@ public class StuAcountChange extends JPanel{
 	         	}
 	        }
 	    });
-	    	    
+	    	
+	    
+	    bt1.setContentAreaFilled(false);
+	    bt1.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				bt1.setIcon(new ImageIcon("img\\确认点击.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				bt1.setIcon(new ImageIcon("img\\确认.png"));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+	    });
 	    
 	}
 

@@ -45,6 +45,7 @@ public class StuBookCheck extends JPanel{
 	
 	
 	/**
+	 * @wbp.parser.constructor
 	 * 
 	 */
 	public StuBookCheck(StudentService ss) {
@@ -64,7 +65,7 @@ public class StuBookCheck extends JPanel{
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
    
     this.add(bt1);
-    bt1.setBounds(910-270, 910-80, 120, 60);
+    bt1.setBounds(910-270, 910-80, 160, 80);
     bt1.setFont(font);
     // 设置按钮的默认图片
    
@@ -76,12 +77,38 @@ public class StuBookCheck extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			bt1.setIcon(new ImageIcon("img\\归还点击.png"));
+		//	bt1.setIcon(new ImageIcon("img\\归还点击.png"));
 		}
     	
     });
     
-  
+
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\归还点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\归还.png"));
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			 
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
     
     this.add(lb1); 
     lb1.setBounds(456-270, 196-80, 151, 47);
@@ -199,7 +226,7 @@ public class StuBookCheck extends JPanel{
 	/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
 	JScrollPane scroll = new JScrollPane(table);
 	scroll.setLocation(186, 223);
-	scroll.setSize(908, 528);
+	scroll.setSize(1102, 528);
 	table.setSize(600, 800);
 	
 	add(scroll);
@@ -267,7 +294,7 @@ public class StuBookCheck extends JPanel{
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
    
     this.add(bt1);
-    bt1.setBounds(910-270, 910-80, 120, 60);
+    bt1.setBounds(910-270, 910-80, 160, 80);
     bt1.setFont(font);
     // 设置按钮的默认图片
    
@@ -279,12 +306,38 @@ public class StuBookCheck extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			bt1.setIcon(new ImageIcon("img\\归还点击.png"));
+	//		bt1.setIcon(new ImageIcon("img\\归还点击.png"));
 		}
     	
     });
     
-  
+
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\归还点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\归还.png"));
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			 
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
     
     this.add(lb1); 
     lb1.setBounds(456-270, 196-80, 151, 47);

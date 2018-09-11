@@ -44,6 +44,9 @@ public class StuBookChange extends JPanel{
 	JButton bt1=new JButton();
 	JTextField tf1 = new JTextField(20);
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public StuBookChange(StudentService ss) {
 		
 	super();
@@ -131,7 +134,7 @@ public class StuBookChange extends JPanel{
   	/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
   	JScrollPane scroll = new JScrollPane(table);
   	scroll.setLocation(186, 223);
-  	scroll.setSize(1058, 528);
+  	scroll.setSize(1226, 528);
   	table.setSize(600, 800);	
   	add(scroll);
     
@@ -255,7 +258,7 @@ public class StuBookChange extends JPanel{
 
     
     this.add(bt1);
-    bt1.setBounds(910-270, 910-80, 120, 60);
+    bt1.setBounds(910-270, 910-80, 160, 80);
     bt1.setFont(font);
     // 设置按钮的默认图片
    
@@ -266,9 +269,11 @@ public class StuBookChange extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
+		//	bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
 		}
     });
+    
+    bt1.setContentAreaFilled(false);
     bt1.addMouseListener(new MouseListener() {
 
 		@Override
@@ -312,11 +317,12 @@ public class StuBookChange extends JPanel{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+			bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\借阅.png"));
 			// TODO Auto-generated method stub
 			
 		}
@@ -325,7 +331,6 @@ public class StuBookChange extends JPanel{
     	
     
     
-	
 /*	
 	 bt1.addMouseListener(new MouseListener() {
 			@Override
@@ -573,17 +578,22 @@ public class StuBookChange extends JPanel{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+			bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
+			bt1.setIcon(new ImageIcon("img\\借阅.png"));
 				
 			}
 	    	
 	    });
 	    
+	    
+	    
+
+		
 
 	    this.add(lb1); 
 	    lb1.setBounds(456-270, 196-80, 151, 47);
@@ -597,7 +607,7 @@ public class StuBookChange extends JPanel{
 
 	    
 	    this.add(bt1);
-	    bt1.setBounds(910-270, 910-80, 120, 60);
+	    bt1.setBounds(910-270, 910-80, 160, 80);
 	    bt1.setFont(font);
 	    // 设置按钮的默认图片
 	   
@@ -608,7 +618,7 @@ public class StuBookChange extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
+			//	bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
 			}
 	    });
 	    bt1.addMouseListener(new MouseListener() {
@@ -639,31 +649,34 @@ public class StuBookChange extends JPanel{
 			 
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-	    	
-	    });
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\借阅.png"));
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    });
 
 	}
 	

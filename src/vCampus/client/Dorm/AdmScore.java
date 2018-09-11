@@ -19,6 +19,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class AdmScore extends JPanel{
 
@@ -81,6 +83,33 @@ public class AdmScore extends JPanel{
     	
     });
     
+    bt1.setContentAreaFilled(false);
+    bt1.setAutoscrolls(false);
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认.png"));
+		}
+
+		public void mouseClicked(MouseEvent e) {
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
     
     this.add(lb1);
     lb1.setBounds(456-270, 196-80, 101, 47);

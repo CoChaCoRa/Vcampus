@@ -7,11 +7,16 @@ package vCampus.client.InfoView;
  */
 import javax.swing.*;
 
+import com.hxtt.sql.fl;
+
 import vCampus.client.biz.AdminService;
+import vCampus.client.biz.ShopService;
+import vCampus.client.biz.ShopServiceImpl;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
+import vCampus.vo.ProductInformation;
 import vCampus.vo.Student;
 
 import java.awt.CardLayout;
@@ -21,6 +26,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class AdmMessageChange extends JPanel{
 
@@ -61,7 +68,9 @@ public class AdmMessageChange extends JPanel{
     bt1.setFont(font);
     // 设置按钮的默认图片
     bt1.setIcon(new ImageIcon("img\\确认.png"));
+    bt1.setContentAreaFilled(false);
     bt1.setBorder(null);
+    bt1.setContentAreaFilled(false);
     //add front-end monitor
     bt1.addActionListener(new ActionListener() {
 		@Override
@@ -185,5 +194,35 @@ public class AdmMessageChange extends JPanel{
     tf10.setBounds(1360-270, 640-80, 402, 47);
     tf10.setFont(font);
 //    tf10.setEditable(false);
-    tf10.setBorder(null);}
+    tf10.setBorder(null);
+	
+
+    bt1.addMouseListener(new MouseListener() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认点击.png"));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			bt1.setIcon(new ImageIcon("img\\确认.png"));
+		}
+
+		public void mouseClicked(MouseEvent e) {
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub				
+		}
+    });
+	
+	
+	}
 }

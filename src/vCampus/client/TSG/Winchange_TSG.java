@@ -62,6 +62,8 @@ public class Winchange_TSG extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w1");
+	        	 jb1.setIcon(new ImageIcon("img\\查询图书点击.png"));
+	        	 jb2.setIcon(new ImageIcon("img\\归还图书.png"));
 	        }
 	    });
 	    
@@ -70,6 +72,8 @@ public class Winchange_TSG extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w2");
+	        	 jb1.setIcon(new ImageIcon("img\\查询图书.png"));
+	        	 jb2.setIcon(new ImageIcon("img\\归还图书点击.png"));
 	        }
 	    });
 	  
@@ -134,6 +138,8 @@ public class Winchange_TSG extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w3");
+	        	 jb3.setIcon(new ImageIcon("img\\添加图书点击.png"));
+	        	 jb4.setIcon(new ImageIcon("img\\查询修改.png"));
 	        }
 	    });
 	  
@@ -143,6 +149,8 @@ public class Winchange_TSG extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w4");
+	        	 jb3.setIcon(new ImageIcon("img\\添加图书.png"));
+	        	 jb4.setIcon(new ImageIcon("img\\查询修改点击.png"));
 	        }
 	    });
 	  

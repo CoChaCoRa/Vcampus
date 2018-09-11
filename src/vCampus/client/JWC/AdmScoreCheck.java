@@ -72,7 +72,7 @@ public class AdmScoreCheck extends JPanel{
 			  		JTextField tf1 = new JTextField(20);
 			  		
 			  		lb1.setFont(font); 
-			  		lb1.setBounds(456-270, 196-80+111*(i+1), 101, 47);
+			  		lb1.setBounds(456-270, 196-80+111*(i+1), 300, 47);
 			  	    lb1.setFont(font);
 			  	    bottom_jp.add(lb1);
 			  	    tf1.setBackground(Color.WHITE);
@@ -96,7 +96,7 @@ public class AdmScoreCheck extends JPanel{
     });
     
     this.add(lb0);
-    lb0.setBounds(456-270, 196-80, 101, 47);
+    lb0.setBounds(456-270, 196-80, 401, 47);
     lb0.setFont(font);
     this.add(tf0);
     tf0.setBackground(Color.WHITE);
