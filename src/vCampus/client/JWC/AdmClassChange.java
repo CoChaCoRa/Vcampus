@@ -25,7 +25,7 @@ public class AdmClassChange extends JPanel{
 	JButton bt0=new JButton("");
 	JButton bt1=new JButton("");
 	
-	JLabel lb1 = new JLabel("课程号");
+	JLabel lb1 = new JLabel("查询课程号");
 	JTextField tf1 = new JTextField(20);
 	//JLabel lb2 = new JLabel("课程名");
 	//JTextField tf2 = new JTextField(20);
@@ -48,7 +48,7 @@ public class AdmClassChange extends JPanel{
 	public AdmClassChange() {
 		
 	super();
-
+	
 	this.setLayout(null);
 	this.setSize(1650,1000);         
     
@@ -65,6 +65,19 @@ public class AdmClassChange extends JPanel{
     bt0.setIcon(new ImageIcon("img\\查询UI.png"));
     bt0.setBorder(null);
    
+    
+    
+    this.add(lb0);
+    lb0.setBounds(456-270, 196-80, 101, 47);
+    lb0.setFont(font);
+    this.add(tf0);
+    tf0.setBackground(Color.WHITE);
+    tf0.setBounds(660-270, 196-80, 402, 47);
+    tf0.setFont(font);
+  //  tf0.setEditable(false);
+    tf0.setBorder(null);
+    
+    
     
     this.add(bt1);
     bt1.setBounds(910-270, 910-80, 160, 80);
@@ -144,6 +157,7 @@ public class AdmClassChange extends JPanel{
  //   tf8.setEditable(false);
     tf8.setBorder(null);
  	
+    
 	}
 	
 	

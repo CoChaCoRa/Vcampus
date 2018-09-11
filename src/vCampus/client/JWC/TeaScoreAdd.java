@@ -21,20 +21,19 @@ import java.awt.event.MouseListener;
 
 public class TeaScoreAdd extends JPanel{
 
-
+	JLabel lb1 = new JLabel("学号");
+	JTextField tf1 = new JTextField(20);
+	JLabel lb2 = new JLabel("分数");
+	JTextField tf2 = new JTextField(20);
+	JTextField tf3 = new JTextField(20);
+	JButton bt1=new JButton("");
 	
 	public TeaScoreAdd() {
 	
 	super();
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
     
-	JLabel lb1 = new JLabel("学号");
-	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("分数");
-	JTextField tf2 = new JTextField(20);
-	JTextField tf3 = new JTextField(20);
-
-	JButton bt1=new JButton("");
+	
 	bt1.setContentAreaFilled(false);
 	
 	this.setLayout(null);
@@ -128,4 +127,8 @@ public class TeaScoreAdd extends JPanel{
     
     
   }
+	
+	
+	
 }
+
