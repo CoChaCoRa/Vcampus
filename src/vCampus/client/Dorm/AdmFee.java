@@ -7,7 +7,10 @@ package vCampus.client.Dorm;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.DormitoryService;
+import vCampus.client.biz.DormitoryServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Dormitory;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -57,9 +60,15 @@ public class AdmFee extends JPanel{
 			try {
     			double moneychange = Double.parseDouble(tf2.getText());
     			if(moneychange<=0) throw new ArithmeticException();
-    			tf3.setText("收费成功！");
-    			tf1.setText("");
-    			tf2.setText("");
+    			DormitoryService DS = new DormitoryServiceImpl();
+    			Dormitory newdorm = new Dormitory();
+    			newdorm.setDormBill(moneychange);
+    			if(DS.addDormitoryInfo(newdorm)) {
+    				tf3.setText("收费成功！");
+    				tf1.setText("");
+    				tf2.setText("");
+    			}
+    			else tf3.setText(DS.getExceptionCode());
     		}catch(NumberFormatException e1) {
     			tf3.setText("输入不能含有字符");
     			tf1.setText("");

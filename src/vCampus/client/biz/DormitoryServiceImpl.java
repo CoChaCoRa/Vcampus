@@ -60,7 +60,7 @@ public class DormitoryServiceImpl implements DormitoryService{
 		ArrayList<Object> data = new ArrayList<Object>();
 		data.add(userName);
 		message.setData(data);
-		message.setMessageType(MessageTypeCodes.userQueryAccountCurrentByUserName);
+		message.setMessageType(MessageTypeCodes.userQueryDormitoryByUserName);
 		
 		Message serverResponse = client.sendRequestToServer(message);
 		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();

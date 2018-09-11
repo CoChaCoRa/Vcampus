@@ -45,6 +45,13 @@ public class StudentServiceImpl implements StudentService{
 		return cacheStudent;
 	}
 
+	
+	public Student getUpdatedStudent() {
+		if(login(cacheStudent.getUserName(),cacheStudent.getPassword())) {
+			return cacheStudent;
+		}
+		return cacheStudent;
+	}
 
 	/* (non-Javadoc)
 	 * @see vCampus.client.biz.StudentService#login(int, java.lang.String)

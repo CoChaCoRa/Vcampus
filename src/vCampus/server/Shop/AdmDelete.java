@@ -7,7 +7,11 @@ package vCampus.server.Shop;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.ShopService;
+import vCampus.client.biz.ShopServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.ProductInformation;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,11 +25,14 @@ import java.awt.event.MouseListener;
 
 public class AdmDelete extends JPanel{
 
-
 	
-	public AdmDelete() {
+	
+	public AdmDelete(AdminService admin) {
 		
 	super();
+	
+	ShopService SPS = new ShopServiceImpl(3,admin.getCacheAdmin().getAdminID());
+	
 	JLabel lb0 = new JLabel("查询");
 	JTextField tf0 = new JTextField(20);
 
@@ -54,6 +61,21 @@ public class AdmDelete extends JPanel{
     // 设置按钮的默认图片
     bt0.setIcon(new ImageIcon("img\\查询UI.png"));
     bt0.setBorder(null);
+    bt0.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			ProductInformation productinfo = SPS.queryProductInformation(tf0.getText());
+			if(productinfo!=null) {
+				tf1.setText(productinfo.getProductID());
+				tf2.setText(productinfo.getProductName());
+				tf3.setText(String.valueOf(productinfo.getProductPrice()));
+				tf4.setText(String.valueOf(productinfo.getAmount()));
+			}
+		}
+    	
+    });
     
     this.add(bt1);
     bt1.setBounds(910-270, 910-80, 160, 80);
@@ -83,7 +105,7 @@ public class AdmDelete extends JPanel{
     tf0.setBackground(Color.WHITE);
     tf0.setBounds(660-270, 196-80, 352, 47);
     tf0.setFont(font);
-    tf0.setEditable(false);
+//    tf0.setEditable(false);
     tf0.setBorder(null);
     
     this.add(lb1);
@@ -93,7 +115,7 @@ public class AdmDelete extends JPanel{
     tf1.setBackground(Color.WHITE);
     tf1.setBounds(660-270, 196-80+111, 352, 47);
     tf1.setFont(font);
-    tf1.setEditable(false);
+//    tf1.setEditable(false);
     tf1.setBorder(null);
 
     this.add(lb2);
@@ -113,7 +135,7 @@ public class AdmDelete extends JPanel{
     tf3.setBackground(Color.WHITE);
     tf3.setBounds(660-270, 307-80+111, 352, 47);
     tf3.setFont(font);
-    tf3.setEditable(false);
+//    tf3.setEditable(false);
     tf3.setBorder(null);
     
     this.add(lb4);
@@ -123,7 +145,7 @@ public class AdmDelete extends JPanel{
     tf4.setBackground(Color.WHITE);
     tf4.setBounds(1360-270, 307-80+111, 352, 47);
     tf4.setFont(font);
-    tf4.setEditable(false);
+//    tf4.setEditable(false);
     tf4.setBorder(null);
    
     
@@ -140,7 +162,15 @@ public class AdmDelete extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			 
+			ProductInformation product = new ProductInformation();
+			product.setProductID(tf1.getText());
+			product.setProductName(tf2.getText());
+			product.setProductPrice(Integer.parseInt(tf3.getText()));
+			product.setAmount(Integer.parseInt(tf4.getText()));
+			if(SPS.updateProductByAdmin(product)==true) {
+				JOptionPane.showMessageDialog(null, "修改成功");
+			}
+			else JOptionPane.showMessageDialog(null, SPS.getExceptionCodes());
 		}
 
 		@Override
@@ -169,7 +199,11 @@ public class AdmDelete extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			 
+			
+			if(SPS.deleteProductByAdmin(tf1.getText())==true) {
+				JOptionPane.showMessageDialog(null, "删除成功");
+			}
+			else JOptionPane.showMessageDialog(null, SPS.getExceptionCodes());
 		}
 
 		@Override

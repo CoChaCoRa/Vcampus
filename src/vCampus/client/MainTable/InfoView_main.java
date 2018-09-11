@@ -21,7 +21,7 @@ import vCampus.client.TSG.*;
 import vCampus.client.biz.AdminService;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.TeacherService;
-import vCampus.client.Shop.*;
+import vCampus.server.Shop.Winchange_shop;
 import vCampus.client.Bank.*;
 import vCampus.client.Dorm.*;
 
@@ -69,7 +69,7 @@ public class InfoView_main extends JPanel{
  	Winchange_test w1=new Winchange_test(id,ss);
  	Winchange_JWC w2=new Winchange_JWC(id,ss);
  	Winchange_TSG w3=new Winchange_TSG(id,ss);
- 	Winchange_shop w4=new Winchange_shop(id);
+ 	Winchange_shop w4=new Winchange_shop(id,ss);
  	Winchange_dorm w5=new Winchange_dorm(id,ss);
  	Winchange_bank w6=new Winchange_bank(id,ss);
  	
@@ -273,7 +273,7 @@ public class InfoView_main extends JPanel{
 	 	Winchange_test w1=new Winchange_test(id,admin);
 	 	Winchange_JWC w2=new Winchange_JWC(id,admin);
 	 	Winchange_TSG w3=new Winchange_TSG(id,admin);
-	 	Winchange_shop w4=new Winchange_shop(id);
+	 	Winchange_shop w4=new Winchange_shop(id,admin);
 	 	Winchange_dorm w5=new Winchange_dorm(id,admin);
 	 	Winchange_bank w6=new Winchange_bank(id,admin);
 	 	
@@ -478,7 +478,7 @@ public class InfoView_main extends JPanel{
 	 	Winchange_test w1=new Winchange_test(id,tc);
 	 	Winchange_JWC w2=new Winchange_JWC(id,tc);
 	 	Winchange_TSG w3=new Winchange_TSG(id,tc);
-	 	Winchange_shop w4=new Winchange_shop(id);
+	 	Winchange_shop w4=new Winchange_shop(id,tc);
 	 	//Winchange_dorm w5=new Winchange_dorm(id,tc);
 	 	Winchange_bank w6=new Winchange_bank(id,tc);
 	 	

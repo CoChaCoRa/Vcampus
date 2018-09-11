@@ -7,6 +7,8 @@ package vCampus.client.Dorm;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.DormitoryService;
+import vCampus.client.biz.DormitoryServiceImpl;
 import vCampus.client.biz.StudentService;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Student;
@@ -28,15 +30,15 @@ public class StuCheck extends JPanel{
 		super();
 	
 //	this.setBackground(Color.BLUE);
-	
+		DormitoryService DS = new DormitoryServiceImpl();
 		JLabel lb1 = new JLabel("宿舍号");
 		JTextField tf1 = new JTextField(stu.getCacheStudent().getDormNumber());
 		JLabel lb2 = new JLabel("姓名");
 		JTextField tf2 = new JTextField(stu.getCacheStudent().getRealName());
 		JLabel lb3 = new JLabel("分数");
-		JTextField tf3 = new JTextField(20);
+		JTextField tf3 = new JTextField(String.valueOf(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName()).get(0).getScore()));
 		JLabel lb4 = new JLabel("水电消费");
-		JTextField tf4 = new JTextField(20);
+		JTextField tf4 = new JTextField(String.valueOf(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName()).get(0).getDormBill()));
 
 		this.setLayout(null);
 		this.setSize(1650,1000);         

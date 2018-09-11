@@ -7,7 +7,10 @@ package vCampus.client.Dorm;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.DormitoryService;
+import vCampus.client.biz.DormitoryServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.Dormitory;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -53,11 +56,17 @@ public class AdmScore extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-    			double moneychange = Double.parseDouble(tf2.getText());
-    			if(moneychange<0) throw new ArithmeticException();
-    			tf3.setText("打分成功！");
-    			tf1.setText("");
-    			tf2.setText("");
+    			double score = Double.parseDouble(tf2.getText());
+    			if(score<0) throw new ArithmeticException();
+    			DormitoryService DS = new DormitoryServiceImpl();
+    			Dormitory newdorm = new Dormitory();
+    			newdorm.setScore(score);
+    			if(DS.addDormitoryInfo(newdorm)) {
+    				tf3.setText("打分成功！");
+    				tf1.setText("");
+    				tf2.setText("");
+    			}
+    			else tf3.setText(DS.getExceptionCode());
     		}catch(NumberFormatException e1) {
     			tf3.setText("输入不能含有字符");
     			tf1.setText("");

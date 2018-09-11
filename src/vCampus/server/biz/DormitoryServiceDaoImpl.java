@@ -25,7 +25,7 @@ public class DormitoryServiceDaoImpl implements DormitoryServiceDao{
 	@Override
 	public ArrayList<Dormitory> queryDormitoryByUserName(String userName) {
 		// TODO Auto-generated method stub
-		ArrayList<Dormitory> dormitories = dd.queryDormitoryByDormNumber(userName);
+		ArrayList<Dormitory> dormitories = dd.queryDormitoryByUserName(userName);
 		if(dormitories != null) {
 			return dormitories;
 		}

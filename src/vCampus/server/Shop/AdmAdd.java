@@ -7,7 +7,11 @@ package vCampus.server.Shop;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.ShopService;
+import vCampus.client.biz.ShopServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.ProductInformation;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -23,7 +27,7 @@ public class AdmAdd extends JPanel{
 
 
 	
-	public AdmAdd() {
+	public AdmAdd(AdminService admin) {
 		
 	super();
 	
@@ -54,8 +58,8 @@ public class AdmAdd extends JPanel{
     bt1.setBorder(null);
     bt1.setContentAreaFilled(false);
 
-	//cc:如果商品种类==8种不能添加！
-    //cc:如果商品种类==0种不能减少！
+	//如果商品种类==8种不能添加！
+    //如果商品种类==0种不能减少！
     
     
     this.add(lb1);
@@ -65,7 +69,7 @@ public class AdmAdd extends JPanel{
     tf1.setBackground(Color.WHITE);
     tf1.setBounds(660-270, 196-80+111, 352, 47);
     tf1.setFont(font);
-    tf1.setEditable(false);
+//    tf1.setEditable(false);
     tf1.setBorder(null);
 
     this.add(lb2);
@@ -85,7 +89,7 @@ public class AdmAdd extends JPanel{
     tf3.setBackground(Color.WHITE);
     tf3.setBounds(660-270, 307-80+111, 352, 47);
     tf3.setFont(font);
-    tf3.setEditable(false);
+//    tf3.setEditable(false);
     tf3.setBorder(null);
     
     this.add(lb4);
@@ -95,7 +99,7 @@ public class AdmAdd extends JPanel{
     tf4.setBackground(Color.WHITE);
     tf4.setBounds(1360-270, 307-80+111, 352, 47);
     tf4.setFont(font);
-    tf4.setEditable(false);
+//    tf4.setEditable(false);
     tf4.setBorder(null);
    
     
@@ -114,7 +118,18 @@ public class AdmAdd extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			 
+			ShopService SPS = new ShopServiceImpl(3,admin.getCacheAdmin().getAdminID());
+			ProductInformation product = new ProductInformation();
+			product.setProductID(tf1.getText());
+			product.setProductName(tf2.getText());
+			product.setProductPrice(Integer.parseInt(tf3.getText()));
+			product.setAmount(Integer.parseInt(tf4.getText()));
+			if(SPS.addProductByAdmin(product)==true) {
+				JOptionPane.showMessageDialog(null, "添加成功");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, SPS.getExceptionCodes());
+			}
 		}
 
 		@Override

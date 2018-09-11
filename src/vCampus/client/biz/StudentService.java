@@ -16,6 +16,7 @@ import vCampus.vo.Student;
 public interface StudentService {
 
 	public Student getCacheStudent();
+	public Student getUpdatedStudent();
 	public String getExceptionCode();
 	public boolean register(String studentID,String studentPassword,String studentConfirmedPassword);
 	public boolean login(String studentID, String studentPassword);

@@ -10,7 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import vCampus.client.biz.AdminService;
+import vCampus.client.biz.ShopService;
+import vCampus.client.biz.ShopServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.ProductInformation;
+import vCampus.vo.ProductPurchase;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,18 +25,17 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AdmCheck extends JPanel{
 
 
-	JLabel lb1 = new JLabel("余额");
-	JTextField tf1 = new JTextField("");
 	
 	
 	DefaultTableModel dtm = null;
 
 	
-	public AdmCheck() {
+	public AdmCheck(AdminService admin) {
 		
 	super();
 
@@ -42,58 +46,60 @@ public class AdmCheck extends JPanel{
     
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
 
+    ShopService SPS = new ShopServiceImpl(3,admin.getCacheAdmin().getAdminID());
+    ArrayList<ProductInformation> allProducts = SPS.queryAllProduct();
     
-
-    
-    this.add(lb1);
-    lb1.setBounds(456-270, 196-80, 151, 47);
-    lb1.setFont(font);
-    this.add(tf1);
-    tf1.setBackground(Color.WHITE);
-    tf1.setBounds(660-270, 196-80, 352, 47);
-    tf1.setFont(font);
-    tf1.setEditable(false);
-    tf1.setBorder(null);    
-
 	/*
 	 * 设置JTable的列名
 	 */
 	String[] columnNames =
-	{ "产品号","产品名", "购买数量","购买者","购买时间","消费金额","账户余额"};
+	{ "产品号","产品名", "购买数量","购买者","购买时间","消费金额","商品单价"};
 
-	int num_borrow=2;
-	Object[][] obj = new Object[num_borrow][7];
-	for (int i = 0; i < num_borrow; i++)
+	int typenum = allProducts.size();
+	int[] num_eachtype= {0,0,0,0,0,0};
+	int totalnum = 0;
+	ArrayList<ProductPurchase> PurchaseRecords = new ArrayList<ProductPurchase>();
+	for(int i=0;i<typenum;i++) {
+		if(SPS.queryAccountCurrentByProductID(allProducts.get(i).getProductID())!=null) {
+			//num_eachtype[i] = SPS.queryAccountCurrentByProductID(allProducts.get(i).getProductID()).size();
+			totalnum += SPS.queryAccountCurrentByProductID(allProducts.get(i).getProductID()).size();
+			PurchaseRecords.addAll(SPS.queryAccountCurrentByProductID(allProducts.get(i).getProductID()));
+		}
+	}
+	//int num_borrow=2;
+	Object[][] obj = new Object[totalnum][7];
+	for (int i = 0; i < totalnum; i++)
 	{
+		//String ProductID = allProducts.get(i).getProductID();
 		for (int j = 0; j < 7; j++)
 		{
+			if(PurchaseRecords.get(i)==null) break;
 			switch (j)
 			{
 			case 0:
-				obj[i][j] = "1";
+				obj[i][j] = PurchaseRecords.get(i).getProductID();
 				break;
 			case 1:
-				obj[i][j] = "吴云建";
+				obj[i][j] = PurchaseRecords.get(i).getProductName();
 				break;
 			case 2:
-				obj[i][j] = "3";
+				obj[i][j] = PurchaseRecords.get(i).getPurchaseAmount();
 				break;
 			case 3:
-				obj[i][j] = "1993";
+				obj[i][j] = PurchaseRecords.get(i).getUserName();
 				break;
 			case 4:
-				obj[i][j] = "2";
+				obj[i][j] = PurchaseRecords.get(i).getPurchaseTime();
 				break;
 			case 5:
-				obj[i][j] = "3";
+				obj[i][j] = PurchaseRecords.get(i).getOneConsumption()*PurchaseRecords.get(i).getPurchaseAmount();
 				break;
 			case 6:
-				obj[i][j] = "3";
+				obj[i][j] = PurchaseRecords.get(i).getOneConsumption();
 				break;
 				
 			}
 		}
-	
 		
 	}
 	
