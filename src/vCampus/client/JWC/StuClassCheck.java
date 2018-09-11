@@ -1,162 +1,266 @@
 package vCampus.client.JWC;
-/**
- * @author Yanhao Shen
- * 
- * @date 9.3
- *
- */
-import javax.swing.*;
 
-import vCampus.client.biz.AcademicAffairsService;
-import vCampus.client.register.RegisterView;
 
-import java.awt.CardLayout;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;  
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+
 
 public class StuClassCheck extends JPanel{
-
-
+	//表格数据
+	Object[][] data= {{"","","","","","","",""}};
 	
-	public StuClassCheck() {
-	super();
+	//表格对象
+	JTable tableDemo;
+	TableColumn column;
 	
-//	this.setBackground(Color.BLUE);
+	//弹出窗口的对象
+	JFrame mesFrame;
+	JTextArea ta;
 	
-	JLabel lb1 = new JLabel("һ��ͨ");
-	JTextField tf1 = new JTextField(20);
-	JLabel lb2 = new JLabel("����");
-	JTextField tf2 = new JTextField(20);
-	JLabel lb3 = new JLabel("�Ա�");
-	JTextField tf3 = new JTextField(20);
-	JLabel lb4 = new JLabel("����֤��");
-	JTextField tf4 = new JTextField(20);
-	JLabel lb5 = new JLabel("Ժϵ");
-	JTextField tf5 = new JTextField(20);
-	JLabel lb6 = new JLabel("רҵ");
-	JTextField tf6 = new JTextField(20);
-	JLabel lb7 = new JLabel("�༶");
-	JTextField tf7 = new JTextField(20);
-	JLabel lb8 = new JLabel("�����");
-	JTextField tf8 = new JTextField(20);
-	JLabel lb9 = new JLabel("�ֻ�");
-	JTextField tf9 = new JTextField(20);
-	JLabel lb10 = new JLabel("����");
-	JTextField tf10 = new JTextField(20);
+	Font font1=new Font("苹方 常规",Font.BOLD,25);//设置字体格式和大小
+	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,20);//设置字体格式和大小
+	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,18);//设置字体格式和大小
 	
-	this.setLayout(null);
-	this.setSize(1650,1000);         
-    
-    Font font=new Font("ƻ�� ����",Font.CENTER_BASELINE,28);//���������ʽ�ʹ�С
+	private void setData() {
+		Object[][] a= {{"第一节","","","","","","",""},
+				{"第二节","","","","","","",""},
+				{"中午","","","","","","",""},
+				{"第三节","","","","<html><body>adf<br>klj<body><html>","","",""},
+				{"第四节","","","","","","",""},
+				{"下午","","","","","","",""},
+				{"第五节","","","","","","",""}
+				};
+		data=a;
+	}
+	
+	StuClassCheck(){
+		super();
+		//this.setBounds(0, 0, 200, 150);
+		this.setLayout(new BorderLayout());
+		setData();
+		//this.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
+		//this.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		
+		tableDemo=new JTable(new MyTableModel(data));
+		
+		tableDemo.setPreferredScrollableViewportSize(new Dimension(1000,1650));
+		tableDemo.setFillsViewportHeight(true);
+		//设置表头
+		JTableHeader head=tableDemo.getTableHeader();
+		head.setFont(font1);
+		//禁止改变列宽
+		tableDemo.getTableHeader().setResizingAllowed(false);
+		//禁止改变列顺序
+		tableDemo.getTableHeader().setReorderingAllowed(false);
+		//禁止自动改变大小
+		tableDemo.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
+		//确定列宽
+		column = null;
+		for (int i = 1; i < 8; i++) {
+		    column = tableDemo.getColumnModel().getColumn(i);
+		   
+		   
+		        column.setPreferredWidth(200);
+		    
+		}
+		
+		//设置行高
+		for(int i=0;i<7;i++) {
+			if(i==2||i==5) {
+				tableDemo.setRowHeight(i, 15);
+			}
+			else {
+				tableDemo.setRowHeight(i, 150);
+			}
+		}
+		
+		//添加渲染器
+		
+	    tableDemo.getColumnModel().getColumn(0).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(3).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(1).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(2).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(4).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(5).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(6).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(7).setCellRenderer(new TipsRenderer());
+		//TableColumn tc=tableDemo.getColumn("时间");
+		
+		 
+		tableDemo.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				 java.awt.Point p = e.getPoint();
+				int rowIndex = tableDemo.rowAtPoint(p);
+		        int colIndex = tableDemo.columnAtPoint(p);
+//		        if(colIndex>0) {
+//		        	mesFrame=new JFrame();
+//		        	mesFrame.addWindowListener(new WindowAdapter() {
+//		        		public void windowClosing(WindowEvent e) {
+//		        			mesFrame.dispose();
+//		        		}
+//		        	});
+//		        	ta=new JTextArea();
+//		        	ta.setLineWrap(true);
+//		        	mesFrame.setLayout(new BorderLayout());
+//		        	mesFrame.add(ta, BorderLayout.CENTER);
+//		        	mesFrame.setBounds(300, 300, 200, 150);
+//		        	mesFrame.setVisible(true);
+//		        }
+				
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		
+		//scrollTable.add(tableDemo);
+		JScrollPane scrollTable=new JScrollPane();
+		scrollTable.setViewportView(tableDemo);
+		
+		this.add(scrollTable,BorderLayout.CENTER);
+		
+		
+	}
+	
+	//TableModel的类，继承于AbstractTableModel
+	class MyTableModel extends AbstractTableModel{
+		//表格要显示的数据
+		//表头
+		private String[] columnHead= {"时间","周一","周二","周三","周四","周五","周六","周日"};
+		
+		//数据
+		private Object[][] data=null;
+		
+		MyTableModel(Object[][] a){
+			data=a;
+		}
+		
+		
 
 
-    
-    this.add(lb1);
-    lb1.setBounds(456-270, 196-80, 101, 47);
-    lb1.setFont(font);
-    this.add(tf1);
-    tf1.setBackground(Color.WHITE);
-    tf1.setBounds(660-270, 196-80, 352, 47);
-    tf1.setFont(font);
-    tf1.setEditable(false);
-    tf1.setBorder(null);
+		@Override
+		public int getColumnCount() {
+			// TODO Auto-generated method stub
+			return columnHead.length;
+		}
 
-    this.add(lb2);
-    lb2.setBounds(1156-270, 196-80, 101, 47);
-    lb2.setFont(font);
-    this.add(tf2);
-    tf2.setBackground(Color.WHITE);
-  //  tf2.setText("11022");
-    tf2.setBounds(1360-270, 196-80, 352, 47);
-    tf2.setFont(font);
- //   tf2.setEditable(false);
-    tf2.setBorder(null);
-    
-    this.add(lb3);
-    lb3.setBounds(456-270, 307-80, 101, 47);
-    lb3.setFont(font);
-    this.add(tf3);
-    tf3.setBackground(Color.WHITE);
-    tf3.setBounds(660-270, 307-80, 352, 47);
-    tf3.setFont(font);
-    tf3.setEditable(false);
-    tf3.setBorder(null);
-    
-    this.add(lb4);
-    lb4.setBounds(1156-270, 307-80, 150, 47);
-    lb4.setFont(font);
-    this.add(tf4);
-    tf4.setBackground(Color.WHITE);
-    tf4.setBounds(1360-270, 307-80, 352, 47);
-    tf4.setFont(font);
-    tf4.setEditable(false);
-    tf4.setBorder(null);
-    
-    this.add(lb5);
-    lb5.setBounds(456-270, 418-80, 101, 47);
-    lb5.setFont(font);
-    this.add(tf5);
-    tf5.setBackground(Color.WHITE);
-    tf5.setBounds(660-270, 418-80, 352, 47);
-    tf5.setFont(font);
-    tf5.setEditable(false);
-    tf5.setBorder(null);
-    
-    this.add(lb6);
-    tf6.setBackground(Color.WHITE);
-    lb6.setBounds(1156-270, 418-80, 101, 47);
-    lb6.setFont(font);
-    this.add(tf6);
-    tf6.setBounds(1360-270, 418-80, 352, 47);
-    tf6.setFont(font);
-    tf6.setEditable(false);
-    tf6.setBorder(null);
-    
-    this.add(lb7);
-    tf7.setBackground(Color.WHITE);
-    lb7.setBounds(456-270, 529-80, 101, 47);
-    lb7.setFont(font);
-    this.add(tf7);
-    tf7.setBounds(660-270, 529-80, 352, 47);
-    tf7.setFont(font);
-    tf7.setEditable(false);
-    tf7.setBorder(null);
-    
-    this.add(lb8);
-    lb8.setBounds(1156-270, 529-80, 101, 47);
-    lb8.setFont(font);
-    this.add(tf8);
-    tf8.setBackground(Color.WHITE);
-    tf8.setBounds(1360-270, 529-80, 352, 47);
-    tf8.setFont(font);
-    tf8.setEditable(false);
-    tf8.setBorder(null);
-    
-    this.add(lb9);
-    lb9.setBounds(456-270, 640-80, 101, 47);
-    lb9.setFont(font);
-    this.add(tf9);
-    tf9.setBackground(Color.WHITE);
-    tf9.setBounds(660-270, 640-80, 352, 47);
-    tf9.setFont(font);
-    tf9.setEditable(false);
-    tf9.setBorder(null);
-    
-    this.add(lb10);
-    lb10.setBounds(1156-270, 640-80, 101, 47);
-    lb10.setFont(font);
-    this.add(tf10);
-    tf10.setBackground(Color.WHITE);
-    tf10.setBounds(1360-270, 640-80, 352, 47);
-    tf10.setFont(font);
-    tf10.setEditable(false);
-    tf10.setBorder(null);
-    }
+		@Override
+		public int getRowCount() {
+			// TODO Auto-generated method stub
+			return data.length;
+		}
 
-    	
+		@Override
+		public Object getValueAt(int col, int row) {
+			// TODO Auto-generated method stub
+			return data[col][row];
+		}
+		
+		public String getColumnName(int col,int row) {
+			return columnHead[col];
+		}
+		
+		public boolean isCellEditable(int row,int column) {
+				return false;
+			
+		}
+		
+		public String getColumnName(int row)
+		{
+			return columnHead[row];
+		}
+		
+		
+		
+		
+		
+	}
+	
+	//设置渲染器，使其能显示tips
+	class TipsRenderer extends JLabel implements TableCellRenderer{
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object arg1, boolean isSelected, boolean hasFoucesed, int row,
+				int col) {
+			// TODO Auto-generated method stub
+			
+			if(col<1) {
+				this.setBackground(Color.GRAY);
+				this.setText(String.valueOf(table.getValueAt(row, col)));
+				this.setOpaque(true);
+				this.setFont(font2);
+			}
+			else {
+				this.setText(String.valueOf(table.getValueAt(row, col)));
+				this.setOpaque(true);
+				this.setToolTipText(String.valueOf(table.getValueAt(row, col)));
+				this.setFont(font3);
+				if(isSelected) {
+
+				}
+			}
+			this.setHorizontalAlignment(CENTER);
+			this.setVerticalAlignment(CENTER);
+			
+			return this;
+		}
+	
+		
+	}
+	
+	public static void main(String args[]) {
+		StuClassCheck table=new StuClassCheck();
+		//table.setOpaque(true);
+		
+	}
 
 }
