@@ -155,7 +155,7 @@ public class LibraryServiceImpl implements LibraryService {
 		}
 		
 		if(!serverResponse.getExceptionCode().equals("")) {
-			exceptionCode = message.getExceptionCode();
+			exceptionCode = serverResponse.getExceptionCode();
 		}
 		return false;
 	}
@@ -183,10 +183,37 @@ public class LibraryServiceImpl implements LibraryService {
 		}
 		
 		if(!serverResponse.getExceptionCode().equals("")) {
-			exceptionCode = message.getExceptionCode();
+			exceptionCode = serverResponse.getExceptionCode();
 		}
 		return false;
 	}
+	
+	/* (non-Javadoc)
+	 * @see vCampus.client.biz.LibraryService#queryAllBook()
+	 */
+	@Override
+	public ArrayList<BookInformation> queryAllBook() {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		
+		Message message = new Message();
+		message.setUserType("ADMIN");
+		message.setMessageType(MessageTypeCodes.adminGetAllBooks);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
+			ArrayList<BookInformation> allBooks = (ArrayList<BookInformation>) paras.get(0);
+			return allBooks;
+		}
+		
+		if(!serverResponse.getExceptionCode().equals("")) {
+			exceptionCode = serverResponse.getExceptionCode();
+		}
+		return null;
+	}
+	
 	
 	@Override
 	public boolean addBookByAdmin(BookInformation book) {
@@ -209,7 +236,7 @@ public class LibraryServiceImpl implements LibraryService {
 			}
 		}
 		if(!serverResponse.getExceptionCode().equals("")) {
-			exceptionCode = message.getExceptionCode();
+			exceptionCode = serverResponse.getExceptionCode();
 		}
 		return false;
 	}
@@ -236,7 +263,7 @@ public class LibraryServiceImpl implements LibraryService {
 			}
 		}
 		if(!serverResponse.getExceptionCode().equals("")) {
-			exceptionCode = message.getExceptionCode();
+			exceptionCode = serverResponse.getExceptionCode();
 		}
 		return false;
 	}

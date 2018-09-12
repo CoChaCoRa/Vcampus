@@ -87,6 +87,23 @@ public class LibraryServiceDaoImpl implements LibraryServiceDao{
 	}
 	
 	
+	
+	/* (non-Javadoc)
+	 * @see vCampus.server.biz.LibraryServiceDao#queryAllBook()
+	 */
+	@Override
+	public ArrayList<BookInformation> queryAllBook() {
+		// TODO Auto-generated method stub
+		
+		ArrayList<BookInformation> allBooks = ld.queryAllBook();
+		if(allBooks != null) {
+			return allBooks;
+		}
+		 
+		return null;
+	}
+	
+	
 	@Override
 	public boolean addBookByAdmin(BookInformation book) throws RecordAlreadyExistException {
 		// TODO Auto-generated method stub

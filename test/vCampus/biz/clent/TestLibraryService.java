@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import vCampus.client.biz.LibraryService;
 import vCampus.client.biz.LibraryServiceImpl;
+import vCampus.server.biz.LibraryServiceDao;
 import vCampus.server.biz.LibraryServiceDaoImpl;
 import vCampus.server.dao.LibraryDao;
 import vCampus.server.dao.LibraryDaoImpl;
@@ -79,5 +80,12 @@ public class TestLibraryService {
 		System.out.println("test admin delete book info");
 		System.out.println(libraryService.deleteBookByAdmin("6"));
 		System.out.println(libraryService.getExceptionCode());
+		
+		
+		//test get all books
+		System.out.println("test admin on get all books");
+		System.out.println(libraryService.queryAllBook().size());
+		LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+		
 	}
 }
