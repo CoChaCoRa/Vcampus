@@ -23,6 +23,8 @@ import vCampus.client.biz.StudentService;
 import vCampus.client.biz.StudentServiceImpl;
 import vCampus.server.biz.AdminServiceDao;
 import vCampus.server.biz.AdminServiceDaoImpl;
+import vCampus.server.biz.BankServiceDao;
+import vCampus.server.biz.BankServiceDaoImpl;
 import vCampus.server.biz.DormitoryServiceDao;
 import vCampus.server.biz.DormitoryServiceDaoImpl;
 import vCampus.server.biz.LibraryServiceDao;
@@ -47,6 +49,7 @@ import vCampus.vo.CourseInformation;
 import vCampus.vo.Dormitory;
 import vCampus.vo.ProductInformation;
 import vCampus.vo.ProductPurchase;
+import vCampus.vo.Recharge;
 import vCampus.vo.Student;
 import vCampus.vo.Teacher;
 
@@ -933,6 +936,28 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(serverResponse);
             }
             
+            
+            if(object.getMessageType().equals(MessageTypeCodes.userRechargeByBankAccount)) {
+            	Message serverResponse = new Message();
+            	try {
+            	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            	BankServiceDao bankServiceDao = new BankServiceDaoImpl();
+            	boolean isRechargeByBankAccount = bankServiceDao.rechargeByBankAccount((Recharge) paras.get(0));
+            	ArrayList<Object> data = new ArrayList<Object>();
+            	data.add(isRechargeByBankAccount);
+            	serverResponse.setData(data);
+            	}
+            	catch (OutOfLimitException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("OutOfLimitException");
+				}
+            	catch (RecordNotFoundException e) {
+					// TODO: handle exception
+            		serverResponse.setExceptionCode("RecordNotFoundException");
+				}
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
 		}
 		catch (Exception e) {
 			// TODO: handle exception
