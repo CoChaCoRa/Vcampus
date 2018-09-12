@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import vCampus.client.biz.AdminService;
+import vCampus.client.biz.LibraryService;
+import vCampus.client.biz.LibraryServiceImpl;
 import vCampus.client.biz.ShopService;
 import vCampus.client.biz.ShopServiceImpl;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.TeacherService;
+import vCampus.vo.BookBorrow;
+import vCampus.vo.BookInformation;
 import vCampus.vo.ProductPurchase;
 
 
@@ -36,7 +40,7 @@ public class Winchange_shop extends JPanel {
 		StuAccountCheck w1=new StuAccountCheck(ss);
 		Stubuy w2=new Stubuy(ss);
 		
-		
+		 
 		
 		Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);
 		this.setLayout(null);
@@ -68,6 +72,58 @@ public class Winchange_shop extends JPanel {
 	        	 jb2.setIcon(new ImageIcon("img\\购买商品.png"));
 	        	 w1.tf1.setText(String.valueOf(ss.getUpdatedStudent().getMoney()));
 	        	
+	        	 
+	        		String[] columnNames =
+	        			{ "产品号","产品名", "购买数量", "购买时间","消费金额","账户余额"};
+	        			/*
+	        			 * 初始化JTable里面各项的值
+	        			 */
+	        			String username= ss.getCacheStudent().getUserName();
+	        			ShopService SPS = new ShopServiceImpl(1,username);
+	        			ArrayList<ProductPurchase> PurchaseRecord = SPS.queryAccountCurrentByUserName(username);
+
+
+	        			int num_borrow = 0;
+	        			if(PurchaseRecord!=null) num_borrow=PurchaseRecord.size();
+	        			Object[][] obj = new Object[num_borrow][7];
+	        			for (int i = 0; i < num_borrow; i++)
+	        			{
+	        				for (int j = 0; j < 6; j++)
+	        				{
+	        					switch (j)
+	        					{
+	        					case 0:
+	        						obj[i][j] = PurchaseRecord.get(i).getProductID();
+	        						break;
+	        					case 1:
+	        						obj[i][j] = PurchaseRecord.get(i).getProductName();
+	        						break;
+	        					case 2:
+	        						obj[i][j] = PurchaseRecord.get(i).getPurchaseAmount();
+	        						break;
+	        					case 3:
+	        						obj[i][j] = PurchaseRecord.get(i).getPurchaseTime();
+	        						break;
+	        					case 4:
+	        						obj[i][j] = PurchaseRecord.get(i).getOneConsumption();
+	        						break;
+	        					case 5:
+	        						obj[i][j] = PurchaseRecord.get(i).getCurrentAccount();
+	        						break;
+	        				
+	        						
+	        					}
+	        				}
+	        			
+	        				
+	        			}
+	        			
+	        			w1.dtm.setDataVector(obj,columnNames);//设置新内容
+
+	        			w1.dtm.fireTableStructureChanged();//更新显示
+
+	        	
+	        	 
 	        }
 	    });
 	    
@@ -80,6 +136,12 @@ public class Winchange_shop extends JPanel {
 	        	 jb1.setIcon(new ImageIcon("img\\账户余额.png"));
 	        	 jb2.setIcon(new ImageIcon("img\\购买商品点击.png"));
 	        	
+	        	 
+	        	 
+	        	 
+	        	 
+	        	 
+	        	 
 	        }
 	    });
 	  
@@ -145,6 +207,56 @@ public class Winchange_shop extends JPanel {
 	        	 jb1.setIcon(new ImageIcon("img\\账户余额点击.png"));
 	        	 jb2.setIcon(new ImageIcon("img\\购买商品.png"));
 	      	   
+	        	 
+	        	String[] columnNames =
+	        			{ "产品号","产品名", "购买数量", "购买时间","消费金额","账户余额"};
+	        			/*
+	        			 * 初始化JTable里面各项的值
+	        			 */
+	        			String username= tc.getCacheTeacher().getUserName();
+	        			ShopService SPS = new ShopServiceImpl(2,username);
+	        			ArrayList<ProductPurchase> PurchaseRecord = SPS.queryAccountCurrentByUserName(username);
+
+
+	        			int num_borrow = 0;
+	        			if(PurchaseRecord!=null) num_borrow=PurchaseRecord.size();
+	        			Object[][] obj = new Object[num_borrow][7];
+	        			for (int i = 0; i < num_borrow; i++)
+	        			{
+	        				for (int j = 0; j < 6; j++)
+	        				{
+	        					switch (j)
+	        					{
+	        					case 0:
+	        						obj[i][j] = PurchaseRecord.get(i).getProductID();
+	        						break;
+	        					case 1:
+	        						obj[i][j] = PurchaseRecord.get(i).getProductName();
+	        						break;
+	        					case 2:
+	        						obj[i][j] = PurchaseRecord.get(i).getPurchaseAmount();
+	        						break;
+	        					case 3:
+	        						obj[i][j] = PurchaseRecord.get(i).getPurchaseTime();
+	        						break;
+	        					case 4:
+	        						obj[i][j] = PurchaseRecord.get(i).getOneConsumption();
+	        						break;
+	        					case 5:
+	        						obj[i][j] = PurchaseRecord.get(i).getCurrentAccount();
+	        						break;
+	        				
+	        						
+	        					}
+	        				}
+	        			
+	        				
+	        			}
+	        			
+	        			w1.dtm.setDataVector(obj,columnNames);//设置新内容
+
+	        			w1.dtm.fireTableStructureChanged();//更新显示
+
 	        	
 	        }
 	    });

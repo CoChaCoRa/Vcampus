@@ -6,12 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import vCampus.client.biz.AdminService;
+import vCampus.client.biz.LibraryService;
+import vCampus.client.biz.LibraryServiceImpl;
 import vCampus.client.biz.StudentService;
 import vCampus.client.biz.TeacherService;
+import vCampus.vo.BookBorrow;
+import vCampus.vo.BookInformation;
 
 
 /**
@@ -74,6 +79,85 @@ public class Winchange_TSG extends JPanel {
 	        	card.show(cardpanel,"w2");
 	        	 jb1.setIcon(new ImageIcon("img\\查询图书.png"));
 	        	 jb2.setIcon(new ImageIcon("img\\归还图书点击.png"));
+	        	 
+	        	//syh
+	        	 
+	        		String[] columnNames =
+	        			{ "书号","书名", "作者", "出版社" };
+
+	        			/*
+	        			 * 初始化JTable里面各项的值
+	        			 */
+	        			String username= ss.getCacheStudent().getUserName();
+	        			LibraryService LS = new LibraryServiceImpl(1,ss.getCacheStudent().getUserName());
+	        			int num_borrow = 3;
+	        			Object[][] obj = new Object[num_borrow][4];
+	        			if(LS.queryBookBorrow(username)!= null) {
+	        				//num_borrow = LS.queryBookBorrow(username).size();
+	        				ArrayList<BookBorrow> borrowbooks = LS.queryBookBorrow(username);
+	        				num_borrow = LS.queryBookBorrow(username).size();
+	        				obj = new Object[num_borrow][4];
+	        				ArrayList<BookInformation> bbsinfo = new ArrayList<BookInformation>();
+	        				if(borrowbooks!=null) {
+	        					for(int i=0;i<num_borrow;i++) {
+	        						bbsinfo.add(LS.queryBookInformation(borrowbooks.get(i).getBookID()));
+	        					}
+	        				}
+	        				for (int i = 0; i < num_borrow; i++)
+	        				{
+	        					for (int j = 0; j < 4; j++)
+	        					{
+	        						String borrowedbookID = borrowbooks.get(i).getBookID();
+	        						switch (j)
+	        						{
+	        						case 0:
+	        							obj[i][j] = borrowedbookID;
+	        						case 1:
+	        							obj[i][j] = bbsinfo.get(i).getBookName();
+	        							break;
+	        						case 2:
+	        							obj[i][j] = bbsinfo.get(i).getBookWriter();
+	        							break;
+	        						case 3:
+	        							obj[i][j] = bbsinfo.get(i).getBookPress();
+	        							break;
+	        				
+	        						}
+	        					}
+	        				}
+	        				
+	        				
+	        				System.out.println(1);
+	        			}
+	        			else {
+	        				for (int i = 0; i < num_borrow; i++)
+	        				{
+	        					for (int j = 0; j < 4; j++)
+	        					{
+	        						//String borrowedbookID = LS.queryBookBorrow(username).get(i).getBookID();
+	        						switch (j)
+	        						{
+	        						case 0:
+	        							obj[i][j] = "";
+	        							break;
+	        						case 1:
+	        							obj[i][j] = "";
+	        							break;
+	        						case 2:
+	        							obj[i][j] = "";
+	        							break;
+	        				
+	        						}
+	        					}
+	        				}
+	        				
+	        				System.out.println(2);
+	        			}
+
+	        			w2.dtm.setDataVector(obj,columnNames);//设置新内容
+
+	        			w2.dtm.fireTableStructureChanged();//更新显示
+ 
 	        }
 	    });
 	  
@@ -222,6 +306,86 @@ public class Winchange_TSG extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w2");
+	        	
+	        	 
+        		String[] columnNames =
+        			{ "书号","书名", "作者", "出版社" };
+
+        			/*
+        			 * 初始化JTable里面各项的值
+        			 */
+        			String username= tc.getCacheTeacher().getUserName();
+        			LibraryService LS = new LibraryServiceImpl(1,tc.getCacheTeacher().getUserName());
+        			int num_borrow = 3;
+        			Object[][] obj = new Object[num_borrow][4];
+        			if(LS.queryBookBorrow(username)!= null) {
+        				//num_borrow = LS.queryBookBorrow(username).size();
+        				ArrayList<BookBorrow> borrowbooks = LS.queryBookBorrow(username);
+        				num_borrow = LS.queryBookBorrow(username).size();
+        				obj = new Object[num_borrow][4];
+        				ArrayList<BookInformation> bbsinfo = new ArrayList<BookInformation>();
+        				if(borrowbooks!=null) {
+        					for(int i=0;i<num_borrow;i++) {
+        						bbsinfo.add(LS.queryBookInformation(borrowbooks.get(i).getBookID()));
+        					}
+        				}
+        				for (int i = 0; i < num_borrow; i++)
+        				{
+        					for (int j = 0; j < 4; j++)
+        					{
+        						String borrowedbookID = borrowbooks.get(i).getBookID();
+        						switch (j)
+        						{
+        						case 0:
+        							obj[i][j] = borrowedbookID;
+        						case 1:
+        							obj[i][j] = bbsinfo.get(i).getBookName();
+        							break;
+        						case 2:
+        							obj[i][j] = bbsinfo.get(i).getBookWriter();
+        							break;
+        						case 3:
+        							obj[i][j] = bbsinfo.get(i).getBookPress();
+        							break;
+        				
+        						}
+        					}
+        				}
+        				
+        				
+        				System.out.println(1);
+        			}
+        			else {
+        				for (int i = 0; i < num_borrow; i++)
+        				{
+        					for (int j = 0; j < 4; j++)
+        					{
+        						//String borrowedbookID = LS.queryBookBorrow(username).get(i).getBookID();
+        						switch (j)
+        						{
+        						case 0:
+        							obj[i][j] = "";
+        							break;
+        						case 1:
+        							obj[i][j] = "";
+        							break;
+        						case 2:
+        							obj[i][j] = "";
+        							break;
+        				
+        						}
+        					}
+        				}
+        				
+        				System.out.println(2);
+        			}
+
+        			w2.dtm.setDataVector(obj,columnNames);//设置新内容
+
+        			w2.dtm.fireTableStructureChanged();//更新显示
+
+	        	
+	        	
 	        }
 	    });
 	  

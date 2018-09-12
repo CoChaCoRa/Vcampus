@@ -7,6 +7,7 @@ import javax.crypto.interfaces.PBEKey;
  *
  */
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.text.TableView.TableRow;
@@ -43,6 +44,10 @@ public class StuBookChange extends JPanel{
 	JButton bt0=new JButton();
 	JButton bt1=new JButton();
 	JTextField tf1 = new JTextField(20);
+	DefaultTableModel dtm = null;
+	String username;
+	public Object[][] obj;
+	
 	
 	/**
 	 * @wbp.parser.constructor
@@ -50,13 +55,14 @@ public class StuBookChange extends JPanel{
 	public StuBookChange(StudentService ss) {
 		
 	super();
-	
+	username= ss.getCacheStudent().getUserName();
 	LibraryService LS = new LibraryServiceImpl(1,ss.getCacheStudent().getUserName());
 	
 	this.setLayout(null);
 	this.setSize(1650,1000);            
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
    
+    
     
     
   //****************************初始化列表*********************************
@@ -106,12 +112,18 @@ public class StuBookChange extends JPanel{
   	/*
   	 * JTable的其中一种构造方法
   	 */
-  	JTable table = new JTable(obj, columnNames) {
-  		public boolean isCellEditable(int row, int column){
-  				return false;//表格不允许被编辑
-      	}
   	
-  	};
+  	 dtm=new DefaultTableModel(obj,columnNames){
+ 		public boolean isCellEditable(int row, int column)
+ 	    {
+ 	               return false;}//表格不允许被编辑
+ 	    };
+    //用模型建立表;
+ 	    
+
+ 	JTable table = new JTable(dtm); 
+  
+  	
       table.setRowHeight(30);// 设置表格行宽
       
       JTableHeader head = table.getTableHeader(); // 创建表格标题对象
@@ -134,18 +146,19 @@ public class StuBookChange extends JPanel{
   	/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
   	JScrollPane scroll = new JScrollPane(table);
   	scroll.setLocation(186, 223);
-  	scroll.setSize(1226, 528);
+  	scroll.setSize(1060, 528);
   	table.setSize(600, 800);	
   	add(scroll);
     
-    
-    
+      
     this.add(bt0);
     bt0.setBounds(880,196-90,60,60);
     bt0.setFont(font);
     // 设置按钮的默认图片
     bt0.setIcon(new ImageIcon("img\\查询UI.png"));
     bt0.setBorder(null);
+    
+
     
     bt0.addMouseListener(new MouseListener() {
 
@@ -182,40 +195,19 @@ public class StuBookChange extends JPanel{
 						case 6:
 							obj[i][j] = new String(String.valueOf(Books.get(i).getBorrowedAmount()));
 							break;	
+						
+						
 						}
 					}
 				}
-				JTable table = new JTable(obj, columnNames) {
-					public boolean isCellEditable(int row, int column){
-							return false;//表格不允许被编辑
-			    	}
+			
 				
-				};
-			    table.setRowHeight(30);// 设置表格行宽
-			    
-			    JTableHeader head = table.getTableHeader(); // 创建表格标题对象
-			    head.setPreferredSize(new Dimension(head.getWidth(), 35));// 设置表头大小
-			    head.setFont(font);// 设置表格字体
-			   
-				TableColumn column = null;
-				int colunms = table.getColumnCount();
-				for(int i = 0; i < colunms; i++){
-					column = table.getColumnModel().getColumn(i);
-					/*将每一列的默认宽度设置为100*/
-					column.setPreferredWidth(300);	
-				}
-				/*
-				 * 设置JTable自动调整列表的状态，此处设置为关闭
-				 */
-//				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				table.setBounds(400, 365, 600, 800);
-				table.setFont(font);	
-				/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
-				JScrollPane scroll = new JScrollPane(table);
-				scroll.setLocation(186, 223);
-				scroll.setSize(1058, 528);
-				table.setSize(600, 800);	
-				add(scroll);
+				
+				dtm.setDataVector(obj,columnNames);//设置新内容
+				dtm.fireTableStructureChanged();//更新显示
+
+
+
 			}
 		}
 
@@ -283,7 +275,8 @@ public class StuBookChange extends JPanel{
 			//Object NewbookID=table.getValueAt(index,0);//return the id of the book
 			BookBorrow BB = new BookBorrow();
 			BB.setBookID(table.getValueAt(index,0).toString());
-				
+			BB.setBorrowNumber(1);	
+			BB.setUserName(username);
 			String s=new String();
 				 
 					
@@ -329,64 +322,7 @@ public class StuBookChange extends JPanel{
     	
     });
     	
-    
-    
-/*	
-	 bt1.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				bt1.setIcon(new ImageIcon("img\\借阅点击.png"));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				bt1.setIcon(new ImageIcon("img\\借阅.png"));
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				 int index = table.getSelectedRow();
-				 Object New_book=table.getValueAt(index,0);
-				 //System.out.println(n5); 
-					//cc:可借此书
-					//点击确认返回的是新书的id号
-					
-					 String s=new String();
-					 
-						
-					 String s6=table.getValueAt(index,6).toString();
-					 int n6 = Integer.valueOf(s6).intValue();
-					 
-					 String s5=table.getValueAt(index,5).toString();
-					 int n5 = Integer.valueOf(s5).intValue();
-					  
-					 System.out.println(n6);
-					 System.out.println(n5);
-					 if (n6<n5) {
-						 s=table.getValueAt(index,6).toString();
-						 int n = Integer.valueOf(s).intValue()+1;
-						 s=String.valueOf(n);
-						 table.setValueAt(s, index, 6);		 
-					}
-
-					 
-					 System.out.println(New_book);
-					
-				
-				 
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-	    });
-*/	
+    	
    
     
     }
@@ -399,12 +335,12 @@ public class StuBookChange extends JPanel{
 		super();
 		
 		LibraryService LS = new LibraryServiceImpl(1,tc.getCacheTeacher().getUserName());
-		
+		username = tc.getCacheTeacher().getUserName();
 		this.setLayout(null);
 		this.setSize(1650,1000);            
 	    Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
 	   
-	    
+		
 	    
 	  //****************************初始化列表*********************************
 	    
@@ -453,12 +389,19 @@ public class StuBookChange extends JPanel{
 	  	/*
 	  	 * JTable的其中一种构造方法
 	  	 */
-	  	JTable table = new JTable(obj, columnNames) {
-	  		public boolean isCellEditable(int row, int column){
-	  				return false;//表格不允许被编辑
-	      	}
 	  	
-	  	};
+	  	
+
+	  	
+	  	 dtm=new DefaultTableModel(obj,columnNames){
+	 		public boolean isCellEditable(int row, int column)
+	 	    {
+	 	               return false;}//表格不允许被编辑
+	 	    };
+	    //用模型建立表;
+	 	    
+
+	 	JTable table = new JTable(dtm); 
 	      table.setRowHeight(30);// 设置表格行宽
 	      
 	      JTableHeader head = table.getTableHeader(); // 创建表格标题对象
@@ -529,37 +472,12 @@ public class StuBookChange extends JPanel{
 							}
 						}
 					}
-					JTable table = new JTable(obj, columnNames) {
-						public boolean isCellEditable(int row, int column){
-								return false;//表格不允许被编辑
-				    	}
 					
-					};
-				    table.setRowHeight(30);// 设置表格行宽
-				    
-				    JTableHeader head = table.getTableHeader(); // 创建表格标题对象
-				    head.setPreferredSize(new Dimension(head.getWidth(), 35));// 设置表头大小
-				    head.setFont(font);// 设置表格字体
-				   
-					TableColumn column = null;
-					int colunms = table.getColumnCount();
-					for(int i = 0; i < colunms; i++){
-						column = table.getColumnModel().getColumn(i);
-						/*将每一列的默认宽度设置为100*/
-						column.setPreferredWidth(300);	
-					}
-					/*
-					 * 设置JTable自动调整列表的状态，此处设置为关闭
-					 */
-//					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					table.setBounds(400, 365, 600, 800);
-					table.setFont(font);	
-					/*用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看*/
-					JScrollPane scroll = new JScrollPane(table);
-					scroll.setLocation(186, 223);
-					scroll.setSize(1058, 528);
-					table.setSize(600, 800);	
-					add(scroll);
+				
+					dtm.setDataVector(obj,columnNames);//设置新内容
+					dtm.fireTableStructureChanged();//更新显示
+
+
 				}
 			}
 
@@ -630,6 +548,8 @@ public class StuBookChange extends JPanel{
 				//Object NewbookID=table.getValueAt(index,0);//return the id of the book
 				BookBorrow BB = new BookBorrow();
 				BB.setBookID(table.getValueAt(index,0).toString());
+				BB.setUserName(username);
+				BB.setBorrowNumber(1);
 					
 				String s=new String();
 					 

@@ -45,7 +45,7 @@ public class StuClassCheck extends JPanel{
 	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,20);//设置字体格式和大小
 	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,18);//设置字体格式和大小
 	
-	private void setData(String username) {
+	public void setData(String username) {
 		
 		AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,username);
 		ArrayList<CourseInformation>courseTable = AAS.studentGetTimeTable();
@@ -61,7 +61,6 @@ public class StuClassCheck extends JPanel{
 				{"傍晚","","","","","","",""},
 				{"第五节","","","","","","",""}
 				};
-		data=a;
 		
 		for(int i=0;i<course_num;i++) {
 			int row= courseTable.get(i).getWeekIndex()/5;
@@ -70,6 +69,8 @@ public class StuClassCheck extends JPanel{
 			String coursePlace = courseTable.get(i).getCoursePlace();
 			a[row][col]="<html><body>"+courseName+"<br>"+coursePlace+"<body><html>";
 		}
+		
+		data=a;
 	}
 	
 	StuClassCheck(String username){

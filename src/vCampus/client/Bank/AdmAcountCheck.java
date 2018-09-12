@@ -8,8 +8,14 @@ package vCampus.client.Bank;
 import javax.swing.*;
 
 import vCampus.client.biz.AdminService;
+import vCampus.client.biz.StudentService;
+import vCampus.client.biz.StudentServiceImpl;
+import vCampus.client.biz.TeacherService;
+import vCampus.client.biz.TeacherServiceImpl;
 import vCampus.client.register.RegisterView;
 import vCampus.vo.Admin;
+import vCampus.vo.BookInformation;
+import vCampus.vo.Student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -18,6 +24,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;  
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AdmAcountCheck extends JPanel{
 
@@ -50,7 +57,11 @@ public class AdmAcountCheck extends JPanel{
     bt0.setBorder(null);
     bt0.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null, "to check money of one stu");
+			//JOptionPane.showMessageDialog(null, "to check money of one stu");
+			if(adm.queryAccountByUserName(tf1.getText())!=-1) {
+				String money = String.valueOf(adm.queryAccountByUserName(tf1.getText()));
+				tf2.setText(money);
+			}
 		}
     	
     });

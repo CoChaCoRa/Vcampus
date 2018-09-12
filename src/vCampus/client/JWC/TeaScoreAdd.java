@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class TeaScoreAdd extends JPanel{
 
-	JLabel lb1 = new JLabel("学号");
+	JLabel lb1 = new JLabel("一卡通号");
 	JTextField tf1 = new JTextField(20);
 	JLabel lb2 = new JLabel("分数");
 	JTextField tf2 = new JTextField(20);

@@ -3,6 +3,7 @@ package vCampus.client.JWC;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -22,6 +23,7 @@ import vCampus.client.biz.AcademicAffairsService;
 import vCampus.client.biz.AcademicAffairsServiceImpl;
 import vCampus.client.biz.AdminService;
 import vCampus.client.biz.StudentService;
+import vCampus.client.biz.StudentServiceImpl;
 import vCampus.client.biz.TeacherService;
 import vCampus.vo.Admin;
 import vCampus.vo.CourseChoose;
@@ -45,14 +47,15 @@ public class Winchange_JWC extends JPanel {
 	JButton jb7=new JButton("管理员查询成绩");
 	JButton jb8=new JButton("修改课程");
 	
+	int num = 0;
+	
 	public Winchange_JWC(int identify,StudentService stu){
 		super();
 		
+		JFrame frame=new JFrame("");
+		
 		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(1, stu.getCacheStudent().getUserName());
-		if(AAS.studentGetAllCourses()!=null) {
-			index=AAS.studentGetAllCourses().size();
-		}
-		else index=0;
+		index=AAS.studentGetAllCourses().size();
 		
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
@@ -67,6 +70,21 @@ public class Winchange_JWC extends JPanel {
 		this.setLayout(null);
 	    
 		
+        
+    	if(AAS.studentGetAllCourses()==null) {
+    		num = AAS.studentGetAllCourses().size();
+    	}
+    	ArrayList<Thread> tv = new ArrayList<Thread>(num); 	
+    	ArrayList<CourseChoose> goal= AAS.studentGetAllCourseGrades();
+    	//学生成绩 需要外部调用
+    	   
+    //	int index;
+    	
+    	
+    	
+    	System.out.println(1);
+    
+    	
 		//identify:1 学生 查看课表/查成绩/退选课
 		//identify:2 教师 查看课表/录入成绩
 		//identify:3 添加课/查成绩/修改课程（学分）
@@ -107,20 +125,12 @@ public class Winchange_JWC extends JPanel {
 	        public void actionPerformed(ActionEvent e) {
 	      
 	        	card.show(cardpanel,"w2");
-	        	int num = 0;
-	        	if(AAS.studentGetAllCourses()==null) {
-	        		num = AAS.studentGetAllCourses().size();
-	        	}
-	        	ArrayList<Thread> tv = new ArrayList<Thread>(num); 	
-	        	ArrayList<CourseChoose> goal= AAS.studentGetAllCourseGrades();
-	        	//学生成绩 需要外部调用
-	        	   
-	        //	int index;
 	        	for(int j=0;j<index;j++) {
 	        	
 	        	int score=(int) goal.get(j).getScore();	
 	        	JProgressBar progress=w2.BarVector.get(j);
 	        	
+	        	//System.out.println(score);
 	        	//int score=100;
 	        	
 	        	Thread t2 = new Thread(){
@@ -148,14 +158,16 @@ public class Winchange_JWC extends JPanel {
 	        			
 	        				progress.setForeground(color);
 	        			//	jtar.progressbar.setDigitalColor(color);
-	        				
-	        				
+	        					
 	        				progress.setValue(i);
-	        				
+	        			
 	        			}
 	        	    }
 	        	};
+	        	
 	        	tv.add(t2);
+	        	System.out.println("add scuuess");
+	        	
 	        	}
 
 	        	Thread t2 =new Thread() {
@@ -165,11 +177,10 @@ public class Winchange_JWC extends JPanel {
 	        		int g = 0;
 	        		int b = 0;	
 	        		
-	        		
 	        		//GPA 为平均分
-	        		double GPA= AAS.studentGetGPA();	
+	        		//double GPA= AAS.studentGetGPA();	
 	        		//double GPA=100;
-	        		
+	        		double GPA=92;
 					@Override
 					public void run() {
 						while (index2 <= GPA) {
@@ -193,10 +204,20 @@ public class Winchange_JWC extends JPanel {
 
 				};
 	        	
-	        	t2.run();
-		        for(int i=0;i<num;i++) {
-		        	tv.get(i).run();
-		        }	
+				System.out.println("run begin");
+	        	
+			
+				   
+				t2.start();
+				
+				
+				tv.get(0).start();
+				tv.get(1).start();
+				tv.get(2).start();
+				tv.get(3).start();	
+				tv.get(4).start();
+				
+					
 	        }
 	    });
 	  
@@ -224,6 +245,11 @@ public class Winchange_JWC extends JPanel {
 			this.add(jb3);
 		}
 		
+		frame.add(this);
+		
+		frame.setVisible(true);
+		frame.setSize(1650, 1000);
+		
 		
 		this.add(cardpanel);
 		
@@ -241,9 +267,10 @@ public class Winchange_JWC extends JPanel {
 		
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-	
-		TeaClassCheck w4=new TeaClassCheck(tc.getCacheTeacher().getUserName());	//cc 需要修改接口
-		TeaScoreAdd w5=new TeaScoreAdd(tc.getCacheTeacher().getUserName());
+		
+		String username = tc.getCacheTeacher().getUserName();
+		TeaClassCheck w4=new TeaClassCheck(username);	//需要修改接口
+		TeaScoreAdd w5=new TeaScoreAdd(username);
 		
 		
 		
@@ -312,8 +339,10 @@ public class Winchange_JWC extends JPanel {
 		
 		this.setBackground(null);
 		this.setOpaque(false);
+		
+
 	}
-	
+
 	
 	public Winchange_JWC(int identify,AdminService adm) {
 		super();
@@ -485,6 +514,10 @@ public class Winchange_JWC extends JPanel {
 			// TODO Auto-generated method stub
 			
 		}
+	
+		
+		
 		
 	}
+	
 }

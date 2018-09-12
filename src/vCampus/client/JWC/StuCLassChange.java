@@ -74,11 +74,20 @@ public class StuCLassChange extends JPanel{
 		data=a;
 		AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,username);
 		ArrayList<CourseInformation> allcourses = new ArrayList<CourseInformation>();
-		allcourses.add(AAS.findCourseInformation("1"));
+		/*allcourses.add(AAS.findCourseInformation("1"));
 		allcourses.add(AAS.findCourseInformation("2"));
 		allcourses.add(AAS.findCourseInformation("3"));
 		allcourses.add(AAS.findCourseInformation("4"));
 		for(int row=0;row<allcourses.size();row++) {
+			a[row][0]=allcourses.get(row).getCourseName();
+			a[row][1]=allcourses.get(row).getTeacherName();
+			a[row][2]=allcourses.get(row).getCourseID();
+			a[row][3]=allcourses.get(row).getCoursePlace();
+			a[row][4]=allcourses.get(row).getCredit();
+			}*/
+		allcourses = AAS.studentGetAllAvailableCourses();
+		int num = (allcourses!=null)?allcourses.size():0;
+		for(int row=0;row<num;row++) {
 			a[row][0]=allcourses.get(row).getCourseName();
 			a[row][1]=allcourses.get(row).getTeacherName();
 			a[row][2]=allcourses.get(row).getCourseID();
@@ -133,7 +142,7 @@ public class StuCLassChange extends JPanel{
 		//ÉèÖÃÐÐ¸ß
 		for(int i=0;i<7;i++) {
 			
-				tableDemo.setRowHeight(i, 40);
+				tableDemo.setRowHeight(i, 80);
 		
 				
 			

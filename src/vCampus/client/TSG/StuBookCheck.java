@@ -160,6 +160,8 @@ public class StuBookCheck extends JPanel{
 			}
 		}
 		
+		
+		System.out.println(1);
 	}
 	else {
 		for (int i = 0; i < num_borrow; i++)
@@ -182,6 +184,8 @@ public class StuBookCheck extends JPanel{
 				}
 			}
 		}
+		
+		System.out.println(2);
 	}
 	
 	/*
@@ -196,7 +200,13 @@ public class StuBookCheck extends JPanel{
 	    
 
 	JTable table = new JTable(dtm); 
-	;
+
+	dtm.setDataVector(obj,columnNames);//设置新内容
+
+	dtm.fireTableStructureChanged();//更新显示
+
+
+
 	/*
 	 * 设置JTable的列默认的宽度和高度
 	 */
@@ -230,6 +240,8 @@ public class StuBookCheck extends JPanel{
 	table.setSize(600, 800);
 	
 	add(scroll);
+	
+	
 	
 	  bt1.addMouseListener(new MouseListener() {
 			@Override
@@ -425,6 +437,13 @@ public class StuBookCheck extends JPanel{
 	    
 
 	JTable table = new JTable(dtm); 
+	
+
+	dtm.setDataVector(obj,columnNames);//设置新内容
+
+	dtm.fireTableStructureChanged();//更新显示
+
+	
 	;
 	/*
 	 * 设置JTable的列默认的宽度和高度
