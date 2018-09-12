@@ -55,5 +55,6 @@ public interface MessageTypeCodes {
 	String userAddDormitoryInfo = "USER_ADD_DORMITORY_INFO";
 	String studentGetAllAvailableCourses = "STUDENT_GET_ALL AVAILABLE_COURSES";
 	String userRechargeByBankAccount = "USER_RECHARGE_BY_BANK_ACCOUNT";
+	String adminGetAllBooks = "ADMIN_GET_ALL_BOOKS";
 	
 }

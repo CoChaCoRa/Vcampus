@@ -64,6 +64,14 @@ public interface LibraryService {
 	 */
 	public boolean returnBook(BookBorrow borrow);
 	
+	
+	/**
+	 * 获取所有书目,返回ArrayList<BookInformation>对象,未查询成功将返回null
+	 * @param String
+	 * @return ArrayList<BookInformation>
+	 */
+	public ArrayList<BookInformation> queryAllBook();
+	
 	/**
 	 * 传入BookInformation,若bookID已经存在则抛出异常,SQL异常返回false
 	 * @param String

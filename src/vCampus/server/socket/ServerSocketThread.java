@@ -958,6 +958,20 @@ public class ServerSocketThread extends Thread{
             	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
             	response.writeObject(serverResponse);
             }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminGetAllBooks)) {
+            	Message serverResponse = new Message();
+            	
+            		ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            		LibraryServiceDao libraryServiceDao = new LibraryServiceDaoImpl();
+            		ArrayList<BookInformation> allBooks = libraryServiceDao.queryAllBook();
+            		ArrayList<Object> data = new ArrayList<Object>();
+            		data.add(allBooks);
+            		serverResponse.setData(data);
+            		
+            		ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+                	response.writeObject(serverResponse);
+            }
 		}
 		catch (Exception e) {
 			// TODO: handle exception
