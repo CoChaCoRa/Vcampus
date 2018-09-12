@@ -140,6 +140,23 @@ public class LibraryDaoImpl implements LibraryDao{
 	}
 	
 	@Override
+	public ArrayList<BookInformation> queryAllBook() {
+		try {
+			String sql="SELECT * FROM tbl_bookinformation";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			if(rs.next()) {
+				return ResultSetToBookInformationArrayList();
+			}
+		}catch(SQLException e) {
+    		System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
 	public boolean borrowBook(BookBorrow borrow) 
 			throws RecordNotFoundException,OutOfLimitException {
 		try {

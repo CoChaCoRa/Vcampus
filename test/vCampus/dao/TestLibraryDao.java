@@ -22,6 +22,17 @@ public class TestLibraryDao {
 	public boolean deleteBookByAdmin(String bookID)throws RecordNotFoundException;
 	*/
 
+	
+	private static void queryAllBook() {
+		ArrayList<BookInformation> list=new ArrayList<BookInformation>();
+		list=libImpl.queryAllBook();
+		if(list==null) {
+			System.out.println("NULL!\n");
+			return;
+		}
+		for(int i=0;i<list.size();i++)
+			System.out.println(Integer.toString(i)+":  "+list.get(i));
+	}
 	private static void queryBookInformation(String bookID) {
 		BookInformation book=libImpl.queryBookInformation(bookID);
 		if(book==null) {
@@ -68,6 +79,7 @@ public class TestLibraryDao {
 	
 	public static void main(String[] args) {
 		try {
+			queryAllBook();
 			queryBook("Ëã·¨");
 			queryBookInformation("1");
 			queryBookBorrow("213161269");

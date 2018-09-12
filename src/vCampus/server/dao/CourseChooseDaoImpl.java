@@ -193,7 +193,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			int currentAmount=rs.getInt("currentAmount");
 			int personLimit=rs.getInt("personLimit");
 			String courseName=rs.getString("courseName");
-			String teacherName=rs.getString("teacherName");
+			String teacherUserName=rs.getString("teacherUserName");
 			
 			String sql2="SELECT * FROM tbl_coursechoose WHERE courseID='"+courseID+"' AND "
 					+"studentUserName='"+studentUserName+"'";
@@ -215,7 +215,7 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 			stmt.setString(1,courseID);
 			stmt.setString(2,courseName);
 			stmt.setString(3,studentUserName);
-			stmt.setString(4, teacherName);
+			stmt.setString(4, teacherUserName);
 			stmt.setDouble(5, 0.0);
 			stmt.executeUpdate();
 		}catch(SQLException e) {
