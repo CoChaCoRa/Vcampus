@@ -48,8 +48,8 @@ public class StuCLassChange extends JPanel{
 	JTextArea ta;
 	
 	Font font1=new Font("苹方 常规",Font.CENTER_BASELINE,25);//设置字体格式和大小
-	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,15);//设置字体格式和大小
-	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,10);//设置字体格式和大小
+	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,20);//设置字体格式和大小
+	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,15);//设置字体格式和大小
 	
 	String userName;
 	Object[][] Courses = {{"","","","","",""},
@@ -64,6 +64,22 @@ public class StuCLassChange extends JPanel{
 	//加入要显示数据
 	private void setData(String username) {
 		Object[][] a= {{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
 				{"","","","","",""},
 				{"","","","","",""},
 				{"","","","","",""},
@@ -87,14 +103,16 @@ public class StuCLassChange extends JPanel{
 			}*/
 		allcourses = AAS.studentGetAllAvailableCourses();
 		int num = (allcourses!=null)?allcourses.size():0;
-		for(int row=0;row<num;row++) {
-			a[row][0]=allcourses.get(row).getCourseName();
-			a[row][1]=allcourses.get(row).getTeacherName();
-			a[row][2]=allcourses.get(row).getCourseID();
-			a[row][3]=allcourses.get(row).getCoursePlace();
-			a[row][4]=allcourses.get(row).getCredit();
+		if(num!=0) {
+			for(int row=0;row<num;row++) {
+				a[row][0]=allcourses.get(row).getCourseName();
+				a[row][1]=allcourses.get(row).getTeacherName();
+				a[row][2]=allcourses.get(row).getCourseID();
+				a[row][3]=allcourses.get(row).getCoursePlace();
+				a[row][4]=allcourses.get(row).getCredit();
+				}
+			Courses = a;
 			}
-		Courses = a;
 		}
 	
 	
@@ -140,9 +158,9 @@ public class StuCLassChange extends JPanel{
 		}
 		
 		//设置行高
-		for(int i=0;i<7;i++) {
+		for(int i=0;i<23;i++) {
 			
-				tableDemo.setRowHeight(i, 80);
+				tableDemo.setRowHeight(i, 60);
 		
 				
 			

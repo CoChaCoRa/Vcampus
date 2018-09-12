@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import vCampus.client.biz.AcademicAffairsService;
 import vCampus.client.biz.AcademicAffairsServiceImpl;
@@ -40,6 +41,8 @@ public class StuClassCheck extends JPanel{
 	//弹出窗口的对象
 	JFrame mesFrame;
 	JTextArea ta;
+	
+	String user;
 	
 	Font font1=new Font("苹方 常规",Font.BOLD,25);//设置字体格式和大小
 	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,20);//设置字体格式和大小
@@ -73,6 +76,58 @@ public class StuClassCheck extends JPanel{
 		data=a;
 	}
 	
+	public void run() {
+		setData(user);
+		TableModel model=new MyTableModel(data);
+		tableDemo.setModel(model);
+		tableDemo.repaint();
+		tableDemo.setPreferredScrollableViewportSize(new Dimension(1000,1650));
+		tableDemo.setFillsViewportHeight(true);
+		//设置表头
+		JTableHeader head=tableDemo.getTableHeader();
+		head.setFont(font1);
+		//禁止改变列宽
+		tableDemo.getTableHeader().setResizingAllowed(false);
+		//禁止改变列顺序
+		tableDemo.getTableHeader().setReorderingAllowed(false);
+		//禁止自动改变大小
+		tableDemo.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
+		//确定列宽
+		column = null;
+		for (int i = 1; i < 8; i++) {
+		    column = tableDemo.getColumnModel().getColumn(i);
+		   
+		   
+		        column.setPreferredWidth(200);
+		    
+		}
+		
+		//设置行高
+		for(int i=0;i<7;i++) {
+			if(i==2||i==5) {
+				tableDemo.setRowHeight(i, 15);
+			}
+			else {
+				tableDemo.setRowHeight(i, 150);
+			}
+		}
+		
+		//添加渲染器
+		
+	    tableDemo.getColumnModel().getColumn(0).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(3).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(1).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(2).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(4).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(5).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(6).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(7).setCellRenderer(new TipsRenderer());
+		//TableColumn tc=tableDemo.getColumn("时间");
+
+		tableDemo.updateUI();
+	}
+	
 	StuClassCheck(String username){
 		super();
 		//this.setBounds(0, 0, 200, 150);
@@ -80,7 +135,7 @@ public class StuClassCheck extends JPanel{
 		setData(username);
 		//this.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
 		//this.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
+		user=username;
 		
 		tableDemo=new JTable(new MyTableModel(data));
 		

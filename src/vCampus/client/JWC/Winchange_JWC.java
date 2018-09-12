@@ -115,7 +115,7 @@ public class Winchange_JWC extends JPanel {
 	    jb1.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	      
+	        	w1.run();
 	        	card.show(cardpanel,"w1");
 	        }
 	    });
@@ -267,9 +267,9 @@ public class Winchange_JWC extends JPanel {
 		
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
-		
+	
 		String username = tc.getCacheTeacher().getUserName();
-		TeaClassCheck w4=new TeaClassCheck(username);	//需要修改接口
+		TeaClassCheck w4=new TeaClassCheck(username);	//cc 需要修改接口
 		TeaScoreAdd w5=new TeaScoreAdd(username);
 		
 		
