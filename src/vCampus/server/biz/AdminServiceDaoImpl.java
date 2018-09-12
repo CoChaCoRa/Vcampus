@@ -177,6 +177,14 @@ public class AdminServiceDaoImpl implements AdminServiceDao{
 		return false;
 	}
 	
-	
+	/* (non-Javadoc)
+	 * @see vCampus.server.biz.AdminServiceDao#queryAccountByUserName(java.lang.String)
+	 */
+	@Override
+	public double queryAccountByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return ad.queryAccountByUserName(userName);
+		
+	}
 	
 }

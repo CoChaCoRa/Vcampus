@@ -249,7 +249,28 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	
-	
+	/* (non-Javadoc)
+	 * @see vCampus.client.biz.AdminService#queryAccountByUserName(java.lang.String)
+	 */
+	@Override
+	public double queryAccountByUserName(String userName) {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		Message message = new Message();
+		message.setUserType("ADMIN");
+		ArrayList<Object> data = new ArrayList<Object>();
+		data.add(userName);
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.adminQueryAccountByUserName);
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		
+		if(paras != null) {
+			return (double) paras.get(0);
+		}
+		
+		return -1;
+	}
 
 	
 }

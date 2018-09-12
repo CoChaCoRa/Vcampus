@@ -21,4 +21,11 @@ public interface AdminService {
 	public boolean updateStudentInformation(Student updatedStudent);
 
 	
+	/**
+	 * 传入userName参数，返回银行余额，未查询到账户(老师/学生)则将返回-1
+	 * @param String
+	 * @return double
+	 */
+	public double queryAccountByUserName(String userName);
+	
 }

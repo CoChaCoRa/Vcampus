@@ -85,5 +85,8 @@ public class TestAdminService {
 					System.out.println("change success!");
 				}
 				
+				
+				System.out.println(adminService.queryAccountByUserName("213164189"));
+				
 	}
 }

@@ -972,6 +972,20 @@ public class ServerSocketThread extends Thread{
             		ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
                 	response.writeObject(serverResponse);
             }
+            
+            if(object.getMessageType().equals(MessageTypeCodes.adminQueryAccountByUserName)) {
+            	Message serverResponse = new Message();
+            	
+            	ArrayList<Object> paras = (ArrayList<Object>) object.getData();
+            	AdminServiceDao adminServiceDao = new AdminServiceDaoImpl();
+            	double account = adminServiceDao.queryAccountByUserName((String) paras.get(0));
+            	ArrayList<Object> data = new ArrayList<Object>();
+            	data.add(account);
+            	serverResponse.setData(data);
+            	
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
 		}
 		catch (Exception e) {
 			// TODO: handle exception
