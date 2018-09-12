@@ -43,6 +43,38 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 		return null;
 	}
     
+    private ArrayList<CourseInformation> ResultSetToCourseArrayListInformation(){
+    	try {
+	    	ArrayList<CourseInformation> list=new ArrayList<CourseInformation>();
+			do {
+		    	CourseInformation course;
+		    	course=new CourseInformation();
+	    		course.setCourseDate(rs.getDate("courseDate"));
+	    		course.setCourseHour(rs.getInt("courseHour"));
+	    		course.setCourseID(rs.getString("courseID"));
+	    		course.setCourseName(rs.getString("courseName"));
+	    		course.setCoursePlace(rs.getString("coursePlace"));
+	    		course.setCredit(rs.getDouble("credit"));
+	    		course.setCurrentAmount(rs.getInt("currentAmount"));
+	    		course.setDeptName(rs.getString("deptName"));
+	    		course.setExamPlace(rs.getString("examPlace"));
+	    		course.setExamTime(rs.getDate("examTime"));
+	    		course.setPersonLimit(rs.getInt("personLimit"));
+	    		course.setTeacherUserName(rs.getString("teacherUserName"));
+	    		course.setTeacherName(rs.getString("teacherName"));
+	    		course.setWeekIndex(rs.getInt("weekIndex"));
+				list.add(course);
+			}while(rs.next());
+			return list;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+            System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
     private CourseInformation ResultSetToCourseInformation() {
     	try {
         	CourseInformation course=new CourseInformation();
@@ -85,6 +117,22 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
     	}
     	return null;
     }
+    
+	@Override
+	public ArrayList<CourseInformation> allCourses() {
+		try {
+    		String sql= "select * from tbl_courseinformation";
+			stmt=DBC.con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				return ResultSetToCourseArrayListInformation();
+			}
+    	}catch(SQLException e) {
+    		System.out.println(e.getMessage());
+			e.printStackTrace();
+    	}
+    	return null;
+	}
     
     @Override
 	public ArrayList<CourseChoose> courseQueryByStudent(String studentUserName){
@@ -352,4 +400,5 @@ public class CourseChooseDaoImpl implements CourseChooseDao{
 		}
 		return true;
 	}
+
 }

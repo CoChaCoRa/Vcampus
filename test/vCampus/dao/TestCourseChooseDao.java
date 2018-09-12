@@ -19,6 +19,7 @@ public class TestCourseChooseDao {
 	
 	/*
 	public CourseInformation findCourse(String courseID);
+    public ArrayList<CourseInformation> allCourses();
     public ArrayList<CourseChoose> courseQueryByStudent(String studentName)throws RecordNotFoundException;
     public ArrayList<CourseChoose> courseQueryByTeacher(String teacherName)throws RecordNotFoundException;
     public ArrayList<CourseChoose> courseQueryByCourse(String courseID)throws RecordNotFoundException;
@@ -32,6 +33,11 @@ public class TestCourseChooseDao {
 	
 	private static CourseInformation findCourse(String courseID)throws Exception {
 		return ccImpl.findCourse(courseID);
+	}
+	private static void allCourses() {
+		ArrayList<CourseInformation> list=ccImpl.allCourses();
+		for(int i=0;i<list.size();i++)
+			System.out.println(i+" : "+list.get(i));
 	}
 	private static ArrayList<CourseChoose> courseQueryByStudent(String studentUserName)throws Exception {
 		return ccImpl.courseQueryByStudent(studentUserName);
@@ -63,6 +69,7 @@ public class TestCourseChooseDao {
     
 	public static void main(String[] args) {
 		try {
+			allCourses();
 			CourseInformation queryResult1=new CourseInformation();
 			ArrayList<CourseChoose> queryResult2=new ArrayList<CourseChoose>();
 

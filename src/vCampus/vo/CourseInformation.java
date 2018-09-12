@@ -106,4 +106,23 @@ public class CourseInformation implements Serializable {
 	public String getTeacherName(){
 		return teacherName;
 	}
+	
+	@Override
+	public String toString() {
+		return "\n\tCourseInformation"
+			+"\ncourseID\t"+courseID
+			+"\ncourseName\t"+courseName
+			+"\ndeptName\t"+deptName
+			+"\nteacherUserName\t"+teacherUserName
+			+"\nteacherName\t"+teacherName
+			+"\ncourseHour\t"+courseHour
+			+"\ncredit\t"+credit
+			+"\ncourseDate\t"+courseDate
+			+"\nweekIndex\t"+weekIndex
+			+"\ncoursePlace\t"+coursePlace
+			+"\nexamTime\t"+examTime
+			+"\nexamPlace\t"+examPlace
+			+"\npersonLimit\t"+personLimit
+			+"\ncurrentAmount\t"+currentAmount;
+	}
 }

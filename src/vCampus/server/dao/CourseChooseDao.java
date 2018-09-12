@@ -15,6 +15,13 @@ public interface CourseChooseDao {
 	 */
     public CourseInformation findCourse(String courseID);
     
+	/**
+	 * 获取所有课程信息,返回ArrayList<CourseInformation>,未查询成功将返回null
+	 * @param null
+	 * @return ArrayList<courseInformation>
+	 */
+    public ArrayList<CourseInformation> allCourses();
+    
     /**
 	 * 传入studentUserName参数,返回ArrayList<CourseChoose>,未查询成功将返回null
 	 * @param String
