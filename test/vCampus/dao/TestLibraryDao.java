@@ -68,7 +68,7 @@ public class TestLibraryDao {
 	
 	public static void main(String[] args) {
 		try {
-			queryBook("QAQ");
+			queryBook("Ëã·¨");
 			queryBookInformation("1");
 			queryBookBorrow("213161269");
 			
@@ -87,23 +87,23 @@ public class TestLibraryDao {
 			
 			BookInformation book=new BookInformation();
 			book.setBookAddress("3C112");
-			book.setBookID("4");
+			book.setBookID("100");
 			book.setBookName("SONGZIXING");
 			book.setBookPress("SEU");
 			book.setBookWriter("CC");
 			book.setTotalAmount(5);
 			book.setBorrowedAmount(0);
 			if(addBookByAdmin(book)) {
-				queryBookInformation("4");
+				queryBookInformation("100");
 			}else System.out.println("Error!");
 			
 			book.setBookWriter("yhy");
 			if(updateBookByAdmin(book)) {
-				queryBookInformation("4");
+				queryBookInformation("100");
 			}else System.out.println("Error!");
 			
-			if(deleteBookByAdmin("4")) {
-				queryBookInformation("4");
+			if(deleteBookByAdmin("100")) {
+				queryBookInformation("100");
 			}else System.out.println("Error!");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

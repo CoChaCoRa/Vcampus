@@ -125,7 +125,7 @@ public class LibraryDaoImpl implements LibraryDao{
 	@Override
 	public ArrayList<BookInformation> queryBook(String bookName) {
 		try {
-			String sql="SELECT * FROM tbl_bookinformation WHERE bookName='"+bookName+"'";
+			String sql="SELECT * FROM tbl_bookinformation WHERE bookName LIKE '%"+bookName+"%'";
 			stmt=DBC.con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 
