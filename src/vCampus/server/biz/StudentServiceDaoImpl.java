@@ -208,4 +208,13 @@ private CourseChooseDao ccd = new CourseChooseDaoImpl();
 		}
 	
 	
+	@Override
+		public ArrayList<CourseInformation> queryAllCourses() {
+			// TODO Auto-generated method stub
+		ArrayList<CourseInformation> allAvaiableCoureses = ccd.allCourses();
+		if(allAvaiableCoureses != null) {
+			return allAvaiableCoureses;
+		}
+			return null;
+		}
 }

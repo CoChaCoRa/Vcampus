@@ -921,6 +921,18 @@ public class ServerSocketThread extends Thread{
             	response.writeObject(serverRresponse);
 			}
             
+            if(object.getMessageType().equals(MessageTypeCodes.studentGetAllAvailableCourses)) {
+            	Message serverResponse = new Message();
+            	StudentServiceDao studentServiceDao = new StudentServiceDaoImpl();
+            	ArrayList<CourseInformation> allAvailableCourses = studentServiceDao.queryAllCourses();
+            	ArrayList<Object> data = new ArrayList<Object>();
+            	data.add(allAvailableCourses);
+            	serverResponse.setData(data);
+        		
+            	ObjectOutputStream response = new ObjectOutputStream(clientSocket.getOutputStream());
+            	response.writeObject(serverResponse);
+            }
+            
 		}
 		catch (Exception e) {
 			// TODO: handle exception

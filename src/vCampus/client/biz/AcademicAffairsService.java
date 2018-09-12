@@ -14,7 +14,7 @@ import vCampus.vo.CourseInformation;
 public interface AcademicAffairsService {
 
 	/**
-	 * 得到所有异常的代码提示，浅显易懂
+	 * 寰楀埌鎵�鏈夊紓甯哥殑浠ｇ爜鎻愮ず锛屾祬鏄炬槗鎳�
 	 * @param 
 	 * @return String
 	 */
@@ -24,8 +24,8 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 根据courseID得到具体的课程详细信息（具体见CourseInformation类）
-	 * 若没有这门课的信息，返回异常状态码RecordNotFoundException
+	 * 鏍规嵁courseID寰楀埌鍏蜂綋鐨勮绋嬭缁嗕俊鎭紙鍏蜂綋瑙丆ourseInformation绫伙級
+	 * 鑻ユ病鏈夎繖闂ㄨ鐨勪俊鎭紝杩斿洖寮傚父鐘舵�佺爜RecordNotFoundException
 	 * @param courseID
 	 * @return CourseInformation
 	 */
@@ -34,9 +34,9 @@ public interface AcademicAffairsService {
 	//academic affairs service for student
 	
 	
-	//以下开始为学生的教务处提供的方法
+	//浠ヤ笅寮�濮嬩负瀛︾敓鐨勬暀鍔″鎻愪緵鐨勬柟娉�
 	/**
-	 * 得到缓存中学生所有选的课程的简单信息列表（具体见CourseChoose类）
+	 * 寰楀埌缂撳瓨涓鐢熸墍鏈夐�夌殑璇剧▼鐨勭畝鍗曚俊鎭垪琛紙鍏蜂綋瑙丆ourseChoose绫伙級
 	 * 
 	 * @return ArrayList<CourseChoose>
 	 */
@@ -47,7 +47,7 @@ public interface AcademicAffairsService {
 	
 	/**
 	 * 
-	 * 访问服务器得到最新的学生所有选的课程的简单信息列表
+	 * 璁块棶鏈嶅姟鍣ㄥ緱鍒版渶鏂扮殑瀛︾敓鎵�鏈夐�夌殑璇剧▼鐨勭畝鍗曚俊鎭垪琛�
 	 * 
 	 * @return ArrayList<CourseChoose>
 	 */
@@ -57,7 +57,7 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 得到学生所有选的课程详细信息，方便制作课程表
+	 * 寰楀埌瀛︾敓鎵�鏈夐�夌殑璇剧▼璇︾粏淇℃伅锛屾柟渚垮埗浣滆绋嬭〃
 	 * 
 	 * @return ArrayList<CourseInformation>
 	 */
@@ -68,8 +68,8 @@ public interface AcademicAffairsService {
 	
 	/**
 	 * 
-	 * 判断学生是否选择这门课
-	 * 若没有这门课的信息，返回异常状态码RecordNotFoundException
+	 * 鍒ゆ柇瀛︾敓鏄惁閫夋嫨杩欓棬璇�
+	 * 鑻ユ病鏈夎繖闂ㄨ鐨勪俊鎭紝杩斿洖寮傚父鐘舵�佺爜RecordNotFoundException
 	 * @param courseID
 	 * @return boolean
 	 */
@@ -81,8 +81,8 @@ public interface AcademicAffairsService {
 	
 	/**
 	 * 
-	 * 根据courseID返回该生有关这门课的简单课程信息
-	 * 若没有这门课的信息，返回异常状态码RecordNotFoundException
+	 * 鏍规嵁courseID杩斿洖璇ョ敓鏈夊叧杩欓棬璇剧殑绠�鍗曡绋嬩俊鎭�
+	 * 鑻ユ病鏈夎繖闂ㄨ鐨勪俊鎭紝杩斿洖寮傚父鐘舵�佺爜RecordNotFoundException
 	 * @param courseID
 	 * @return CourseChoose
 	 */
@@ -93,8 +93,8 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 返回这门课该生的成绩
-	 * 若没有这门课的信息，返回异常状态码RecordNotFoundException
+	 * 杩斿洖杩欓棬璇捐鐢熺殑鎴愮哗
+	 * 鑻ユ病鏈夎繖闂ㄨ鐨勪俊鎭紝杩斿洖寮傚父鐘舵�佺爜RecordNotFoundException
 	 * @param courseID
 	 * @return double
 	 */
@@ -103,7 +103,7 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 返回该学生所有的课程成绩
+	 * 杩斿洖璇ュ鐢熸墍鏈夌殑璇剧▼鎴愮哗
 	 * @return ArrayList<CourseChoose>
 	 */
 	public ArrayList<CourseChoose> studentGetAllCourseGrades();
@@ -111,7 +111,7 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 返回该生的GPA，针对所有有成绩的课程
+	 * 杩斿洖璇ョ敓鐨凣PA锛岄拡瀵规墍鏈夋湁鎴愮哗鐨勮绋�
 	 * @return double
 	 */
 	public double studentGetGPA();
@@ -119,12 +119,21 @@ public interface AcademicAffairsService {
 	
 	
 	
+	
+	
+	
+	
+	public ArrayList<CourseInformation> studentGetAllAvailableCourses();
+	
+	
+	
+	
 	/**
 	 * 
-	 * 学生选CourseID课,成功选择返回true，失败返回false
-	 * 如果已经选择了，返回RecordAlreadyExistException异常状态码
-	 * 如果人数已经满了，返回OutOfLimitException异常状态码
-	 * 如果没有这门课，返回RecordNotFoundException异常状态码
+	 * 瀛︾敓閫塁ourseID璇�,鎴愬姛閫夋嫨杩斿洖true锛屽け璐ヨ繑鍥瀎alse
+	 * 濡傛灉宸茬粡閫夋嫨浜嗭紝杩斿洖RecordAlreadyExistException寮傚父鐘舵�佺爜
+	 * 濡傛灉浜烘暟宸茬粡婊′簡锛岃繑鍥濷utOfLimitException寮傚父鐘舵�佺爜
+	 * 濡傛灉娌℃湁杩欓棬璇撅紝杩斿洖RecordNotFoundException寮傚父鐘舵�佺爜
 	 * @param CourseID
 	 * @return boolean
 	 */
@@ -134,9 +143,9 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 学生退课根据CourseID，成功返回true，失败返回false
-	 * 如果已经退选了，返回异常状态码RecordNotFoundException
-	 * 如果还没有人选择这门课，返回状态异常码OutOfLimitException
+	 * 瀛︾敓閫�璇炬牴鎹瓹ourseID锛屾垚鍔熻繑鍥瀟rue锛屽け璐ヨ繑鍥瀎alse
+	 * 濡傛灉宸茬粡閫�閫変簡锛岃繑鍥炲紓甯哥姸鎬佺爜RecordNotFoundException
+	 * 濡傛灉杩樻病鏈変汉閫夋嫨杩欓棬璇撅紝杩斿洖鐘舵�佸紓甯哥爜OutOfLimitException
 	 * @param CourseID
 	 * @return boolean
 	 */
@@ -145,12 +154,12 @@ public interface AcademicAffairsService {
 	
 	
 	
-	//下面开始教师的教务处提供的方法
+	//涓嬮潰寮�濮嬫暀甯堢殑鏁欏姟澶勬彁渚涚殑鏂规硶
 	
 	//academic affairs service for teacher
 	/**
-	 * 给出教师所有的授课信息，返回的每一个所教的课程的所有学生的信息，不建议直接调用该方法
-	 * 用下面的
+	 * 缁欏嚭鏁欏笀鎵�鏈夌殑鎺堣淇℃伅锛岃繑鍥炵殑姣忎竴涓墍鏁欑殑璇剧▼鐨勬墍鏈夊鐢熺殑淇℃伅锛屼笉寤鸿鐩存帴璋冪敤璇ユ柟娉�
+	 * 鐢ㄤ笅闈㈢殑
 	 * @return ArrayList<CourseChoose>
 	 */
 	public ArrayList<CourseChoose> teacherGetAllCourses();
@@ -161,8 +170,8 @@ public interface AcademicAffairsService {
 	
 	/**
 	 * 
-	 * 更新学生的成绩，成功返回true，失败返回false
-	 * 具体参数要参见一下 <CourseChoose>类
+	 * 鏇存柊瀛︾敓鐨勬垚缁╋紝鎴愬姛杩斿洖true锛屽け璐ヨ繑鍥瀎alse
+	 * 鍏蜂綋鍙傛暟瑕佸弬瑙佷竴涓� <CourseChoose>绫�
 	 * @param ArrayList<CourseChoose> gradesSheet
 	 * @return boolean
 	 */
@@ -172,7 +181,7 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 返回教师所有教的课程名列表
+	 * 杩斿洖鏁欏笀鎵�鏈夋暀鐨勮绋嬪悕鍒楄〃
 	 * @return ArrayList<String>
 	 */
 	public ArrayList<String> getTeacherCourse();
@@ -181,8 +190,8 @@ public interface AcademicAffairsService {
 	
 	/**
 	 * 
-	 * 返回课程courseID的所有学生信息（主要是成绩），当做查看这门courseID的全班成绩单
-	 * 如果教师没有教授courseID这门课，返回异常状态码RecordNotFoundException
+	 * 杩斿洖璇剧▼courseID鐨勬墍鏈夊鐢熶俊鎭紙涓昏鏄垚缁╋級锛屽綋鍋氭煡鐪嬭繖闂╟ourseID鐨勫叏鐝垚缁╁崟
+	 * 濡傛灉鏁欏笀娌℃湁鏁欐巿courseID杩欓棬璇撅紝杩斿洖寮傚父鐘舵�佺爜RecordNotFoundException
 	 * @param courseID
 	 * @return ArrayList<CourseChoose>
 	 */
@@ -192,8 +201,8 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 修改添加学生成绩，针对courseID这门课
-	 * 如果教师没有教授courseID这门课，返回异常状态码RecordNotFoundException
+	 * 淇敼娣诲姞瀛︾敓鎴愮哗锛岄拡瀵筩ourseID杩欓棬璇�
+	 * 濡傛灉鏁欏笀娌℃湁鏁欐巿courseID杩欓棬璇撅紝杩斿洖寮傚父鐘舵�佺爜RecordNotFoundException
 	 * @param courseID
 	 * @param gradesSheet
 	 * @return boolean
@@ -204,11 +213,11 @@ public interface AcademicAffairsService {
 	
 	//academic affairs service for admin
 	
-	//下面开始是管理员调用的教务处方法
+	//涓嬮潰寮�濮嬫槸绠＄悊鍛樿皟鐢ㄧ殑鏁欏姟澶勬柟娉�
 	
 	
 	/**
-	 * 查看这门课courseID的选课情况
+	 * 鏌ョ湅杩欓棬璇綾ourseID鐨勯�夎鎯呭喌
 	 * @param courseID
 	 * @return ArrayList<CourseChoose>
 	 */
@@ -217,9 +226,9 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 添加课程，成功返回true，失败返回false
-	 * 如果课程已经存在，异常状态码为RecordAlreadyExistException
-	 * 若包含的老师信息不存在，异常状态码为RecordNotFoundException
+	 * 娣诲姞璇剧▼锛屾垚鍔熻繑鍥瀟rue锛屽け璐ヨ繑鍥瀎alse
+	 * 濡傛灉璇剧▼宸茬粡瀛樺湪锛屽紓甯哥姸鎬佺爜涓篟ecordAlreadyExistException
+	 * 鑻ュ寘鍚殑鑰佸笀淇℃伅涓嶅瓨鍦紝寮傚父鐘舵�佺爜涓篟ecordNotFoundException
 	 * @param newCourse
 	 * @return
 	 */
@@ -231,8 +240,8 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 修改课程基本信息
-	 * 若课程id信息或者包含的老师信息不存在，异常状态码为RecordNotFoundException
+	 * 淇敼璇剧▼鍩烘湰淇℃伅
+	 * 鑻ヨ绋媔d淇℃伅鎴栬�呭寘鍚殑鑰佸笀淇℃伅涓嶅瓨鍦紝寮傚父鐘舵�佺爜涓篟ecordNotFoundException
 	 * 
 	 * @param updatedCourse
 	 * @return
@@ -243,8 +252,8 @@ public interface AcademicAffairsService {
 	
 	
 	/**
-	 * 修改课程基本信息
-	 * 若课程不存在，异常状态码为RecordNotFoundException
+	 * 淇敼璇剧▼鍩烘湰淇℃伅
+	 * 鑻ヨ绋嬩笉瀛樺湪锛屽紓甯哥姸鎬佺爜涓篟ecordNotFoundException
 	 * @param courseID
 	 * @return
 	 */

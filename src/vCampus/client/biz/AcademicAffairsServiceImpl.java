@@ -294,6 +294,29 @@ public class AcademicAffairsServiceImpl implements AcademicAffairsService{
 	}
 	
 	
+	
+	
+	@Override
+	public ArrayList<CourseInformation> studentGetAllAvailableCourses() {
+		// TODO Auto-generated method stub
+		exceptionCode = "";
+		Message message = new Message();
+		
+		message.setUserType("STUDENT");
+		ArrayList<Object> data = new ArrayList<Object>();
+		message.setData(data);
+		message.setMessageType(MessageTypeCodes.studentGetAllAvailableCourses);
+		
+		Message serverResponse = client.sendRequestToServer(message);
+		ArrayList<Object> paras = (ArrayList<Object>) serverResponse.getData();
+		if(paras != null) {
+			ArrayList<CourseInformation> allAvailableCourses = (ArrayList<CourseInformation>) paras.get(0);
+			return allAvailableCourses;
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public ArrayList<CourseChoose> teacherGetAllCourses() {
 		// TODO Auto-generated method stub

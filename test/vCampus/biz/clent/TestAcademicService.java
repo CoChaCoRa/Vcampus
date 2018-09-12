@@ -25,6 +25,9 @@ public class TestAcademicService {
 		
 		AcademicAffairsService academicAffairsService = new AcademicAffairsServiceImpl(1,"213160821");
 		
+		System.out.println(academicAffairsService.studentGetAllAvailableCourses().size());
+		
+		
 		//test findCourseInformation
 		
 		System.out.println("test findCourseInformation:");

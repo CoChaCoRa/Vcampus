@@ -25,6 +25,7 @@ public interface StudentServiceDao {
 	Student updateStudentInfo(Student updatedStudent) throws  RecordNotFoundException;
 	boolean destroyStudent(String userName) throws RecordNotFoundException;
 	
+	ArrayList<CourseInformation> queryAllCourses(); 
 	CourseInformation findCourseInformation(String courseID);
 	ArrayList<CourseChoose> findAllChosenCourses(String userName);
 	boolean addCourse(String userName,String courseID) throws RecordNotFoundException, RecordAlreadyExistException, OutOfLimitException;

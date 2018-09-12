@@ -53,6 +53,7 @@ public interface MessageTypeCodes {
 	String userQueryDormitoryByUserName = "USER_QUERY_DORMITORY_BY_USER_NAME";
 	String userQueryDormitoryByDormNumber = "USER_QUERY_DORMITORRY_BY_DORM_NUMBER";
 	String userAddDormitoryInfo = "USER_ADD_DORMITORY_INFO";
+	String studentGetAllAvailableCourses = "STUDENT_GET_ALL AVAILABLE_COURSES";
 	
 	
 }
