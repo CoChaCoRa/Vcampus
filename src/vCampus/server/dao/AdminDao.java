@@ -12,6 +12,13 @@ public interface AdminDao {
 	public Admin selectAdmin(String adminID);
 	
 	/**
+	 * 传入userName参数，返回银行余额，未查询到账户(老师/学生)则将返回-1
+	 * @param String
+	 * @return double
+	 */
+	public double queryAccountByUserName(String userName);
+	
+	/**
 	 * 传入adminID,password,若userName已经存在抛出异常,SQL异常返回false
 	 * @param String
 	 * @return boolean

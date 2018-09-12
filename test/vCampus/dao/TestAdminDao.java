@@ -33,15 +33,17 @@ public class TestAdminDao {
 	
 	public static void main(String args[]) {
 		try {
-			selectAdmin("1");
-			if(insertAdmin("2","QWQ")) {
-				selectAdmin("2");
+			double result=adminImpl.queryAccountByUserName("1");
+			System.out.println(result);
+			selectAdmin("admin1");
+			if(insertAdmin("admin12","QWQ")) {
+				selectAdmin("admin12");
 			}else System.out.println("Error!");
-			if(updatePassword("2","QAQ")) {
-				selectAdmin("2");
+			if(updatePassword("admin12","QAQ")) {
+				selectAdmin("admin12");
 			}else System.out.println("Error!");
-			if(deleteAdmin("2")) {
-				selectAdmin("2");
+			if(deleteAdmin("admin12")) {
+				selectAdmin("admin12");
 			}else System.out.println("Error!");
 		}
 		catch(Exception e) {

@@ -1,8 +1,9 @@
 package vCampus.server.dao;
 import java.sql.ResultSet;
 
+
 import java.sql.SQLException;
-import vCampus.vo.Admin;
+import vCampus.vo.*;
 import java.sql.PreparedStatement;
 import vCampus.server.exception.*;
 
@@ -15,6 +16,18 @@ public class AdminDaoImpl implements AdminDao{
 	private DBConnection DBC=new DBConnection();
 	private PreparedStatement stmt=null;
 	private ResultSet rs=null;
+
+	@Override
+	public double queryAccountByUserName(String userName) {
+		StudentDao aDao=new StudentDaoImpl();
+		Student std=aDao.findByName(userName);
+		if(std==null) {
+			TeacherDao tDao=new TeacherDaoImpl();
+			Teacher tea=tDao.findByName(userName);
+			if(tea!=null)tea.getAccount();
+		}else return std.getAccount();
+		return -1;
+	}
 	
 	@Override
 	public Admin selectAdmin(String adminID){
@@ -98,4 +111,5 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return true;
 	}
+
 }
