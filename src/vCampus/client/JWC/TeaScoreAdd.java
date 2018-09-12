@@ -7,7 +7,10 @@ package vCampus.client.JWC;
  */
 import javax.swing.*;
 
+import vCampus.client.biz.AcademicAffairsService;
+import vCampus.client.biz.AcademicAffairsServiceImpl;
 import vCampus.client.register.RegisterView;
+import vCampus.vo.CourseChoose;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -18,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class TeaScoreAdd extends JPanel{
 
@@ -25,14 +29,16 @@ public class TeaScoreAdd extends JPanel{
 	JTextField tf1 = new JTextField(20);
 	JLabel lb2 = new JLabel("分数");
 	JTextField tf2 = new JTextField(20);
+	JLabel lb3 = new JLabel("课程号");
 	JTextField tf3 = new JTextField(20);
 	JButton bt1=new JButton("");
+	String Username;
 	
-	public TeaScoreAdd() {
+	public TeaScoreAdd(String username) {
 	
 	super();
     Font font=new Font("苹方 常规",Font.CENTER_BASELINE,28);//设置字体格式和大小
-    
+    Username = username;
 	
 	bt1.setContentAreaFilled(false);
 	
@@ -40,12 +46,6 @@ public class TeaScoreAdd extends JPanel{
 	this.setSize(1650,1000);         
     
    
-   
-    this.add(tf3);
-    tf3.setBounds(810-170, 600-80, 352, 47);
-    tf3.setFont(font);
-    tf3.setEditable(false);
-    tf3.setBorder(null);
     
     this.add(bt1);
     bt1.setBounds(910-270, 910-80, 160, 80);
@@ -59,16 +59,13 @@ public class TeaScoreAdd extends JPanel{
 			try {
     			double moneychange = Double.parseDouble(tf2.getText());
     			if(moneychange<0) throw new ArithmeticException();
-    			tf3.setText("打分成功！");
-    			tf1.setText("");
-    			tf2.setText("");
     		}catch(NumberFormatException e1) {
-    			tf3.setText("输入不能含有字符");
+    			JOptionPane.showMessageDialog(null,"输入不能含有字符");
     			tf1.setText("");
     			tf2.setText("");
     		}
     		catch(ArithmeticException e2) {
-    			tf3.setText("请输入0-100的整数");
+    			JOptionPane.showMessageDialog(null,"请输入0-100的整数");
     			tf1.setText("");
     			tf2.setText("");
     		}
@@ -98,6 +95,16 @@ public class TeaScoreAdd extends JPanel{
  //   tf2.setEditable(false);
     tf2.setBorder(null);
     
+    this.add(lb3);
+    lb3.setBounds(456-270, 196, 101, 47);
+    lb3.setFont(font);
+    this.add(tf3);
+    tf3.setBounds(660-270, 196, 352, 47);
+    tf3.setFont(font);
+//    tf3.setEditable(false);
+    tf3.setBorder(null);
+    
+    
     bt1.addMouseListener(new MouseListener() {
 		@Override
 		public void mouseEntered(MouseEvent e) {
@@ -111,7 +118,17 @@ public class TeaScoreAdd extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			 
+			AcademicAffairsService AAS = new AcademicAffairsServiceImpl(2,Username);
+			ArrayList<CourseChoose>gradeSheet = new ArrayList<CourseChoose>();
+			CourseChoose grade = new CourseChoose();
+			grade.setCourseID(tf3.getText());
+			grade.setStudentUserName(tf1.getText());
+			grade.setScore(Double.parseDouble(tf2.getText()));
+			gradeSheet.add(grade);
+			if(AAS.updateStudentGradesForCourse(tf3.getText(), gradeSheet)) {
+				JOptionPane.showMessageDialog(null, "添加成绩成功");
+			}
+			else JOptionPane.showMessageDialog(null, AAS.getExceptionCode());
 		}
 
 		@Override

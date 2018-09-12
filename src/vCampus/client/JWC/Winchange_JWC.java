@@ -242,8 +242,8 @@ public class Winchange_JWC extends JPanel {
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();
 	
-	//	TeaClassCheck w4=new TeaClassCheck(tc.getCacheTeacher().getUserName());	//cc 需要修改接口
-		TeaScoreAdd w5=new TeaScoreAdd();
+		TeaClassCheck w4=new TeaClassCheck(tc.getCacheTeacher().getUserName());	//cc 需要修改接口
+		TeaScoreAdd w5=new TeaScoreAdd(tc.getCacheTeacher().getUserName());
 		
 		
 		
@@ -300,7 +300,7 @@ public class Winchange_JWC extends JPanel {
 		
 		if(identify==2)
 		{
-			//cardpanel.add("w4",w4);
+			cardpanel.add("w4",w4);
 			cardpanel.add("w5",w5);
 			this.add(jb4);
 			this.add(jb5);

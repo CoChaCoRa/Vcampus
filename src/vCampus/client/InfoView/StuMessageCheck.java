@@ -170,7 +170,7 @@ public class StuMessageCheck extends JPanel{
 		JLabel lb1 = new JLabel("一卡通");
 		JTextField tf1 = new JTextField(tc.getCacheTeacher().getTeacherEcardNumber());
 		JLabel lb2 = new JLabel("姓名");
-		JTextField tf2 = new JTextField(tc.getCacheTeacher().getUserName());
+		JTextField tf2 = new JTextField(tc.getCacheTeacher().getRealName());
 		JLabel lb3 = new JLabel("性别");
 		JTextField tf3 = new JTextField(tc.getCacheTeacher().getSex());
 		JLabel lb4 = new JLabel("身份证号");
