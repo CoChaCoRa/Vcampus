@@ -241,7 +241,7 @@ public class LoginView extends JFrame{
 	        	switch(identity) {
 	        	case 0://学生登录
 	        		StudentService SS = new StudentServiceImpl();
-	        		if(SS.login("213160821","szx123")/*SS.login(uID,uPassword)*/) {
+	        		if(SS.login(uID,uPassword)) {
 	        			LToff();
 	        			InfoView_main SIV=new InfoView_main(1,SS);
 	        			JOptionPane.showMessageDialog(null,"登录成功！");
@@ -253,7 +253,7 @@ public class LoginView extends JFrame{
 	        	case 1://教师登录
 	        		TeacherService TS = new TeacherServiceImpl();
 	        		//TS.register("0", "12345", "12345");
-	        		if(TS.login("203492842","741983")/*TS.login(uID,uPassword)*/) {
+	        		if(TS.login(uID,uPassword)) {
 	        			LToff();
 	        			InfoView_main TIV=new InfoView_main(2,TS);
 	        			JOptionPane.showMessageDialog(null,"登录成功！");
@@ -263,7 +263,7 @@ public class LoginView extends JFrame{
 	        	case 2://管理员登陆
 	        		AdminService AS = new AdminServiceImpl();
 	        		//AS.register("1", "1234", "1234");
-	        		if(AS.login("admin1","148921")/*AS.login(uID,uPassword)*/) {
+	        		if(AS.login(uID,uPassword)) {
 	        			LToff();
 	        			InfoView_main AIV=new InfoView_main(3,AS);
 	        			JOptionPane.showMessageDialog(null,"登录成功！");

@@ -436,9 +436,9 @@ public class StuCLassChange extends JPanel{
 					// TODO Auto-generated method stub
 					//************************在此处添加与数据可连接代码
 					AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,userName);
-					JOptionPane.showMessageDialog(null, userName);
+					//JOptionPane.showMessageDialog(null, userName);
 					String courseID = (String)Courses[row][2];
-					JOptionPane.showMessageDialog(null, (String)Courses[row][2]);
+					//JOptionPane.showMessageDialog(null, (String)Courses[row][2]);
 					if(AAS.studentAddCourse(courseID)) {
 						JOptionPane.showMessageDialog(null, "选课成功");
 					}

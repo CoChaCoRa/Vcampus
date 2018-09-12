@@ -1,33 +1,32 @@
 package vCampus.client.JWC;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.EventObject;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.event.CellEditorListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
-import vCampus.client.biz.AcademicAffairsService;
-import vCampus.client.biz.AcademicAffairsServiceImpl;
-import vCampus.vo.CourseChoose;
-import vCampus.vo.CourseInformation;
 
 
 public class TeaClassCheck extends JPanel{
@@ -42,48 +41,37 @@ public class TeaClassCheck extends JPanel{
 	JFrame mesFrame;
 	JTextArea ta;
 	
-	Font font1=new Font("苹方 常规",Font.BOLD,25);//设置字体格式和大小
-	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,20);//设置字体格式和大小
-	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,18);//设置字体格式和大小
-	
-	private void setData(String username) {
-		
-		AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,username);
-		ArrayList<CourseChoose>courseTable = AAS.teacherGetAllCourses();
-		
-		Object[][] a= {{"第一节","","","","","","",""},
-				{"第二节","","","","","","",""},
-				{"中午","","","","","","",""},
-				{"第三节","","","","","","",""},
-				{"第四节","","","","","","",""},
-				{"傍晚","","","","","","",""},
-				{"第五节","","","","","","",""}
+	Font font1=new Font("苹方 常规",Font.CENTER_BASELINE,25);//设置字体格式和大小
+	Font font2=new Font("苹方 常规",Font.CENTER_BASELINE,15);//设置字体格式和大小
+	Font font3=new Font("苹方 常规",Font.CENTER_BASELINE,10);//设置字体格式和大小
+	//************************************************
+	//加入要显示数据
+	private void setData() {
+		Object[][] a= {{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""},
+				{"","","","","",""}
 				};
 		data=a;
-		
-		for(int i=0;i<courseTable.size();i++) {
-			int row= courseTable.get(i).getWeekIndex()/5;
-			int col= courseTable.get(i).getWeekIndex()%5+1;
-			String courseName = courseTable.get(i).getCourseName();
-			String coursePlace = courseTable.get(i).getCoursePlace();
-			a[row][col]="<html><body>"+courseName+"<br>"+coursePlace+"<body><html>";
-		}
 	}
 	
-	TeaClassCheck(String username){
+	TeaClassCheck(){
 		super();
 		//this.setBounds(0, 0, 200, 150);
 		this.setLayout(new BorderLayout());
-		setData(username);
-		//this.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
-		//this.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
-		
+		setData();
+
+	//	this.setLayout(null);
+		this.setSize(1650,1000);         
+	    	
 		tableDemo=new JTable(new MyTableModel(data));
 		
 		tableDemo.setPreferredScrollableViewportSize(new Dimension(1000,1650));
 		tableDemo.setFillsViewportHeight(true);
-		//设置表头
+		
 		JTableHeader head=tableDemo.getTableHeader();
 		head.setFont(font1);
 		//禁止改变列宽
@@ -95,34 +83,34 @@ public class TeaClassCheck extends JPanel{
 		
 		//确定列宽
 		column = null;
-		for (int i = 1; i < 8; i++) {
+		for (int i = 0; i <5 ; i++) {
 		    column = tableDemo.getColumnModel().getColumn(i);
-		   
-		   
-		        column.setPreferredWidth(200);
+		   if(i==0||i==2) {
+			   column.setPreferredWidth(250);
+		   }
+		   else
+		        column.setPreferredWidth(150);
 		    
 		}
 		
 		//设置行高
 		for(int i=0;i<7;i++) {
-			if(i==2||i==5) {
-				tableDemo.setRowHeight(i, 15);
-			}
-			else {
-				tableDemo.setRowHeight(i, 150);
-			}
+			
+				tableDemo.setRowHeight(i, 40);
+		
+				
+			
 		}
 		
 		//添加渲染器
 		
 	    tableDemo.getColumnModel().getColumn(0).setCellRenderer(new TipsRenderer());
-		tableDemo.getColumnModel().getColumn(3).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(5).setCellRenderer(new CourseChooseRenderer());
 		tableDemo.getColumnModel().getColumn(1).setCellRenderer(new TipsRenderer());
 		tableDemo.getColumnModel().getColumn(2).setCellRenderer(new TipsRenderer());
-		 tableDemo.getColumnModel().getColumn(4).setCellRenderer(new TipsRenderer());
-		 tableDemo.getColumnModel().getColumn(5).setCellRenderer(new TipsRenderer());
-		 tableDemo.getColumnModel().getColumn(6).setCellRenderer(new TipsRenderer());
-		 tableDemo.getColumnModel().getColumn(7).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(3).setCellRenderer(new TipsRenderer());
+		tableDemo.getColumnModel().getColumn(4).setCellRenderer(new TipsRenderer());
+		 tableDemo.getColumnModel().getColumn(5).setCellEditor(new CourseChooseEditor());
 		//TableColumn tc=tableDemo.getColumn("时间");
 		
 		 
@@ -134,20 +122,20 @@ public class TeaClassCheck extends JPanel{
 				 java.awt.Point p = e.getPoint();
 				int rowIndex = tableDemo.rowAtPoint(p);
 		        int colIndex = tableDemo.columnAtPoint(p);
-//		        if(colIndex>0) {
-//		        	mesFrame=new JFrame();
-//		        	mesFrame.addWindowListener(new WindowAdapter() {
-//		        		public void windowClosing(WindowEvent e) {
-//		        			mesFrame.dispose();
-//		        		}
-//		        	});
-//		        	ta=new JTextArea();
-//		        	ta.setLineWrap(true);
-//		        	mesFrame.setLayout(new BorderLayout());
-//		        	mesFrame.add(ta, BorderLayout.CENTER);
-//		        	mesFrame.setBounds(300, 300, 200, 150);
-//		        	mesFrame.setVisible(true);
-//		        }
+		        if(colIndex<3) {
+		        	mesFrame=new JFrame();
+		        	mesFrame.addWindowListener(new WindowAdapter() {
+		        		public void windowClosing(WindowEvent e) {
+		        			mesFrame.dispose();
+		        		}
+		        	});
+		        	ta=new JTextArea();
+		        	ta.setLineWrap(true);
+		        	mesFrame.setLayout(new BorderLayout());
+		        	mesFrame.add(ta, BorderLayout.CENTER);
+		        	mesFrame.setBounds(300, 300, 200, 150);
+		        	mesFrame.setVisible(true);
+		        }
 				
 				
 			}
@@ -183,9 +171,13 @@ public class TeaClassCheck extends JPanel{
 		//scrollTable.add(tableDemo);
 		JScrollPane scrollTable=new JScrollPane();
 		scrollTable.setViewportView(tableDemo);
-		//System.err.println();
+		
 		this.add(scrollTable,BorderLayout.CENTER);
 		
+		
+		
+		this.setOpaque(true);
+	
 		
 	}
 	
@@ -193,7 +185,7 @@ public class TeaClassCheck extends JPanel{
 	class MyTableModel extends AbstractTableModel{
 		//表格要显示的数据
 		//表头
-		private String[] columnHead= {"时间","周一","周二","周三","周四","周五","周六","周日"};
+		private String[] columnHead= {"课程名称","教师","时间","院系","学分",""};
 		
 		//数据
 		private Object[][] data=null;
@@ -201,9 +193,6 @@ public class TeaClassCheck extends JPanel{
 		MyTableModel(Object[][] a){
 			data=a;
 		}
-		
-		
-
 
 		@Override
 		public int getColumnCount() {
@@ -228,7 +217,13 @@ public class TeaClassCheck extends JPanel{
 		}
 		
 		public boolean isCellEditable(int row,int column) {
-				return false;
+				if(column==5)
+				{
+					return true;
+				}
+				else {
+					return false;
+				}
 			
 		}
 		
@@ -236,11 +231,6 @@ public class TeaClassCheck extends JPanel{
 		{
 			return columnHead[row];
 		}
-		
-		
-		
-		
-		
 	}
 	
 	//设置渲染器，使其能显示tips
@@ -251,34 +241,185 @@ public class TeaClassCheck extends JPanel{
 				int col) {
 			// TODO Auto-generated method stub
 			
-			if(col<1) {
-				this.setBackground(Color.GRAY);
-				this.setText(String.valueOf(table.getValueAt(row, col)));
-				this.setOpaque(true);
-				this.setFont(font2);
-			}
-			else {
 				this.setText(String.valueOf(table.getValueAt(row, col)));
 				this.setOpaque(true);
 				this.setToolTipText(String.valueOf(table.getValueAt(row, col)));
 				this.setFont(font3);
-				if(isSelected) {
-
-				}
-			}
+				
+			
 			this.setHorizontalAlignment(CENTER);
 			this.setVerticalAlignment(CENTER);
 			
 			return this;
 		}
+		
+	}
 	
+	//设置选课按钮渲染器
+	class CourseChooseRenderer extends JPanel implements TableCellRenderer{
+		JButton choose,exit;
+		JPanel pane;
+		boolean chosen=false;
+		@Override
+		public Component getTableCellRendererComponent(JTable arg0, Object arg1, boolean arg2, boolean arg3, int row,
+				int col) {
+			// TODO Auto-generated method stub
+			pane=new JPanel();
+			choose=new JButton("选课");
+			exit=new JButton("退课");
+			choose.setSize(35, 10);
+			exit.setSize(35, 10);
+			pane.setSize(100, 30);
+			//pane.setLayout(new BorderLayout());
+			pane.add(choose);
+			pane.add(exit);
+			chosen=false;
+			if(chosen==true) {
+				choose.setVisible(false);
+				
+			}
+			else
+			{
+				exit.setVisible(false);
+			}
+			return pane;
+		}
 		
 	}
-/*	
+	
+	//设置编辑器
+	class CourseChooseEditor extends AbstractTableModel implements TableCellEditor{
+		JButton choose,exit;
+		JPanel pane;
+		boolean chosen=false;
+
+		@Override
+		public void addCellEditorListener(CellEditorListener arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void cancelCellEditing() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Object getCellEditorValue() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public boolean isCellEditable(EventObject arg0) {
+			// TODO Auto-generated method stub
+			return true;
+		}
+
+		@Override
+		public void removeCellEditorListener(CellEditorListener arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean shouldSelectCell(EventObject arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean stopCellEditing() {
+			// TODO Auto-generated method stub
+			fireEditingStopped();
+			return true;
+		}
+		
+		 private void fireEditingStopped(){
+			 
+		 }
+
+		@Override
+		public Component getTableCellEditorComponent(JTable table, Object arg1, boolean arg2, int row, int col) {
+			// TODO Auto-generated method stub
+			JButton choose,exit;
+			JPanel pane;
+			boolean chosen=true;
+			pane=new JPanel();
+			choose=new JButton("选课");
+			exit=new JButton("退课");
+			choose.setSize(35, 10);
+			exit.setSize(35, 10);
+			pane.setSize(100, 30);
+			//pane.setLayout(new BorderLayout());
+			pane.add(choose);
+			pane.add(exit);
+			exit.setVisible(false);
+			//fireTableCellUpdated();
+			
+			exit.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					//************************在此处添加与数据可连接代码
+					
+					//***********************************************
+					choose.setVisible(true);
+					exit.setVisible(false);
+					
+					fireTableCellUpdated(row,col);
+					fireEditingStopped();
+					
+				}
+				
+			});
+			
+			choose.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					//************************在此处添加与数据可连接代码
+					
+					//***********************************************
+					choose.setVisible(false);
+					exit.setVisible(true);
+					fireTableCellUpdated(col,row);
+					fireEditingStopped();
+					
+				}
+				
+			});
+			
+			return pane;
+		}
+
+		@Override
+		public int getColumnCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getRowCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Object getValueAt(int arg0, int arg1) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		
+	}
+	
 	public static void main(String args[]) {
-		StuClassCheck table=new StuClassCheck();
-		//table.setOpaque(true);
-		
+		TeaClassCheck table=new TeaClassCheck();
+	
 	}
-*/
+
 }

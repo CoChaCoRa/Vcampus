@@ -49,6 +49,10 @@ public class StuClassCheck extends JPanel{
 		
 		AcademicAffairsService AAS = new AcademicAffairsServiceImpl(1,username);
 		ArrayList<CourseInformation>courseTable = AAS.studentGetTimeTable();
+		int course_num = 0;
+		if(courseTable!=null) {
+			course_num = courseTable.size();
+		}
 		Object[][] a= {{"第一节","","","","","","",""},
 				{"第二节","","","","","","",""},
 				{"中午","","","","","","",""},
@@ -59,7 +63,7 @@ public class StuClassCheck extends JPanel{
 				};
 		data=a;
 		
-		for(int i=0;i<courseTable.size();i++) {
+		for(int i=0;i<course_num;i++) {
 			int row= courseTable.get(i).getWeekIndex()/5;
 			int col= courseTable.get(i).getWeekIndex()%5+1;
 			String courseName = courseTable.get(i).getCourseName();

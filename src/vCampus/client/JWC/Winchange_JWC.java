@@ -49,7 +49,10 @@ public class Winchange_JWC extends JPanel {
 		super();
 		
 		AcademicAffairsService AAS= new AcademicAffairsServiceImpl(1, stu.getCacheStudent().getUserName());
-		index=AAS.studentGetAllCourses().size();
+		if(AAS.studentGetAllCourses()!=null) {
+			index=AAS.studentGetAllCourses().size();
+		}
+		else index=0;
 		
 	    CardLayout card=new CardLayout();
 		JPanel cardpanel=new JPanel();

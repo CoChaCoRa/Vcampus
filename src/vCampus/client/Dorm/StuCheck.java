@@ -36,9 +36,15 @@ public class StuCheck extends JPanel{
 		JLabel lb2 = new JLabel("姓名");
 		JTextField tf2 = new JTextField(stu.getCacheStudent().getRealName());
 		JLabel lb3 = new JLabel("分数");
-		JTextField tf3 = new JTextField(String.valueOf(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName()).get(0).getScore()));
+		JTextField tf3 = new JTextField();
+		if(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName())!=null) {
+			tf3.setText(String.valueOf(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName()).get(0).getScore()));
+		}
 		JLabel lb4 = new JLabel("水电消费");
-		JTextField tf4 = new JTextField(String.valueOf(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName()).get(0).getDormBill()));
+		JTextField tf4 = new JTextField();
+		if(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName())!=null) {
+			tf4.setText(String.valueOf(DS.queryDormitoryByUserName(stu.getCacheStudent().getUserName()).get(0).getDormBill()));
+		}
 
 		this.setLayout(null);
 		this.setSize(1650,1000);         

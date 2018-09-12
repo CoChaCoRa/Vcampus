@@ -279,8 +279,12 @@ public class StuScoreCheck extends JPanel{
 	this.add(circleProgressBar2);
 	circleProgressBar2.setBounds(1100, 100, 400, 400);
     
-    
-	for(int i=0;i<AAS.studentGetAllCourses().size();i++)
+    int num = 0;
+    if(AAS.studentGetAllCourses()!=null) {
+    	num = AAS.studentGetAllCourses().size();
+    }
+	
+	for(int i=0;i<num;i++)
     {
 		JProgressBar progressbar; 
 		progressbar = new JProgressBar();
