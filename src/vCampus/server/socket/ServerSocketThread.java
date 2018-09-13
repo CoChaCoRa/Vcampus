@@ -41,6 +41,7 @@ import vCampus.server.exception.RecordNotFoundException;
 import vCampus.server.exception.WrongPasswordException;
 import vCampus.util.Message;
 import vCampus.util.MessageTypeCodes;
+import vCampus.util.Query;
 import vCampus.vo.Admin;
 import vCampus.vo.BookBorrow;
 import vCampus.vo.BookInformation;
@@ -62,7 +63,7 @@ import vCampus.vo.Teacher;
 public class ServerSocketThread extends Thread{
 
 	private Socket clientSocket;
-	
+	public static Query allQueries = new Query();
 	public ServerSocketThread(Socket socket) {
 		// TODO Auto-generated constructor stub
 		this.clientSocket = socket;
@@ -76,7 +77,8 @@ public class ServerSocketThread extends Thread{
             System.out.println("已接收到客户端连接"+ ",当前客户端ip为："
                     + clientSocket.getInetAddress().getHostAddress());
             System.out.println(object.getMessageType());
-          
+            allQueries.addQuery(object.getMessageType());
+            System.out.println(allQueries.getAllQueries().size());
             
             if(object.getMessageType().equals(MessageTypeCodes.studentLogin) ) {
             	Message serverResponse = new Message();
